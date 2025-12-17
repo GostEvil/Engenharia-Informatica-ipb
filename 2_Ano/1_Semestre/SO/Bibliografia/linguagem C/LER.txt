@@ -1,0 +1,1 @@
+"The ANSI C Programming Language (2nd Ed)", Brian W. Kernighan and Dennis M. Ritchie, Prentice Hall, 1988
