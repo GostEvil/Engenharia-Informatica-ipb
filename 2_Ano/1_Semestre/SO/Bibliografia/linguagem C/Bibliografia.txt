@@ -1,1 +1,10 @@
+Linguagem C
 "The ANSI C Programming Language (2nd Ed)", Brian W. Kernighan and Dennis M. Ritchie, Prentice Hall, 1988
+
+Linhas de comando
+Linux para totos: https://pplware.sapo.pt/linux/comandos-linux-totos-tutorial-no34/
+Linha Journey: https://linuxjourney.com/
+
+Programação nível sistema
+"The Linux Programming Interface", Michael Kerrisk, No Starch Press, 2010
+"Linux System Programming, 2nd Ed.", Robert Love, O'Reilly, 2013
