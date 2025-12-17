@@ -1,0 +1,133 @@
+################################################################################
+################################################################################
+     Sistemas Operativos - Guia de Estudo - 2023-2024 - v1.4 - 2024-01-12
+################################################################################
+################################################################################
+
+Este guia indica quais os elementos da documentação da disciplina que são mais
+relevantes no contexto de cada prova de avaliação em 2023/2024. Em particular:
+- slides teóricos e secções do livro principal relacionadas (recomenda-se a
+  a leitura dessas secções para complementar os slides e consolidar a matéria)
+- secções da sebenta prática cobertas e respetivos exercícios
+
+Livro Principal: 
+- "Silberschatz, A. , Galvin, P. B. , & Gagne, G. (2018). Operating 
+system concepts (10th ed). Hoboken, NJ: John Wiley & Sons."
+- "Silberschatz, A. , Galvin, P. B. , & Gagne, G. (2013). Operating 
+system concepts (9th ed). Hoboken, NJ: John Wiley & Sons."
+
+Este guia não dispensa a consulta dos sumários online, onde se poderão referenciar
+exercícios de exames, que não constam dos slide teóricos nem da sebenta prática.
+
+Este guia irá sendo atualizado à medida que as aulas progridem.
+
+################################################################################
+################################################################################
+Componente Teórica
+################################################################################
+################################################################################
+
+################################################################################
+Matéria avaliada na parte T1
+################################################################################
+
+Slides de "teórica-unidade1-slides.pdf":
+- 2 a 18, 20 a 35
+
+Capítulo 1 do Livro Principal (10th edition):
+- secções 1.1, 1.2 (excepto 1.2.2), 1.4, 1.7, 1.8, 1.10, 1.11
+
+################################################################################
+
+Slides de "teórica-unidade2-slides.pdf":
+- 2 a 41
+
+Capítulo 2 do Livro Principal (10th edition):
+- secções 2.1 a 2.4, 2.7 a 2.10 (excepto 2.10.4)
+
+################################################################################
+
+Slides de "teórica-unidade3-slides.pdf":
+- 2 a 38
+
+Capítulo 3 do Livro Principal (10th edition):
+- secções 3.1 (excepto 3.1.4), 3.2, 3.3 (excepto 3.3.2.1), 3.4 (excepto pg 124), 
+  3.5, 3.6, 3.7.4 (*), 3.8 (excepto 3.8.2.1)
+
+(*) útil mais tarde para consolidar o tópico prático dos pipes
+
+################################################################################
+Matéria avaliada na parte T2
+################################################################################
+
+Slides de "teórica-unidade4-slides.pdf":
+- 2 a 32, 40 a 50
+
+Capítulo 5 do Livro Principal (10th edition):
+- secções 5.1 a 5.3, 5.5.1, 5.5.3, 5.5.4
+
+################################################################################
+
+Slides de "teórica-unidade5-slides.pdf":
+- 2 a 7, 8(*), 10(*), 11 a 19, 27 a 29
+
+Capítulo 5 do Livro Principal (9th edition):
+- secções 5.1 a 5.3, 5.4(*) 5.5, 5.6
+
+(*) estes algoritmos não foram estudados nas aulas, mas podem ser usados como 
+    casos práticos de demonstração do não cumprimento de um ou mais requisitos
+    de uma solução do problema da secção crítica    
+
+################################################################################
+Matéria avaliada na parte T3
+################################################################################
+
+Slides de "teórica-unidade6-slides.pdf":
+- 2 a 5, 10 a 30, 43 a 46
+
+Capítulo 9 do Livro Principal (10th edition):
+- secções 9.1 (excepto 9.1.4 e 9.1.5), 9.2, 9.3 (excepto 9.3.3 e 9.3.4)
+
+################################################################################
+
+Slides de "teórica-unidade7-slides.pdf":
+- 2 a 13, 16 a 23, 26 a 30, 49 a 52
+
+Capítulo 14 do Livro Principal (10th edition):
+- secções 14.1, 14.2, 14.4 (excepto 14.4.4), 14.5 (apenas 14.5.1 e 14.5.2)
+
+################################################################################
+################################################################################
+Componente Prática
+################################################################################
+################################################################################
+
+################################################################################
+Matéria avaliada na parte P1
+################################################################################
+
+Capítulo 1 da Sebenta Prática
+- secções: 1.1 a 1.7
+- exercícios: 1.2 a 1.11
+
+################################################################################
+Matéria avaliada na parte P2
+################################################################################
+
+Capítulo 2 da Sebenta Prática
+- secções: todas, excepto 2.7.3
+- exercícios: 2.1 a 2.9
+
+Capítulo 3 da Sebenta Prática
+- secções: todas, excepto 3.6.2
+- exercícios: 3.1 a 3.9
+
+################################################################################
+Matéria avaliada na parte P3
+################################################################################
+
+Capítulo 4 da Sebenta Prática
+- secções: 4.1, 4.3.1, 4.3.2, 4.8.1
+- exercícios: o foco principal são os exercícios sobre Pipes sem Nome (4.11 a 
+  4.19, excepto 4.15.c); os exercícios não resolvidos nas aulas devem ser usados
+  para consolidar o estudo
