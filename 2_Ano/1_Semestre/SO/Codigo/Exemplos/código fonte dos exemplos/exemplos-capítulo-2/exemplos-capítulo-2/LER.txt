@@ -1,0 +1,11 @@
+- para compilar todos os programas:
+	make
+
+- para limpar todos os executaveis:
+	make clean
+
+- para compilar um programa (e.g., programa.c) individualmente:
+	gcc -Wall programa.c -o programa.exe
+
+- para executar um programa (e.g., programa.exe):
+	./programa.exe
