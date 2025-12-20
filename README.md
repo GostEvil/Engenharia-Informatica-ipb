@@ -3,7 +3,7 @@
 Se possível deverás fazer um **clone** ou um **fork** deste arquivo na tua máquina. 
 ##### Como?
 - 1) Abre vscode e faz um fork com este comando:
-> `git fork https://github.com/GostEvil/Cisco-Packet-Tracer.git`
+> `git fork https://github.com/GostEvil/Engenharia-Informatica-ipb.git`
 - 2) Deves sempre que possível verificar se houve um pull para o main
 > `git status`
 * se não houver commits -> não fazes nada
