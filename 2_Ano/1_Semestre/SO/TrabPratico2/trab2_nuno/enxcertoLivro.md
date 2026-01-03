@@ -943,3 +943,288 @@ int serverFd, clientFd; struct request req; struct response resp;
 
 
 
+if (argc > 1 && strcmp(argv[l] , "--help") == O) usageErr("%s [seq-len. . . ]\n", argv[o]);
+
+/* Create our FIFO (before sending request, to avoid a race) *!
+
+umask(o); /* So we get the permissions we want *!
+
+(D snprintf(clientFifo, CLIFNT_FIFO_NAMF_LFN, CLIFNT_FIFO_TFMPLATF,
+
+(long) getpidO);
+
+if (mkfifo(clientFifo, S_IRUSR | S_IWUSR | S_IWGRP) == -1 && errno != FFXIST) errFxit("mkfifo %s", clientFifo);
+
+(D if (atexit(removeFifo) != O)
+
+errFxit("atexit");
+
+/* Construct request message, open server FIFO, and send request *!
+
+© req.pid = getpid();
+
+req.seqLen = (argc > l) ? getlnt(argv[l] , GN_CT_0, "seq-len") : l;
+
+® serverFd = open(SFRVFR_FIFO, 0_WR0NLY);
+
+if (serverFd == -l)
+
+errFxitC'open %s", SFRVFR_FIFO);
+
+® if (write(serverFd, &req, sizeof (struct request)) !=
+
+sizeof (struct request)) fatal("Can't write to server");
+
+/* Open our FIFO, read and display response *!
+
+® clientFd = open(clientFifo, 0_RD0NLY);
+
+if (clientFd == -l)
+
+errFxitC'open %s", clientFifo);
+
+® if (read(clientFd, &resp, sizeof(struct response))
+
+!= sizeof (struct response)) fatal("Can't read response from server");
+
+printf ("%d\n", resp.seqNum);
+
+exit(FXIT_SUCCFSS);
+
+}
+
+pipes/fifo_seqnum_client.c
+
+44.9 Nonblocking I/O
+
+As noted earlier, when a process opens one end of a FIFO, it blocks if the other end of the FIFO has not yet been opened. Sometimes, it is desirable not to block, and for this purpose, the 0_N0NBL0CK flag can be specified when calling open():
+
+fd = openC'fifopath", 0_RD0NLY | 0_N0NBL0CK); if (fd == -1)
+
+errFxitC'open");
+
+If the other end of the FIFO is already open, then the 0_N0NBL0CK flag has no effect on the open() call— it successfully opens the FIFO immediately, as usual. The 0_N0NBL0CK flag changes things only if the other end of the FIFO is not yet open, and the effect depends on whether we are opening the FIFO for reading or writing:
+
+• If the FIFO is being opened for reading, and no process currently has the write end of the FIFO open, then the open() call succeeds immediately (just as though the other end of the FIFO was already open).
+
+• If the FIFO is being opened FIFO for writing, and the other end of the FIFO is not already open for reading, then open() fails, setting ermo to ENXIO.
+
+The asymmetry of the 0_N0NBL0CK flag depending on whether the FIFO is being opened for reading or for writing can be explained as follows. It is okay to open a FIFO for reading when there is no writer at the other end of the FIFO, since any attempt to read from the FIFO simply returns no data. However, attempting to write to a FIFO for which there is no reader would result in the generation of the SIGPIPE signal and an EPIPE error from write().
+
+Table 44-1 summarizes the semantics of opening a FIFO, including the effects of 0 NONBLOCK described above.
+
+Table 44-1; Semantics of open() for a FIFO
+
+Type of open()
+
+Result of open()
+
+open for
+
+additional flags
+
+other end of FIFO open
+
+other end of FIFO closed
+
+reading
+
+none (blocking)
+
+succeeds immediately
+
+blocks
+
+0_N0NBL0CK
+
+succeeds immediately
+
+succeeds immediately
+
+writing
+
+none (blocking)
+
+succeeds immediately
+
+blocks
+
+0_N0NBL0CK
+
+succeeds immediately
+
+fails (ENXIO)
+
+Using the 0_N0NBL0CK flag when opening a FIFO serves two main purposes:
+
+• It allows a single process to open both ends of a FIFO. The process first opens the FIFO for reading specifying 0_N0NBL0CK, and then opens the FIFO for writing.
+
+• It prevents deadlocks between processes opening two FIFOs.
+
+A deadlock is a situation where two or more process are blocked because each is waiting on the other process(es) to complete some action. The two processes shown in Figure 44-8 are deadlocked. Each process is blocked waiting to open a FIFO for reading. This blocking would not happen if each process could perform its second step (opening the other FIFO for writing). This particular deadlock problem could be solved by reversing the order of steps 1 and 2 in process Y, while leaving the order in process X unchanged, or vice versa. However, such an arrangement of steps may not be easy to achieve in some applications. Instead, we can resolve the problem by having either process, or both, specify the 0_N0NBL0CK flag when opening the FIFOs for reading.
+
+916 Chapt er 44
+
+Process X
+
+Process Y
+
+1 . Open FIFO A for reading 1 . Open FIFO B for reading
+
+blocks blocks
+
+2. Open FIFO B for writing 2. Open FIFO A for writing
+
+Figure 44-8: Deadlock between processes opening two FIFOs
+
+Nonblocking read() and write()
+
+The 0_N0NBL0CK flag affects not only the semantics of open() but also— because the flag then remains set for the open file description— the semantics of subsequent read() and write() calls. We describe these effects in the next section.
+
+Sometimes, we need to change the state of the 0_N0NBL0CK flag for a FIFO (or another type of file) that is already open. Scenarios where this need may arise include the following:
+
+• We opened a FIFO using 0_N0NBL0CK, but we want subsequent read() and write() calls to operate in blocking mode.
+
+• We want to enable nonblocking mode for a file descriptor that was returned by pipe(). More generally, we might want to change the nonblocking status of any file descriptor that was obtained other than from a call to open()—ior example, one of the three standard descriptors that are automatically opened for each new program run by the shell or a file descriptor returned by socket().
+
+• For some application-specific purpose, we need to switch the setting of the 0_N0NBL0CK setting of a file descriptor on and off.
+
+For these purposes, we can use fcntl() to enable or disable the 0_N0NBL0CK open file status flag. To enable the flag, we write the following (omitting error checking):
+
+int flags;
+
+flags = fcntl(fd, F_GETFL); /* Fetch open files status flags */
+
+flags 1= 0_N0NBL0CK; /* Enable OJONBLOCK bit */
+
+fcntl(fdj F_SETFL, flags); /* Update open files status flags */
+
+And to disable it, we write the following:
+
+flags = fcntl(fd, F_GETFL);
+
+flags &= -OJONBLOCK; /* Disable OJONBLOCK bit */
+
+fcntl(fdj F_SETFL, flags);
+
+44.10 Semantics of read() and wHte() on Pipes and FIFOs
+
+Table 44-2 summarizes the operation of read() for pipes and FIFOs, and includes the effect of the OJONBLOCK flag.
+
+The only difference between blocking and nonblocking reads occurs when no data is present and the write end is open. In this case, a normal read() blocks, while a nonblocking read() fails with the error EAGAIN.
+
+Table 44-2; Semantics of reading n bytes from a pipe or FIFO containing p bytes
+
+ONONBLOCK
+
+enabled?
+
+Data bytes available in pipe or FIFO {p)
+
+p = 0, write end open
+
+p = 0, write end closed
+
+p < n
+
+p >=n
+
+No
+
+block
+
+return 0 (EOF)
+
+read p bytes
+
+read n bytes
+
+Yes
+
+fail (EAGAIN)
+
+return 0 (EOF)
+
+read p bytes
+
+read n bytes
+
+The impact of the 0_N0NBL0CK flag when writing to a pipe or FIFO is made complex by interactions with the PIPE_BUF limit. The write() behavior is summarized in Table 44-3.
+
+Table 44-3; Semantics of writing n bytes to a pipe or FIFO
+
+ONONBLOCK
+
+Read end open
+
+Read end
+
+enabled?
+
+n <= PIPE_BUF
+
+n >PIPE_BUF
+
+closed
+
+No
+
+Atomically write n bytes; may block until sufficient data is read for write() to be performed
+
+Write n bytes; may block until sufficient data read for write() to complete; data may be interleaved with writes by other processes
+
+SIGPIPE
+
++
+
+If sufficient space is
+
+If there is sufficient space to
+
+Yes
+
+available to immediately write n bytes, then write() succeeds atomically; otherwise, it fails (EAGAIN)
+
+immediately write some bytes, then write between 1 and n bytes (which may be interleaved with data written by other processes); otherwise, write() fails (EAGAIN)
+
+EPIPE
+
+The 0_N0NBL0CK flag causes a write() on a pipe or FIFO to fail (with the error EAGAIN) in any case where data can’t be transferred immediately. This means that if we are writing up to PIPE_BUE bytes, then the write() will fail if there is not sufficient space in the pipe or FIFO, because the kernel can’t complete the operation immediately and can’t perform a partial write, since that would break the requirement that writes of up to PIPE_BUE bytes are atomic.
+
+When writing more than PIPE_BUF bytes at a time, a write is not required to be atomic. For this reason, write() transfers as many bytes as possible (a partial write) to fill up the pipe or FIFO. In this case, the return value from write() is the number of bytes actually transferred, and the caller must retry later in order to write the remaining bytes. However, if the pipe or FIFO is full, so that not even one byte can be transferred, then write() fails with the error EAGAIN.
+
+44.11 Summary
+
+Pipes were the first method of IPC under the UNIX system, and they are used frequently by the shell, as well as in other applications. A pipe is a unidirectional, limitedcapacity byte stream that can be used for communication between related processes. Although blocks of data of any size can be written to a pipe, only writes that do not exceed PIPE_BUE bytes are guaranteed to be atomic. As well as being used as a method of IPC, pipes can also be used for process synchronization
+
+When using pipes, we must be careful to close unused descriptors in order to ensure that reading processes detect end-of-file and writing processes receive the SICPIPE signal or the EPIPE error. (Usually, it is easiest to have the application writing to a pipe ignore SIGPIPE and detect a “broken” pipe via the EPIPE error.)
+
+The popen() and pclose() functions allow a program to transfer data to or from a standard shell command, without needing to handle the details of creating a pipe, execing a shell, and closing unused file descriptors.
+
+FIFOs operate in exactly the same way as pipes, except that they are created using mkfifo(), have a name in the file system, and can be opened by any process with appropriate permissions. By default, opening a FIFO for reading blocks until another process opens the FIFO for writing, and vice versa.
+
+In the course of this chapter, we looked at a number of related topics. First, we saw how to duplicate file descriptors in such a manner that the standard input or output of a filter can be bound to a pipe. While presenting a client-server example using FIFOs, we touched on a number of topics in client-server design, including the use of a well-known address for a server and iterative versus concurrent server design. In developing the example FIFO application, we noted that, although data transmitted through a pipe is a byte stream, it is sometimes useful for communicating processes to package the data into messages, and we looked at various ways in which this could be accomplished.
+
+Finally, we noted the effect of the 0_N0NBL0CK (nonblocking I/O) flag when opening and performing I/O on a FIFO. The 0_N0NBL0CK flag is useful if we don’t want to block while opening a FIFO. It is also useful if we don’t want reads to block if no data is available, or writes to block if there is insufficient space within a pipe or FIFO.
+
+Further mformation
+
+The implementation of pipes is discussed in [Bach, 1986] and [Bovet & Cesati, 2005]. Useful details about pipes and FIFOs can also be found in [Vahalia, 1996].
+
+44.12 Exercises
+
+44-1. Write a program that uses two pipes to enable bidirectional communication between a parent and child process. The parent process should loop reading a block of text from standard input and use one of the pipes to send the text to the child, which converts it to uppercase and sends it back to the parent via the other pipe. The parent reads the data coming back from the child and echoes it on standard output before continuing around the loop once more.
+
+44-2. Implement Z-nd pclose(). Although these functions are simplified by not requiring the signal handling employed in the implementation of system() (Section 27.7), you will need to be careful to correctly bind the pipe ends to file streams in each process, and to ensure that all unused descriptors referring to the pipe ends are closed. Since children created by multiple calls to popen() may be running at one time, you will need to maintain a data structure that associates the file stream pointers allocated by popen() with the corresponding child process IDs. (If using an array for this purpose, the value returned by the fileno() function, which obtains the file descriptor corresponding to a file stream, can be used to index the
+
+array.) Obtaining the correct process ID from this structure will allow to select the child upon which to wait. This structure will also assist with the SUSvS requirement that any still-open file streams created by earlier calls to popen() must be closed in the new child process.
+
+44-3. The server in Listing 44-7 (fifo_seqnum_server.c) always starts assigning sequence numbers from 0 each time it is started. Modify the program to use a backup file that is updated each time a sequence number is assigned. (The open() 0_SYNC flag, described in Section 4.3.1, may be useful.) At startup, the program should check for the existence of this file, and if it is present, use the value it contains to initialize the sequence number. If the backup file can’t be found on startup, the program should create a new file and start assigning sequence numbers beginning at 0. (An alternative to this technique would be to use memory-mapped files, described in Chapter 49.)
+
+44-4. Add code to the server in Listing 44-7 (fifo_seqnum_server.c) so that if the program receives the SICINT or SIGTERM signals, it removes the server FIFO and terminates.
+
+44-5. The server in Listing 44-7 (fifo_seqnum_server.c) performs a second 0_WR0NLY open of the FIFO so that it never sees end-of-file when reading from the reading descriptor {serverFd) of the FIFO. Instead of doing this, an alternative approach could be tried: whenever the server sees end-of-file on the reading descriptor, it closes the descriptor, and then once more opens the FIFO for reading. (This open would block until the next client opened the FIFO for writing.) What is wrong with this approach?
+
+44-6. The server in Listing 44-7 (fifo_seqnum_server.c) assumes that the client process is well behaved. If a misbehaving client created a client FIFO and sent a request to the server, but did not open its FIFO, then the server’s attempt to open the client FIFO would block, and other client’s requests would be indefinitely delayed. (If done maliciously, this would constitute a denial-of-service attack.) Devise a scheme to deal with this problem. Extend the server (and possibly the client in Listing 44-8) accordingly.
+
+44-7. Write programs to verify the operation of nonblocking opens and nonblocking 1/ O on FIFOs (see Section 44.9)
