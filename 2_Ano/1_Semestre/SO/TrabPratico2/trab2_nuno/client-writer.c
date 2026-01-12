@@ -16,86 +16,36 @@
 #define MAX_MSG_SIZE 1024
 
 int main(int argc, char **argv) {
+    long client_id = (argc > 1) ? strtol(argv[1], NULL, 10) : (long)getpid();
     int server_fd;
     char buffer[MAX_MSG_SIZE];
     char msg[MAX_MSG_SIZE];
-    int client_id, i, j, temp_id;
-    char num_str[20];
-    
-    if (argc < 2) {
-        client_id = getpid();
-    } else {
-        client_id = 0;
-        i = 0;
-        while (argv[1][i] >= '0' && argv[1][i] <= '9') {
-            client_id = client_id * 10 + (argv[1][i] - '0');
-            i++;
-        }
-    }
-    
+
     server_fd = open(SERVER_FIFO, O_WRONLY);
     if (server_fd < 0) {
-        exit(1);
+        fprintf(stderr, "erro ao abrir fifo do servidor\n");
+        return 1;
     }
-    
-    strcpy(buffer, "REGISTER ");
-    i = 9;
-    temp_id = client_id;
-    j = 0;
-    if (temp_id == 0) {
-        num_str[j++] = '0';
-    } else {
-        while (temp_id > 0) {
-            num_str[j++] = '0' + (temp_id % 10);
-            temp_id = temp_id / 10;
-        }
+
+    int n = snprintf(buffer, sizeof(buffer), "REGISTER %ld", client_id);
+    if (n < 0 || n >= (int)sizeof(buffer) || write(server_fd, buffer, n + 1) < 0) {
+        fprintf(stderr, "erro ao registar cliente\n");
+        close(server_fd);
+        return 1;
     }
-    while (j > 0) {
-        buffer[i++] = num_str[--j];
-    }
-    buffer[i] = '\0';
-    write(server_fd, buffer, i + 1);
-    
-    while (1) {
-        i = 0;
-        while (i < MAX_MSG_SIZE - 1) {
-            msg[i] = getchar();
-            if (msg[i] == EOF || msg[i] == '\n') {
-                break;
-            }
-            i++;
-        }
-        msg[i] = '\0';
-        
-        if (i == 0 && msg[0] == EOF) {
+
+    while (fgets(msg, sizeof(msg), stdin)) {
+        size_t len = strlen(msg);
+        if (len && msg[len - 1] == '\n') msg[len - 1] = '\0';
+        if (msg[0] == '\0') continue;
+        n = snprintf(buffer, sizeof(buffer), "%ld:%s", client_id, msg);
+        if (n < 0 || n >= (int)sizeof(buffer)) continue;
+        if (write(server_fd, buffer, n + 1) < 0) {
+            fprintf(stderr, "erro ao enviar mensagem\n");
             break;
         }
-        
-        if (i > 0) {
-            temp_id = client_id;
-            j = 0;
-            if (temp_id == 0) {
-                num_str[j++] = '0';
-            } else {
-                while (temp_id > 0) {
-                    num_str[j++] = '0' + (temp_id % 10);
-                    temp_id = temp_id / 10;
-                }
-            }
-            i = 0;
-            while (j > 0) {
-                buffer[i++] = num_str[--j];
-            }
-            buffer[i++] = ':';
-            j = 0;
-            while (msg[j] != '\0' && i < MAX_MSG_SIZE - 1) {
-                buffer[i++] = msg[j++];
-            }
-            buffer[i] = '\0';
-            write(server_fd, buffer, i + 1);
-        }
     }
-    
+
     close(server_fd);
     return 0;
 }
