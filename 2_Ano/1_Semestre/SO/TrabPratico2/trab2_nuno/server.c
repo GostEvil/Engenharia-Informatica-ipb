@@ -1,134 +1,103 @@
-/*
- * server.c
- * Servidor de chat - gere registo de clientes e disseminacao de mensagens
- * Autor: Nuno [numero]
- */
+//Nuno Silva, 63426
+//Jorge Silva, 40230
+
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <fcntl.h>
+#include <sys/stat.h>
+#include <string.h>
 #include <signal.h>
+#include <errno.h>
 
-#define SERVER_FIFO "/tmp/chat_server"
-#define CLIENT_FIFO_PREFIX "/tmp/chat_client_"
-#define MAX_MSG_SIZE 1024
-#define MAX_CLIENTS 100
+#define SERVER_FIFO "/tmp/chat_server_fifo"
+#define MAX_CLIENTS 10
+#define MAX_MSG 256
 
-int clients[MAX_CLIENTS];  /* Array com IDs dos clientes registados */
-int num_clients = 0;
-FILE *server_fp = NULL;
+typedef struct {
+    pid_t pid;
+    char fifo[64];
+} Client;
 
-/* converte inteiro positivo para string */
-void int_to_str(int value, char *dest) {
-    char tmp[20];
-    int i = 0, j;
+int server_fd = -1;
 
-    if (value == 0) {
-        dest[0] = '0';
-        dest[1] = '\0';
-        return;
-    }
-
-    while (value > 0) {
-        tmp[i] = (char)('0' + (value % 10));
-        value = value / 10;
-        i++;
-    }
-
-    for (j = 0; j < i; j++) {
-        dest[j] = tmp[i - 1 - j];
-    }
-    dest[i] = '\0';
-}
-
-/* Funcao para limpar ao terminar */
-void cleanup(int sig) {
-    if (server_fp != NULL) {
-        fclose(server_fp);
-    }
-    unlink(SERVER_FIFO);  /* Remove o FIFO do servidor */
+void shutdown_server(int sig) {
+    (void)sig;
+    if (server_fd != -1)
+        close(server_fd);
+    unlink(SERVER_FIFO);
+    printf("\n\nA encerrar servidor...\n");
     exit(0);
 }
 
-int main() {
-    char buffer[MAX_MSG_SIZE];
-    char client_fifo[256];
-    char id_str[20];
-    int i, client_id, len;
-    FILE *client_fp;
+int main(void) {
+    Client clients[MAX_CLIENTS];
+    int num_clients = 0;
+    char buffer[MAX_MSG];
 
-    /* Configurar handler para Ctrl+C */
-    signal(SIGINT, cleanup);
+    setbuf(stdout, NULL);
+    signal(SIGINT, shutdown_server);
 
-    /* Remover FIFO antigo se existir e criar novo */
-    unlink(SERVER_FIFO);
-    if (mkfifo(SERVER_FIFO, 0666) < 0) {
+    memset(clients, 0, sizeof(clients));
+
+    if (mkfifo(SERVER_FIFO, 0666) == -1 && errno != EEXIST) {
         printf("Erro ao criar FIFO do servidor\n");
         return 1;
     }
 
-    /* Abrir FIFO para leitura */
-    server_fp = fopen(SERVER_FIFO, "r");
-    if (server_fp == NULL) {
+    printf("\n----------------------------------------\n");
+    printf("\tSERVIDOR ONLINE\n");
+    printf("PID: %d\n", getpid());
+    printf("----------------------------------------\n");
+
+    server_fd = open(SERVER_FIFO, O_RDWR);
+    if (server_fd == -1) {
         printf("Erro ao abrir FIFO do servidor\n");
         unlink(SERVER_FIFO);
         return 1;
     }
 
-    printf("Servidor iniciado. A aguardar clientes...\n");
-
-    /* Ciclo principal */
     while (1) {
-        if (fgets(buffer, MAX_MSG_SIZE, server_fp) == NULL) {
-            /* EOF no FIFO: reabrir */
-            fclose(server_fp);
-            server_fp = fopen(SERVER_FIFO, "r");
-            if (server_fp == NULL) {
-                printf("Erro ao reabrir FIFO do servidor\n");
-                break;
-            }
-            continue;
-        }
+        int n = read(server_fd, buffer, MAX_MSG - 1);
 
-        /* remover newline lida pelo fgets */
-        len = (int)strlen(buffer);
-        if (len > 0 && buffer[len - 1] == '\n') {
-            buffer[len - 1] = '\0';
-        }
+        if (n > 0) {
+            buffer[n] = '\0';
 
-        /* Verificar se e registo de cliente: "REGISTER <id>" */
-        if (strncmp(buffer, "REGISTER ", 9) == 0) {
-            client_id = atoi(buffer + 9);
-            if (num_clients < MAX_CLIENTS) {
-                clients[num_clients] = client_id;
-                num_clients++;
-                printf("Cliente registado: %d\n", client_id);
-            }
-        }
-        /* Senao e uma mensagem: "<id>:<texto>" */
-        else {
-            printf("Mensagem recebida: %s\n", buffer);
+            int sender;
+            char text[MAX_MSG];
 
-            /* Disseminar para todos os clientes registados */
-            for (i = 0; i < num_clients; i++) {
-                int_to_str(clients[i], id_str);
-                strcpy(client_fifo, CLIENT_FIFO_PREFIX);
-                strcat(client_fifo, id_str);
+            if (sscanf(buffer, "%d:%255[^\n]", &sender, text) == 2) {
+                printf("\n>> %d | %s\n", sender, text);
 
-                client_fp = fopen(client_fifo, "w");
-                if (client_fp != NULL) {
-                    fputs(buffer, client_fp);
-                    fputc('\n', client_fp);
-                    fclose(client_fp);
+                int found = 0;
+                int idx = 0;
+                while (idx < num_clients && !found) {
+                    if (clients[idx].pid == sender) found = 1;
+                    else idx++;
+                }
+
+                if (!found && num_clients < MAX_CLIENTS) {
+                    clients[num_clients].pid = sender;
+                    sprintf(clients[num_clients].fifo, "/tmp/chat_client_%d", sender);
+                    num_clients++;
+                    printf("Novo client: %d\n", sender);
+                }
+
+                int i = 0;
+                while (i < num_clients) {
+                    int cfd = open(clients[i].fifo, O_WRONLY);
+                    if (cfd != -1) {
+                        write(cfd, buffer, strlen(buffer) + 1);
+                        close(cfd);
+                        printf("* msg para%d\n", clients[i].pid);
+                    } else {
+                        printf("[!] Erro enviar msg %d\n", clients[i].pid);
+                    }
+                    i++;
                 }
             }
         }
     }
-
-    cleanup(0);
     return 0;
 }

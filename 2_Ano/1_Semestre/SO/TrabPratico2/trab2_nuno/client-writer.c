@@ -1,7 +1,5 @@
-/*
-    client-writer.c
-    Trabalho Prático 2 - Sistemas Operativos
-*/
+//Nuno Silva, 63426
+//Jorge Silva, 40230
 
 #include <stdio.h>
 #include <stdlib.h>
