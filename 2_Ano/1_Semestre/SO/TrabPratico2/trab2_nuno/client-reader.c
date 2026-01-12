@@ -12,25 +12,45 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-#define CLIENT_FIFO_TEMPLATE "/tmp/chat_client_%d"
 #define MAX_MSG_SIZE 1024
 
 int main(int argc, char **argv) {
     int client_fd;
     char client_fifo[256];
     char buffer[MAX_MSG_SIZE];
-    int client_id;
-    int n;
+    int n, i, j, client_id, temp_id;
+    char num_str[20];
     
     if (argc < 2) {
         client_id = getpid();
     } else {
-        client_id = atoi(argv[1]);
+        client_id = 0;
+        i = 0;
+        while (argv[1][i] >= '0' && argv[1][i] <= '9') {
+            client_id = client_id * 10 + (argv[1][i] - '0');
+            i++;
+        }
     }
     
-    sprintf(client_fifo, CLIENT_FIFO_TEMPLATE, client_id);
-    mkfifo(client_fifo, 00666);
-    chmod(client_fifo, 00666);
+    strcpy(client_fifo, "/tmp/chat_client_");
+    temp_id = client_id;
+    j = 0;
+    if (temp_id == 0) {
+        num_str[j++] = '0';
+    } else {
+        while (temp_id > 0) {
+            num_str[j++] = '0' + (temp_id % 10);
+            temp_id = temp_id / 10;
+        }
+    }
+    i = 17;
+    while (j > 0) {
+        client_fifo[i++] = num_str[--j];
+    }
+    client_fifo[i] = '\0';
+    
+    mkfifo(client_fifo, 00600);
+    chmod(client_fifo, 00600);
     
     client_fd = open(client_fifo, O_RDONLY);
     if (client_fd < 0) {
@@ -44,8 +64,11 @@ int main(int argc, char **argv) {
         }
         
         buffer[n] = '\0';
-        printf("%s\n", buffer);
-        fflush(stdout);
+        i = 0;
+        while (buffer[i] != '\0') {
+            putchar(buffer[i++]);
+        }
+        putchar('\n');
     }
     
     close(client_fd);

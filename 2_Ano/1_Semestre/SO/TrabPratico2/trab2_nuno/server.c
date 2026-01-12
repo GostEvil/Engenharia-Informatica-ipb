@@ -13,7 +13,6 @@
 #include <fcntl.h>
 
 #define SERVER_FIFO "/tmp/chat_server"
-#define CLIENT_FIFO_TEMPLATE "/tmp/chat_client_%d"
 #define MAX_CLIENTS 100
 #define MAX_MSG_SIZE 1024
 
@@ -37,7 +36,8 @@ int find_client(int client_id) {
 
 int add_client(int client_id) {
     char client_fifo[256];
-    int fd;
+    int fd, temp_id, i, j;
+    char num_str[20];
     
     if (num_clients >= MAX_CLIENTS) {
         return -1;
@@ -47,7 +47,23 @@ int add_client(int client_id) {
         return 0;
     }
     
-    sprintf(client_fifo, CLIENT_FIFO_TEMPLATE, client_id);
+    strcpy(client_fifo, "/tmp/chat_client_");
+    temp_id = client_id;
+    i = 0;
+    if (temp_id == 0) {
+        num_str[i++] = '0';
+    } else {
+        while (temp_id > 0) {
+            num_str[i++] = '0' + (temp_id % 10);
+            temp_id = temp_id / 10;
+        }
+    }
+    j = 17;
+    while (i > 0) {
+        client_fifo[j++] = num_str[--i];
+    }
+    client_fifo[j] = '\0';
+    
     fd = open(client_fifo, O_WRONLY);
     if (fd < 0) {
         return -1;
@@ -61,14 +77,48 @@ int add_client(int client_id) {
 }
 
 void broadcast_message(char *msg, int sender_id) {
-    int i;
+    int i, j, len, temp_id;
     char full_msg[MAX_MSG_SIZE + 64];
+    char num_str[20];
     
-    sprintf(full_msg, "[Cliente %d]: %s", sender_id, msg);
+    len = 0;
+    full_msg[len++] = '[';
+    full_msg[len++] = 'C';
+    full_msg[len++] = 'l';
+    full_msg[len++] = 'i';
+    full_msg[len++] = 'e';
+    full_msg[len++] = 'n';
+    full_msg[len++] = 't';
+    full_msg[len++] = 'e';
+    full_msg[len++] = ' ';
+    
+    temp_id = sender_id;
+    i = 0;
+    if (temp_id == 0) {
+        num_str[i++] = '0';
+    } else {
+        while (temp_id > 0) {
+            num_str[i++] = '0' + (temp_id % 10);
+            temp_id = temp_id / 10;
+        }
+    }
+    while (i > 0) {
+        full_msg[len++] = num_str[--i];
+    }
+    
+    full_msg[len++] = ']';
+    full_msg[len++] = ':';
+    full_msg[len++] = ' ';
+    
+    i = 0;
+    while (msg[i] != '\0' && len < MAX_MSG_SIZE + 60) {
+        full_msg[len++] = msg[i++];
+    }
+    full_msg[len] = '\0';
     
     for (i = 0; i < num_clients; i++) {
         if (clients[i].client_id != sender_id) {
-            write(clients[i].fd, full_msg, strlen(full_msg) + 1);
+            write(clients[i].fd, full_msg, len + 1);
         }
     }
 }
@@ -76,12 +126,13 @@ void broadcast_message(char *msg, int sender_id) {
 int main() {
     int server_fd;
     char buffer[MAX_MSG_SIZE];
-    int client_id;
+    int client_id, msg_type;
     char client_fifo[256];
-    int n;
+    int n, i, j, temp_id;
+    char num_str[20];
     
-    mkfifo(SERVER_FIFO, 00666);
-    chmod(SERVER_FIFO, 00666);
+    mkfifo(SERVER_FIFO, 00600);
+    chmod(SERVER_FIFO, 00600);
     
     server_fd = open(SERVER_FIFO, O_RDONLY);
     if (server_fd < 0) {
@@ -96,14 +147,50 @@ int main() {
         
         buffer[n] = '\0';
         
-        if (sscanf(buffer, "REGISTER %d", &client_id) == 1) {
-            sprintf(client_fifo, CLIENT_FIFO_TEMPLATE, client_id);
-            mkfifo(client_fifo, 00666);
-            chmod(client_fifo, 00666);
+        if (buffer[0] == 'R' && buffer[1] == 'E' && buffer[2] == 'G') {
+            i = 9;
+            client_id = 0;
+            while (buffer[i] >= '0' && buffer[i] <= '9') {
+                client_id = client_id * 10 + (buffer[i] - '0');
+                i++;
+            }
+            
+            strcpy(client_fifo, "/tmp/chat_client_");
+            temp_id = client_id;
+            j = 0;
+            if (temp_id == 0) {
+                num_str[j++] = '0';
+            } else {
+                while (temp_id > 0) {
+                    num_str[j++] = '0' + (temp_id % 10);
+                    temp_id = temp_id / 10;
+                }
+            }
+            i = 17;
+            while (j > 0) {
+                client_fifo[i++] = num_str[--j];
+            }
+            client_fifo[i] = '\0';
+            
+            mkfifo(client_fifo, 00600);
+            chmod(client_fifo, 00600);
             add_client(client_id);
         } else {
-            sscanf(buffer, "%d:%[^\n]", &client_id, buffer);
-            broadcast_message(buffer, client_id);
+            i = 0;
+            client_id = 0;
+            while (buffer[i] >= '0' && buffer[i] <= '9') {
+                client_id = client_id * 10 + (buffer[i] - '0');
+                i++;
+            }
+            if (buffer[i] == ':') {
+                i++;
+                j = 0;
+                while (buffer[i] != '\0' && j < MAX_MSG_SIZE - 1) {
+                    buffer[j++] = buffer[i++];
+                }
+                buffer[j] = '\0';
+                broadcast_message(buffer, client_id);
+            }
         }
     }
     

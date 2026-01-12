@@ -45,6 +45,36 @@ NOTA: É importante iniciar primeiro o servidor, depois os clientes.
    próprio PID, o que não permitirá a coordenação entre reader e writer.
 
 ================================================================================
+TESTE DA APLICAÇÃO
+================================================================================
+
+Exemplo prático de teste com 1 cliente:
+
+1. Abra 3 terminais WSL e navegue para a pasta do projeto
+
+2. TERMINAL 1 - Inicie o servidor:
+   ./server
+   (O servidor fica em execução, sem output visível)
+
+3. TERMINAL 2 - Inicie o client-reader (onde aparecerão as mensagens):
+   ./client-reader 1
+   (Este terminal fica à espera de receber mensagens)
+
+4. TERMINAL 3 - Inicie o client-writer (onde escreve as mensagens):
+   ./client-writer 1
+   (Agora pode escrever mensagens aqui e pressionar Enter)
+
+5. TESTE:
+   - No TERMINAL 3, escreva: "Olá pessoal!" e pressione Enter
+   - A mensagem aparecerá no TERMINAL 2 como: "[Cliente 1]: Olá pessoal!"
+
+Para testar com múltiplos clientes, repita os passos 3 e 4 com IDs diferentes
+(por exemplo, client-reader 2 e client-writer 2 em terminais separados).
+
+As mensagens enviadas por qualquer cliente aparecerão nos terminais de
+todos os outros clientes (mas não no próprio remetente).
+
+================================================================================
 FUNCIONAMENTO
 ================================================================================
 

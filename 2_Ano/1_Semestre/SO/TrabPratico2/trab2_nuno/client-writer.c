@@ -19,12 +19,18 @@ int main(int argc, char **argv) {
     int server_fd;
     char buffer[MAX_MSG_SIZE];
     char msg[MAX_MSG_SIZE];
-    int client_id;
+    int client_id, i, j, temp_id;
+    char num_str[20];
     
     if (argc < 2) {
         client_id = getpid();
     } else {
-        client_id = atoi(argv[1]);
+        client_id = 0;
+        i = 0;
+        while (argv[1][i] >= '0' && argv[1][i] <= '9') {
+            client_id = client_id * 10 + (argv[1][i] - '0');
+            i++;
+        }
     }
     
     server_fd = open(SERVER_FIFO, O_WRONLY);
@@ -32,22 +38,62 @@ int main(int argc, char **argv) {
         exit(1);
     }
     
-    sprintf(buffer, "REGISTER %d", client_id);
-    write(server_fd, buffer, strlen(buffer) + 1);
+    strcpy(buffer, "REGISTER ");
+    i = 9;
+    temp_id = client_id;
+    j = 0;
+    if (temp_id == 0) {
+        num_str[j++] = '0';
+    } else {
+        while (temp_id > 0) {
+            num_str[j++] = '0' + (temp_id % 10);
+            temp_id = temp_id / 10;
+        }
+    }
+    while (j > 0) {
+        buffer[i++] = num_str[--j];
+    }
+    buffer[i] = '\0';
+    write(server_fd, buffer, i + 1);
     
     while (1) {
-        if (fgets(msg, MAX_MSG_SIZE, stdin) == NULL) {
+        i = 0;
+        while (i < MAX_MSG_SIZE - 1) {
+            msg[i] = getchar();
+            if (msg[i] == EOF || msg[i] == '\n') {
+                break;
+            }
+            i++;
+        }
+        msg[i] = '\0';
+        
+        if (i == 0 && msg[0] == EOF) {
             break;
         }
         
-        msg[strcspn(msg, "\n")] = '\0';
-        
-        if (strlen(msg) == 0) {
-            continue;
+        if (i > 0) {
+            temp_id = client_id;
+            j = 0;
+            if (temp_id == 0) {
+                num_str[j++] = '0';
+            } else {
+                while (temp_id > 0) {
+                    num_str[j++] = '0' + (temp_id % 10);
+                    temp_id = temp_id / 10;
+                }
+            }
+            i = 0;
+            while (j > 0) {
+                buffer[i++] = num_str[--j];
+            }
+            buffer[i++] = ':';
+            j = 0;
+            while (msg[j] != '\0' && i < MAX_MSG_SIZE - 1) {
+                buffer[i++] = msg[j++];
+            }
+            buffer[i] = '\0';
+            write(server_fd, buffer, i + 1);
         }
-        
-        sprintf(buffer, "%d:%s", client_id, msg);
-        write(server_fd, buffer, strlen(buffer) + 1);
     }
     
     close(server_fd);
