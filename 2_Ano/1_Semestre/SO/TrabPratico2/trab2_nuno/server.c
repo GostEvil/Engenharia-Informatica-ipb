@@ -20,11 +20,36 @@
 
 int clients[MAX_CLIENTS];  /* Array com IDs dos clientes registados */
 int num_clients = 0;
-int server_fd = -1;
+FILE *server_fp = NULL;
+
+/* converte inteiro positivo para string */
+void int_to_str(int value, char *dest) {
+    char tmp[20];
+    int i = 0, j;
+
+    if (value == 0) {
+        dest[0] = '0';
+        dest[1] = '\0';
+        return;
+    }
+
+    while (value > 0) {
+        tmp[i] = (char)('0' + (value % 10));
+        value = value / 10;
+        i++;
+    }
+
+    for (j = 0; j < i; j++) {
+        dest[j] = tmp[i - 1 - j];
+    }
+    dest[i] = '\0';
+}
 
 /* Funcao para limpar ao terminar */
 void cleanup(int sig) {
-    close(server_fd);
+    if (server_fp != NULL) {
+        fclose(server_fp);
+    }
     unlink(SERVER_FIFO);  /* Remove o FIFO do servidor */
     exit(0);
 }
@@ -32,7 +57,9 @@ void cleanup(int sig) {
 int main() {
     char buffer[MAX_MSG_SIZE];
     char client_fifo[256];
-    int i, n, client_id, fd;
+    char id_str[20];
+    int i, client_id, len;
+    FILE *client_fp;
 
     /* Configurar handler para Ctrl+C */
     signal(SIGINT, cleanup);
@@ -45,8 +72,8 @@ int main() {
     }
 
     /* Abrir FIFO para leitura */
-    server_fd = open(SERVER_FIFO, O_RDONLY);
-    if (server_fd < 0) {
+    server_fp = fopen(SERVER_FIFO, "r");
+    if (server_fp == NULL) {
         printf("Erro ao abrir FIFO do servidor\n");
         unlink(SERVER_FIFO);
         return 1;
@@ -56,18 +83,24 @@ int main() {
 
     /* Ciclo principal */
     while (1) {
-        n = read(server_fd, buffer, MAX_MSG_SIZE - 1);
-        
-        if (n <= 0) {
-            /* FIFO fechado, reabrir */
-            close(server_fd);
-            server_fd = open(SERVER_FIFO, O_RDONLY);
+        if (fgets(buffer, MAX_MSG_SIZE, server_fp) == NULL) {
+            /* EOF no FIFO: reabrir */
+            fclose(server_fp);
+            server_fp = fopen(SERVER_FIFO, "r");
+            if (server_fp == NULL) {
+                printf("Erro ao reabrir FIFO do servidor\n");
+                break;
+            }
             continue;
         }
-        
-        buffer[n] = '\0';
 
-        /* Verificar se e registo de cliente: REGISTER <id> */
+        /* remover newline lida pelo fgets */
+        len = (int)strlen(buffer);
+        if (len > 0 && buffer[len - 1] == '\n') {
+            buffer[len - 1] = '\0';
+        }
+
+        /* Verificar se e registo de cliente: "REGISTER <id>" */
         if (strncmp(buffer, "REGISTER ", 9) == 0) {
             client_id = atoi(buffer + 9);
             if (num_clients < MAX_CLIENTS) {
@@ -76,17 +109,21 @@ int main() {
                 printf("Cliente registado: %d\n", client_id);
             }
         }
-        /* Senao e uma mensagem: <id>:<texto> */
+        /* Senao e uma mensagem: "<id>:<texto>" */
         else {
             printf("Mensagem recebida: %s\n", buffer);
 
             /* Disseminar para todos os clientes registados */
             for (i = 0; i < num_clients; i++) {
-                sprintf(client_fifo, "%s%d", CLIENT_FIFO_PREFIX, clients[i]);
-                fd = open(client_fifo, O_WRONLY | O_NONBLOCK);
-                if (fd >= 0) {
-                    write(fd, buffer, strlen(buffer) + 1);
-                    close(fd);
+                int_to_str(clients[i], id_str);
+                strcpy(client_fifo, CLIENT_FIFO_PREFIX);
+                strcat(client_fifo, id_str);
+
+                client_fp = fopen(client_fifo, "w");
+                if (client_fp != NULL) {
+                    fputs(buffer, client_fp);
+                    fputc('\n', client_fp);
+                    fclose(client_fp);
                 }
             }
         }
