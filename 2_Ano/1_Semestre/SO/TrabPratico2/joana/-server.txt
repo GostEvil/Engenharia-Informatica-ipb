@@ -1,0 +1,146 @@
+/*
+	server.c
+	Trabalho Prático 2 - Sistemas Operativos
+	Autores:
+		Joana Moreira a63416
+		Luís Fernandes a50765
+*/
+
+/*
+    server.c
+    Trabalho Pratico 2 - Sistemas Operativos
+    Autores:
+        Joana Moreira a63416
+        Luis Fernandes a50765
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <string.h>
+#include <errno.h>
+#include <signal.h>
+
+#define SERVER_FIFO "/tmp/chat_server_fifo"
+#define MAX_CLIENTS 10
+#define MAX_MSG 256
+
+typedef struct {
+	pid_t pid;
+	char fifo_name[50];
+} Client;
+
+int server_fd;
+
+void shutdown_server(int sig){
+	if (server_fd != -1) close(server_fd);
+	unlink(SERVER_FIFO);
+	printf("\n>>>> SERVIDOR ENCERRADO <<<< \n");
+	exit(0);
+}
+
+int main() {
+	Client client_list[MAX_CLIENTS];
+	int num_clients = 0;
+	char msg_buffer[MAX_MSG];
+    
+	int first_msg = 1;
+
+	setbuf(stdout, NULL);
+	signal(SIGINT, shutdown_server);
+	memset(client_list, 0, sizeof(client_list));
+
+	if (mkfifo(SERVER_FIFO, 0666) == -1) {
+		if (errno != EEXIST) {
+			perror("!!! Erro ao criar Server FIFO");
+			exit(1);
+		}
+	}
+
+	system("clear");
+	printf("\n");
+	printf("----------------------------------------\n");
+	printf("             SERVIDOR ONLINE\n");
+	printf("        (A aguardar ligacoes...)\n");
+	printf("----------------------------------------\n");
+
+	server_fd = open(SERVER_FIFO, O_RDWR);
+
+	if (server_fd == -1) { 
+		perror("Erro open server"); 
+		return 1;
+	}
+
+	while (1) {
+		memset(msg_buffer, 0, MAX_MSG);
+
+		int n_bytes = read(server_fd, msg_buffer, MAX_MSG);
+        
+		if (n_bytes > 0) {
+            
+			if (first_msg == 1) {
+				printf("\n   >>> CONEXAO ESTABELECIDA <<<\n");
+				printf("\n");
+				printf("        PID DO SERVIDOR: %d\n", getpid());
+				printf("----------------------------------------\n");
+				first_msg = 0;
+			}
+
+			pid_t sender_pid = 0;
+			char msg_text[MAX_MSG] = "";
+
+			if (sscanf(msg_buffer, "%d:%[^\n]", &sender_pid, msg_text) == 2) {
+				if (sender_pid <= 0) continue;                
+
+				printf("\n");
+				printf("\n[MENSAGEM RECEBIDA]\n");
+				printf("|De: %d\n", sender_pid);
+				printf("|Msg: '%s'\n", msg_text);
+				printf("\n");
+
+				int exists = 0;
+				int client_index = -1;
+                 
+				for (int i = 0; i < num_clients; i++) {
+					if (client_list[i].pid == sender_pid) { 
+						exists = 1;
+						client_index = i; 
+						break; 
+					}
+				}
+
+				if (!exists && num_clients < MAX_CLIENTS) {
+					client_index = num_clients;
+					client_list[client_index].pid = sender_pid;
+					sprintf(client_list[client_index].fifo_name, "/tmp/chat_client_%d", sender_pid);
+					num_clients++;
+					printf("**********--------------------**********\n");
+					printf("  NOVO REGISTO: Cliente %d adicionado\n", sender_pid);
+					printf("**********--------------------**********\n");
+					printf("\n");
+				}
+
+				for (int i = 0; i < num_clients; i++) {
+					if (client_list[i].pid <= 0) continue;
+
+					int client_fd = open(client_list[i].fifo_name, O_RDWR); 
+                    
+					if (client_fd != -1) {
+						int msg_len = strlen(msg_buffer) + 1;
+						write(client_fd, msg_buffer, msg_len);
+						close(client_fd);
+						printf("     -> Enviado para %d\n", client_list[i].pid);
+					} else {
+						printf("     -> Falha ao enviar para %d\n", client_list[i].pid);
+					}
+				}
+			}
+		}
+	}
+    
+    	close(server_fd);
+    	unlink(SERVER_FIFO);
+    	return 0;
+}

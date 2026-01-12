@@ -1,111 +1,58 @@
-Trabalho Prático 2 - Aplicação de Chat
-Sistemas Operativos - 2025/2026
+=============================================================================
+TRABALHO PRATICO 2 - APLICACAO DE CHAT COM PIPES COM NOME
+Sistemas Operativos - 2024/2025
+=============================================================================
 
-Autores: Nuno [número]
+AUTORES:
+- Nuno [numero]
+- [Nome do colega] [numero]
 
-================================================================================
-COMPILAÇÃO
-================================================================================
-
-Para compilar os três programas, utilize os seguintes comandos:
+=============================================================================
+COMPILACAO
+=============================================================================
 
 gcc -o server server.c
-gcc -o client-writer client-writer.c
 gcc -o client-reader client-reader.c
+gcc -o client-writer client-writer.c
 
-Ou, alternativamente, pode compilar todos de uma vez:
+=============================================================================
+EXECUCAO
+=============================================================================
 
-gcc -o server server.c && gcc -o client-writer client-writer.c && gcc -o client-reader client-reader.c
-
-================================================================================
-EXECUÇÃO
-================================================================================
-
-A aplicação requer a execução de múltiplos terminais:
-
-1. TERMINAL 1 - Servidor:
+1. Iniciar o servidor (num terminal):
    ./server
 
-2. TERMINAIS 2 e 3 - Cliente 1 (escritor e leitor):
+2. Para cada cliente, abrir DOIS terminais:
+
+   Terminal 1 - Cliente leitor (recebe mensagens):
+   ./client-reader <id_cliente>
+
+   Terminal 2 - Cliente escritor (envia mensagens):
+   ./client-writer <id_cliente>
+
+   IMPORTANTE: O id_cliente deve ser o MESMO nos dois terminais!
+
+EXEMPLO com 2 clientes:
+   Terminal 1: ./server
    Terminal 2: ./client-reader 1
    Terminal 3: ./client-writer 1
-
-3. TERMINAIS 4 e 5 - Cliente 2 (escritor e leitor):
    Terminal 4: ./client-reader 2
    Terminal 5: ./client-writer 2
 
-E assim sucessivamente para cada cliente adicional (usando IDs diferentes).
-
-NOTA: É importante iniciar primeiro o servidor, depois os clientes.
-   O client-reader deve ser iniciado ANTES do client-writer correspondente
-   para que o FIFO do cliente esteja criado quando o escritor se registar.
-   Ambos os processos (reader e writer) devem usar o MESMO ID de cliente.
-   
-   Se não for fornecido um ID como argumento, cada processo usará o seu
-   próprio PID, o que não permitirá a coordenação entre reader e writer.
-
-================================================================================
-TESTE DA APLICAÇÃO
-================================================================================
-
-Exemplo prático de teste com 1 cliente:
-
-1. Abra 3 terminais WSL e navegue para a pasta do projeto
-
-2. TERMINAL 1 - Inicie o servidor:
-   ./server
-   (O servidor fica em execução, sem output visível)
-
-3. TERMINAL 2 - Inicie o client-reader (onde aparecerão as mensagens):
-   ./client-reader 1
-   (Este terminal fica à espera de receber mensagens)
-
-4. TERMINAL 3 - Inicie o client-writer (onde escreve as mensagens):
-   ./client-writer 1
-   (Agora pode escrever mensagens aqui e pressionar Enter)
-
-5. TESTE:
-   - No TERMINAL 3, escreva: "Olá pessoal!" e pressione Enter
-   - A mensagem aparecerá no TERMINAL 2 como: "[Cliente 1]: Olá pessoal!"
-
-Para testar com múltiplos clientes, repita os passos 3 e 4 com IDs diferentes
-(por exemplo, client-reader 2 e client-writer 2 em terminais separados).
-
-As mensagens enviadas por qualquer cliente aparecerão nos terminais de
-todos os outros clientes (mas não no próprio remetente).
-
-================================================================================
+=============================================================================
 FUNCIONAMENTO
-================================================================================
+=============================================================================
 
-- O servidor cria um FIFO bem conhecido (/tmp/chat_server) para receber
-  mensagens dos clientes.
+- O servidor cria um FIFO em /tmp/chat_server
+- Cada cliente-reader cria um FIFO em /tmp/chat_client_<id>
+- O client-writer regista-se no servidor e envia mensagens
+- O servidor dissemina as mensagens para todos os clientes registados
+- Para terminar, usar Ctrl+C
 
-- Cada cliente escritor envia uma mensagem de registo ao servidor com o seu PID.
-
-- O servidor cria um FIFO específico para cada cliente (/tmp/chat_client_PID).
-
-- Quando um cliente escritor envia uma mensagem, o servidor recebe-a e
-  dissemina-a por todos os clientes registados (exceto o remetente).
-
-- Cada cliente leitor recebe e exibe as mensagens no seu terminal.
-
-- Para terminar um cliente escritor, utilize Ctrl+D (EOF).
-
-- Para terminar o servidor, utilize Ctrl+C.
-
-================================================================================
+=============================================================================
 NOTAS
-================================================================================
+=============================================================================
 
-- Os FIFOs são criados no diretório /tmp.
-
-- Se os FIFOs já existirem de uma execução anterior, pode ser necessário
-  removê-los manualmente antes de iniciar uma nova execução:
-  rm /tmp/chat_server /tmp/chat_client_*
-
-- A aplicação suporta até 100 clientes simultâneos.
-
-- As mensagens têm um tamanho máximo de 1024 caracteres.
-
-================================================================================
+- A aplicacao usa apenas pipes com nome (FIFOs) para comunicacao
+- O servidor suporta ate 100 clientes em simultaneo
+- As mensagens tem tamanho maximo de 1024 bytes

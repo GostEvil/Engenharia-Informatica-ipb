@@ -1,7 +1,7 @@
 /*
  * client-writer.c
  * Cliente escritor - envio de mensagens para o servidor
- * Autor: Nuno [número]
+ * Autor: Nuno [numero]
  */
 
 #include <stdio.h>
@@ -16,34 +16,47 @@
 #define MAX_MSG_SIZE 1024
 
 int main(int argc, char **argv) {
-    long client_id = (argc > 1) ? strtol(argv[1], NULL, 10) : (long)getpid();
+    int client_id;
     int server_fd;
     char buffer[MAX_MSG_SIZE];
     char msg[MAX_MSG_SIZE];
+    int n;
 
+    /* Verificar se foi passado o ID do cliente como argumento */
+    if (argc < 2) {
+        printf("Uso: %s <id_cliente>\n", argv[0]);
+        return 1;
+    }
+
+    client_id = atoi(argv[1]);
+
+    /* Abrir FIFO do servidor para escrita */
     server_fd = open(SERVER_FIFO, O_WRONLY);
     if (server_fd < 0) {
-        fprintf(stderr, "erro ao abrir fifo do servidor\n");
+        printf("Erro ao abrir FIFO do servidor\n");
         return 1;
     }
 
-    int n = snprintf(buffer, sizeof(buffer), "REGISTER %ld", client_id);
-    if (n < 0 || n >= (int)sizeof(buffer) || write(server_fd, buffer, n + 1) < 0) {
-        fprintf(stderr, "erro ao registar cliente\n");
-        close(server_fd);
-        return 1;
-    }
+    /* Registar cliente no servidor */
+    n = sprintf(buffer, "REGISTER %d", client_id);
+    write(server_fd, buffer, n + 1);
 
-    while (fgets(msg, sizeof(msg), stdin)) {
-        size_t len = strlen(msg);
-        if (len && msg[len - 1] == '\n') msg[len - 1] = '\0';
-        if (msg[0] == '\0') continue;
-        n = snprintf(buffer, sizeof(buffer), "%ld:%s", client_id, msg);
-        if (n < 0 || n >= (int)sizeof(buffer)) continue;
-        if (write(server_fd, buffer, n + 1) < 0) {
-            fprintf(stderr, "erro ao enviar mensagem\n");
-            break;
+    printf("Cliente escritor iniciado. Escreva mensagens:\n");
+
+    /* Ler mensagens do teclado e enviar ao servidor */
+    while (fgets(msg, sizeof(msg), stdin) != NULL) {
+        /* Remover newline */
+        n = strlen(msg);
+        if (n > 0 && msg[n - 1] == '\n') {
+            msg[n - 1] = '\0';
         }
+        
+        /* Ignorar linhas vazias */
+        if (msg[0] == '\0') continue;
+
+        /* Formatar e enviar mensagem */
+        n = sprintf(buffer, "%d:%s", client_id, msg);
+        write(server_fd, buffer, n + 1);
     }
 
     close(server_fd);

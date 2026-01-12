@@ -1,0 +1,62 @@
+/*
+	client-writer.c
+	Trabalho Prático 2 - Sistemas Operativos
+	Autores:
+		Joana Moreira a63416
+		Luís Fernandes a50765
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <string.h>
+
+#define SERVER_FIFO "/tmp/chat_server_fifo"
+#define MAX_MSG 256
+
+int main(int argc, char *argv[]) {
+	int fd;
+	char msg[MAX_MSG];
+	char buffer[MAX_MSG];
+
+	if (argc != 2) {
+		printf("ERRO DE UTILIZAÇÃO\n");
+		printf("Uso correto: ./client-writer <PID_DO_LEITOR>\n");
+		return 1;
+	}
+
+	int pid_leitor = atoi(argv[1]);
+
+	fd = open(SERVER_FIFO, O_WRONLY);
+	if (fd == -1) { 
+		printf("ERRO: O SERVIDOR ESTÁ OFFLINE\n");
+		printf("Certifique-se que o servidor está a correr noutro terminal.\n");
+		return 1; 
+	}
+
+	system("clear");
+	printf("\n");
+	printf("----------------------------------------\n");
+	printf("             ESCRITOR ONLINE\n");
+	printf("            PID (LEITOR): %d\n", pid_leitor);
+	printf("----------------------------------------\n");
+	printf("> Escreva a mensagem e pressione ENTER\n");
+	printf("     (digite 'sair' para fechar)\n\n");
+
+	while (1) {
+		printf(" [MENSAGEM] >");
+		fgets(msg, MAX_MSG, stdin);
+        
+		msg[strcspn(msg, "\n")] = 0;
+        
+		if (strcmp(msg, "sair") == 0) break;
+
+        	sprintf(buffer, "%d:%s", pid_leitor, msg);
+
+        	write(fd, buffer, strlen(buffer) + 1);
+	}
+
+	close(fd); 
+	return 0;
+}
