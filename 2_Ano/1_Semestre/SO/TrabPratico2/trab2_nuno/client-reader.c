@@ -1,80 +1,70 @@
-/*
- * client-reader.c
- * Cliente leitor - rececao e visualizacao de mensagens do servidor
- * Autor: Nuno [numero]
- */
-
+//Nuno Silva, 63426
+//Jorge Silva, 40230
+//enviei o cr diferente por engano, mas acho q este tmb da :D
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <fcntl.h>
+#include <sys/stat.h>
+#include <string.h>
 #include <signal.h>
+#include <errno.h>
 
-#define CLIENT_FIFO_PREFIX "/tmp/chat_client_"
-#define MAX_MSG_SIZE 1024
+#define SERVER_FIFO "/tmp/chat_server_fifo"
+#define MAX_MSG 256
 
-char client_fifo[256];
+char my_fifo[64];
 
-/* Funcao para limpar FIFO ao terminar */
-void cleanup(int sig) {
-    unlink(client_fifo);  /* Remove o FIFO do cliente */
+void stop_handler(int sig) {
+    (void)sig;
+    unlink(my_fifo);
+    printf("\n\nA encerrar reader...\n");    
     exit(0);
 }
 
-int main(int argc, char **argv) {
-    int client_id;
-    int client_fd;
-    char buffer[MAX_MSG_SIZE];
-    int n;
+int main(void) {
+    char buffer[MAX_MSG];
+    pid_t pid = getpid();
 
-    /* Verificar se foi passado o ID do cliente */
-    if (argc < 2) {
-        printf("Uso: %s <id_cliente>\n", argv[0]);
+    setbuf(stdout, NULL);
+    signal(SIGINT, stop_handler);
+
+    sprintf(my_fifo, "/tmp/chat_client_%d", pid);
+
+    if (mkfifo(my_fifo, 0666) == -1 && errno != EEXIST) {
+        printf("Erro ao criar FIFO do client\n");
         return 1;
     }
 
-    client_id = atoi(argv[1]);
+    printf("\n----------------------------------------\n");
+    printf("\tCLIENT READER\n");
+    printf("\tPID: %d\n", pid);
+    printf("----------------------------------------\n");
 
-    /* Configurar handler para Ctrl+C */
-    signal(SIGINT, cleanup);
-
-    /* Criar nome do FIFO do cliente */
-    sprintf(client_fifo, "%s%d", CLIENT_FIFO_PREFIX, client_id);
-    
-    /* Remover FIFO antigo se existir e criar novo */
-    unlink(client_fifo);
-    if (mkfifo(client_fifo, 0666) < 0) {
-        printf("Erro ao criar FIFO do cliente\n");
-        return 1;
+    int sfd = open(SERVER_FIFO, O_WRONLY);
+    if (sfd != -1) {
+        char login[MAX_MSG];
+        sprintf(login, "%d:[+] User", pid);
+        write(sfd, login, strlen(login) + 1);
+        close(sfd);
+    } else {
+        printf("Servidor offline\n");
     }
 
-    printf("Cliente leitor iniciado. A aguardar mensagens...\n");
-
-    /* Abrir FIFO para leitura */
-    client_fd = open(client_fifo, O_RDONLY);
-    if (client_fd < 0) {
+    int fd = open(my_fifo, O_RDWR);
+    if (fd == -1) {
         printf("Erro ao abrir FIFO do cliente\n");
-        unlink(client_fifo);
+        unlink(my_fifo);
         return 1;
     }
 
-    /* Ciclo principal - ler e mostrar mensagens */
     while (1) {
-        n = read(client_fd, buffer, MAX_MSG_SIZE - 1);
+        int n = read(fd, buffer, MAX_MSG - 1);
         if (n > 0) {
             buffer[n] = '\0';
-            printf("%s\n", buffer);
-        } else if (n == 0) {
-            /* FIFO fechado pelo outro lado, reabrir */
-            close(client_fd);
-            client_fd = open(client_fifo, O_RDONLY);
-            if (client_fd < 0) break;
+            int sender;
+            char msg[MAX_MSG];
+
+            if (sscanf(buffer, "%d:%255[^\n]", &sender, msg) == 2) { printf("[%d]: %s\n", sender, msg);}
         }
     }
-
-    cleanup(0);
-    return 0;
-}
