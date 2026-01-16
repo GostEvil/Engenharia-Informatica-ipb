@@ -1,5 +1,4 @@
-//Nuno Silva, 63426
-//Jorge Silva, 40230
+
 //enviei o cr diferente por engano, mas acho q este tmb da :D
 #include <stdio.h>
 #include <stdlib.h>

@@ -1,5 +1,3 @@
-//Nuno Silva, 63426
-//Jorge Silva, 40230
 
 
 #include <stdio.h>
