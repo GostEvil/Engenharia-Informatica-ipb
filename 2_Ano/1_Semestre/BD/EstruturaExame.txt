@@ -5,3 +5,5 @@ Conceitos teóricos sobre os 4 primeiros cap: SI, SGBD e modelação e algebra r
 Parte 2 - Prática (realizar no virtual com lock down browser): 15 valores / 1h30m
 2.1- Prática SQL: 10 valores / 9 perguntas
 2.2 - Prática NoSQL: 5 valores / 6 perguntas
+
+fonte: Virtual, anúncio prof
