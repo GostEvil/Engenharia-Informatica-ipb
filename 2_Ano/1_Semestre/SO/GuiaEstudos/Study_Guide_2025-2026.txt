@@ -42,17 +42,16 @@ unit 4 - chapter 6 (10th edition)
 - chapter 6: sections 6.1 to 6.6
 
 ################################################################################
-3rd theoretical part (T3)
+3rd part (T3)
 ################################################################################
 
-################################################################################
+# Teorica
 unit 5 - chapter 9 (10th edition):
 
 - slides PT: 5.1 to 5.9, 5.12 to 5.35, 5.51 to end
 - slides EN: 5.1 to 5.13, 5.16 to 5.41, 5.60 to end
 - chapter 9: sections 9.1 (9.1.1 to 9.1.3), 9.2, 9.3 (9.3.1, 9.3.2)
 
-################################################################################
 unit 6 - chapters 13+14 (10th edition):
 
 - slides PT: 6.1 to 6.16, 6.37 to 6.43, 6.48 to 6.51. 6.72 to 6.74
@@ -60,5 +59,60 @@ unit 6 - chapters 13+14 (10th edition):
 - chapter 13: sections 13.1, 13.2, 13.3 (13.3.1 to 13.3.3)
 - chapter 14: sections 14.4.1, 14.4.2
 
+#Pratica
+Unidade 5 - Pthreads
+- slides: "06 - Threads.pdf", disponibilizados no Virtual
+- exercícios: 5.1 a 5.9
+
+Leitura complementar: "Programming with POSIX Threads", David Butenhof, Addison Wesley, 1997
+- capítulo 2
+- secções 3.1 e 3.2 do capítulo 3
 
 // para a parte pratica, tlv saia um muito parecido com o 5.8
+
+
+
+
+
+
+########################################################################
+Sistemas Operativos - Guia de Estudo da COMPONENTE PRÁTICA - 2025-2026
+v1.2 - 2026-01-09
+
+Este guia indica os elementos da documentação da disciplina que são mais
+relevantes no contexto da COMPONENTE PRÁTICA de cada prova de avaliação, 
+em 2025/2026. Este guia não dispensa a consulta dos sumários online, 
+onde se poderão referenciar exercícios de exames, que não constam da 
+sebenta prática. Este guia irá sendo atualizado à medida que as aulas 
+progridem.
+
+########################################################################
+Matéria avaliada na parte P1
+
+Capítulo 1 da Sebenta Prática
+- secções: 1.1 a 1.7
+- exercícios: 1.2 a 1.11
+
+########################################################################
+Matéria avaliada na parte P2
+
+Capítulo 2 da Sebenta Prática
+- secções: todas, excepto 2.7.3
+- exercícios: 2.1 a 2.9
+
+Capítulo 3 da Sebenta Prática
+- secções: todas, excepto 3.6.2
+- exercícios: 3.1 a 3.9
+
+########################################################################
+Matéria avaliada na parte P3
+
+Unidade 5 - Pthreads
+- slides: "06 - Threads.pdf", disponibilizados no Virtual
+- exercícios: 5.1 a 5.9
+
+Leitura complementar: "Programming with POSIX Threads", David Butenhof, Addison Wesley, 1997
+- capítulo 2
+- secções 3.1 e 3.2 do capítulo 3
+########################################################################
+
