@@ -1,1 +1,7 @@
 Estrutura do Teste:
+Parte 1- teórica (realizar no virtual com lock down browser) : 5 valores / 15min / 20 perguntas escolha múltipla / desconta erradas.
+Conceitos teóricos sobre os 4 primeiros cap: SI, SGBD e modelação e algebra relacional.
+
+Parte 2 - Prática (realizar no virtual com lock down browser): 15 valores / 1h30m
+2.1- Prática SQL: 10 valores / 9 perguntas
+2.2 - Prática NoSQL: 5 valores / 6 perguntas
