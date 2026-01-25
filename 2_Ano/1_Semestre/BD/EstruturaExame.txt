@@ -8,3 +8,4 @@ Parte 2 - Prática (realizar no virtual com lock down browser): 15 valores / 1h3
 
 fonte: Virtual, anúncio prof
 ------- English -------------------------------------------------------
+Test Structure:
