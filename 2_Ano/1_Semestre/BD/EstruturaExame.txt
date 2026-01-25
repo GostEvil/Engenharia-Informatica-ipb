@@ -7,3 +7,4 @@ Parte 2 - Prática (realizar no virtual com lock down browser): 15 valores / 1h3
 2.2 - Prática NoSQL: 5 valores / 6 perguntas
 
 fonte: Virtual, anúncio prof
+------- English -------------------------------------------------------
