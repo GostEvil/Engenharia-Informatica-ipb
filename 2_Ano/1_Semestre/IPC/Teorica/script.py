@@ -25,12 +25,15 @@ with open(output_txt, "w", encoding="utf-8") as txt_out:
             continue
 
         with open(pdf_path, "rb") as pdffileobj:
-            pdfreader = PyPDF2.PdfFileReader(pdffileobj)
-            num_pages = pdfreader.numPages
+            # usar a nova API do PyPDF2 (v3+)
+            pdfreader = PyPDF2.PdfReader(pdffileobj)
+            num_pages = len(pdfreader.pages)
 
             for page_num in range(num_pages):
-                pageobj = pdfreader.getPage(page_num)
-                text = pageobj.extractText()
+                pageobj = pdfreader.pages[page_num]
+                text = pageobj.extract_text() or ""
 
                 txt_out.write(f"\n\n===== {filename} - página {page_num + 1} =====\n")
                 txt_out.write(text)
+
+print("Terminado. Verifica o ficheiro 'arquivo.txt' nesta pasta.")
