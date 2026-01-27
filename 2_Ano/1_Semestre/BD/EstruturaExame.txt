@@ -7,7 +7,8 @@ Parte 2 - Prática (realizar no virtual com lock down browser): 15 valores / 1h3
 2.2 - Prática NoSQL: 5 valores / 6 perguntas
 
 fonte: Virtual, anúncio prof
-------- English -------------------------------------------------------
+
+English
 Test Structure:
 Part 1 - theoretical (perform in the virtual with lock down browser): 5 points / 15min / 20 multiple choice questions / wrong discounts.
 Theoretical concepts on the first 4 chapters: IS, DBMS, modeling, and relational algebra.
