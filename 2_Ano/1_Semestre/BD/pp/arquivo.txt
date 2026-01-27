@@ -1,0 +1,1374 @@
+===== 2_BD_SGBD.pdf - página 1 =====
+Capítulo 2. Sistemas de Gestão de Bases de Dados (SGBD) 
+
+===== 2_BD_SGBD.pdf - página 2 =====
+2Base de Dados |   2025@jprp | 2025          Base de Dados
+Índice
+⚫ Conteúdo
+➔ 1.Introdução aosambientes deBase deDados
+-Noção deSistema deInformação
+-AInformação nasOrganizações
+-Tecnologias deInformação
+-Gestão deInformação
+➔ 2.Sistemas deGestão deBases deDados
+-Abordagem eVantagens
+-Arquitetura deumSGBD
+-Tipos deUtilizadores num SGDB
+➔ 3.Modelação eNormalização deDados
+-Manutenção daIntegridade
+-Redundância eChaves
+-Diagramas E-R
+-Modelo Relacional
+➔ 4.Álgebra Relacional eSQL -(MySQL )
+-Conceitos eaplicação deÁlgebra Relacional
+-Ferramentas deAdministração MySQL
+-Comandos DDL
+-Comandos DML
+➔ 5.Introdução àsBases deDados NoSQL
+Bases deDados NoSQL ,
+Tipos deBases deDados NoSQL ,
+Bases dedados orientadas adocumentos
+➔ 6.MongoDB
+Estruturas JSON eBSON,
+Modelação dedados,
+Criação decoleções edocumentos,
+Operações CRUD eagregação,
+Indexação etransações
+
+===== 2_BD_SGBD.pdf - página 3 =====
+3Base de Dados |   2025@jprp | 2025          Base de Dados
+Conceitos de Bases de Dados
+⚫ Base deDados :
+➔Conjunto estruturado deinformação, organizada em Campos, Registos eTabelas, que seinter -relacionam por
+intermédio dechaves eque permitem oacesso adiferentes perfis deutilizadores .
+⚫ Dados :
+➔Sãoelementos deInformação que permitem descrever asEntidades ouEventos .
+⚫ Evento :
+➔Acontecimento ouocorrência relativa auma entidade doqual sepretende guardar Dados eInformação .
+⚫ Informação :
+➔Conjunto dedados que descrevem entidades oueventos, organizados deuma forma significativa erelevante para
+umdeterminado contexto .
+⚫ Campo :
+➔Componente elementar deumregisto onde searmazenam osDados que caracterizam asEntidades .
+⚫ Tabela :
+➔Conjunto organizado deregistos que armazenam ainformação relacionada com asEntidades dosistema, segundo
+uma perspetiva matricial .
+⚫ Registo :
+➔Corresponde auma entrada individual nabase dedados onde searmazena informação relacionada com as
+Entidades ouEventos .
+
+===== 2_BD_SGBD.pdf - página 4 =====
+4Base de Dados |   2025@jprp | 2025          Base de Dados
+Conceitos de Bases de Dados
+⚫ Exemplo
+⚫ Características dasBases deDados
+➔ Nas Bases deDados, aInformação pode servisualizada sob aforma deTabelas, com uma linha para cada Registo ouEntrada euma
+série decolunas para cada Campo ouPropriedade, oque origina que ainserção emanipulação dosdados seja feita deforma :
+Organizada …
+Consistente …
+Integra…
+Não Redundante …
+Segura…
+⚫ Redundância :
+➔ Duplicação desnecessária dosdados com inconvenientes :
+Maior custo com armazenamento dosdados ;
+Operações deatualização desnecessárias ;
+Aumento custos com Pessoal ;
+Maior possibilidade deInconsistência dosdados .
+⚫ Inconsistência :
+➔ Aexistência deredundância, pode levar aque determinados processos deatualização dedados, não atualizem oscampos redundantes,
+penalizando -seassim aIntegridade daBase dedados .
+⚫ Integridade :
+➔ Existência dedados com conteúdos únicos .
+⚫ Segurança :
+➔ Aatribuição dedeterminadas permissões deacordo com osperfis deutilização, limita osacessos eprocessamentos aefetuar àbase de
+dados, garantindo -seassim ummaior nível desegurança eproteção dosdados .Tabela cliente
+Num_Cliente Localidade E_mail
+1000 Bragança joao@mail.pt
+1100 Lisboa joana@mail.pt
+1200 Bragança maria@mail.ptTabela encomenda
+Num_Cliente Num_Encomenda Data_Encomenda
+1000 123 01/03/2022
+1200 150 01/03/2022
+1200 245 12/03/2022
+
+
+===== 2_BD_SGBD.pdf - página 5 =====
+5Base de Dados |   2025@jprp | 2025          Base de Dados
+Conceitos de Bases de Dados
+⚫ Redundância
+➔Aredundância ocorre sempre que omesmo facto éarmazenado mais doque uma veznamesma base dedados, ou
+quando factos derivados sãoarmazenados numa base dedados .
+➔Osproblemas que aredundância pode trazer aumsistema debases dedados podem serresumidos nos pontos
+seguintes :
+Problemas demanutenção :
+→Redundância significa oarmazenamento repetido dosmesmos dados .
+→Como resultado, uma simples alteração ouremoção pode implicar oacesso avárias partes dabase dedados, tornando -se
+difícil manter acoerência dosdados armazenados .
+Custos deespaço dearmazenamento :
+→Apesar de,atualmente, não serumproblema significativo (opreço das memórias secundárias desce cada vez mais), não
+deixa deserimportante evitar ocupar espaço dearmazenamento com algo que não acrescenta nada aoque jáexiste
+armazenado .
+Problemas dedesempenho :
+→Apesar denão sertãoevidente, aredundância pode também trazer problemas dedesempenho aosistema .
+→Arazão para isso éque arazão mais importante para ummau desempenho deumSGBD sãoosacessos aosdiscos onde as
+bases dedados seencontram armazenadas .
+→Searedundância forsignificativa, isso implicará mais acessos aosdiscos para trazer osmesmos dados .
+➔Como exemplo deredundância, considere -searelação Empregados eProjetos, aqual mostra osrelacionamentos
+existentes entre projetos eosempregados que nele participam .
+Código de 
+EmpregadoNúmero 
+do ProjetoOrçamentoTempo 
+Total
+E1 PROJ1 20 20
+E3 PROJ1 20 16
+E2 PROJ2 17 35
+E2 PROJ3 84 42
+E3 PROJ2 17 17
+E2 PROJ1 20 83
+E4 PROJ3 84 41
+PROJ4 90Acoluna“Orçamento” doprojeto éarmazenado várias vezes, tantas quanto onúmero depessoas (coluna
+Código deEmpregado) participantes noprojeto .
+Asdesvantagens deste tipo desituações sãovárias :
+1) Seoorçamento deumprojeto muda, então teremos dealterar mais doque uma linha databela ;
+2) Decada vezque umpessoa éincluída num projeto, énecessário incluir também oorçamento doprojeto ;
+3) Um projeto sem pessoas atribuídas, como PROJ 4,sóterá acoluna Orçamento preenchida ;asrestantes
+ficarão vazios .Isto significa que uma simples operação deintrodução deuma pessoa num projeto será
+realizada demodos diferentes, deacordo com oestado atual dabase dedados .Porexemplo, para inserir
+uma pessoa noprojeto PROJ 2resume -seainserir umnova linha natabela Empregados eProjetos ;para
+acrescentar uma pessoa aoprojeto PROJ 4,deve -sealterar ovalor dascolunas que estão vazias nalinha
+correspondente aesse projeto .
+
+===== 2_BD_SGBD.pdf - página 6 =====
+6Base de Dados |   2025@jprp | 2025          Base de Dados
+Conceitos de Bases de Dados
+⚫ Manutenção daIntegridade
+➔Amanutenção daintegridade deuma base dedados relacional éfundamental para oseu bom funcionamento,
+devendo serassegurada pelo SGBD (Sistema deGestão deBases deDados) oupelas aplicações que interagem com
+osdados .
+➔Assim, uma base dedados relacional deve assegurar três tipos deintegridade :
+Integridade deDomínio
+→Esta éaforma mais elementar demanutenção deintegridade .Consiste emque oSGBD faça respeitar asrestrições que
+determinados atributos impõem sobre osvalores que lhes podem seratribuídos .
+→Exemplo :
+•Numa relação que guarde informação sobre pessoas, oatributo Sexo apenas poderá aceitar um dedois valores
+possíveis :umvalor que represente osexo masculino, eoutro valor que represente osexo feminino .
+•Nesta mesma relação, oatributo Data deNascimento apenas poderá aceitar valores que representem datas válidas .
+Por exemplo, adata 30deFevereiro de2005 éinválida e,portanto, não poderá seraceite pelo atributo Data de
+Nascimento .
+Integridade deEntidade
+→Oproblema daintegridade deentidade coloca -seemrelação àpossível existência devalores nulos como valores deum
+atributo deuma relação .
+→Naterminologia dasbases dedados, umvalor nulo não significa umvalor igual azero ;antes, significa que ovalor não existe,
+ouque édesconhecido, ouque simplesmente não seaplica nessa ocorrência darelação .
+→Oprincípio daintegridade deentidade estipula que nenhum atributo pertencente àchave primária deuma relação pode
+conter valores nulos .
+• Uma vezque achave primária constitui oidentificador dos tuplos darelação, aviolação deste princípio equivaleria a
+admitir que abase dedados poderia registar informações dealgo não identificável .Esta possibilidade érejeitada pelo
+modelo relacional .
+Integridade Referencial
+→Oprincípio daintegridade referencial estabelece que umvalor deuma chave estrangeira tem obrigatoriamente deexistir
+como valor deumatributo dachave primária databela relacionada com aquela chave estrangeira .
+•Ouseja, umvalor que não exista como chave primária nasuatabela não pode serusado como chave estrangeira de
+uma outra tabela .
+→Emrigor, nenhum atributo que represente datas poderá aceitar qualquer valor que não represente uma data válida .
+
+===== 2_BD_SGBD.pdf - página 7 =====
+7Base de Dados |   2025@jprp | 2025          Base de Dados
+Conceitos de Bases de Dados
+⚫Objetivos dasBases deDados :
+➔Facilitar otratamento degrandes volumes dedados ;
+➔Processar informação deforma centralizada ;
+➔Assegurar aindependência dosdados face aosprocessamentos ;
+➔Evitar aredundância noregisto dosdados ;
+➔Evitar inconsistências aonível dosprocessamentos dedados ;
+➔Garantir integridade dosdados ;
+➔Facilitar apartilha dosdados ;
+➔Garantir aconfidencialidade easegurança dosdados .
+
+===== 2_BD_SGBD.pdf - página 8 =====
+8Base de Dados |   2025@jprp | 2025          Base de Dados
+SGBD (Sistema de Gestão de Bases de Dados)
+⚫Oque éumSGBD (Sistema deGestão deBases deDados)
+➔OSGBD éuma porção desoftware que fazaligação entre osutilizadores, ouprogramas deaplicação,
+eabase dedados propriamente dita.
+➔Étarefa doSGBD conciliar ospedidos deacesso àbase dedados originados pelos vários utilizadores .
+➔Esse software deve proporcionar aos utilizadores umambiente flexível, eficiente edefácil utilização
+para aconsulta, introdução, alteração eremoção deinformação nabase dedados .
+⚫OsSGBDs sãousados geralmente para :
+➔criar ougerir utilizadores
+➔consultar dados
+➔alterar dados etabelas
+➔excluir dados
+➔relacionar tabelas
+➔importar eexportar dados
+
+
+===== 2_BD_SGBD.pdf - página 9 =====
+9Base de Dados |   2025@jprp | 2025          Base de Dados
+SGBD (Sistema de Gestão de Bases de Dados)
+⚫ Omodo como ainformação está fisicamente armazenada não érelevante
+para outilizador dabase dedados…
+➔pelo contrário, esse conhecimento apenas aumentaria acomplexidade da
+operação .
+⚫ Nestas condições, uma função importante do SGBD éapresentar ao
+utilizador uma visão abstrata dainformação ,escondendo osdetalhes sobre
+como ainformação está fisicamente armazenada e,assim, simplificar aação
+doutilizador .
+⚫ Normalmente, distinguem -setrês níveis de abstração da informação,
+definidos como :
+➔Nível Físico :
+Éomais baixo nível deabstração edescreve omodo como ainformação está
+fisicamente armazenada nosdispositivos físicos apropriados (exemplo :HD, SSD,etc ).
+➔Nível Conceptual (oulógico) :
+Este nível éintermédio edescreve qual ainformação que está armazenada nabase
+dedados, easvárias relações internas aessa informação .
+Este nível éainda relativamente complexo devido àinclusão detoda ainformação
+sobre aorganização dosdados existentes nabase dedados .
+Noentanto, onível conceptual jánão inclui aforma como ainformação está
+fisicamente armazenada .
+➔Nível deVisualização (ouaplicação ):
+Também designado por nível deinteração ounível externo, éonível com maior
+abstração dainformação econtempla apenas uma parte dainformação contida na
+base dedados .
+Ainformação disponível aeste nível éajustada àsnecessidades ecompetências de
+cada utilizador específico .
+→Em virtude dadiversidade deutilizadores, existem normalmente várias
+visualizações para amesma base dedados .
+Nível Físico
+SGBD "Sistema de Gestão da Base de Dados"Nível Conceptual
+Organização Lógica da InformaçãoVisão 1 Visão 2 Visão 3
+
+===== 2_BD_SGBD.pdf - página 10 =====
+10Base de Dados |   2025@jprp | 2025          Base de Dados
+SGBD (Sistema de Gestão de Bases de Dados)
+⚫Níveis deabstração dainformação
+➔Éfrequente que aestrutura deuma base dedados seja
+alterada aolongo dotempo para melhor responder aos
+requisitos que lhesão endereçados, eassim aumentar asua
+capacidade eeficiência .
+Apossibilidade dealterar adefinição deumnível deabstração de
+informação sem afetar onível seguinte designa -se por
+independência dainformação .
+➔Deacordo com osníveis deabstração considerados, existem
+dois níveis deindependência dainformação :
+Independência dainformação física :
+→Éacapacidade dealterar aestrutura dearmazenamento
+físico dainformação sem alterar aestrutura aonível
+conceptua l,eporconseguinte, sem alterar osprogramas de
+aplicação .
+→Alterações aonível físico são esporadicamente efetuadas
+para aumentar aeficiência do armazenamento da
+informação e,consequentemente, odesempenho dos
+programas deaplicação que acedem auma determinada
+base dedados .
+Independência dainformação lógica :
+→Éapossibilidade dealterar abase dedados aonível
+conceptual sem alterar osprogramas deaplicação .
+→Esta propriedade édifícil de conseguir ,dado que os
+programas de aplicação baseiam -se na descrição da
+informação aonível conceptual .
+
+
+===== 2_BD_SGBD.pdf - página 11 =====
+11Base de Dados |   2025@jprp | 2025          Base de Dados
+SGBD (Sistema de Gestão de Bases de Dados)
+⚫Níveis deabstração dainformação
+➔Ainteração dasaplicações edosutilizadores com oSGBD faz-seàcusta delinguagens apropriadas .
+➔Aonível conceptual, aestrutura deuma base dedados éespecificada porumconjunto deinstruções
+numa Linguagem deDefinição deDados (DDL) aqual deve permitir que oesquema deuma base de
+dados possa serdefinido .
+Oresultado dessa definição éum conjunto detabelas armazenadas naquilo aque sechama dicionário de
+dados, oqual pode ser visto como um depósito central que descreve edefine osignificado detoda a
+informação usada noesquema dabase dedados .
+➔OsSGBDs modernos também disponibilizam aos utilizadores uma Linguagem deManipulação de
+Dados (DML), que permite manipular (isto é,consultar, inserir, apagar oualterar) osdados
+armazenados numa base dedados .
+Alinguagem padrão que permite definir emanipular osdados armazenados numa base dedados chama -seSQL
+(“Structured Query Language ”,isto é,“Linguagem dePerguntas Estruturadas”) .
+
+===== 2_BD_SGBD.pdf - página 12 =====
+12Base de Dados |   2025@jprp | 2025          Base de Dados
+SGBD (Sistema de Gestão de Bases de Dados)
+⚫Osdois principais modelos deSGBD sãoosrelacionais eosnão relacionais, eadiferença básica
+entre eles éaestrutura utilizada para organizar osdados .
+⚫Modelos debases dedados :
+➔1-Relacional (SQL)
+São otipo mais comum deSGBD .Expressam osdados emtabelas erelacionamentos através dechaves, e
+utilizam alinguagem SQL para relacionar osdados .
+Aplicações :Oracle SQL, Microsoft SQL Server, PostgreeSQL ,MySQL ,MariaDB .
+➔2-Não relacional (NoSQL )
+São bases dedados que não usam somente SQL ouomodelo relacional .São ideais para ambientes onde o
+modelo dedados émuito volátil (por exemplo :eventos emumwebsite) .
+Aplicações :Cassandra, Redis, MongoDB ,CouchDB ,Apache Hbase ,Riak .
+➔3-Graph
+Éumtipo deNoSQL que representa osdados emumgrafo (graph )devértices earestas .Ideal para dados que
+estão altamente relacionados entre si(por exemplo, modelo derecomendação) .
+Aplicações :Neo4j,Azure Cosmos DB,SAP HANA, Sparksee ,Oracle Spatial and Graph ,OrientDB
+
+===== 2_BD_SGBD.pdf - página 13 =====
+13Base de Dados |   2025@jprp | 2025          Base de Dados
+Utilizadores de Bases de Dados
+⚫Relativamente aotipo deutilizadores que interagem com osSGBDs ,épossível distinguir duas
+classes deutilizadores com interesses eposturas diferentes perante estes sistemas :
+➔Oadministrador dabase dedados eosutilizadores propriamente ditos :
+Administrador
+Utilizadores
+13
+
+===== 2_BD_SGBD.pdf - página 14 =====
+14Base de Dados |   2025@jprp | 2025          Base de Dados
+Utilizadores de Bases de Dados
+⚫Administrador
+➔Oadministrador deuma base dedados éoresponsável máximo pelo bom funcionamento detodo o
+SGBD .Assuas funções mais importantes são:
+Definição daestrutura :Aestrutura dabase dedados édefinida por um conjunto deinstruções que são
+transformadas pelo compilador dalinguagem dedefinição dedados doSGBD num conjunto dedefinições que
+sãoarmazenadas nodicionário dedados .
+Alteração daestrutura :Àsvezes, torna -senecessário alterar aestrutura deuma base dedados jáexistente .
+Esta ação étambém definida por um conjunto deinstruções utilizando alinguagem dedefinição dedados
+disponibilizada pelo SGBD .
+Autorização deacesso aos dados :Étarefa doadministrador especificar quais osdados que podem ser
+consultados oualterados porcada tipo deutilizador que necessita deaceder àbase dedados .
+Condições deintegridade :Cabe aoadministrador definir quais ascondições que devem sersatisfeitas pela
+informação existente nabase dedados .Por outras palavras, oadministrador dabase dedados deve definir
+todas asrestrições que garantem aintegridade dosdados armazenados .
+14
+
+===== 2_BD_SGBD.pdf - página 15 =====
+15Base de Dados |   2025@jprp | 2025          Base de Dados
+Utilizadores de Bases de Dados
+⚫Utilizadores
+➔Operfil deumutilizador deumSGBD édefinido consoante otipo deinteração que este necessita de
+tercom osistema .
+➔Basicamente, existem dois tipos deutilizadores :
+Programadores deaplicações :
+→São profissionais deinformática que, através delinguagens deprogramação dealto nível (por exemplo,
+Pascal, C,Visual Basic, etc.)eatravés doesquema conceptual dabase dedados, desenvolvem asaplicações
+informáticas que osutilizadores finais irão depois utilizar para aceder àbase dedados .
+Utilizadores finais :
+→São arazão deexistir dabase dedados .Acedem aosistema para consultar, alterar, adicionar ouremover
+dados, sob ascondições deacesso definidas eimpostas pelo administrador dabase dedados .Estes
+utilizadores não poderão nunca alterar aestrutura (isto é,oesquema conceptual) dabase dedados .
+15
+
+===== 2_BD_SGBD.pdf - página 16 =====
+16Base de Dados |   2025@jprp | 2025          Base de Dados
+Tipos de SGBD mais usados
+⚫SQL eNoSql
+⚫SGBD relacionais mais populares
+⚫SGBD orientados adocumento mais populares
+
+
+===== 3_BD_ModeloRelacional.pdf - página 1 =====
+1Base de Dados |   2025@jprp | 2025          Base de Dados
+Bases de Dados
+Engenharia
+ Informática
+ (2ºano)
+Tecnologias
+ Digitais
+ e 
+Gestão
+ (2ºano)
+João Paulo Pereira | jprp@ipb.pt
+Marisa Ortega | marisa.ortega@ipb.pt
+David Dias |davide.dias@ipb.pt
+Tiago Santos | tiago.santos@ipb.pt
+2025
+Capítulo 3. Modelação e Normalização de Dados 
+
+===== 3_BD_ModeloRelacional.pdf - página 2 =====
+2Base de Dados |   2025@jprp | 2025          Base de Dados
+Índice
+⚫ Conteúdo
+➔ 1.Introdução aosambientes deBase deDados
+-Noção deSistema deInformação
+-AInformação nasOrganizações
+-Tecnologias deInformação
+-Gestão deInformação
+➔ 2.Sistemas deGestão deBases deDados
+-Abordagem eVantagens
+-Arquitetura deumSGBD
+-Tipos deUtilizadores num SGDB
+➔ 3.Modelação eNormalização deDados
+-Manutenção daIntegridade
+-Redundância eChaves
+-Diagramas E-R
+-Modelo Relacional
+➔ 4.Álgebra Relacional eSQL -(MySQL )
+-Conceitos eaplicação deÁlgebra Relacional
+-Ferramentas deAdministração MySQL
+-Comandos DDL
+-Comandos DML
+➔ 5.Introdução àsBases deDados NoSQL
+Bases deDados NoSQL ,
+Tipos deBases deDados NoSQL ,
+Bases dedados orientadas adocumentos
+➔ 6.MongoDB
+Estruturas JSON eBSON,
+Modelação dedados,
+Criação decoleções edocumentos,
+Operações CRUD eagregação,
+Indexação etransações
+
+===== 3_BD_ModeloRelacional.pdf - página 3 =====
+3Base de Dados |   2025@jprp | 2025          Base de Dados
+Tipos de SGBD mais usados
+⚫SQL eNoSql
+⚫SGBD relacionais mais populares
+⚫SGBD orientados adocumento mais populares
+
+
+===== 3_BD_ModeloRelacional.pdf - página 4 =====
+4Base de Dados |   2025@jprp | 2025          Base de Dados
+Abordagem relacional
+⚫Álgebra Relacional
+➔AÁlgebra Relacional éuma linguagem processual dequestões .
+➔Consiste num conjunto deoperações que têm uma ouduas relações como entradas eproduzem uma
+nova relação como resultado (ousaída) .
+➔Pode -sedizer que aÁlgebra Relacional éuma linguagem formal deinterrogação abases dedados
+relacionais .
+⚫Asoperações básicas daÁlgebra Relacional são asoperações equivalentes dateoria dos
+conjuntos (reunião, intersecção, diferença, produto cartesiano), ealgumas operações
+específicas que sãoúteis aomodelo relacional :
+➔Seleção detuplos (linhas) numa relação ;
+➔Seleção deatributos deuma relação (projeção) ;
+➔Junção natural deduas relações ;
+➔Semi -junção natural deduas relações ;
+➔Divisão deduas relações ;
+➔Renomeação derelações oudeatributos deuma relação .
+
+===== 3_BD_ModeloRelacional.pdf - página 5 =====
+5Base de Dados |   2025@jprp | 2025          Base de Dados
+Abordagem relacional
+⚫ Modelo relacional
+➔ Omodelo relacional tornou -seomodelo conceptual debases dedados mais difundido eutilizado pelos SGBDs atualmente existentes
+nomercado .
+➔ Devido àsua relativa simplicidade, omodelo relacional contribuiu decisivamente para amassificação dautilização datecnologia de
+bases dedados nasorganizações .
+➔ Agrande maioria dos SGBDs disponíveis nomercado atualmente são baseados nomodelo relacional dedados :Oracle, SQL Server,
+MySQL ,PostgreSQL ,etc.
+➔ Omodelo relacional ébaseado nateoria matemática dosconjuntos, noqual ainformação eassuas associações internas sãodescritas :
+porvárias relações (também designadas como tabelas ),porserem constituídas porlinhas ecolunas .
+Arelação éaestrutura fundamental domodelo relacional .Uma relação éuma estrutura bidimensional com umdeterminado esquema ,ezero
+oumais instâncias .
+Oesquema deuma relação éconstituído por um oumais atributos (também chamados decampos ,que correspondem acada uma das
+colunas databela), osquais traduzem otipo dedados que serão armazenados narelação .Osatributos sãoascaracterísticas daentidade real
+que arelação pretende representar .
+➔ Nomodelo relacional, asrelações possuem algumas características que devem sersempre tidas emconta :
+Ovalor decada atributo num tuplo éatómico, isto é,nocruzamento deuma linha (tuplo )com uma coluna (atributo), sóépossível encontrar
+umvalor .
+Osatributos deuma relação devem teridentificadores distintos .Apesar denum mesmo esquema debase dedados relacional poderem surgir
+atributos com identificadores idênticos, estes atributos terão que pertencer arelações distintas .
+Ostuplos deuma relação devem serdistintos, isto é,numa relação não podem existir dois tuplos com osmesmos valores para todos os
+atributos .Poroutras palavras, não pode haver linhas duplicadas numa relação .
+Aordem dostuplos numa relação não tem qualquer significado .
+Aordem dosatributos noesquema deuma relação não tem qualquer significado .
+Todos osvalores deumatributo provêm doseu domínio .Porém, ovalor dealguns atributos num tuplo poderá serdesconhecido, ounão
+existir .Para estes casos, diz-seque ovalor doatributo énulo .
+
+
+===== 3_BD_ModeloRelacional.pdf - página 6 =====
+6Base de Dados |   2025@jprp | 2025          Base de Dados
+Abordagem relacional
+⚫Modelo relacional
+➔Aarquitetura deuma base dedados relacional évista pelo utilizador apenas como umconjunto de
+tabelas relacionadas, independentemente dastécnicas deorganização interna dainformação, aonível
+dosuporte físico .
+➔OSGBD éresponsável pela implementação dosistema, aonível dosoftware, “escondendo” do
+utilizador ascomplexidades dagestão interna dos dados epossibilitando uma visão lógica da
+estrutura dainformação, compatível com omodelo conceptual .
+➔Deve -seteremconta que omodelo debases dedados relacionais éuma teoria :
+OsSGBDs permitem transformar essa teoria em prática, ouseja, permitem implementar omodelo nos
+computadores .
+➔Exemplo :
+Astabelas representam uma implementação das relações Clientes eEncomendas, respetivamente, usando o
+modelo relacional .
+Oobjetivo destas tabelas éguardar osdados referentes aosclientes eàsencomendas, respetivamente, nabase
+dedados .
+Estas tabelas relacionam osclientes com asencomendas através doatributo Num_Cliente ,que representa o
+número deumcliente (por exemplo :ocliente“1000 /Joana” tem 2encomendas) .
+
+
+===== 3_BD_ModeloRelacional.pdf - página 7 =====
+7Base de Dados |   2025@jprp | 2025          Base de Dados
+Abordagem relacional
+⚫Modelo Entidade –Relacionamento (DER)
+➔Odesenvolvimento deumsistema deinformação baseado embases dedados implica odesenvolvimento de
+ummodelo conceptual dedados onde sedescreve aestrutura lógica dos dados, que depois será traduzido
+para ummodelo particular debase dedados .
+Um SGBD permite que osdados sejam definidos emtermos deummodelo conceptual dedados, oqual é,porsuavez,
+uma descrição dealto nível dosdados .
+Essa descrição permite ignorar muitos detalhes dearmazenamento debaixo nível, emespecial asinterações com o
+sistema operativo para oacesso aosficheiros físicos nosquais osdados serão efetivamente guardados .
+➔Omodelo dedados Entidade -Relacionamento (mais conhecida pela sigla E-R)foidesenvolvido para auxiliar o
+projeto debases dedados, através daespecificação deumesquema lógico que define aorganização oua
+estrutura dabase dedados .
+➔Amodelação ERéatécnica demodelação dedados mais popular, dado sersimples, defácil compreensão e
+leitura eumbom meio dediscussão eanálise emprocessos dedefinição para esquemas debases dedados .
+➔Omodelo E-Rémuito útilpara modelar, com umdiagrama simples, umsistema deinformação completo .
+Odiagrama criado édepois melhor detalhado com aajuda deoutra técnica demodelação denominada por
+normalização .
+➔Informação doSIéorganizada recorrendo aoconceito de:
+entidade,
+relação e
+atributo .
+
+===== 3_BD_ModeloRelacional.pdf - página 8 =====
+8Base de Dados |   2025@jprp | 2025          Base de Dados
+Abordagem relacional
+⚫Modelo Entidade –Relacionamento (DER)
+➔Entidade
+Qualquer coisa, real ouabstrata, sobre aqual guardamos dados para produzir informação requerida pelo oSI
+emestudo .
+Osdados que guardamos sobre asentidades sãoosatributos daentidade .
+Uma entidade tem deterpelo menos dois atributos .
+Não háentidades “padrão” -aimportância deuma“coisa” varia com anatureza eobjetivo doSIemestudo .
+Osnomes dasentidades devem serumsubstantivo nosingular :
+→Exemplo :Aluno, Requisição, Cliente, Fornecedor, etc.
+Aentidade representa oconjunto detodas asocorrências possíveis :
+→Exemplo :Entidade -Aluno ;duas dassuas ocorrências podem serAna Cardoso, Joaquim Santos
+
+===== 3_BD_ModeloRelacional.pdf - página 9 =====
+9Base de Dados |   2025@jprp | 2025          Base de Dados
+Abordagem relacional
+⚫Modelo Entidade –Relacionamento (DER)
+➔Atributos
+Para cada entidade énecessário conhecer assuas propriedades relevantes para osistema .
+Atributo équalquer propriedade deuma entidade .
+→Exemplo :N°Cliente eNome deCliente
+Sãosempre elementos atómicos (indivisíveis) deinformação .
+Umatributo poderá assumir diferentes valores deumdomínio .
+Tipos deAtributos
+→Identificadores (Chaves candidatas)
+→Descritores
+Detodos osatributos deuma entidade algum (ou alguns) identificam uma ocorrência específica dessa entidade
+distinguindo -adasrestantes .
+→Aestes atributos chamamos identificadores ouchaves candidatas
+•Para que umatributo seja identificador épreciso que não existam duas ocorrências distintas dessa entidade
+emque esse atributo assuma omesmo valor .
+•Exemplo :ON°Cliente éoúnico identificador para cliente nocaso presente
+→Aos restantes atributos, que sódescrevem oucaracterizam asocorrências daentidade, chamamos descritores .
+
+
+===== 3_BD_ModeloRelacional.pdf - página 10 =====
+10Base de Dados |   2025@jprp | 2025          Base de Dados
+Abordagem relacional
+⚫ Modelo Entidade –Relacionamento (DER)
+➔ Relação (Associação)
+Umrelacionamento éuma associação entre duas oumais entidades .
+→Osrelacionamentos são introduzidos nomodelo E-Rdepois deasentidades terem sido identificadas, porque torna -senecessário
+perceber edefinir omodo como asentidades dosistema seassociam ouserelacionam entre si.
+→Atodos osrelacionamentos entre conjuntos deentidades dá-seonome deconjunto derelacionamentos .
+Asentidades não existem isoladas, estão associadas entre sinoSI.
+→Onome darelação deve serexpresso navozativa, sersignificativo enão muito longo .
+Exemplo :
+→OCliente fazEncomenda
+ Grau deAssociação (Forma como duas entidades podem estar relacionadas) :
+→Para cada ocorrência daentidade tipo Aháuma euma sóocorrência daentidade tipo B.
+→Para cada ocorrência daentidade tipo Aháuma ounenhuma ocorrência daentidade tipo B.
+→Para cada ocorrência daentidade tipo Aháuma oumais ocorrências daentidade tipo B.
+→Para cada ocorrência daentidade tipo Aháuma, várias ounenhuma ocorrência daentidade tipo B.
+Assim, uma associação pode relacionar :
+→Duas entidades entre si(binária )
+→Várias Entidades entre si(Complexa )
+→Uma entidade consigo própria (Unária )
+Um relacionamento entre entidades écaracterizado pela sua cardinalidade, ouseja, aquantificação deentidades que podem serelacionar
+através deumdeterminado relacionamento .
+Considerando dois conjuntos deentidades AeB,acardinalidade dos relacionamentos entre entidades deAedeBpode serde3tipos
+distintos :
+→Um para um(1:1):uma entidade deAestá associada apenas auma entidade deB,euma entidade deBestá associada apenas auma
+entidade deA.
+→Um para vários (1:N):uma entidade deAestá associada aqualquer número deentidades deB,mas uma entidade deBsóestá associada
+auma única entidade deA.
+→Vários para vários (N:N):uma entidade deApode estar associada aqualquer número deentidades deB,euma entidade deBpode
+estar associada aqualquer número deentidades deACliente EncomendaFazAo analisar um sistema, a
+primeira análise para distinguir
+entidades eassociações pode
+socorrer -sedanotação utilizada
+pelas organizações :
+-Substantivos: Para fazer 
+referência a entidades
+-Verbos: Para fazer referência a 
+associações
+
+===== 3_BD_ModeloRelacional.pdf - página 11 =====
+11Base de Dados |   2025@jprp | 2025          Base de Dados
+Abordagem relacional
+⚫Grau deAssociação (Cardinalidade)
+A B
+B
+A B
+A BUm A está
+associado
+com um B
+Um A está
+associado
+com zero ou um B
+Um A está
+associado
+com zero, um ou
+mais B'sGrau
+AssociaçãoNotação
+A B
+A BA B
+A B
+A B
+A BA B
+A B1
+1
+1
+nPé de Galinha Ross Bachman Chen
+AUm A está
+associado
+com
+mais B's
+
+===== 3_BD_ModeloRelacional.pdf - página 12 =====
+12Base de Dados |   2025@jprp | 2025          Base de Dados
+Abordagem relacional
+⚫Modelo Entidade –Relacionamento (DER)
+➔Notação doDER
+Entidade ésempre representada porumretângulo .
+Tipo deRelação
+→sobre alinha
+→dentro deumlosango
+➔Exemplo :
+Uma associação que relacione funcionário com departamento pode limitar -seaindicar -nos:
+Osfuncionários afetos aumdepartamento ;
+Aque departamento está afeto umfuncionário .Nome_Entidade
+Nome_Relação
+Nome_Relação
+Departamento Empregado
+Tem Afecto1 N
+
+===== 3_BD_ModeloRelacional.pdf - página 13 =====
+13Base de Dados |   2025@jprp | 2025          Base de Dados
+Abordagem relacional
+⚫Como construir umDiagrama ER?
+➔Identificar asentidades
+Sobre oque temos que guardar dados
+➔Olhar para cada pardeentidades everificar seexiste alguma relação entre elas…
+Seexiste :
+→Identificar otipo derelação
+→Identificar ograu deassociação
+⚫Cada entidade dánormalmente origem auma tabela com :
+➔Identificador daentidade (Chave daRelação)
+➔Restantes atributos daentidade (Descritores daRelação)
+➔Identificadores deoutras entidades que eventualmente lhes estejam associadas Chaves estrangeirasEmpregado CônjugeCliente Fatura
+Detalhe
+Fatura
+ProdutoCódigo 
+PostalPossui
+Pode estarEncontra -seTêm
+
+===== 3_BD_ModeloRelacional.pdf - página 14 =====
+14Base de Dados |   2025@jprp | 2025          Base de Dados
+Abordagem relacional
+⚫ Normalização
+➔ Técnica para analisar dados .
+➔ Problemas :
+redundância dainformação
+mais espaço emdisco ,
+mais tempo deprocessamento ,
+dificuldade demanutenção daintegridade dosdados
+➔ Oobjetivo danormalização éeliminar aredundância defactos numa
+base dedados relacional .
+Poroutras palavras, através daanálise dasrelações deuma base dedados
+relacional, são identificadas aschaves primárias eestrangeiras dessas
+relações ,easdependências funcionais existentes entre osatributos
+dessas relações, porforma aeliminar aredundância dos dados .
+➔ Características :
+Permite derivar estruturas dedados flexíveis esem anomalias .
+Geralmente usado emconjunção com odiagrama ER.
+Ateoria danormalização foiconstruída àvolta doconceito das Formas
+Normais
+Diz-seque uma estrutura está numa determinada forma normal se
+satisfizer umconjunto derestrições .
+➔ Uma estrutura diz-senão normalizada quando nem sequer está na1ªFN.
+➔ Restrições para uma estrutura seencontrar numa determinada forma
+normal :
+Uma estrutura está na1ªForma Normal senão houver grupos repetitivos
+deatributo(s) ,istoécada atributo assume umsóvalor .
+ Uma estrutura está na2ªForma Normal sejáestiver na1ªFNecada
+atributo não chave depende inteiramente dachave .
+ Uma estrutura está na3ªForma Normal sejáestiver na2ªFNenão há
+nenhuma dependência entre atributos não-chave .
+Duas metodologias (podem ser usadas isoladamente ou combinadas):
+–Normalização
+–Entidades e relacionamentos
+
+===== 3_BD_ModeloRelacional.pdf - página 15 =====
+15Base de Dados |   2025@jprp | 2025          Base de Dados
+Abordagem relacional
+⚫ Normalização
+➔Anormalização éumprocesso sistemático, conduzido porregras que traduzem asdependências funcionais entre os
+atributos, constituído por decomposições sucessivas derelações maiores emrelações cada vez menores que, ao
+longo devários passos, tenta identificar eremover aredundância própria das associações dos dados talequal
+existem nomundo real.
+➔Apesar deanormalização alterar aestrutura dasrelações, não pode alterar oconteúdo global dainformação .
+Ouseja, durante oprocesso denormalização não pode haver perda deinformação :deverá sersempre possível regressar à
+estrutura original dabase dedados .
+➔Para efetuar anormalização deuma base dedados, deve -secomeçar poranalisar ainformação dabase dedados e
+estruturá -lacom vista àconstrução dasrelações .
+Deve -seprocurar incluir nessas relações todos osatributos considerados importantes .
+➔Anormalização pode seraplicada sobre umconjunto dedados“embruto”, isto é,sobre arelação universal, ou
+então sobre asestruturas resultantes damodelação E-R,com oobjetivo deasrefinar .
+➔Redundância :
+Aredundância ocorre sempre que omesmo facto éarmazenado mais doque uma veznamesma base dedados, ouquando factos
+derivados sãoarmazenados numa base dedados .
+Osproblemas que aredundância pode trazer aumsistema debases dedados podem serresumidos nospontos seguintes :
+→Problemas demanutenção :Redundância significa oarmazenamento repetido dos mesmos dados .Como resultado, uma
+simples alteração ouremoção pode implicar oacesso avárias partes dabase dedados, tornando -sedifícil manter a
+coerência dosdados armazenados .
+→Custos deespaço dearmazenamento :Apesar de,atualmente, não serumproblema significativo (opreço das memórias
+secundárias desce cada vezmais), não deixa deserimportante evitar ocupar espaço dearmazenamento com algo que não
+acrescenta nada aoque jáexiste armazenado .
+→Problemas dedesempenho :Apesar denão sertãoevidente, aredundância pode também trazer problemas dedesempenho
+aosistema .Arazão para isso éque arazão mais importante para ummau desempenho deumSGBD são osacessos aos
+discos onde asbases dedados seencontram armazenadas .Searedundância forsignificativa, isso implicará mais acessos aos
+discos para trazer osmesmos dados .
+
+===== 3_BD_ModeloRelacional.pdf - página 16 =====
+16Base de Dados |   2025@jprp | 2025          Base de Dados
+Abordagem relacional
+⚫Normalização –Exemplo
+➔Informalmente, anormalização consiste em dividir uma tabela inicial em várias tabelas minimizando a
+redundância dainformação .
+➔Iniciar pela identificação deuma chave
+Achave éumconjunto decampos, que identifica deforma única cada registo databela (Pode sersimples oucomposta)
+a) Estrutura não -normalizada
+Numero_aluno
+Nome 
+Morada
+Nome_mae
+Nome_pai
+Departamento
+Codigo_curso
+Nome_curso
+Disciplinas*
+Codigo_disciplina
+Nome_diciplina
+Notab) Estrutura na 1ª Forma Normal
+Numero_aluno
+Nome 
+Morada
+Nome_mae
+Nome_pai
+Departamento
+Codigo_curso
+Nome_curso
+Numero_aluno
+Codigo_disciplina
+Nome_disciplina
+Nota
+(resultaram 2 estruturas na 1ªFN)c) Estrutura na 2ª Forma Normal
+Numero_aluno
+Nome 
+Morada
+Nome_mae
+Nome_pai
+Departamento
+Codigo_curso
+Nome_curso
+Numero_aluno
+Codigo_disciplina
+Nota
+Codigo_disciplina
+Nome_disciplina
+(resultaram 3 estruturas na 2ª FN)d) Estrutura na 3ª Forma Normal
+Numero_aluno
+Nome
+Morada
+Nome_mae
+Nome_pai
+Codigo_curso
+Codigo Curso
+Nome Curso
+Numero_aluno
+Codigo_disciplina
+Nota
+Codigo_disciplina
+Nome_disciplina
+(resultaram 4 estruturas na 3ª FN
+
+
+===== 3_BD_ModeloRelacional.pdf - página 17 =====
+17Base de Dados |   2025@jprp | 2025          Base de Dados
+Abordagem relacional
+⚫Normalização
+➔Oporquê da1ªFN, 2ªFN e3ªFN
+Porquê a1ªFN?
+→Base dedados relacionais não permitem registos decomprimento variável .
+Porquê a2ªFN?
+→Evitar redundância econsequentemente evitar inconsistência .
+→Diminuir oespaço necessário para guardar ainformação .
+Porquê a3ªFN?
+→Evitar redundância econsequentemente evitar inconsistência .
+→Diminuir oespaço necessário para guardar ainformação .
+Exemplo deuma estrutura que não satisfaz a2ªFN:
+Numero_aluno
+Codigo_discilina
+Nome_disciplina
+Nota
+-ONome_disciplina érepetida para todas asocorrências referentes a
+um aluno diferente (outro Número_aluno )mas que frequenta a
+mesma cadeira (Codigo_disciplina igual) .
+-Setemos 1000 alunos diferentes afrequentar amesma disciplina
+repetimos 1000 vezes omesmo nome dadisciplina --->redundância
+-Sepor qualquer razão muda onome dadisciplina temos que alterá -lo
+1000 vezes --->possibilidade deinconsistênciaExemplo deuma estrutura que não satisfaz a3ªFN:
+Numero_aluno
+Nome
+Morada
+Nome daMãe
+Nome doPai
+Departamento
+Código Curso
+Nome Curso
+-ONome_curso érepetida para todas asocorrências referentes aum
+aluno diferente (outro Número_aluno )que frequenta omesmo curso
+(Código_curso igual) .
+-Setemos 1000 alunos diferentes afrequentar omesmo curso repetimos
+1000 vezes omesmo nome dacurso --->redundância
+-Seporqualquer razão muda onome docurso temos que altera -lo1000
+vezes --->possibilidade deinconsistência
+
+===== 3_BD_ModeloRelacional.pdf - página 18 =====
+18Base de Dados |   2025@jprp | 2025          Base de Dados
+Abordagem relacional
+⚫ Normalização
+➔Estruturas Finais -Combinar asdiferentes estruturas resultantes danormalização numa estrutura final também
+normalizada .
+➔Todas asestruturas resultantes danormalização, (3ªFN) eque tenham omesmo elemento dedados como chave,
+podem ser combinadas numa estrutura única garantindo que essa estrutura final também seencontra na3ªFN.
+➔Exemplo :
+Após normalização dasdiferentes estruturas definidas num determinado SIobtiveram asseguintes estruturas na3ªFN.
+Estruturas finais :
+
+
+===== 3_BD_ModeloRelacional.pdf - página 19 =====
+19Base de Dados |   2025@jprp | 2025          Base de Dados
+Abordagem relacional
+⚫ Normalização (Resumo)
+Emgeral, oprocesso denormalização éaplicado sobre uma estrutura não normalizada designada derelação universal, a
+qual deve conter todos osatributos dosquais énecessário guardar informação .
+➔Passo 1:Nesta fase inicial doprocesso, oanalista deve :
+a)Identificar quais osatributos que poderão serrepetidos .
+b)Identificar osatributos que poderão serchave :umatributo que identifique osatributos não repetidos, eumoutro atributo para
+identificar osatributos repetidos .
+➔Passo 2:Aplicar asregras da1.ªforma normal, isto é,separar osatributos repetidos dos atributos não repetidos .
+Para isso, oanalista deve :
+a)Converter osatributos não atómicos ematributos atómicos, para que não seja possível incluir mais doque umvalor emcada
+atributo deuma relação .
+b)Separar osatributos repetidos dosnão repetidos, passando aconsiderá -loscomo elementos deuma nova relação .Achave primária
+darelação dosatributos não repetidos deve seracrescentada, como chave estrangeira, àchave primária dosatributos repetidos .
+➔Passo 3:Aplicar asregras da2.ªforma normal ;para isso, terá deverificar seosatributos não-chave deuma relação
+dependem datotalidade dachave primária dessa relação .
+a)Searelação sótem umatributo como chave primária, eseessa relação jáestiver na1.ªforma normal, então arelação também se
+encontra na2.ªforma normal .
+b)Seachave primária écomposta, esealgum atributo não-chave depende apenas deuma parte dachave primária, então arelação
+deverá serdecomposta, para que cada atributo dependa datotalidade dachave primária .
+➔Passo 4:aplicação dasregras da3.ªforma normal, aqual obriga aanalisar adependência dos atributos não-chave
+decada relação .
+a)Oanalista deverá procurar dependências funcionais entre osatributos não-chave deuma relação .
+b)Seuma relação que jáesteja na2.ªforma normal tiver, nomáximo, um atributo não-chave, então essa relação também se
+encontra na3.ªforma normal .
+c)Seexistir algum conjunto deatributos não-chave deuma relação que tenha dependência funcional emrelação aumoutro conjunto
+deatributos não-chave daquela mesma relação, então arelação deverá serdecomposta, demodo que qualquer atributo não-
+chave dessa relação sódependa dachave primária darelação .
+
+===== 4_1_BD_Agebra_en.pdf - página 1 =====
+1Base de Dados |   2025@jprp | 2025          Base de Dados
+Bases de Dados
+Engenharia
+ Informática
+ (2ºano)
+Tecnologias
+ Digitais
+ e 
+Gestão
+ (2ºano)
+João Paulo Pereira | jprp@ipb.pt
+Marisa Ortega | marisa.ortega@ipb.pt
+David Dias |davide.dias@ipb.pt
+Tiago Santos | tiago.santos@ipb.pt
+2025
+Capítulo 4. Álgebra Relacional e SQL -(MySQL ) 
+
+===== 4_1_BD_Agebra_en.pdf - página 2 =====
+2Base de Dados |   2025@jprp | 2025          Base de Dados
+Índice
+⚫ Conteúdo
+➔ 1.Introdução aosambientes deBase deDados
+1.1Noção deSistema deInformação
+1.2AInformação nasOrganizações
+1.3Tecnologias deInformação
+1.4Gestão deInformação
+➔ 2.Sistemas deGestão deBases deDados
+2.1Abordagem eVantagens
+2.2Arquitetura deumSGBD
+2.3Tipos deUtilizadores num SGDB
+➔ 3.Modelação eNormalização deDados
+3.1Manutenção daIntegridade
+3.2Redundância eChaves
+3.3Diagramas E-R
+3.4Modelo Relacional
+➔ 4.Álgebra Relacional eSQL -(MySQL )
+4.1Conceitos eaplicação deÁlgebra Relacional
+4.2Ferramentas deAdministração MySQL
+4.3Comandos DDL
+4.4Comandos DML
+➔ 5.Introdução àsBases deDados NoSQL
+Bases deDados NoSQL ,
+Tipos deBases deDados NoSQL ,
+Bases dedados orientadas adocumentos
+➔ 6.MongoDB
+Estruturas JSON eBSON,
+Modelação dedados,
+Criação decoleções edocumentos,
+Operações CRUD eagregação,
+Indexação etransações
+
+===== 4_1_BD_Agebra_en.pdf - página 3 =====
+3Base de Dados |   2025@jprp | 2025          Base de Dados
+4.1 
+Concepts and application of Relational Algebra
+⚫ What isRelational Algebra ?
+➔Formal data manipulation model
+➔Defines operations onrelations (tables )
+➔Basis forlanguages like
+⚫ SQL Fundamental Concepts
+➔Relation =Setoftuples (rows )with thesame schema
+➔Attributes =Relation columns
+➔Schema =Relation name +attributes
+⚫ Relational Algebra
+➔Operators Unary operators (1relation )
+➔Binary operators (2relations )
+➔Categories :
+1. Selection (σ)
+2. Projection (π)
+3. Union (∪)
+4. Difference (−)
+5. Cartesian product (×)
+6. Join (⨝)
+7. Rename (ρ)
+➔Derivative Operations (These canbeconstructed with basic operators )
+1. Intersection (∩)
+2. Division
+3. Outer joinRelational algebra isaset ofoperators to
+manipulate relations .Each operator ofthe
+relational algebra takes either oneortworelations
+asitsinput and produces anew relation asits
+output .
+Codd defined 8such operators, two groups of4
+each:
+-The traditional set operations :union,
+intersection, difference andCartesian product
+-Thespecial relational operations :select, project,
+joinanddivide .
+CODD, E.F.Relational completeness on data base
+sublanguage ,Data Base Systems ,Courant Computer Science
+Symposia Series, Vol.6Englewood Cliffs ,N.J,Prentice -Hall,
+1972
+
+===== 4_1_BD_Agebra_en.pdf - página 4 =====
+4Base de Dados |   2025@jprp | 2025          Base de Dados
+4.1 
+Concepts and application of Relational Algebra
+⚫ Relational Algebra Operators
+➔Selection (σ)
+Filters rows based onacondition
+Notation :σ<sub>condition</sub>(R)
+Example :σ<sub>age >30</sub>(People)
+➔Projection (π)
+Selects specific columns (attributes)
+Notation :π<sub>attributes</sub>(R)
+Example :π<sub>name, age</sub>(People)
+➔Union (∪)
+Combines two relations with thesame schema
+ Removes duplicates (bydefinition)
+Example :R∪S
+➔Difference (−)
+Rows that areinRbutnotinS
+Example :R−S
+➔Cartesian Product (×)
+Combines each row inRwith allofS
+Can generate large volumes ofdata
+Example :R×S
+➔Join (⨝)
+Combines tuples based onacondition
+Natural join:⨝
+Conditional join:R⨝<sub>condition</sub> S
+➔Rename (ρ)
+Changes thename ofrelationships orattributes
+Notation :ρ<sub> new_name </sub>(R)
+Useful fordistinguishing temporary relationships
+
+===== 4_1_BD_Agebra_en.pdf - página 5 =====
+5Base de Dados |   2025@jprp | 2025          Base de Dados
+4.1 
+Concepts and application of Relational Algebra
+⚫Union
+➔The union oftwo union -compatible relations R1and R2,R1UNION R2,isthe setofalltuples t
+belonging toeither R1orR2orboth .
+➔Two relations areunion -compatible ifthey have the same degree, and the ithattribute ofeach is
+based onthesame domain .
+➔The formal notation foraunion operation isU.
+➔UNION operation isassociative and commutative .
+➔Next figure provides anexample ofaUNION operation .The operands arerelation R1and relation R2
+and theresult isanother relation R3with 5tuples .
+
+
+===== 4_1_BD_Agebra_en.pdf - página 6 =====
+6Base de Dados |   2025@jprp | 2025          Base de Dados
+4.1 
+Concepts and application of Relational Algebra
+⚫Intersection
+➔The intersection oftwo union -compatible relations R1and R2,R1INTERSECT R2,isthesetofalltuples
+tbelonging toboth R1and R2.
+➔The formal notation foranintersect operation is∩.
+➔INTERSECT operation isassociative and commutative .
+➔Next figure provides anexample ofanINTERSECT operation .The operands are relation R1and
+relation R2and theresult isanother relation R3with only one tuple .
+
+
+===== 4_1_BD_Agebra_en.pdf - página 7 =====
+7Base de Dados |   2025@jprp | 2025          Base de Dados
+4.1 
+Concepts and application of Relational Algebra
+⚫Difference
+➔The difference between two union -compatible relations R1and R2,R1MINUS R2,isthe setofall
+tuples tbelonging toR1and nottoR2.
+➔The formal notation foradifference operation is-
+➔DIFFERENCE operation isnotassociative and commutative .
+➔Next figure provides anexample ofaDIFFERECE operation .The operands arerelation R1and relation
+R2and the result isanother relation R3with two tuples .Asyou can see, the result ofR1-R2is
+different from R2-R1.
+
+
+===== 4_1_BD_Agebra_en.pdf - página 8 =====
+8Base de Dados |   2025@jprp | 2025          Base de Dados
+4.1 
+Concepts and application of Relational Algebra
+⚫Cartesian product
+➔The Cartesian product between two relations R1and R2,R1TIMES R2,isthesetofalltuples tsuch
+that tisthe concatenation ofatuple rbelonging toR1and atuple sbelonging toR2.The
+concatenation ofatuple r=(r1,r2,…,rm) and atuple s=(sm+ 1,sm+2,…,sm+n )isthetuple t=(r1,
+r2,…,rm,sm+1,sm+2,…,sm+n ).
+➔R1and R2don’t have tobeunion -compatible .
+➔The formal notation foraCartesian product operation is×.
+➔IfR1has degree nand cardinality N1and R2has degree mand cardinality N2then the resulting
+relation R3hasdegree (n+m )and cardinality (N1*N2).This isillustrated inFigure .
+
+
+===== 4_1_BD_Agebra_en.pdf - página 9 =====
+9Base de Dados |   2025@jprp | 2025          Base de Dados
+4.1 
+Concepts and application of Relational Algebra
+⚫Selection
+➔The select operation selects asubset oftuples from arelation .Itisaunary operator, that is,itapplies
+onasingle relation .The tuples subset must satisfy aselection condition orpredicate .
+➔The formal notation foraselect operation is:
+σ<select condition >(<relation >)
+where <select condition >is
+<attribute> <comparison operator> <constant value>/<attribute> [AND/OR/NOT <attribute> <comparison
+operator> <constant value>/<attribute> …]
+➔The comparison operator can be<,>,<=,>=,=,<>and itdepends onattribute domain ordata type
+constant value .
+➔The resulting relation degree isequal with theinitial relation degree onwhich theoperator isapplied .
+The resulting relation cardinality isless orequal with theinitial relation cardinality .Ifthecardinality is
+low wesaythat theselect condition selectivity ishigh and ifthecardinality ishigh wesaythat the
+select condition selectivity islow.
+➔Selection iscommutative .
+
+===== 4_1_BD_Agebra_en.pdf - página 10 =====
+10Base de Dados |   2025@jprp | 2025          Base de Dados
+4.1 
+Concepts and application of Relational Algebra
+⚫Selection
+➔Inthenext Figure ,there aretwo select operation examples performed onrelation R.First theselect
+condition isAge= 20and the result isrelation R1and second the select condition is(Sex=M) AND
+(Age> 19)and theresult isrelation R2.
+
+
+===== 4_1_BD_Agebra_en.pdf - página 11 =====
+11Base de Dados |   2025@jprp | 2025          Base de Dados
+4.1 
+Concepts and application of Relational Algebra
+⚫Projection
+➔The project operation builds another relation byselecting asubset ofattributes ofanexisting relation .
+Duplicate tuples from theresulting relation areeliminated .Itisalso aunary operator .
+➔The formal notation foraproject operation is:
+π<attribute list>(<relation >)
+where <attribute list> isthesubset attributes ofanexisting relation .
+➔The resulting relation degree isequal with thenumber ofattributes from <attribute list> because only
+those attributes willappear intheresulting relation .The resulting relation cardinality isless orequal
+with theinitial relation cardinality .Ifthelistofattributes contains arelation candidate key, then the
+cardinality isequal with theinitial relation cardinality .Ifitdoes notcontain acandidate key, then the
+cardinality could beless because ofthepossibility tohave duplicate tuples, which areeliminated from
+theresulting relation .
+➔Projection isnotcommutative .
+
+===== 4_1_BD_Agebra_en.pdf - página 12 =====
+12Base de Dados |   2025@jprp | 2025          Base de Dados
+4.1 
+Concepts and application of Relational Algebra
+⚫Inthenext figure there aretwo project operation examples performed onrelation R.First the
+projection ismade onattributes Name and Sex and theresult isrelation R1and second the
+projection ismade onattributes Age and Sexand theresult isrelation R2.
+
+
+===== 4_1_BD_Agebra_en.pdf - página 13 =====
+13Base de Dados |   2025@jprp | 2025          Base de Dados
+4.1 
+Concepts and application of Relational Algebra
+⚫Join
+➔The join operation concatenates two relations based onajoining condition orpredicate .The relations
+must have atleast one common attribute with thesame underlying domain, and onsuch attributes a
+joining condition canbespecified .
+➔The formal notation forajoin operation is:
+R<join condition >►◄ S
+where <join condition >is
+<attribute from R><comparison operator> <<attribute from S>
+➔The comparison operator canbe<,>,<=,>=,=,<>and itdepends onattributes domain .
+➔Ifrelation Rhasattributes A1,A2,…,Anand relation Shasattributes B1,B2,…,Bmand attribute Ai
+and attribute Bjhave thesame underlying domain wecandefine ajoin operation between relation R
+and relation Sonajoin condition between attribute Aiand Bj.The result isanother relation Tthat
+contains allthe tuples tsuch that tisthe concatenation ofatuple rbelonging toRand atuple s
+belonging toSifthe join condition istrue .This type ofjoin operation isalso called theta -join.It
+follows from the definition that the result ofajoin must include two identical attributes from the
+point ofview oftheir values .Ifone ofthose two attributes iseliminated theresult iscalled natural
+join.
+
+===== 4_1_BD_Agebra_en.pdf - página 14 =====
+14Base de Dados |   2025@jprp | 2025          Base de Dados
+4.1 
+Concepts and application of Relational Algebra
+⚫Join
+➔There arealso other forms ofjoin operations .The most often used isthe equijoin ,which means that
+thecomparison operator is=.
+➔There aresituations when notallthetuples from relation Rhave acorresponding tuple inrelation S.
+Those tuples won’t appear intheresult ofajoin operation between Rand S.Inpractice, sometimes it
+isnecessary tohave alltuples intheresult, so,another form ofjoin was created :theouter join.
+➔There are3forms ofouter join:
+left outer join,where alltuples from Rwillbeintheresult,
+right outer join,where alltuples from Swillbeintheresult, and
+full outer join,where alltuples from Rand Swill beinthe result .Ifthere isnot acorresponding tuple, the
+system considers that there isahypothetical tuple, with allattribute values null, which will beused for
+concatenation .
+➔Inthenext figure there aretwo relations R1and R2joined onajoin condition where LastName from
+relation R1isequal with LastName from relation R2.The resulting relation isR3.
+
+
+===== 4_1_BD_Agebra_en.pdf - página 15 =====
+15Base de Dados |   2025@jprp | 2025          Base de Dados
+4.1 
+Concepts and application of Relational Algebra
+⚫Join
+➔Inthenext figure you could seetheresults foranatural join between R1and R2and also theresults
+foraright outer join.
+
+
+===== 4_1_BD_Agebra_en.pdf - página 16 =====
+16Base de Dados |   2025@jprp | 2025          Base de Dados
+4.1 
+Concepts and application of Relational Algebra
+⚫Division
+➔The division operator divides arelation R1ofdegree (n+m )byarelation R2ofdegree mand produces
+arelation ofdegree n.The (n+i)thattribute ofR1and theithattribute from R2should bedefined on
+the same domain .The result ofadivision operation between R1and R2isanother relation, which
+contains allthetuples that concatenated with allR2tuples arebelonging toR1relation .
+➔The formal notation foradivision operation is÷.
+➔Next figure provides anexample ofadivision operation between relation R1and R2.
+
+
+===== 4_1_BD_Agebra_en.pdf - página 17 =====
+17Base de Dados |   2025@jprp | 2025          Base de Dados
+4.1 
+Concepts and application of Relational Algebra
+⚫Differences between Relational Algebra and SQL
+➔SQL allows duplicates ,relational algebra does not
+➔SQL ismore permissive insyntax
+➔Relational algebra ismore formal and mathematical
+⚫Advantages ofRelational Algebra
+➔Formal clarity
+➔Solid theoretical basis
+➔Facilitates query optimization
+⚫Disadvantages /Limitations
+➔Less user -friendly syntax
+➔Little used directly (more intheory )
+➔SQL ismore expressive forcomplex practical cases
+⚫Summary
+➔Relational algebra =basis forSQL
+➔Main operators :σ,π,∪,−,×,⨝
+➔Essential forunderstanding thelogic behind thequery
+
+===== 4_1_BD_Agebra_en.pdf - página 18 =====
+18Base de Dados |   2025@jprp | 2025          Base de Dados
+4.1 
+Concepts and application of Relational Algebra
+⚫ Example :
+➔ Tables :
+Students(Name, Course)
+Courses(Course, Department)
+➔ Query :Student names and corresponding department
+π<sub>Name, Department</sub>(Students ⨝Courses)
+Reasoning :
+▪ Natural join between Students and Courses
+▪ Projection oftheName and Department attributes
+⚫ Example :Selection and Projection (Simple)
+➔ Statement :
+Given theEmployees(Name, Position, Salary, Department) relation, getthenames oftheemployees who work inthe"Sales" department .
+Resolution :
+▪ Filter (selection) :
+•σ<sub>Department ='Sales'</sub>(Employees)
+▪ Name projection :
+•π<sub>Name</sub>(σ<sub>Department ='Sales'</sub>(Employees))
+▪ Final result :
+•π<sub>Name</sub>(σ<sub>Department ='Sales'</sub>(Employees))
+⚫ Reasoning :
+➔ Select rows that satisfy acondition :
+Wewant only employees inthe"Sales" department .
+Weusetheselection operator (σ)with thecondition Department ='Sales’ .
+➔ Select only the"Name" column :
+After filtering, wewant only thenames .
+Weusetheprojection operator (π)toextract only that column .
+
+
+===== 4_1_BD_Agebra_en.pdf - página 19 =====
+19Base de Dados |   2025@jprp | 2025          Base de Dados
+4.1 
+Concepts and application of Relational Algebra
+⚫Example :Join and Projection
+➔Statement :
+Given therelationships :
+▪Students( StudentID ,Name, CourseID )
+▪Courses( CourseID ,CourseName ,Department)
+Getthenames ofthestudents and thenames oftheir courses .
+➔Resolution :
+Join between Students and Courses :
+▪Students ⨝Courses (Natural join using CourseID )
+Projection ofthedesired attributes :
+▪π<sub>Name, CourseName </sub>(Students ⨝Courses)
+Final result :
+▪π<sub>Name, CourseName </sub>(Students ⨝Courses)
+➔Reasoning :
+Relate thetwo tables :
+▪Both have theCourseID attribute .
+▪Wecanjoin thetables with anatural join, since they have acommon attribute .
+Select only therelevant data :
+▪Wewant thenames ofthestudents and thenames ofthecourses .
+▪Projection ontheattributes Name and CourseName .
+
+===== 4_1_BD_Agebra_en.pdf - página 20 =====
+20Base de Dados |   2025@jprp | 2025          Base de Dados
+4.1 
+Concepts and application of Relational Algebra
+⚫ Example :Difference
+➔Statement :
+Given therelationships :
+▪ Customers( CustomerID ,Name)
+▪ Purchases( PurchaseID ,CustomerID ,Date)
+▪ Get thenames ofcustomers who have never made apurchase .
+Resolution :
+▪ Getting customers who made purchases :
+•π<sub> CustomerID </sub>(Purchases)
+▪ Get allcustomers :
+•π<sub> CustomerID </sub>(Customers)
+▪ Difference :
+•π<sub> CustomerID </sub>(Customers) −π<sub> CustomerID </sub>(Purchases)
+▪ Join with theCustomers relation togetthenames :
+•ρ<sub> CustomersWithoutPurchases </sub>(π<sub> CustomerID </sub>(Customers) −
+π<sub> CustomerID </sub>(Purchases))
+•CustomersWithoutPurchases ⨝Customers
+•π<sub>Name</sub>( CustomersWithoutPurchases ⨝Customers)
+▪ Final result :
+•π<sub>Name</sub>((π<sub> CustomerID </sub>(Customers) −π<sub> CustomerID </sub>(Purchases)) ⨝Customers)
+➔Reasoning :
+Customers who purchased :
+▪ Weextract theCustomerIDs from thePurchases list.
+Total customers :
+▪ Weextract theCustomerIDs from theCustomers list.
+Difference :
+▪ Weusethedifference operator (−)togettheIDsofcustomers who areinCustomers butnotinPurchases .
+Get thenames :
+▪ Since weonly have theIDs, weneed toreconnect toCustomers togetthenames —using ajoin.
+
+===== 4_1_BD_Agebra_en.pdf - página 21 =====
+21Base de Dados |   2025@jprp | 2025          Base de Dados
+4.1 
+Concepts and application of Relational Algebra
+⚫Example :Cartesian Product +Selection
+➔Statement :
+Given :
+▪ Professors(ID, Name, Department)
+▪ Disciplines( DisciplineID ,DisciplineName ,Department)
+▪ Listallpairs (professor, discipline) from thesame department .
+➔Resolution :
+Cartesian product :
+▪ Teachers ×Subjects
+Join condition :
+▪ σ<sub> Teachers .Department =Subjects .Department </sub>
+Name projection :
+▪ π<sub>Name, SubjectName </sub>(σ( ...))
+Final result :
+▪ π<sub>Name, SubjectName </sub>(σ<sub> Teachers.Department = Subjects.Department </sub>(Teachers ×
+Subjects)) 
+➔Reasoning :
+Cartesian product (×):
+▪ Pairs allrows ofTeachers with allrows ofSubjects .
+Filter pairs that have thesame department :
+▪ Weuseselection (σ)with thecondition Teachers .Department =Subjects .Department .
+Projection :
+▪ Wewant toseeonly thename oftheteacher and thesubject .
+▪ Weuseπ<sub>Name, SubjectName </sub>
+
+===== 4_1_BD_Agebra_en.pdf - página 22 =====
+22Base de Dados |   2025@jprp | 2025          Base de Dados
+4.1 
+Concepts and application of Relational Algebra
+⚫Example :Composition ofmultiple operations (Join +Multiple Filters)
+➔Statement :
+Given :
+▪ Employees(ID, Name, Salary, DepartmentID )
+▪ Departments(ID, DeptName ,Location)
+▪ Listthenames ofemployees who earn more than 2000 and who work in"Lisbon" .
+➔Resolution :
+Join:
+▪ Employees ⨝<sub> Employees .DepartmentID =Departments .ID</sub> Departments
+Filter (double condition) :
+▪ σ<sub>Salary >2000∧Location ='Lisbon'</sub>
+Name projection :
+▪ π<sub>Name</sub>( ...)
+Final result :
+▪ π<sub>Name</sub>(σ<sub>Salary > 2000 ∧Location = 'Lisbon'</sub>(Employees 
+⨝<sub> Employees.DepartmentID = Departments.ID</sub> Departments)) 
+➔Reasoning :
+Join between Employees and Departments :
+▪ Welinkthetables bythecommon attribute :DepartmentID =ID.
+Filter byconditions :
+▪ Salary >2000
+▪ Location ="Lisbon"
+Projection :
+▪ Weonly want theemployee's name .
+
+===== 4_1_BD_Agebra_en.pdf - página 23 =====
+23Base de Dados |   2025@jprp | 2025          Base de Dados
+4.1 
+Concepts and application of Relational Algebra
+⚫Example :Selection +Projection
+➔Fictitious Schema :
+Employees Relationship( EmployeeID ,Name, Age, Department)
+➔Desired Query :
+Display theName and Age ofallemployees over 30.
+➔Algebraic Expression :
+πName, Age(σAge>30(Employees))
+➔Reasoning
+Selection :
+▪σ<sub>Age >30</sub>(Employees)
+•filters thetuples from theEmployees table that satisfy the"Age >30"condition .
+Projection :
+▪π<sub>Name, Age</sub>( …)from thefiltered table, weextract only theName and Age columns .
+The result isanew relationship/table with only two columns and only employees over 30.
