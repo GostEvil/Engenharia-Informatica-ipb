@@ -8,7 +8,7 @@ pdf_files = [
     "2_BD_SGBD.pdf",
     "3_BD_ModeloRelacional.pdf",
     "4_1_BD_Agebra_en.pdf",
-    "5_mongoDB_PT",
+    "5_mongoDB_PT", #faltou este aqui
 ]
 
 output_txt = os.path.join(base_dir, "arquivo.txt")
