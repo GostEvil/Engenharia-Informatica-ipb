@@ -1,0 +1,758 @@
+# Resumos matéria completa
+> Feito com AI 
+
+BASES DE DADOS - CONTEÚDO ESSENCIAL
+
+===============================================================================
+CAPÍTULO 2 - SISTEMAS DE GESTÃO DE BASES DE DADOS (SGBD)
+===============================================================================
+
+ÍNDICE DE CONTEÚDOS
+
+1. Introdução aos ambientes de Base de Dados
+   - Noção de Sistema de Informação
+   - A Informação nas Organizações
+   - Tecnologias de Informação
+   - Gestão de Informação
+
+2. Sistemas de Gestão de Bases de Dados
+   - Abordagem e Vantagens
+   - Arquitetura de um SGBD
+   - Tipos de Utilizadores num SGDB
+
+3. Modelação e Normalização de Dados
+   - Manutenção da Integridade
+   - Redundância e Chaves
+   - Diagramas E-R
+   - Modelo Relacional
+
+4. Álgebra Relacional e SQL (MySQL)
+   - Conceitos e aplicação de Álgebra Relacional
+   - Ferramentas de Administração MySQL
+   - Comandos DDL
+   - Comandos DML
+
+5. Introdução às Bases de Dados NoSQL
+   - Bases de Dados NoSQL
+   - Tipos de Bases de Dados NoSQL
+   - Bases de dados orientadas a documentos
+
+6. MongoDB
+   - Estruturas JSON e BSON
+   - Modelação de dados
+   - Criação de coleções e documentos
+   - Operações CRUD e agregação
+   - Indexação e transações
+
+
+===============================================================================
+CONCEITOS DE BASES DE DADOS
+===============================================================================
+
+BASE DE DADOS:
+Conjunto estruturado de informação, organizada em Campos, Registos e Tabelas, que se inter-relacionam por intermédio de chaves e que permitem o acesso a diferentes perfis de utilizadores.
+
+DADOS:
+São elementos de Informação que permitem descrever as Entidades ou Eventos.
+
+EVENTO:
+Acontecimento ou ocorrência relativa a uma entidade do qual se pretende guardar Dados e Informação.
+
+INFORMAÇÃO:
+Conjunto de dados que descrevem entidades ou eventos, organizados de uma forma significativa e relevante para um determinado contexto.
+
+CAMPO:
+Componente elementar de um registo onde se armazenam os Dados que caracterizam as Entidades.
+
+TABELA:
+Conjunto organizado de registos que armazenam a informação relacionada com as Entidades do sistema, segundo uma perspetiva matricial.
+
+REGISTO:
+Corresponde a uma entrada individual na base de dados onde se armazena informação relacionada com as Entidades ou Eventos.
+
+EXEMPLO:
+Tabela cliente:
+Num_Cliente | Localidade | E_mail
+1000 | Bragança | joao@mail.pt
+1100 | Lisboa | joana@mail.pt
+1200 | Bragança | maria@mail.pt
+
+Tabela encomenda:
+Num_Cliente | Num_Encomenda | Data_Encomenda
+1000 | 123 | 01/03/2022
+1200 | 150 | 01/03/2022
+1200 | 245 | 12/03/2022
+
+
+CARACTERÍSTICAS DAS BASES DE DADOS:
+Nas Bases de Dados, a Informação pode ser visualizada sob a forma de Tabelas, com uma linha para cada Registo ou Entrada e uma série de colunas para cada Campo ou Propriedade, o que origina que a inserção e manipulação dos dados seja feita de forma:
+- Organizada
+- Consistente
+- Integra
+- Não Redundante
+- Segura
+
+REDUNDÂNCIA:
+Duplicação desnecessária dos dados com inconvenientes:
+- Maior custo com armazenamento dos dados
+- Operações de atualização desnecessárias
+- Aumento custos com Pessoal
+- Maior possibilidade de Inconsistência dos dados
+
+A redundância ocorre sempre que o mesmo facto é armazenado mais do que uma vez na mesma base de dados, ou quando factos derivados são armazenados numa base de dados.
+
+Os problemas que a redundância pode trazer a um sistema de bases de dados:
+
+1. Problemas de manutenção:
+   - Redundância significa o armazenamento repetido dos mesmos dados
+   - Uma simples alteração ou remoção pode implicar o acesso a várias partes da base de dados
+   - Torna-se difícil manter a coerência dos dados armazenados
+
+2. Custos de espaço de armazenamento:
+   - Apesar de atualmente não ser um problema significativo
+   - É importante evitar ocupar espaço de armazenamento desnecessariamente
+
+3. Problemas de desempenho:
+   - A redundância pode trazer problemas de desempenho ao sistema
+   - A razão mais importante para um mau desempenho de um SGBD são os acessos aos discos
+   - Redundância significativa implica mais acessos aos discos para trazer os mesmos dados
+
+INCONSISTÊNCIA:
+A existência de redundância pode levar a que determinados processos de atualização de dados não atualizem os campos redundantes, penalizando-se assim a Integridade da Base de dados.
+
+INTEGRIDADE:
+Existência de dados com conteúdos únicos.
+
+SEGURANÇA:
+A atribuição de determinadas permissões de acordo com os perfis de utilização limita os acessos e processamentos a efetuar à base de dados, garantindo-se assim um maior nível de segurança e proteção dos dados.
+
+
+===============================================================================
+MANUTENÇÃO DA INTEGRIDADE
+===============================================================================
+
+A manutenção da integridade de uma base de dados relacional é fundamental para o seu bom funcionamento, devendo ser assegurada pelo SGBD ou pelas aplicações que interagem com os dados.
+
+Assim, uma base de dados relacional deve assegurar três tipos de integridade:
+
+INTEGRIDADE DE DOMÍNIO:
+Esta é a forma mais elementar de manutenção de integridade. Consiste em que o SGBD faça respeitar as restrições que determinados atributos impõem sobre os valores que lhes podem ser atribuídos.
+
+Exemplo:
+- Numa relação que guarde informação sobre pessoas, o atributo Sexo apenas poderá aceitar um de dois valores possíveis
+- O atributo Data de Nascimento apenas poderá aceitar valores que representem datas válidas
+
+INTEGRIDADE DE ENTIDADE:
+O problema da integridade de entidade coloca-se em relação à possível existência de valores nulos como valores de um atributo de uma relação.
+
+Na terminologia das bases de dados, um valor nulo não significa um valor igual a zero; antes, significa que o valor não existe, ou que é desconhecido, ou que simplesmente não se aplica nessa ocorrência da relação.
+
+O princípio da integridade de entidade estipula que nenhum atributo pertencente à chave primária de uma relação pode conter valores nulos.
+
+INTEGRIDADE REFERENCIAL:
+O princípio da integridade referencial estabelece que um valor de uma chave estrangeira tem obrigatoriamente de existir como valor de um atributo da chave primária da tabela relacionada com aquela chave estrangeira.
+
+Ou seja, um valor que não exista como chave primária na sua tabela não pode ser usado como chave estrangeira de uma outra tabela.
+
+
+OBJETIVOS DAS BASES DE DADOS:
+- Facilitar o tratamento de grandes volumes de dados
+- Processar informação de forma centralizada
+- Assegurar a independência dos dados face aos processamentos
+- Evitar a redundância no registo dos dados
+- Evitar inconsistências ao nível dos processamentos de dados
+- Garantir integridade dos dados
+- Facilitar a partilha dos dados
+- Garantir a confidencialidade e a segurança dos dados
+
+
+===============================================================================
+SGBD (SISTEMA DE GESTÃO DE BASES DE DADOS)
+===============================================================================
+
+O QUE É UM SGBD:
+O SGBD é uma porção de software que faz a ligação entre os utilizadores, ou programas de aplicação, e a base de dados propriamente dita.
+
+É tarefa do SGBD conciliar os pedidos de acesso à base de dados originados pelos vários utilizadores.
+
+Esse software deve proporcionar aos utilizadores um ambiente flexível, eficiente e de fácil utilização para a consulta, introdução, alteração e remoção de informação na base de dados.
+
+Os SGBDs são usados geralmente para:
+- Criar ou gerir utilizadores
+- Consultar dados
+- Alterar dados e tabelas
+- Excluir dados
+- Relacionar tabelas
+- Importar e exportar dados
+
+O modo como a informação está fisicamente armazenada não é relevante para o utilizador da base de dados. Esse conhecimento apenas aumentaria a complexidade da operação.
+
+Uma função importante do SGBD é apresentar ao utilizador uma visão abstrata da informação, escondendo os detalhes sobre como a informação está fisicamente armazenada e, assim, simplificar a ação do utilizador.
+
+
+NÍVEIS DE ABSTRAÇÃO DA INFORMAÇÃO:
+
+1. NÍVEL FÍSICO:
+É o mais baixo nível de abstração e descreve o modo como a informação está fisicamente armazenada nos dispositivos físicos apropriados (exemplo: HD, SSD, etc).
+
+2. NÍVEL CONCEPTUAL (OU LÓGICO):
+Este nível é intermédio e descreve qual a informação que está armazenada na base de dados, e as várias relações internas a essa informação.
+
+Este nível é ainda relativamente complexo devido à inclusão de toda a informação sobre a organização dos dados existentes na base de dados.
+
+No entanto, o nível conceptual já não inclui a forma como a informação está fisicamente armazenada.
+
+3. NÍVEL DE VISUALIZAÇÃO (OU APLICAÇÃO):
+Também designado por nível de interação ou nível externo, é o nível com maior abstração da informação e contempla apenas uma parte da informação contida na base de dados.
+
+A informação disponível a este nível é ajustada às necessidades e competências de cada utilizador específico.
+
+Em virtude da diversidade de utilizadores, existem normalmente várias visualizações para a mesma base de dados.
+
+
+INDEPENDÊNCIA DA INFORMAÇÃO:
+
+É frequente que a estrutura de uma base de dados seja alterada ao longo do tempo para melhor responder aos requisitos que lhe são endereçados, e assim aumentar a sua capacidade e eficiência.
+
+A possibilidade de alterar a definição de um nível de abstração de informação sem afetar o nível seguinte designa-se por independência da informação.
+
+De acordo com os níveis de abstração considerados, existem dois níveis de independência da informação:
+
+INDEPENDÊNCIA DA INFORMAÇÃO FÍSICA:
+É a capacidade de alterar a estrutura de armazenamento físico da informação sem alterar a estrutura ao nível conceptual, e por conseguinte, sem alterar os programas de aplicação.
+
+Alterações ao nível físico são esporadicamente efetuadas para aumentar a eficiência do armazenamento da informação e, consequentemente, o desempenho dos programas de aplicação que acedem a uma determinada base de dados.
+
+INDEPENDÊNCIA DA INFORMAÇÃO LÓGICA:
+É a possibilidade de alterar a base de dados ao nível conceptual sem alterar os programas de aplicação.
+
+Esta propriedade é difícil de conseguir, dado que os programas de aplicação baseiam-se na descrição da informação ao nível conceptual.
+
+
+LINGUAGENS DE INTERAÇÃO:
+
+A interação das aplicações e dos utilizadores com o SGBD faz-se à custa de linguagens apropriadas.
+
+DDL (LINGUAGEM DE DEFINIÇÃO DE DADOS):
+Ao nível conceptual, a estrutura de uma base de dados é especificada por um conjunto de instruções numa Linguagem de Definição de Dados (DDL) a qual deve permitir que o esquema de uma base de dados possa ser definido.
+
+O resultado dessa definição é um conjunto de tabelas armazenadas naquilo a que se chama dicionário de dados, o qual pode ser visto como um depósito central que descreve e define o significado de toda a informação usada no esquema da base de dados.
+
+DML (LINGUAGEM DE MANIPULAÇÃO DE DADOS):
+Os SGBDs modernos também disponibilizam aos utilizadores uma Linguagem de Manipulação de Dados (DML), que permite manipular (isto é, consultar, inserir, apagar ou alterar) os dados armazenados numa base de dados.
+
+A linguagem padrão que permite definir e manipular os dados armazenados numa base de dados chama-se SQL ("Structured Query Language", isto é, "Linguagem de Perguntas Estruturadas").
+
+
+MODELOS DE BASES DE DADOS:
+
+Os dois principais modelos de SGBD são os relacionais e os não relacionais, e a diferença básica entre eles é a estrutura utilizada para organizar os dados.
+
+1. RELACIONAL (SQL):
+São o tipo mais comum de SGBD. Expressam os dados em tabelas e relacionamentos através de chaves, e utilizam a linguagem SQL para relacionar os dados.
+
+Aplicações: Oracle SQL, Microsoft SQL Server, PostgreeSQL, MySQL, MariaDB.
+
+2. NÃO RELACIONAL (NoSQL):
+São bases de dados que não usam somente SQL ou o modelo relacional. São ideais para ambientes onde o modelo de dados é muito volátil (por exemplo: eventos em um website).
+
+Aplicações: Cassandra, Redis, MongoDB, CouchDB, Apache Hbase, Riak.
+
+3. GRAPH:
+É um tipo de NoSQL que representa os dados em um grafo (graph) de vértices e arestas. Ideal para dados que estão altamente relacionados entre si (por exemplo, modelo de recomendação).
+
+Aplicações: Neo4j, Azure Cosmos DB, SAP HANA, Sparksee, Oracle Spatial and Graph, OrientDB.
+
+
+===============================================================================
+UTILIZADORES DE BASES DE DADOS
+===============================================================================
+
+Relativamente ao tipo de utilizadores que interagem com os SGBDs, é possível distinguir duas classes de utilizadores com interesses e posturas diferentes perante estes sistemas:
+
+O administrador da base de dados e os utilizadores propriamente ditos.
+
+ADMINISTRADOR:
+O administrador de uma base de dados é o responsável máximo pelo bom funcionamento de todo o SGBD. As suas funções mais importantes são:
+
+1. Definição da estrutura:
+   A estrutura da base de dados é definida por um conjunto de instruções que são transformadas pelo compilador da linguagem de definição de dados do SGBD num conjunto de definições que são armazenadas no dicionário de dados.
+
+2. Alteração da estrutura:
+   Às vezes, torna-se necessário alterar a estrutura de uma base de dados já existente. Esta ação é também definida por um conjunto de instruções utilizando a linguagem de definição de dados disponibilizada pelo SGBD.
+
+3. Autorização de acesso aos dados:
+   É tarefa do administrador especificar quais os dados que podem ser consultados ou alterados por cada tipo de utilizador que necessita de aceder à base de dados.
+
+4. Condições de integridade:
+   Cabe ao administrador definir quais as condições que devem ser satisfeitas pela informação existente na base de dados. Por outras palavras, o administrador da base de dados deve definir todas as restrições que garantem a integridade dos dados armazenados.
+
+UTILIZADORES:
+O perfil de um utilizador de um SGBD é definido consoante o tipo de interação que este necessita de ter com o sistema.
+
+Basicamente, existem dois tipos de utilizadores:
+
+1. Programadores de aplicações:
+   São profissionais de informática que, através de linguagens de programação de alto nível (por exemplo, Pascal, C, Visual Basic, etc.) e através do esquema conceptual da base de dados, desenvolvem as aplicações informáticas que os utilizadores finais irão depois utilizar para aceder à base de dados.
+
+2. Utilizadores finais:
+   São a razão de existir da base de dados. Acedem ao sistema para consultar, alterar, adicionar ou remover dados, sob as condições de acesso definidas e impostas pelo administrador da base de dados. Estes utilizadores não poderão nunca alterar a estrutura (isto é, o esquema conceptual) da base de dados.
+
+
+===============================================================================
+CAPÍTULO 3 - MODELAÇÃO E NORMALIZAÇÃO DE DADOS
+===============================================================================
+
+ABORDAGEM RELACIONAL
+
+ÁLGEBRA RELACIONAL:
+A Álgebra Relacional é uma linguagem processual de questões.
+
+Consiste num conjunto de operações que têm uma ou duas relações como entradas e produzem uma nova relação como resultado (ou saída).
+
+Pode-se dizer que a Álgebra Relacional é uma linguagem formal de interrogação a bases de dados relacionais.
+
+As operações básicas da Álgebra Relacional são as operações equivalentes da teoria dos conjuntos (reunião, intersecção, diferença, produto cartesiano), e algumas operações específicas que são úteis ao modelo relacional:
+- Seleção de tuplos (linhas) numa relação
+- Seleção de atributos de uma relação (projeção)
+- Junção natural de duas relações
+- Semi-junção natural de duas relações
+- Divisão de duas relações
+- Renomeação de relações ou de atributos de uma relação
+
+
+MODELO RELACIONAL:
+
+O modelo relacional tornou-se o modelo conceptual de bases de dados mais difundido e utilizado pelos SGBDs atualmente existentes no mercado.
+
+Devido à sua relativa simplicidade, o modelo relacional contribuiu decisivamente para a massificação da utilização da tecnologia de bases de dados nas organizações.
+
+A grande maioria dos SGBDs disponíveis no mercado atualmente são baseados no modelo relacional de dados: Oracle, SQL Server, MySQL, PostgreSQL, etc.
+
+O modelo relacional é baseado na teoria matemática dos conjuntos, no qual a informação e as suas associações internas são descritas por várias relações (também designadas como tabelas), por serem constituídas por linhas e colunas.
+
+A relação é a estrutura fundamental do modelo relacional. Uma relação é uma estrutura bidimensional com um determinado esquema, e zero ou mais instâncias.
+
+O esquema de uma relação é constituído por um ou mais atributos (também chamados de campos, que correspondem a cada uma das colunas da tabela), os quais traduzem o tipo de dados que serão armazenados na relação. Os atributos são as características da entidade real que a relação pretende representar.
+
+No modelo relacional, as relações possuem algumas características que devem ser sempre tidas em conta:
+- O valor de cada atributo num tuplo é atómico, isto é, no cruzamento de uma linha (tuplo) com uma coluna (atributo), só é possível encontrar um valor
+- Os atributos de uma relação devem ter identificadores distintos
+- Os tuplos de uma relação devem ser distintos
+- A ordem dos tuplos numa relação não tem qualquer significado
+- A ordem dos atributos no esquema de uma relação não tem qualquer significado
+- Todos os valores de um atributo provêm do seu domínio
+
+A arquitetura de uma base de dados relacional é vista pelo utilizador apenas como um conjunto de tabelas relacionadas, independentemente das técnicas de organização interna da informação, ao nível do suporte físico.
+
+O SGBD é responsável pela implementação do sistema, ao nível do software, "escondendo" do utilizador as complexidades da gestão interna dos dados e possibilitando uma visão lógica da estrutura da informação, compatível com o modelo conceptual.
+
+Deve-se ter em conta que o modelo de bases de dados relacionais é uma teoria: Os SGBDs permitem transformar essa teoria em prática, ou seja, permitem implementar o modelo nos computadores.
+
+
+===============================================================================
+MODELO ENTIDADE-RELACIONAMENTO (DER)
+===============================================================================
+
+O desenvolvimento de um sistema de informação baseado em bases de dados implica o desenvolvimento de um modelo conceptual de dados onde se descreve a estrutura lógica dos dados, que depois será traduzido para um modelo particular de base de dados.
+
+O modelo de dados Entidade-Relacionamento (E-R) foi desenvolvido para auxiliar o projeto de bases de dados, através da especificação de um esquema lógico que define a organização ou a estrutura da base de dados.
+
+A modelação ER é a técnica de modelação de dados mais popular, dado ser simples, de fácil compreensão e leitura e um bom meio de discussão e análise em processos de definição para esquemas de bases de dados.
+
+O modelo E-R é muito útil para modelar, com um diagrama simples, um sistema de informação completo.
+
+Informação do SI é organizada recorrendo ao conceito de:
+- Entidade
+- Relação
+- Atributo
+
+
+ENTIDADE:
+Qualquer coisa, real ou abstrata, sobre a qual guardamos dados para produzir informação requerida pelo SI em estudo.
+
+Os dados que guardamos sobre as entidades são os atributos da entidade.
+
+Uma entidade tem de ter pelo menos dois atributos.
+
+Não há entidades "padrão" - a importância de uma "coisa" varia com a natureza e objetivo do SI em estudo.
+
+Os nomes das entidades devem ser um substantivo no singular:
+Exemplo: Aluno, Requisição, Cliente, Fornecedor, etc.
+
+A entidade representa o conjunto de todas as ocorrências possíveis:
+Exemplo: Entidade-Aluno; duas das suas ocorrências podem ser Ana Cardoso, Joaquim Santos
+
+
+ATRIBUTOS:
+Para cada entidade é necessário conhecer as suas propriedades relevantes para o sistema.
+
+Atributo é qualquer propriedade de uma entidade.
+Exemplo: N°Cliente e Nome de Cliente
+
+São sempre elementos atómicos (indivisíveis) de informação.
+
+Um atributo poderá assumir diferentes valores de um domínio.
+
+TIPOS DE ATRIBUTOS:
+- Identificadores (Chaves candidatas)
+- Descritores
+
+De todos os atributos de uma entidade algum (ou alguns) identificam uma ocorrência específica dessa entidade distinguindo-a das restantes.
+
+A estes atributos chamamos identificadores ou chaves candidatas.
+
+Para que um atributo seja identificador é preciso que não existam duas ocorrências distintas dessa entidade em que esse atributo assuma o mesmo valor.
+
+Aos restantes atributos, que só descrevem ou caracterizam as ocorrências da entidade, chamamos descritores.
+
+
+RELAÇÃO (ASSOCIAÇÃO):
+Um relacionamento é uma associação entre duas ou mais entidades.
+
+Os relacionamentos são introduzidos no modelo E-R depois de as entidades terem sido identificadas, porque torna-se necessário perceber e definir o modo como as entidades do sistema se associam ou se relacionam entre si.
+
+A todos os relacionamentos entre conjuntos de entidades dá-se o nome de conjunto de relacionamentos.
+
+As entidades não existem isoladas, estão associadas entre si no SI.
+
+O nome da relação deve ser expresso na voz ativa, ser significativo e não muito longo.
+
+Exemplo: O Cliente faz Encomenda
+
+GRAU DE ASSOCIAÇÃO (Forma como duas entidades podem estar relacionadas):
+- Para cada ocorrência da entidade tipo A há uma e uma só ocorrência da entidade tipo B
+- Para cada ocorrência da entidade tipo A há uma ou nenhuma ocorrência da entidade tipo B
+- Para cada ocorrência da entidade tipo A há uma ou mais ocorrências da entidade tipo B
+- Para cada ocorrência da entidade tipo A há uma, várias ou nenhuma ocorrência da entidade tipo B
+
+Assim, uma associação pode relacionar:
+- Duas entidades entre si (binária)
+- Várias Entidades entre si (Complexa)
+- Uma entidade consigo própria (Unária)
+
+Um relacionamento entre entidades é caracterizado pela sua cardinalidade, ou seja, a quantificação de entidades que podem se relacionar através de um determinado relacionamento.
+
+Considerando dois conjuntos de entidades A e B, a cardinalidade dos relacionamentos entre entidades de A e de B pode ser de 3 tipos distintos:
+
+- Um para um (1:1): uma entidade de A está associada apenas a uma entidade de B, e uma entidade de B está associada apenas a uma entidade de A
+- Um para vários (1:N): uma entidade de A está associada a qualquer número de entidades de B, mas uma entidade de B só está associada a uma única entidade de A
+- Vários para vários (N:N): uma entidade de A pode estar associada a qualquer número de entidades de B, e uma entidade de B pode estar associada a qualquer número de entidades de A
+
+Ao analisar um sistema, a primeira análise para distinguir entidades e associações pode socorrer-se da notação utilizada pelas organizações:
+- Substantivos: Para fazer referência a entidades
+- Verbos: Para fazer referência a associações
+
+
+NOTAÇÃO DO DER:
+Entidade é sempre representada por um retângulo.
+
+Tipo de Relação:
+- Sobre a linha
+- Dentro de um losango
+
+Exemplo: Uma associação que relacione funcionário com departamento pode limitar-se a indicar-nos:
+- Os funcionários afetos a um departamento
+- A que departamento está afeto um funcionário
+
+
+COMO CONSTRUIR UM DIAGRAMA ER:
+
+1. Identificar as entidades
+   Sobre o que temos que guardar dados
+
+2. Olhar para cada par de entidades e verificar se existe alguma relação entre elas
+   Se existe:
+   - Identificar o tipo de relação
+   - Identificar o grau de associação
+
+Cada entidade dá normalmente origem a uma tabela com:
+- Identificador da entidade (Chave da Relação)
+- Restantes atributos da entidade (Descritores da Relação)
+- Identificadores de outras entidades que eventualmente lhes estejam associadas (Chaves estrangeiras)
+
+
+===============================================================================
+NORMALIZAÇÃO
+===============================================================================
+
+Técnica para analisar dados.
+
+PROBLEMAS:
+- Redundância da informação
+- Mais espaço em disco
+- Mais tempo de processamento
+- Dificuldade de manutenção da integridade dos dados
+
+OBJETIVO:
+O objetivo da normalização é eliminar a redundância de factos numa base de dados relacional.
+
+Por outras palavras, através da análise das relações de uma base de dados relacional, são identificadas as chaves primárias e estrangeiras dessas relações, e as dependências funcionais existentes entre os atributos dessas relações, por forma a eliminar a redundância dos dados.
+
+CARACTERÍSTICAS:
+- Permite derivar estruturas de dados flexíveis e sem anomalias
+- Geralmente usado em conjunção com o diagrama ER
+- A teoria da normalização foi construída à volta do conceito das Formas Normais
+- Diz-se que uma estrutura está numa determinada forma normal se satisfizer um conjunto de restrições
+
+Uma estrutura diz-se não normalizada quando nem sequer está na 1ª FN.
+
+RESTRIÇÕES PARA UMA ESTRUTURA SE ENCONTRAR NUMA DETERMINADA FORMA NORMAL:
+
+1ª FORMA NORMAL (1FN):
+Uma estrutura está na 1ª Forma Normal se não houver grupos repetitivos de atributo(s), isto é, cada atributo assume um só valor.
+
+2ª FORMA NORMAL (2FN):
+Uma estrutura está na 2ª Forma Normal se já estiver na 1ª FN e cada atributo não chave depende inteiramente da chave.
+
+3ª FORMA NORMAL (3FN):
+Uma estrutura está na 3ª Forma Normal se já estiver na 2ª FN e não há nenhuma dependência entre atributos não-chave.
+
+Duas metodologias (podem ser usadas isoladamente ou combinadas):
+- Normalização
+- Entidades e relacionamentos
+
+A normalização é um processo sistemático, conduzido por regras que traduzem as dependências funcionais entre os atributos, constituído por decomposições sucessivas de relações maiores em relações cada vez menores que, ao longo de vários passos, tenta identificar e remover a redundância própria das associações dos dados tal e qual existem no mundo real.
+
+Apesar de a normalização alterar a estrutura das relações, não pode alterar o conteúdo global da informação. Ou seja, durante o processo de normalização não pode haver perda de informação: deverá ser sempre possível regressar à estrutura original da base de dados.
+
+Para efetuar a normalização de uma base de dados, deve-se começar por analisar a informação da base de dados e estruturá-la com vista à construção das relações.
+
+Deve-se procurar incluir nessas relações todos os atributos considerados importantes.
+
+A normalização pode ser aplicada sobre um conjunto de dados "em bruto", isto é, sobre a relação universal, ou então sobre as estruturas resultantes da modelação E-R, com o objetivo de as refinar.
+
+
+PORQUÊ DA 1ªFN, 2ªFN E 3ªFN:
+
+Porquê a 1ªFN?
+- Base de dados relacionais não permitem registos de comprimento variável
+
+Porquê a 2ªFN?
+- Evitar redundância e consequentemente evitar inconsistência
+- Diminuir o espaço necessário para guardar a informação
+
+Porquê a 3ªFN?
+- Evitar redundância e consequentemente evitar inconsistência
+- Diminuir o espaço necessário para guardar a informação
+
+
+ESTRUTURAS FINAIS:
+Combinar as diferentes estruturas resultantes da normalização numa estrutura final também normalizada.
+
+Todas as estruturas resultantes da normalização (3ªFN) e que tenham o mesmo elemento de dados como chave, podem ser combinadas numa estrutura única garantindo que essa estrutura final também se encontra na 3ªFN.
+
+
+NORMALIZAÇÃO (RESUMO):
+
+Em geral, o processo de normalização é aplicado sobre uma estrutura não normalizada designada de relação universal, a qual deve conter todos os atributos dos quais é necessário guardar informação.
+
+PASSO 1:
+Nesta fase inicial do processo, o analista deve:
+a) Identificar quais os atributos que poderão ser repetidos
+b) Identificar os atributos que poderão ser chave: um atributo que identifique os atributos não repetidos, e um outro atributo para identificar os atributos repetidos
+
+PASSO 2:
+Aplicar as regras da 1ª forma normal, isto é, separar os atributos repetidos dos atributos não repetidos.
+Para isso, o analista deve:
+a) Converter os atributos não atómicos em atributos atómicos, para que não seja possível incluir mais do que um valor em cada atributo de uma relação
+b) Separar os atributos repetidos dos não repetidos, passando a considerá-los como elementos de uma nova relação. A chave primária da relação dos atributos não repetidos deve ser acrescentada, como chave estrangeira, à chave primária dos atributos repetidos
+
+PASSO 3:
+Aplicar as regras da 2ª forma normal; para isso, terá de verificar se os atributos não-chave de uma relação dependem da totalidade da chave primária dessa relação.
+a) Se a relação só tem um atributo como chave primária, e se essa relação já estiver na 1ª forma normal, então a relação também se encontra na 2ª forma normal
+b) Se a chave primária é composta, e se algum atributo não-chave depende apenas de uma parte da chave primária, então a relação deverá ser decomposta, para que cada atributo dependa da totalidade da chave primária
+
+PASSO 4:
+Aplicação das regras da 3ª forma normal, a qual obriga a analisar a dependência dos atributos não-chave de cada relação.
+a) O analista deverá procurar dependências funcionais entre os atributos não-chave de uma relação
+b) Se uma relação que já esteja na 2ª forma normal tiver, no máximo, um atributo não-chave, então essa relação também se encontra na 3ª forma normal
+c) Se existir algum conjunto de atributos não-chave de uma relação que tenha dependência funcional em relação a um outro conjunto de atributos não-chave daquela mesma relação, então a relação deverá ser decomposta, de modo que qualquer atributo não-chave dessa relação só dependa da chave primária da relação
+
+
+===============================================================================
+CAPÍTULO 4 - ÁLGEBRA RELACIONAL E SQL (MySQL)
+===============================================================================
+
+O QUE É ÁLGEBRA RELACIONAL?
+- Modelo formal de manipulação de dados
+- Define operações em relações (tabelas)
+- Base para linguagens como SQL
+
+CONCEITOS FUNDAMENTAIS:
+- Relação = Conjunto de tuplos (linhas) com o mesmo esquema
+- Atributos = Colunas da relação
+- Esquema = Nome da relação + atributos
+
+OPERADORES DA ÁLGEBRA RELACIONAL:
+
+Operadores Unários (1 relação):
+- Operadores Binários (2 relações)
+
+Categorias:
+1. Seleção (σ)
+2. Projeção (π)
+3. União (∪)
+4. Diferença (−)
+5. Produto Cartesiano (×)
+6. Junção (⨝)
+7. Renomeação (ρ)
+
+Operações Derivadas (Podem ser construídas com operadores básicos):
+1. Interseção (∩)
+2. Divisão
+3. Outer join
+
+A álgebra relacional é um conjunto de operadores para manipular relações. Cada operador da álgebra relacional toma uma ou duas relações como entrada e produz uma nova relação como saída.
+
+
+OPERADORES DA ÁLGEBRA RELACIONAL:
+
+SELEÇÃO (σ):
+- Filtra linhas com base numa condição
+- Notação: σ_condição(R)
+- Exemplo: σ_idade>30(Pessoas)
+
+PROJEÇÃO (π):
+- Seleciona colunas específicas (atributos)
+- Notação: π_atributos(R)
+- Exemplo: π_nome,idade(Pessoas)
+
+UNIÃO (∪):
+- Combina duas relações com o mesmo esquema
+- Remove duplicados (por definição)
+- Exemplo: R ∪ S
+
+DIFERENÇA (−):
+- Linhas que estão em R mas não em S
+- Exemplo: R − S
+
+PRODUTO CARTESIANO (×):
+- Combina cada linha em R com todas de S
+- Pode gerar grandes volumes de dados
+- Exemplo: R × S
+
+JUNÇÃO (⨝):
+- Combina tuplos com base numa condição
+- Junção natural: ⨝
+- Junção condicional: R ⨝_condição S
+
+RENOMEAÇÃO (ρ):
+- Altera o nome de relações ou atributos
+- Notação: ρ_novo_nome(R)
+- Útil para distinguir relações temporárias
+
+
+UNIÃO:
+A união de duas relações union-compatible R1 e R2, R1 UNION R2, é o conjunto de todos os tuplos t pertencentes a R1 ou R2 ou ambos.
+
+Duas relações são union-compatible se têm o mesmo grau, e o i-ésimo atributo de cada é baseado no mesmo domínio.
+
+A notação formal para uma operação de união é U.
+
+A operação UNION é associativa e comutativa.
+
+
+INTERSEÇÃO:
+A interseção de duas relações union-compatible R1 e R2, R1 INTERSECT R2, é o conjunto de todos os tuplos t pertencentes a R1 e R2.
+
+A notação formal para uma operação de interseção é ∩.
+
+A operação INTERSECT é associativa e comutativa.
+
+
+DIFERENÇA:
+A diferença entre duas relações union-compatible R1 e R2, R1 MINUS R2, é o conjunto de todos os tuplos t pertencentes a R1 e não a R2.
+
+A notação formal para uma operação de diferença é -
+
+A operação DIFFERENCE não é associativa nem comutativa.
+
+
+PRODUTO CARTESIANO:
+O Produto Cartesiano entre duas relações R1 e R2, R1 TIMES R2, é o conjunto de todos os tuplos t tal que t é a concatenação de um tuplo r pertencente a R1 e um tuplo s pertencente a R2.
+
+R1 e R2 não têm de ser union-compatible.
+
+A notação formal para uma operação de Produto Cartesiano é ×.
+
+Se R1 tem grau n e cardinalidade N1 e R2 tem grau m e cardinalidade N2 então a relação resultante R3 tem grau (n+m) e cardinalidade (N1*N2).
+
+
+SELEÇÃO:
+A operação de seleção seleciona um subconjunto de tuplos de uma relação. É um operador unário, isto é, aplica-se sobre uma única relação. O subconjunto de tuplos deve satisfazer uma condição de seleção ou predicado.
+
+A notação formal para uma operação de seleção é:
+σ_<condição de seleção>(relação)
+
+onde <condição de seleção> é:
+<atributo> <operador de comparação> <valor constante>/<atributo> [AND/OR/NOT <atributo> <operador de comparação> <valor constante>/<atributo> ...]
+
+O operador de comparação pode ser <, >, <=, >=, =, <> e depende do domínio do atributo ou tipo de dados do valor constante.
+
+O grau da relação resultante é igual ao grau da relação inicial sobre a qual o operador é aplicado. A cardinalidade da relação resultante é menor ou igual à cardinalidade da relação inicial.
+
+A seleção é comutativa.
+
+
+PROJEÇÃO:
+A operação de projeção constrói outra relação selecionando um subconjunto de atributos de uma relação existente. Tuplos duplicados da relação resultante são eliminados. É também um operador unário.
+
+A notação formal para uma operação de projeção é:
+π_<lista de atributos>(relação)
+
+onde <lista de atributos> é o subconjunto de atributos de uma relação existente.
+
+O grau da relação resultante é igual ao número de atributos da <lista de atributos> porque apenas esses atributos aparecerão na relação resultante. A cardinalidade da relação resultante é menor ou igual à cardinalidade da relação inicial.
+
+A projeção não é comutativa.
+
+
+JUNÇÃO:
+A operação de junção concatena duas relações com base numa condição de junção ou predicado. As relações devem ter pelo menos um atributo comum com o mesmo domínio subjacente, e sobre tais atributos uma condição de junção pode ser especificada.
+
+A notação formal para uma operação de junção é:
+R ⨝_<condição de junção> S
+
+onde <condição de junção> é:
+<atributo de R> <operador de comparação> <atributo de S>
+
+O operador de comparação pode ser <, >, <=, >=, =, <> e depende do domínio dos atributos.
+
+Existem também outras formas de operações de junção. A mais usada é a equijoin, que significa que o operador de comparação é =.
+
+Há situações em que nem todos os tuplos da relação R têm um tuplo correspondente na relação S. Esses tuplos não aparecerão no resultado de uma operação de junção entre R e S. Na prática, às vezes é necessário ter todos os tuplos no resultado, então, outra forma de junção foi criada: a outer join.
+
+Existem 3 formas de outer join:
+- Left outer join: onde todos os tuplos de R estarão no resultado
+- Right outer join: onde todos os tuplos de S estarão no resultado
+- Full outer join: onde todos os tuplos de R e S estarão no resultado
+
+
+DIVISÃO:
+O operador de divisão divide uma relação R1 de grau (n+m) por uma relação R2 de grau m e produz uma relação de grau n. O (n+i)-ésimo atributo de R1 e o i-ésimo atributo de R2 devem ser definidos no mesmo domínio.
+
+O resultado de uma operação de divisão entre R1 e R2 é outra relação, que contém todos os tuplos que concatenados com todos os tuplos de R2 pertencem à relação R1.
+
+A notação formal para uma operação de divisão é ÷.
+
+
+DIFERENÇAS ENTRE ÁLGEBRA RELACIONAL E SQL:
+- SQL permite duplicados, álgebra relacional não
+- SQL é mais permissivo em sintaxe
+- Álgebra relacional é mais formal e matemática
+
+VANTAGENS DA ÁLGEBRA RELACIONAL:
+- Clareza formal
+- Base teórica sólida
+- Facilita a otimização de queries
+
+DESVANTAGENS/LIMITAÇÕES:
+- Sintaxe menos amigável
+- Pouco usada diretamente (mais na teoria)
+- SQL é mais expressivo para casos práticos complexos
+
+RESUMO:
+- Álgebra relacional = base para SQL
+- Principais operadores: σ, π, ∪, −, ×, ⨝
+- Essencial para compreender a lógica por trás das consultas
