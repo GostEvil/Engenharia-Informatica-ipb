@@ -1,1 +1,266 @@
 Resolucao do cap4 SQL
+#####################
+
+1) Postal(Codigo PK, Local); Pessoa(Id PK, Nome, Idade, Salario, Telefone, Cod_Postal FK->Postal.Codigo); Mensagem(Id_Msg PK, Mensagem); Comissao(Id FK->Pessoa.Id, Id_Msg FK->Mensagem.Id_Msg, Valor)
+
+2)
+CREATE DATABASE AULAS;
+USE AULAS;
+
+CREATE TABLE Postal
+ (Codigo NUMERIC(4) PRIMARY KEY,
+  Local CHAR(30) NOT NULL);
+
+CREATE TABLE Pessoa
+ (Id NUMERIC PRIMARY KEY,
+  Nome CHAR(30) NOT NULL,
+  Idade INTEGER NOT NULL CHECK (Idade BETWEEN 0 AND 150),
+  Salario NUMERIC(10,2) NOT NULL CHECK (Salario>0),
+  Telefone CHAR(12) NULL,
+  Cod_Postal NUMERIC(4) REFERENCES Postal(Codigo)
+  ON UPDATE CASCADE
+  ON DELETE CASCADE);
+
+CREATE TABLE Mensagem
+ (Id_Msg NUMERIC PRIMARY KEY,
+  Mensagem CHAR(30) NOT NULL);
+
+CREATE TABLE Comissao
+ (Id NUMERIC NOT NULL,
+  Id_Msg NUMERIC NOT NULL,
+  Valor NUMERIC NOT NULL,
+  PRIMARY KEY (Id, Id_Msg),
+  FOREIGN KEY (Id) REFERENCES Pessoa(Id)
+    ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (Id_Msg) REFERENCES Mensagem(Id_Msg)
+    ON UPDATE CASCADE ON DELETE CASCADE);
+
+3)
+INSERT INTO Postal VALUES(1000,'LISBOA');
+INSERT INTO Postal VALUES(1100,'LISBOA');
+INSERT INTO Postal VALUES(1200,'LISBOA');
+INSERT INTO Postal VALUES(1500,'LISBOA');
+INSERT INTO Postal VALUES(2000,'SANTAREM');
+INSERT INTO Postal VALUES(2300,'TOMAR');
+INSERT INTO Postal VALUES(3000,'COIMBRA');
+INSERT INTO Postal VALUES(4000,'PORTO');
+INSERT INTO Postal VALUES(9000,'FUNCHAL');
+
+4) SELECT * FROM Postal;
+
+5) SELECT * FROM Pessoa;
+
+6) SELECT * FROM Mensagem;
+
+7) SELECT * FROM Comissao;
+
+8) SELECT Nome, Salario FROM Pessoa ORDER BY Salario DESC;
+
+9) SELECT Nome, Salario FROM Pessoa ORDER BY Salario ASC;
+
+10) SELECT DISTINCT Local FROM Postal;
+
+11) SELECT COUNT(*) AS Total_Pessoas FROM Pessoa;
+
+12) SELECT AVG(Salario) AS Salario_Medio FROM Pessoa;
+
+13) SELECT MIN(Salario) AS Menor_Salario FROM Pessoa;
+
+14) SELECT MAX(Salario) AS Maior_Salario FROM Pessoa;
+
+15) SELECT Nome, Idade FROM Pessoa ORDER BY Idade DESC;
+
+16) SELECT Nome, Idade FROM Pessoa WHERE Idade >= 18;
+
+17) SELECT Nome FROM Pessoa WHERE Nome LIKE 'A%';
+
+18) SELECT Nome FROM Pessoa WHERE Telefone IS NULL;
+
+19) SELECT Nome FROM Pessoa WHERE Telefone IS NOT NULL;
+
+20) SELECT Nome, Salario FROM Pessoa WHERE Salario BETWEEN 700 AND 1500;
+
+21) SELECT Nome FROM Pessoa WHERE Cod_Postal = 4000;
+
+22) SELECT p.Nome, po.Local FROM Pessoa p JOIN Postal po ON po.Codigo=p.Cod_Postal;
+
+23) SELECT po.Local, COUNT(*) AS Num_Pessoas
+    FROM Pessoa p JOIN Postal po ON po.Codigo=p.Cod_Postal
+    GROUP BY po.Local;
+
+24) SELECT p.Nome, SUM(c.Valor) AS Total_Comissoes
+    FROM Pessoa p LEFT JOIN Comissao c ON c.Id=p.Id
+    GROUP BY p.Id, p.Nome;
+
+25) SELECT p.Nome
+    FROM Pessoa p
+    WHERE NOT EXISTS (SELECT 1 FROM Comissao c WHERE c.Id=p.Id);
+
+26) SELECT p.Nome
+    FROM Pessoa p
+    WHERE EXISTS (SELECT 1 FROM Comissao c WHERE c.Id=p.Id);
+
+27) SELECT p.Nome, c.Id_Msg, c.Valor
+    FROM Pessoa p JOIN Comissao c ON c.Id=p.Id
+    ORDER BY p.Nome, c.Id_Msg;
+
+28) SELECT m.Mensagem, COUNT(*) AS Num_Comissoes
+    FROM Comissao c JOIN Mensagem m ON m.Id_Msg=c.Id_Msg
+    GROUP BY m.Id_Msg, m.Mensagem;
+
+29) SELECT p.Nome, SUM(c.Valor) AS Total_Comissoes
+    FROM Pessoa p JOIN Comissao c ON c.Id=p.Id
+    GROUP BY p.Id, p.Nome
+    HAVING SUM(c.Valor) > 0;
+
+30) SELECT p.Nome, p.Salario, IFNULL(SUM(c.Valor),0) AS Total_Comissoes
+    FROM Pessoa p LEFT JOIN Comissao c ON c.Id=p.Id
+    GROUP BY p.Id, p.Nome, p.Salario;
+
+31) SELECT p.Nome, p.Salario
+    FROM Pessoa p
+    WHERE p.Salario = (SELECT MAX(Salario) FROM Pessoa);
+
+32) SELECT p.Nome, p.Salario
+    FROM Pessoa p
+    WHERE p.Salario = (SELECT MIN(Salario) FROM Pessoa);
+
+33) SELECT p.Nome, p.Salario
+    FROM Pessoa p
+    WHERE p.Salario > (SELECT AVG(Salario) FROM Pessoa);
+
+34) SELECT p.Nome, p.Salario
+    FROM Pessoa p
+    WHERE p.Salario < (SELECT AVG(Salario) FROM Pessoa);
+
+35) SELECT p.Nome, p.Salario
+    FROM Pessoa p
+    WHERE p.Salario IN (SELECT Salario FROM Pessoa WHERE Salario >= 1000);
+
+36) SELECT p.Nome
+    FROM Pessoa p
+    WHERE p.Cod_Postal IN (SELECT Codigo FROM Postal WHERE Local='LISBOA');
+
+37) SELECT p.Nome
+    FROM Pessoa p
+    WHERE p.Cod_Postal NOT IN (SELECT Codigo FROM Postal WHERE Local='LISBOA');
+
+38) SELECT p.Nome
+    FROM Pessoa p
+    WHERE EXISTS (SELECT 1 FROM Postal po WHERE po.Codigo=p.Cod_Postal AND po.Local='LISBOA');
+
+39) SELECT p.Nome
+    FROM Pessoa p
+    WHERE NOT EXISTS (SELECT 1 FROM Postal po WHERE po.Codigo=p.Cod_Postal AND po.Local='LISBOA');
+
+40) SELECT p.Nome, SUM(c.Valor) AS Soma
+    FROM Pessoa p JOIN Comissao c ON c.Id=p.Id
+    GROUP BY p.Id, p.Nome
+    HAVING SUM(c.Valor) = (SELECT MAX(t.soma)
+                           FROM (SELECT SUM(Valor) soma FROM Comissao GROUP BY Id) t);
+
+41) SELECT p.Nome
+    FROM Pessoa p
+    WHERE p.Id IN (SELECT c.Id FROM Comissao c GROUP BY c.Id HAVING COUNT(*) >= 2);
+
+42) SELECT p.Nome
+    FROM Pessoa p
+    WHERE p.Id NOT IN (SELECT DISTINCT c.Id FROM Comissao c);
+
+43) SELECT m.Mensagem
+    FROM Mensagem m
+    WHERE m.Id_Msg IN (SELECT DISTINCT c.Id_Msg FROM Comissao c);
+
+44) SELECT m.Mensagem
+    FROM Mensagem m
+    WHERE m.Id_Msg NOT IN (SELECT DISTINCT c.Id_Msg FROM Comissao c);
+
+45) SELECT p.Nome, p.Salario
+    FROM Pessoa p
+    WHERE p.Salario > (SELECT MIN(Salario) FROM Pessoa);
+
+46) SELECT p.Nome, p.Salario
+    FROM Pessoa p
+    WHERE p.Salario < (SELECT MAX(Salario) FROM Pessoa);
+
+47) SELECT MIN(Salario) AS Menor_Salario FROM Pessoa;
+
+48) SELECT Nome FROM Pessoa WHERE Salario > (SELECT AVG(Salario) FROM Pessoa);
+
+49) SELECT Nome, Salario
+    FROM Pessoa
+    WHERE Salario > (SELECT SUM(Valor) FROM Comissao WHERE Comissao.Id=Pessoa.Id);
+
+50) SELECT COUNT(*) AS Num_Pessoas_Lisboa
+    FROM Pessoa
+    WHERE Cod_Postal IN (SELECT Codigo FROM Postal WHERE Local='LISBOA');
+
+51) SELECT Nome
+    FROM Pessoa
+    WHERE Cod_Postal NOT IN (SELECT Codigo FROM Postal WHERE Local='LISBOA');
+
+52) SELECT DISTINCT c.Id
+    FROM Comissao c
+    WHERE NOT EXISTS (SELECT 1 FROM Pessoa p WHERE p.Id=c.Id);
+
+53) CREATE VIEW v_pessoa_postal AS
+    SELECT p.Id, p.Nome, p.Idade, p.Salario, p.Telefone, p.Cod_Postal, po.Local
+    FROM Pessoa p JOIN Postal po ON po.Codigo=p.Cod_Postal;
+
+54) SELECT * FROM v_pessoa_postal;
+
+55) CREATE VIEW v_total_comissoes AS
+    SELECT p.Id, p.Nome, IFNULL(SUM(c.Valor),0) AS Total_Comissoes
+    FROM Pessoa p LEFT JOIN Comissao c ON c.Id=p.Id
+    GROUP BY p.Id, p.Nome;
+
+56) SELECT * FROM v_total_comissoes ORDER BY Total_Comissoes DESC;
+
+57) DROP VIEW v_pessoa_postal;
+
+58) DROP VIEW v_total_comissoes;
+
+59) CREATE INDEX indNome ON Pessoa(Nome);
+
+60) CREATE INDEX indCodPostal ON Pessoa(Cod_Postal);
+
+61) CREATE INDEX indIdMsg ON Comissao(Id_Msg);
+
+62) CREATE INDEX indComissaoId ON Comissao(Id);
+
+63) SHOW INDEX FROM Pessoa;
+
+64) SHOW INDEX FROM Comissao;
+
+65) SHOW INDEX FROM Postal;
+
+66) DROP INDEX indCodPostal ON Pessoa;
+
+67) DROP INDEX indIdMsg ON Comissao;
+
+68) SELECT Nome FROM Pessoa WHERE Nome LIKE 'A%';
+
+69) EXPLAIN SELECT Nome FROM Pessoa WHERE Nome LIKE 'A%';
+
+70) CREATE INDEX indNome ON Pessoa(Nome);
+
+71) SHOW INDEX FROM Pessoa;
+
+72) DROP INDEX indNome ON Pessoa;
+
+73) SHOW INDEX FROM ex1_caderno.Postal;
+
+74) DROP INDEX indNome ON Pessoa;
+
+75) CREATE USER 'joana'@'localhost' IDENTIFIED BY '123456789';
+    FLUSH PRIVILEGES;
+    SELECT user,host FROM mysql.user;
+
+76) SET PASSWORD FOR 'joana'@'localhost' = PASSWORD('987654321');
+
+77) DROP USER 'joana'@'localhost';
+
+78) GRANT ALL ON *.* TO 'joana';
+
+79) GRANT INSERT, SELECT ON ex1_caderno.Pessoa TO 'joana';
+    REVOKE ALL ON *.* FROM 'joana';
