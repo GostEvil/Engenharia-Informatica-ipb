@@ -1,0 +1,215 @@
+Módulo 5: Sistemas numéricos
+Introdução às redes v7.0 (ITN)Versão original: Cisco Network Academy
+Versão modificada: Eduardo Costa
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+9© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoObjetivos do módulo
+Título do módulo: Sistemas de Numeração
+Objetivo do módulo : Calcular representações entre sistemas decimais, binários e 
+hexadecimais.
+Título do Tópico Objetivo do Tópico
+Sistema de numeração binário Calcular as representações entre sistemas 
+decimal e binário.
+Sistema de numeração hexadecimal Calcular as representações entre sistemas 
+decimal e hexadecimal.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+10© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco5.1 Sistema de numeração 
+binário
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+11© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoSistema de numeração binário
+Endereços binários e IPv4
+•O sistema de numeração binária consiste em 1s e 0s, chamados bits
+•Sistema de numeração decimal consiste em dígitos 0 a 9
+•Hosts, servidores e equipamentos de rede usando endereçamento binário para se 
+identificarem uns aos outros.
+•Cada endereço é composto de uma sequência de 32 bits, dividida em quatro seções 
+chamadas octetos.
+•Cada octeto contém 8 bits (ou 1 byte) separados por um ponto.
+•Para facilitar o uso por pessoas, esta notação pontuada é convertida em decimal 
+pontuada.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+13© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoSistema de numeração binário
+Notação posicional binária
+•Notação posicional significa que um dígito representa valores diferentes, dependendo 
+da posição que ocupa na sequência de números.
+•O sistema de notação posicional decimal opera como é mostrado nas tabelas abaixo.
+Raiz 10 10 10 10
+Posição no número 3 2 1 0
+Cáculo (103)(102) (101)(100)
+Valor da posição 1000 100 10 1Milhar Centena Dezena Unida
+de
+Valor Posicional 1000 100 10 1
+Número decimal (1234) 1 2 3 4
+Cálculo 1 x 1000 2 x 100 3 x 10 4 x 1
+Adicionar… 1000 + 200 + 30 + 4
+Resultado 1.234
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+14© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoSistema de numeração binário
+Notação de posicional binária(cont.) 
+O sistema de notação posicional binária funciona como é mostrado nas tabelas abaixo.
+Raiz 2 2 2 2 2 2 2 2
+Posição no número 7 6 5 4 3 2 1 0
+Cáculo (27) (26) (25) (24) (23) (22) (21) (20)
+Valor da posição 128 64 32 16 8 4 2 1
+Valor Posicional 128 64 32 16 8 4 2 1
+Número binário (11000000) 1 1 0 0 0 0 0 0
+Cáculo 1x128 1x64 0x32 0x16 0x8 0x4 0x2 0x1
+Adicioná -los... 128 + 64 + 0 + 0 + 0 + 0 + 0 + 0
+Resultado 192
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+15© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoSistema de numeração binário
+Converter Binário para Decimal
+Converter 11000000.10101000.00001011.00001010 para decimais.
+Valor Posicional 128 64 32 16 8 4 2 1
+Número binário (11000000) 1 1 0 0 0 0 0 0
+Cáculo 1x128 1x64 0x32 0x16 0x8 0x4 0x2 0x1
+Adicioná -los... 128 + 64 + 0 + 0 + 0 + 0 + 0 + 0
+Número binário (10101000) 1 0 1 0 1 0 0 0
+Cáculo 1x128 0x64 1x32 0x16 1x8 0x4 0x2 0x1
+Adicioná -los... 128 + 0 + 32 + 0 + 8 + 0 + 0 + 0
+Número Binário 
+(00001011)0 0 0 0 1 0 1 1
+Cálculo 0x128 0x64 0x32 0x16 1x8 0x4 1x2 1x1
+Adicioná -los... 0 + 0 + 0 + 0 + 8 + 0 + 2 + 1
+Número Binário 
+(00001010)0 0 0 0 1 0 1 0
+Cáculo 0x128 0x64 0x32 0x16 1x8 0x4 1x2 0x1
+Adicioná -los... 0 + 0 + 0 + 0 + 8 + 0 + 2 + 0192
+168
+11
+10192.168.11.10
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+16© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoSistema de numeração binário
+Converter Binário para Decimal
+A tabela de valores posicionais binários é útil na conversão de um endereço IPv4 
+decimal pontilhado em binário.
+•Comece na posição 128 (o bit mais 
+significativo). O número decimal do 
+octeto ( n) é igual ou superior a 128?
+•Se não, registe um binário 0 no valor 
+posicional 128 e mova para o valor 
+posicional 64.
+•Se sim, registe um 1 binário no valor 
+posicional 128, subtraia 128 do número 
+decimal e vá para o valor posicional 64.
+•Repita estas etapas através do valor 
+posicional 1.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+17© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoSistema de numeração binário
+Exemplo de Conversão de Decimal para Binário
+•Converter decimal 168 em binário
+168 é > 128?
+-Sim, digite 1 na posição 128 e subtraia 128 (168 -128=40)
+40 é >= 64?
+-Não, digite 0 na posição 64 e siga em frente
+É 40 > 32?
+-Sim, digite 1 na posição 32 e subtraia 32 (40 -32=8)
+É 8 > 16?
+-Não, digite 0 na posição 16 e siga em frente
+8 é > 8?
+-Igual Digite 1 na posição 8 e subtraia 8 (8 -8=0)
+Nenhum valor restante. Insira 0 nas posições binárias restantes
+128 64 32 16 8 4 2 1
+1 0 1 0 1 0 0 0
+Decimal 168 é escrito como 10101000 em binário
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+18© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoSistema de numeração binário 
+Endereços IPv4
+•Routers e computadores só entendem binários, enquanto que os humanos 
+trabalham em decimal. É importante que você obtenha uma compreensão 
+completa desses dois sistemas de numeração e como eles são usados na 
+rede.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+19© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco5.2 -Sistema de numeração 
+hexadecimal
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+20© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoSistema de numeração hexadecimal
+Endereços hexadecimais e IPv6
+•Para entender endereços 
+IPv6, deve ser capaz de 
+converter hexadecimal para 
+decimal e vice -versa.
+•Hexadecimal é um sistema de 
+numeração de base 
+dezesseis, usando os dígitos 
+de 0 a 9 e as letras de A a F.
+•É mais fácil expressar um 
+valor como um único símbolo 
+hexadecimal do que como 
+quatro bits binários.
+•Hexadecimal é usado para 
+representar endereços IPv6 e 
+endereços MAC.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+21© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoSistema numérico hexadecimal
+Endereços hexadecimal e IPv6 (cont.)
+•Endereços IPv6 têm 128 bits 
+de comprimento. Cada 4 bits 
+são representados por um 
+único dígito hexadecimal. Isto 
+torna o endereço IPv6 num 
+total de 32 valores 
+hexadecimais.
+•A figura mostra o método 
+preferido de escrever um 
+endereço IPv6, com cada X 
+representando quatro valores 
+hexadecimais.
+•Cada grupo de caracteres 
+hexadecimais de quatro é 
+referido como um hextet .
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+23© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoSistema de numeração hexadecimal
+Conversões decimal para hexadecimal
+Siga a lista de etapas para converter números decimais em valores hexadecimais:
+•Converta o número decimal para strings binárias de 8 bits.
+•Divida as cadeias binárias em grupos de quatro a partir da posição mais à direita.
+•Converta cada quatro números binários em seu dígito hexadecimal equivalente.
+Por exemplo, 168 convertido em hexadecimal usando o processo de três etapas.
+•168 em binário é 10101000.
+•10101000 em dois grupos de quatro dígitos binários é 1010 e 1000.
+•1010 é hexadecimal e 1000 é hexadecimal 8, então 168 é A8 em hexadecimal.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+24© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoSistema de numeração hexadecimal
+Conversões hexadecimais em decimais
+Siga a lista de etapas para converter números hexadecimais em valores decimais:
+•Converta o número hexadecimal em cadeias binárias de 4 bits.
+•Criar agrupamento binário de 8 bits a partir da posição mais à direita.
+•Converta cada agrupamento binário de 8 bits em seu dígito decimal equivalente.
+Por exemplo, D2 convertido em decimal usando o processo de três etapas:
+•D2 em cadeias binárias de 4 bits é 1110 e 0010.
+•1110 e 0010 é 11100010 em um agrupamento de 8 bits.
+•11100010 em binário é equivalente a 210 em decimal, então D2 é 210 é decimal
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+25© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco5.3 -Sumário
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+26© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoSumário
+O que aprendi neste módulo?
+•Binário é um sistema de numeração de base dois que consiste nos dígitos 0 e 1, chamados bits.
+•Decimal é um sistema de numeração base dez que consiste nos dígitos de 0 a 9.
+•Binário é o que os hosts, servidores e equipamentos de rede usam para se identificar.
+•Hexadecimal é um sistema de numeração de base dezesseis que consiste nos dígitos de 0 a 9 e 
+nas letras A a F.
+•Hexadecimal é usado para representar endereços IPv6 e endereços MAC.
+•Os endereços IPv6 têm 128 bits e a cada 4 bits é representado por um dígito hexadecimal para 
+um total de 32 dígitos hexadecimais.
+•Para converter hexadecimal para decimal, você deve primeiro converter o hexadecimal para 
+binário, depois converter o binário para decimal.
+•Para converter decimal em hexadecimal, você deve primeiro converter o decimal em binário e 
+depois o binário em hexadecimal.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)

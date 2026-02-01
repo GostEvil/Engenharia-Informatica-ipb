@@ -1,0 +1,420 @@
+Introdução às redes v7.0 (ITN)Módulo 7: Switching Ethernet
+Versão original: Cisco Network Academy
+Versão modificada: Eduardo Costa
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+10© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoObjetivos do módulo
+Título do módulo: Switching Ethernet
+Objetivo do módulo : Explique como a Ethernet funciona em uma rede comutada . 
+Título do Tópico Objetivo do Tópico
+Quadro EthernetExplicar como as subcamadas da Ethernet se relacionam 
+com os campos do quadro.
+Endereços MAC Ethernet Descrever o endereço MAC da Ethernet.
+A tabela de endereços MACExplicar como um switch cria a sua tabela de endereços 
+MAC e encaminha os quadros.
+Métodos de comutação e velocidades de 
+comutaçãoDescrever os métodos de comutação dos switches e as 
+configurações da porta disponíveis nas portas de switches 
+de camada 2.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+11© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco7.1 Quadros Ethernet
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+12© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoQuadro Ethernet 
+Encapsulamento Ethernet
+•Ele funciona na camada 
+de ligação de dados e na 
+camada física.
+•É uma família de 
+tecnologias de rede 
+definidas nos standards 
+IEEE 802.2 e 802.3.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+13© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoQuadros Ethernet
+Subcamadas da camada de ligação de dados
+Os standars LAN/MAN 802, incluindo Ethernet, 
+funcionam usando duas subcamadas 
+separadas da camada de ligação de dados:
+•Subcamada LLC : (IEEE 802.2) Coloca 
+informações no quadro para identificar qual o 
+protocolo da camada de rede que é usado pelo 
+quadro.
+•Subcamada MAC : (IEEE 802.3, 802.11 ou 
+802.15) Responsável pelo encapsulamento de 
+dados e controle de acesso ao meio, e fornece 
+endereçamento de camada de ligação de dados. 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+14© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoQuadro Ethernet 
+Subcamada MAC
+A subcamada MAC é responsável pelo encapsulamento de dados e acesso ao meio.
+Encapsulamento de dados
+O encapsulamento de dados IEEE 802.3 inclui o seguinte:
+1. Quadro Ethernet -Estrutura interna do quadro Ethernet. 
+2. Endereçamento Ethernet -O quadro Ethernet inclui os endereços MAC de origem e de destino 
+para entregar o quadro Ethernet da NIC Ethernet para a NIC Ethernet na mesma LAN. 
+3. Detecção de erro Ethernet -O quadro Ethernet inclui um trailer de sequência de verificação de 
+quadros (FCS –Frame Check Sequence ) usado para detecção de erros. 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+15© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoQuadro Ethernet 
+Subcamada MAC
+Acesso ao meio
+•A subcamada MAC IEEE 802.3 inclui as 
+especificações para diferentes padrões de 
+comunicação Ethernet em vários tipos de 
+meio, incluindo cobre e fibra.
+•Ethernet herdada ( legacy ) usa uma topologia 
+de barramento ou hubs,  e é um meio 
+partilhado, half-duplex. A Ethernet num meio 
+half-duplex usa um método de acesso 
+baseado em contenção, detecção de 
+múltiplos acessos/colisões (CSMA/CD).
+•As LANs Ethernet de hoje usam switches que 
+funcionam em full -duplex. As comunicações 
+full-duplex com switches Ethernet não exigem 
+controle de acesso através do CSMA/CD.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+16© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoQuadro Ethernet 
+Campos do quadro Ethernet
+•O tamanho mínimo de quadro Ethernet é 64 bytes e o máximo é 1518 bytes. O campo de 
+preâmbulo não é incluído ao descrever o tamanho do quadro.
+•Qualquer quadro com menos de 64 bytes de comprimento é considerado um "fragmento 
+de colisão" ou ” runtframe" e é automaticamente eliminado. Quadros com mais de 1.500 
+bytes de dados são considerados “jumbo” ou “baby giant ”.
+•Se o tamanho de um quadro transmitido for menor que o mínimo ou maior que o máximo, 
+o dispositivo receptor elimina o quadro. É provável que quadros perdidos sejam resultado 
+de colisões ou outros sinais indesejados. Eles são considerados inválidos. Os quadros 
+jumbo geralmente são suportados pela maioria dos switches e NICs Fast Ethernet e 
+Gigabit Ethernet.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+18© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco7.2 Endereço MAC Ethernet
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+19© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoEndereços Ethernet MAC 
+Endereços MAC e hexadecimal
+•Um endereço MAC Ethernet consiste num valor binário de 48 bits, expresso usando 
+12 valores hexadecimais.
+•Dado que 8 bits (um byte) é um agrupamento binário comum, os binários 00000000 a 
+11111111 podem ser representados em hexadecimal como o intervalo de 00 a FF,
+•Ao usar hexadecimal, os zeros à esquerda são sempre exibidos para concluir a 
+representação de 8 bits. Por exemplo, o valor binário 0000 1010 é representado em 
+hexadecimal como 0A.
+•Números hexadecimais são frequentemente representados pelo valor precedido por 
+0x(por exemplo, 0x73) para distinguir entre valores decimal e hexadecimais na 
+documentação.
+•O hexadecimal também pode ser representado por um subscript 16, ou o número 
+hexadecimal seguido por um H (por exemplo, 73H).
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+20© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoEndereços Ethernet MAC 
+Endereços MAC da Ethernet
+•Nma LAN Ethernet, todos os dispositivos de rede estão conectados ao mesmo meio 
+partilhado. O endereço MAC fornece  um método para identificar o dispositivo na camada 
+de ligação de dados do modelo OSI.
+•Um endereço MAC Ethernet é um endereço de 48 bits expresso usando 12 dígitos 
+hexadecimais. Como um byte é igual a 8 bits, também podemos dizer que um endereço 
+MAC tem 6 bytes de comprimento.
+•Todos os endereços MAC devem ser exclusivos do dispositivo Ethernet ou da interface 
+Ethernet. Para garantir isso, todos os fornecedores que vendem dispositivos Ethernet 
+devem registar -se no IEEE para obter um código hexadecimal exclusivo de 6 (ou seja, 24 
+bits ou 3 bytes) chamado identificador exclusivo organizacional (OUI).
+•Um endereço MAC Ethernet consiste em um código OUI do fornecedor de 6 símbolos 
+hexadecimais seguido de um valor atribuído pelo fornecedor de 6 símbolos hexadecimais.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+21© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoEndereços Ethernet MAC 
+Processamento de Quadros
+•Quando um dispositivo está a encaminhar uma mensagem 
+para uma rede Ethernet, o cabeçalho Ethernet inclui um 
+endereço MAC de origem e um endereço MAC de destino.
+•Quando uma NIC recebe um quadro Ethernet, examina o 
+endereço MAC de destino para verificar se corresponde ao 
+seu endereço MAC físico armazenado na RAM. Se não 
+houver correspondência, o dispositivo eliminará o quadro. 
+Caso haja correspondência, passará o quadro para as 
+camadas OSI superiores, onde ocorre o processo de 
+desencapsulamento .
+Nota : As NICs Ethernet também aceitarão quadros se o endereço MAC 
+de destino for uma transmissão ou um grupo multicast do qual o host 
+seja membro.
+•Qualquer dispositivo que seja a origem ou o destino de um 
+quadro Ethernet terá uma NIC Ethernet e, portanto, um 
+endereço MAC. Isso inclui estações de trabalho, servidores, 
+impressoras, dispositivos móveis e routers ..
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+22© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoEndereços Ethernet MAC 
+Endereços MAC unicast
+Na Ethernet, são utilizados endereços MAC diferentes 
+para comunicação unicast , broadcast e multicast da 
+Camada 2.
+• Um endereço MAC de unicast é o endereço 
+exclusivo usado quando um quadro é enviado de 
+um único dispositivo de transmissão para um 
+único dispositivo de destino.
+• O processo que um host de origem usa para 
+determinar o endereço MAC de destino 
+associado a um endereço IPv4 é conhecido como 
+ARP ( Address Resolution Protocol ). O processo 
+que um host de origem usa para determinar o 
+endereço MAC de destino associado a um 
+endereço IPv6 é conhecido como ND ( Neighbour
+Discovery Discovery).
+Nota : O endereço MAC de origem deve sempre ser 
+um unicast .
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+23© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoEndereços Ethernet MAC 
+Endereços MAC broadcast
+Um quadro de transmissão Ethernet é recebido e 
+processado por cada dispositivo na LAN Ethernet. 
+As características de um broadcast Ethernet são 
+os seguintes:
+•Possui um endereço MAC de destino de FF -
+FF-FF-FF-FF-FF em hexadecimal (48 
+endereços em binário).
+•Inunda todas as portas de um switch Ethernet, 
+exceto a porta de entrada. Um quadro Ethernet 
+não é encaminhado por um router .
+•Se os dados encapsulados forem um pacote 
+de broadcast IPv4, isso significa que o pacote 
+contém um endereço IPv4 de destino que 
+possui todos os 1s na parte do host. Essa 
+numeração no endereço significa que todos os 
+hosts naquela rede local (domínio de 
+broadcast) receberão e processarão o pacote.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+24© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoEndereços Ethernet MAC 
+Endereços MAC Multicast
+Um quadro de multicast Ethernet é recebido e processado por um 
+grupo de dispositivos que pertencem ao mesmo grupo de multicast . 
+•Há um endereço MAC de destino 01 -00-5E quando os dados 
+encapsulados são um pacote multicast IPv4 e um endereço MAC 
+de destino de 33 -33 quando os dados encapsulados são um pacote 
+multicast IPv6.
+•Há outros endereços MAC de destino multicast reservados para 
+quando os dados encapsulados não são IP, como Spanning Tree
+Protocol (STP).
+•São inundadas todas as portas de um switch Ethernet, exceto a 
+porta de entrada, a menos que o switch esteja configurado para 
+espionagem multicast . Não é encaminhado por um router , a menos 
+que o roteador esteja configurado para encaminhar pacotes 
+multicast .
+•Como os endereços multicast representam um grupo de endereços 
+(às vezes chamado de grupo de hosts), eles só podem ser 
+utilizados como destino de um pacote. A origem sempre será um 
+endereço unicast .
+•Assim como nos endereços unicast e broadcast, o endereço IP 
+multicast requer um endereço MAC multicast correspondente.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+26© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco7.3 A tabela de endereços 
+MAC
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+27© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoA tabela de endereços MAC 
+Fundamentos do switch
+•Um switch Ethernet da camada 2 usa endereços MAC da camada 2 para tomar 
+decisões de encaminhamento. Desconhece completamente os dados (protocolo) que 
+estão sendo transportados na parte de dados do quadro, como um pacote IPv4, uma 
+mensagem ARP ou um pacote ND IPv6. O switch toma decisões de encaminhamento 
+com base apenas nos endereços MAC Ethernet da camada 2.
+•Um switch Ethernet examina sua tabela de endereços MAC para tomar uma decisão 
+de encaminhamento para cada quadro, ao contrário dos hubs Ethernet legacy que 
+repetem bits em todas as portas, exceto a porta de entrada. 
+•Quando um switch é ligado, a tabela de endereços MAC está vazia.
+Nota : A tabela de endereços MAC às vezes é chamada de tabela de CAM –Content
+Addressable Memory .
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+28© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoA tabela de endereços MAC
+Aprendizagem e comutação do Switch
+Examine o endereço MAC de origem (Aprende)
+Todos os quadros que entram num switch são testados com o objetivo de procura de 
+informações novas. Esse teste é feito observando o endereço MAC de origem do quadro 
+e o número da porta em que o quadro foi recebido no switch. Se o endereço MAC de 
+origem não existe, é adicionado à tabela juntamente com o número da porta de entrada. 
+Se o endereço MAC de origem existe, o switch atualiza o timer de atualização dessa 
+entrada. Por omissão, a maioria dos switches Ethernet mantém uma entrada na tabela 
+por 5 minutos.
+Nota : Se o endereço MAC de origem existir na tabela, mas numa porta diferente, o 
+switch tratará isso como uma nova entrada. A entrada é substituída usando o mesmo 
+endereço MAC, mas com o número de porta mais atual.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+29© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoA tabela de endereços MAC
+Aprendizagem e comutação do Switch (Cont.) 
+Localiza o endereço MAC de destino (Encaminha)
+Se o endereço MAC de destino for um endereço unicast , o switch procurará uma 
+correspondência entre o endereço MAC de destino do quadro e uma entrada na tabela 
+de endereços MAC. Se o endereço MAC de destino estiver na tabela, ele encaminhará o 
+quadro pela porta especificada. Se o endereço MAC de destino não estiver na tabela, o 
+switch encaminhará o quadro por todas as portas, exceto a de entrada. Isso é chamado 
+de unicast desconhecido.
+Nota : Se o endereço MAC de destino for um endereço de broadcast ou multicast , o 
+quadro também será enviado para todas as portas, exceto a porta de entrada.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+30© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoA tabela de endereços MAC 
+Filtragem de quadros
+À medida que um switch recebe quadros de dispositivos diferentes, ele é capaz de 
+preencher a sua tabela de endereços MAC examinando o endereço MAC de origem de 
+cada quadro. Quando a tabela de endereços MAC do switch contém o endereço MAC de 
+destino, ele pode filtrar o quadro e encaminhá -lo para uma única porta.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+34© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco7.4 Métodos de Comutação 
+e Velocidades de Comutação
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+35© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoMétodos de comutação e Velocidades de Comutação 
+Métodos de comutação de quadros nos switches da Cisco
+Os switches usam um dos seguintes métodos de encaminhamento para o comutação ( switching ) de 
+dados entre as suas portas de rede:
+•Comutação de armazenamento e encaminhamento (Store -and-Forwarding )-Este método de 
+encaminhamento de quadros recebe o quadro inteiro e calcula o CRC. Se o CRC é válido, o 
+switch procura o endereço de destino, que determina a interface de saída. Em seguida, o quadro 
+é encaminhado para fora pela porta correta.
+•Comutação de corte ( Cut-through )-Esse método de encaminhamento de quadros encaminha 
+o quadro antes de ser totalmente recebido. Pelo menos o endereço de destino do quadro deve 
+ser lido para que o quadro possa ser encaminhado.
+•Uma grande vantagem da comutação Store -and-Forward é que determinado se um quadro tem 
+erros antes de o propagar. Quando um erro é detectado num quadro, o switch elimina -o. A 
+eliminação de quadros com erros reduz o consumo de largura de banda por dados corrompidos. 
+•A comutação Store -and-Forward é necessária para a análise de qualidade de serviço ( QoS) em 
+redes convergentes onde é necessária  a classificação de quadros para priorização de tráfego . 
+Por exemplo, os fluxos de dados de voz sobre IP (VoIP) precisam ter prioridade sobre o tráfego 
+de navegação na web.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+36© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoMétodos de Comutação e Velocidades de Comutação 
+Switches cut-through
+Na comutação cut-through , o switch trata os dados assim que eles são recebidos, 
+mesmo que a transmissão não tenha sido concluída. O switch armazena em buffer 
+apenas o quadro suficiente para ler o endereço MAC de destino, para que possa 
+determinar qual a porta para onde deve encaminhar os dados. O switch não realiza 
+nenhuma verificação de erros no quadro.
+Há duas formas de comutação cut-through :
+•Comutação de avanço rápido (Fast -Forward )-Oferece o menor nível de latência 
+encaminhando imediatamente um pacote após a leitura do endereço de destino. Como a 
+comutação fast -forward começa o encaminhamento antes de receber todo o pacote, 
+alguns pacotes podem ser retransmitidos com erros. A NIC de destino descarta o pacote 
+defeituoso após a receção . A comutação fast -forward é o método cut-through típico.
+•Comutação sem fragmentos ( Fragment -free) -Um compromisso entre a alta latência e a 
+alta integridade da comutação Store -and-Forward e a baixa latência e a integridade 
+reduzida da comutação Fast-Forward , o switch armazena e executa uma verificação de 
+erro nos primeiros 64 bytes do quadro antes de encaminhar. Como a maioria dos erros de 
+rede e colisões ocorrem durante os primeiros 64 bytes, isso garante que uma colisão não 
+ocorreu antes de encaminhar o quadro. 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+37© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoMétodos de Comutação e Velocidades de Comutação 
+Buffer de memória nos Switches
+Um switch Ethernet pode usar uma técnica de buffer para armazenar quadros antes de encaminhá -los 
+ou quando a porta de destino estiver ocupada devido ao congestionamento. 
+•O buffer de memória compartilhada também resulta em quadros maiores que podem ser 
+transmitidos com menos quadros eliminados. Isso é importante com a comutação assimétrica, que 
+permite taxas de dados diferentes em portas diferentes. Portanto, mais largura de banda pode ser 
+dedicada a determinadas portas (por exemplo, porta do servidor).Método Descrição
+Memória por porta•Os quadros são armazenados em filas associadas a portas específicas de entrada e saída.
+•Um quadro é transmitido para a porta de saída somente quando todos os quadros à frente na fila foram 
+transmitidos com êxito.
+•É possível que um único quadro atrase a transmissão de todos os quadros na memória caso uma porta de 
+destino esteja ocupada.
+•Esse atraso ocorre mesmo se os outros quadros puderem ser transmitidos para portas de destino que 
+estejam livres.
+Memória partilhada•Deposita todos os quadros num buffer de memória comum partilhado por todas as portas do switch e a 
+quantidade de memória buffer necessária por uma porta é alocada dinamicamente.
+•Os quadros no buffer são dinamicamente associados à porta de destino, permitindo que um pacote seja 
+recebido numa porta e depois transmitido noutra porta, sem movê -lo para uma fila diferente.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+38© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoMétodos de Comutação e Velocidades de Comutação 
+Duplex e velocidade
+Duas das configurações mais básicas de um switch são as configurações de largura de 
+banda ("velocidade") e duplex para cada porta de switch individual. É fundamental que as 
+configurações de duplex e largura de banda correspondam entre a porta do switch e os 
+dispositivos conectados.
+Há dois tipos de configurações duplex usadas para comunicação numa rede Ethernet:
+•Full-duplex -As duas extremidades da conexão podem enviar e receber 
+simultaneamente.
+•Half-duplex -Somente uma extremidade da conexão pode enviar de cada vez.
+A negociação automática é uma função opcional encontrada na maioria dos switches 
+Ethernet e das placas de interface de rede (NICs). Permite que dois dispositivos 
+negociem automaticamente as melhores capacidades de velocidade e duplex.
+Nota : As portas Gigabit Ethernet operam apenas em full -duplex.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+39© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoMétodos de Comutação e Velocidades de Comutação 
+Duplex e velocidade
+•A incompatibilidade duplex é uma das causas mais comuns de problemas de 
+desempenho nos links Ethernet 10/100 Mbps. Ocorre quando uma porta na ligação 
+funciona em half-duplex, enquanto que a outra porta funciona em full -duplex.
+•Isso pode ocorrer quando uma ou ambas as portas numa ligação são redefinidas e o 
+processo de negociação automática não resulta nos dois extremos da ligação com a 
+mesma configuração. 
+•Também pode ocorrer quando os usuários reconfiguram um lado de uma ligação e 
+esquecem de reconfigurar o outro. Os dois lados de uma ligação devem estar ambos 
+com a negociação automática ligada ou desligada. A prática recomendada é 
+configurar ambas as portas de switch Ethernet como full -duplex.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+40© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoMétodos de Comutação e Velocidades de Comutação
+Auto-MDIX
+As conexões entre dispositivos exigiram o uso de um cabo cruzado ou direto. O tipo de 
+cabo necessário dependia do tipo de dispositivos a interligar.
+Observação : Uma conexão direta entre um router e um host requer uma conexão 
+cruzada. 
+•Hoje em dia a maioria dos dispositivos de switch agora suporta o recurso de Auto-
+MDIX (Automatic Medium -Dependent Interface Crossover). Quando ativado, o switch 
+detecta automaticamente o tipo de cabo conectado à porta e configura as interfaces 
+de acordo. 
+•O recurso auto-MDIX é ativado por omissão em switches que executam o Cisco IOS 
+Release 12.2 (18) SE ou posterior. No entanto, o recurso pode ser desativado. Por 
+esse motivo, você sempre deve usar o tipo de cabo correto e não confiar no recurso 
+Auto -MDIX . 
+•O Auto -MDIX pode ser reativado usando o comando mdix auto no modo de interface 
+configuration .
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+41© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco7.5 -Sumário
+42© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoSumário
+O que aprendi neste módulo?
+•A Ethernet funciona na camada de ligação de dados e na camada física. Os padrões 
+Ethernet definem os protocolos da Camada 2 e as tecnologias da Camada 1. 
+•Ethernet usa as subcamadas LLC e MAC da camada de ligação de dados para funcionar. 
+•Os campos de quadro Ethernet são: preâmbulo e delimitador de quadro inicial, endereço 
+MAC de destino, endereço MAC de origem, EtherType , dados e FCS.
+•O endereçamento MAC fornece um método para identificação de dispositivo na camada de 
+ligação de dados do modelo OSI. 
+•Um endereço MAC Ethernet é um endereço de 48 bits expresso usando 12 dígitos 
+hexadecimais ou 6 bytes. 
+•Quando um dispositivo está encaminhando uma mensagem para uma rede Ethernet, o 
+cabeçalho Ethernet inclui os endereços MAC de origem e de destino. Na Ethernet, são 
+utilizados diferentes endereços MAC para comunicação unicast , broadcast e multicast da 
+Camada 2.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+43© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoSumario
+O que aprendi neste módulo? (Cont.)
+•Um switch Ethernet da camada 2 toma as decisões de encaminhamento com base apenas 
+nos endereços MAC da camada 2 Ethernet. 
+•O switch cria a tabela de endereços MAC dinamicamente examinando o endereço MAC de 
+origem dos quadros recebidos numa porta. 
+•O switch encaminha quadros procurando uma correspondência entre o endereço MAC de 
+destino no quadro e uma entrada na tabela de endereços MAC. 
+•Os switches usam um dos seguintes métodos de encaminhamento para alternar dados entre 
+portas de rede: Store -and-forward switching ou Cut-through switching . Duas variantes 
+de Cut-through são Fast -forward switching e Fragment -free. 
+•Dois métodos de armazenamento em buffer de memória são memória baseada em porta e 
+memória partilhada. 
+•Existem dois tipos de configurações duplex usadas para comunicações numa rede Ethernet: 
+full-duplex e half-duplex. 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)

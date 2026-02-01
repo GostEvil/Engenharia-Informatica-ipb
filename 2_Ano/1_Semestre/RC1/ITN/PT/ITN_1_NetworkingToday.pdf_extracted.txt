@@ -1,0 +1,714 @@
+Módulo 1: As redes de hoje
+Introdução às redes v7.0 (ITN)Versão original: Cisco Network Academy
+Versão modificada: Eduardo Costa
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+15© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoObjetivos do módulo
+Título do módulo: As redes de hoje
+Objetivo do módulo : Explicar os avanços nas tecnologias modernas.
+Título do Tópico Objetivo do Tópico
+As redes afetam as nossas vidas Explicar como as redes afetam nossas vidas diárias.
+Componentes de rede Explicar como os dispositivos de host e de rede são usados.
+Representações e topologias de rede Explicar as representações de rede e como elas são usadas em topologias de rede.
+Tipos comuns de redes Comparar as características de tipos comuns de redes.
+Ligações à Internet Explicar como LANs e WANs se interligam com a Internet.
+Redes fiáveis Descrever os quatro requisitos básicos de uma rede fiável.
+Tendências das redes Explicar como as tendências, como BYOD (Bring Your Own Device, 
+consumerização de TI), colaboração on -line, uso de vídeo e computação em 
+nuvem, estão mudando a maneira de interagir.
+Segurança da rede Identificar algumas ameaças e soluções básicas de segurança para todas as redes.
+O profissional de TI Explicar oportunidades de emprego no campo das redes.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+16© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco1.1 As redes afetam as 
+nossas vidas
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+17© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoA comunicação é quase tão importante para nós quanto nossa dependência de ar, 
+água, comida e abrigo. No mundo de hoje, com o uso de redes, estamos 
+conectados como nunca estivemos.As redes afetam as nossas vidas
+As redes ligam -nos
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+19© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoAs redes afetam as nossas vidas
+Sem Fronteiras
+•Mundo sem fronteiras
+•Comunidades globais
+•Rede humana
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+20© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoComponentes de rede
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+21© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoComponentes de rede
+Funções de host
+Todo os computadores numa rede são 
+chamados de host ou dispositivo final.
+Servidores são computadores que 
+fornecem informações aos dispositivos 
+finais:
+•servidores de email
+•servidores web
+•servidor de arquivos
+Os clientes são computadores que 
+enviam solicitações aos servidores 
+para recuperar informações:
+•a partir de um servidor Web
+•e-mail de um servidor de e -mailTipo de 
+servidorDescrição
+E-mail O servidor de email executa o software do servidor 
+de email . 
+Os clientes usam o software cliente para aceder ao 
+e-mail.
+Web O servidor Web executa software de servidor web. 
+Os clientes usam software do navegador para aceder 
+a páginas da Web.
+Arquivo O servidor de arquivos armazena ficheiros 
+corporativos e de utilizador.
+Os dispositivos cliente acedem a esses arquivos.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+22© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoComponentes de rede
+Peer -to-Peer
+É possível que um dispositivo seja um cliente e um servidor numa rede peer-to-peer. Este tipo 
+de desenho de rede é recomendado apenas para redes muito pequenas. 
+Vantagens Desvantagens
+Fácil de configurar Nenhuma administração centralizada
+Menos complexo Não é tão segura
+Custo mais baixo Não é escalável
+Usado para tarefas simples: transferência de ficheiros e 
+partilha de impressorasDesempenho mais lento
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+23© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoComponentes de rede 
+Dispositivos finais
+Um dispositivo final é onde uma mensagem tem originem ou onde ela é recebida. Os dados 
+originam -se num dispositivo final, fluem pela rede e chegam a outro dispositivo final.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+24© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoComponentes de rede
+Dispositivos de rede intermediários
+Um dispositivo intermediário interconecta dispositivos finais. Os exemplos incluem 
+comutadores, pontos de acesso sem fio, routers e firewalls.
+A gestão de dados à medida que estes fluem através de uma rede também é o papel de 
+um dispositivo intermediário, incluindo:
+•Regenerar e retransmitir sinais de dados.
+•Mantenha informações sobre quais os caminhos que existem na rede.
+•Notificar outros dispositivos sobre erros e falhas de comunicação.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+25© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoComponentes de rede
+Meio físico de rede
+A comunicação através de uma rede é transmitida por um meio que permite a uma 
+mensagem deslocar -se da origem até o destino. 
+Tipos de mídia Descrição
+Fios metálicos dentro de 
+cabosUsa impulsos elétricos
+Fibras de vidro ou 
+plástico nos cabos (cabo 
+de fibra óptica)Usa pulsos de luz.
+Transmissão sem fios Usa modulação de 
+frequências específicas 
+de ondas 
+eletromagnéticas.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+26© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco1.3 Representações e topologias 
+de rede
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+27© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoRepresentações e topologias de rede
+Representações de Rede
+Os diagramas de rede, muitas vezes 
+chamados de diagramas de topologia, 
+usam símbolos para representar os 
+dispositivos na rede.
+Os termos importantes a serem 
+conhecidos incluem:
+•Placa de rede
+•Porta Física
+•Interface
+Nota : Frequentemente, os termos 
+porta e interface são usados de forma 
+intercambiável
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+28© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoRepresentações e topologias de rede
+Diagramas de topologia
+Os diagramas de topologia física ilustram a 
+localização física de dispositivos 
+intermediários e a instalação de cabos.
+Os diagramas de topologia lógica ilustram 
+dispositivos, portas e o esquema de 
+endereçamento da rede.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+29© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco1.4 Tipos comuns de redes
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+30© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTipos comuns de redes
+Redes de vários tamanhos
+•Redes domésticas pequenas –
+conectam alguns computadores entre si 
+e à Internet
+•Home office/home office pequenos –
+permite que o computador dentro de 
+uma residência ou escritório remoto 
+conectar -se a uma rede empresarial
+•Redes médias a grandes –muitos locais 
+com centenas ou milhares de 
+computadores interconectados
+•Redes mundiais -conecta centenas de 
+milhões de computadores em todo o 
+mundo -como a InternetPequeno Home SOHO
+Médio/Grande Mundo
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+31© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTipos comuns de redes
+LANs e WANs
+As infra-estruturas de rede variam muito 
+em termos de:
+•Tamanho da área coberta
+•Número de utilizadores conectados
+•Número e tipos de serviços 
+disponíveis
+•Área de responsabilidade
+Os dois tipos mais comuns de redes são: 
+•LAN (Local Area Network, Rede 
+local) 
+•Rede de área ampla (WAN). 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+32© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTipos comuns de redes 
+LANs e WANs (cont.) 
+Uma LAN é uma infraestrutura de rede que 
+abrange uma pequena área geográfica. 
+Uma WAN é uma infraestrutura de rede que 
+abrange uma ampla área geográfica.
+LAN (Local Area Network) WAN (Wide Area Network)
+Interconecte dispositivos finais numa área 
+limitada.Interconecte LANs em áreas geográficas alargadas.
+Administrado por uma única organização ou 
+indivíduo.Normalmente , administrada por um ou mais 
+fornecedores de serviços.
+Forneça largura de banda de alta velocidade 
+aos dispositivos internos.Geralmente, fornece ligações de velocidade mais 
+lenta entre LANs .
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+33© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTipos comuns de redes
+A Internet
+A internet é uma coleção mundial de LANs
+e WANs interconectadas. 
+•As LANs estão conectadas entre si 
+usando as WANs .
+•As WANs podem usar fios de cobre, 
+cabos de fibra ótica e transmissões sem 
+fios.
+A internet não é de propriedade de 
+nenhum indivíduo ou grupo. Os seguintes 
+grupos foram desenvolvidos para ajudar a 
+manter a estrutura na internet:
+•IETF
+•ICANN
+•IAB
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+34© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTipos comuns de redes
+Intranets e extranets
+Uma intranet é uma coleção particular de 
+LANs e WANs internas a uma 
+organização que deve ser acessível 
+apenas aos membros da organização ou 
+a outras pessoas com autorização.
+Uma empresa pode usar uma Extranet 
+para fornecer acesso seguro à sua rede 
+aos indivíduos que trabalham em 
+diferentes empresas, mas precisam 
+aceder os dados em sua rede.
+
+35© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco1.5 Ligações à Internet
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+36© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoLigações à Internet
+Tecnologias de acesso à InternetExistem várias maneiras de conectar 
+utilizadores e organizações à Internet:
+•Os serviços populares para utilizadores 
+domésticos e pequenos escritórios 
+incluem cabo de banda larga, linha de 
+assinante digital banda larga (DSL), 
+WANs sem fios e serviços móveis.
+•As empresas precisam de conexões 
+mais rápidas para oferecer suporte a 
+telefones IP , videoconferência e 
+armazenamento de data center.
+•As interconexões de nível empresarial 
+são geralmente fornecidas por 
+fornecedores de serviços (SP –service
+providers ) e podem incluir: DSL 
+empresarial, linhas dedicadas e Metro 
+Ethernet.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+37© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoLigações à Internet
+Conexões à Internet para residências e pequenos 
+escritóriosConexão Descrição
+Cabo Internet de alta largura de banda, 
+sempre ativa, oferecida por 
+fornecedores de serviços de 
+televisão a cabo.
+DSL alta largura de banda, sempre ativa, 
+conexão à Internet que passa por 
+uma linha telefônica.
+Celular usa uma rede de telefones móveis 
+para a ligação à internet.
+Satélite maiores benefícios para áreas rurais 
+sem fornecedores de serviços de 
+Internet.
+Conexão 
+por telefone 
+(dial-up) uma opção barata e de baixa largura 
+de banda que usa um modem.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+38© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoLigações à Internet
+Conexões Empresariais à Internet
+As conexões empresariais podem exigir:
+•maior largura de banda 
+•conexões dedicadas
+•serviços geridos  
+Tipo de 
+conexãoDescrição
+Linha
+alugada 
+dedicada São circuitos reservados na rede do 
+fornecedor de serviços que 
+conectam escritórios distantes com 
+redes privadas de voz e / ou dados.
+Ethernet 
+WAN Estende a tecnologia de acesso à 
+LAN para a WAN.
+DSL O DSL comercial está disponível em 
+vários formatos, incluindo SDSL 
+(Symmetric Digital Subscriber Lines).
+Satélite Esta solução pode fornecer uma 
+conexão quando uma ligação com 
+fios não está disponível.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+39© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoLigações à Internet
+A Rede Convergente
+Antes das redes convergentes, uma 
+organização teria uma rede cablada
+separada para telefones, vídeo e 
+dados. 
+Cada uma dessas redes usaria 
+tecnologias diferentes para transmitir o 
+sinal. 
+Cada uma destas tecnologias utilizaria 
+um conjunto diferente de regras e 
+normas.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+40© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoLigações à Internet
+A Rede Convergente (Cont.)
+As redes de dados convergentes 
+transportam vários serviços numa só 
+ligação, incluindo: 
+•dados 
+•Voz
+•vídeo
+As redes convergentes podem 
+fornecer dados, voz e vídeo na 
+mesma infraestrutura de rede. A 
+infraestrutura de rede usa o mesmo 
+conjunto de regras e normas.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+44© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco1.6 Redes fiáveis
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+45© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoRede fiável
+Arquitetura de rede
+A arquitetura de rede refere -se a 
+tecnologias que apoiam a infraestrutura 
+responsável por transferir os dados através 
+da rede.
+Há quatro características básicas que as 
+arquiteturas subjacentes precisam abordar 
+para atender às expectativas do utilizador:
+•Tolerância a falhas
+•Escalabilidade
+•Qualidade de serviço ( QoS)
+•Segurança
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+46© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoRede fiável
+Tolerância a falhas
+Uma rede tolerante a falhas limita o impacto de 
+uma falha, ao limitar o número de dispositivos 
+afetados. São necessários vários caminhos para 
+haver tolerância a falhas.
+As redes fiáveis fornecem redundância 
+implementando uma rede de comutação por 
+pacotes:
+•A comutação por pacotes divide o tráfego 
+em pacotes que são encaminhados através 
+da rede.
+•Cada pacote, teoricamente, pode seguir 
+caminhos diferentes até ao destino.
+Isso não é possível com redes de comutação por 
+circuitos que estabelecem circuitos dedicados.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+47© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoRede fiável
+Escalabilidade
+Uma rede escalável pode 
+expandir -se de modo rápido e 
+fácil para comportar novos 
+utilizadores e aplicações, sem 
+causar impacto no desempenho 
+dos serviços fornecidos aos 
+utilizadores atuais.
+Os progetistas de rede seguem 
+normas e protocolos aceites 
+para tornar as redes escaláveis.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+48© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoRede fiável
+Qualidade de serviço
+As transmissões de vídeo ao vivo e de voz 
+têm requisitos mais altos para os serviços a 
+serem prestados, comparativamente com os 
+restantes fluxos. 
+Já assistiu a um vídeo ao vivo com 
+intervalos e pausas constantes? Isso 
+acontece quando há uma maior procura por 
+largura de banda que a disponível –e o QoS
+não está configurada.
+•Qualidade de serviço ( QoS, Quality of
+Service) é o mecanismo principal usado 
+para assegurar a entrega fiável do 
+conteúdo para todos os utilizadores. 
+•Com uma política de QoS em vigor, os 
+routers podem, gerir mais facilmente o 
+fluxo de dados e o tráfego de voz.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+49© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoRede fiável
+Segurança da redeExistem dois tipos principais de segurança da 
+rede que devem ser abordados:  
+•Segurança de infraestrutura de rede
+•Segurança física dos dispositivos de 
+rede
+•Impedindo o acesso não autorizado aos 
+dispositivos
+•Segurança da Informação.
+•Proteção de informações ou dados 
+transmitidos pela rede
+Três metas de segurança da rede:
+•Confidencialidade –apenas os 
+destinatários desejados podem ler os 
+dados
+•Integridade –garantia de que os dados 
+não foram alterados durante a 
+transmissão
+•Disponibilidade –garantia de que os 
+utilizadores autorizados terão acesso em 
+tempo adequado e fiável aos dados
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+50© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco1.7 Tendências das redes
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+51© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTendências das redes
+Tendências recentes
+A função da rede deve ser ajustada e 
+transformada continuamente para 
+acompanhar as novas tecnologias e 
+dispositivos de utilizador final à 
+medida que eles entram no mercado 
+de forma constante. 
+Várias novas tendências de rede que 
+afetam as empresas e os 
+consumidores:
+•BYOD ( Bring Your Own Device)
+•Colaboração on -line
+•Comunicação por vídeo
+•Computação em nuvem
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+52© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTendências das redes
+Traga seu próprio aparelhoTraga seu próprio dispositivo (BYOD) 
+permite que os utilizadores usem os 
+seus próprios dispositivos, dando -lhes 
+mais oportunidades e maior 
+flexibilidade. 
+O BYOD permite que os utilizadores 
+finais tenham liberdade para usar 
+ferramentas pessoais, aceder a 
+informações e comunicar usando os 
+seus:
+•Notebooks
+•Netbooks
+•Tablets
+•Smartphones
+•E-readers
+BYOD significa o uso de qualquer 
+dispositivo, de qualquer propriedade e 
+em qualquer lugar.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+53© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTendências das redes
+Colaboração Online▪Colaborar e trabalhe com outras 
+pessoas em projetos conjuntos 
+através da rede.
+▪As ferramentas de colaboração, 
+incluindo o Cisco WebEx (mostrado 
+na figura), oferecem aos 
+utilizadores uma maneira de se 
+conectarem  e interagirem 
+instantaneamente.
+▪A colaboração é uma prioridade 
+muito alta no mundo empresarial e 
+acadêmico.
+▪Cisco Webex Teams é uma 
+ferramenta de colaboração 
+multifuncional.
+•envie mensagens instantâneas 
+•apresente imagens
+•apresente vídeos e links
+ ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+54© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTendências das redes
+Comunicação por vídeo
+•Chamadas de vídeo são feitas para qualquer pessoa, 
+independentemente da sua localização.
+•A videoconferência é uma ferramenta poderosa para comunicar com 
+outras pessoas.
+•O vídeo está a tornar -se um requisito crítico para uma colaboração 
+eficaz.
+•Cisco TelePresence é uma maneira de permitir a todos trabalhar, em 
+qualquer lugar, independentemente da localização física . 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+56© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTendências das redes
+Computação em nuvem
+A computação em nuvem nos permite armazenar ficheiros pessoais ou fazer backup de nossos 
+dados em servidores espalhados pela Internet. 
+•As aplicações também podem ser acedidas usando a Nuvem.
+•Permite que as empresas possam fornecer serviços para qualquer dispositivo em qualquer lugar do 
+mundo.
+A computação em nuvem é possível devido aos data centers. 
+•Empresas menores que não podem suportar com seus próprios data centers, alugar serviços de 
+armazenamento e servidor a empresas com grandes data centers na nuvem.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+57© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTendências das redes
+Computação em nuvem (Cont.)
+Quatro tipos de nuvens:
+•Nuvens Públicas
+•Disponível para o público em geral através de um modelo de pagamento por uso ou gratuitamente.
+•Nuvens Particulares
+•Destinado a uma organização ou entidade específica, como o governo.
+•Nuvens Híbridas
+•Com dois ou mais tipos de nuvem –por exemplo, parte personalizada e parte pública. 
+•Cada parte mantém um objetivo distintivo, mas as duas estão conectadas usando a mesma 
+arquitetura.
+•Nuvens personalizadas
+•Criado para atender às necessidades de um setor específico, como assistência médica ou informação. 
+•Podem ser privadas ou públicas.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+58© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTendências das redes
+Tendências tecnológicas em casa
+•A tecnologia para residências 
+inteligente é uma tendência 
+crescente que permite a integração 
+da tecnologia em dispositivos de 
+uso diário e a sua interconexão com 
+outros dispositivos.
+•Os fornos podem saber a que horas 
+deve ser preparada uma refeição 
+através da comunicação com a sua 
+agenda para saber a hora planeada 
+para o seu regresso a casa.
+•Atualmente, a tecnologia de casas 
+inteligentes está a ser desenvolvida 
+para todos os espaços de uma 
+casa.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+59© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTendências das redes
+Rede Powerline•A rede Powerline pode permitir 
+que os dispositivos se 
+conectem a uma LAN, onde os 
+cabos de rede de dados ou 
+comunicações sem fios não 
+são uma opção viável.
+•Usando um adaptador padrão 
+powerline , os dispositivos 
+podem conectar -se à LAN 
+onde quer que haja uma 
+tomada elétrica através do 
+envio de dados em 
+determinadas frequências.
+•A rede Powerline é 
+especialmente útil quando os 
+pontos de acesso sem fios não 
+conseguem dar boa cobertura 
+de rede a todos os dispositivos 
+em casa.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+60© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTendências das redes
+Banda larga sem fios
+Além da tecnologia DSL e do cabo, a 
+conexão sem fios é outra opção usada 
+para conectar residências e pequenas 
+empresas à Internet. 
+•Frequentemente encontrado em ambientes 
+rurais, um ISP Wireless (WISP) é um ISP 
+que conecta os assinantes a access points 
+ou hotspots designados. 
+•A banda larga sem fios é outra solução 
+para residências e pequenas empresas.
+•Usa a mesma tecnologia celular usada por um 
+Smartphone.
+•É instalada fora da residência uma antena, 
+que fornece conectividade com ou sem fio 
+para dispositivos na casa.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+61© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco1.8 Segurança da rede
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+62© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoSegurança da rede
+Ameaças à segurança •A segurança de rede é parte 
+integrante da rede, 
+independentemente do seu 
+tamanho.
+•A segurança da rede 
+implementada deve ter em 
+consideração o ambiente ao 
+proteger os dados, mas ainda 
+permitir a qualidade de serviço 
+esperada da rede.
+•Proteger uma rede envolve 
+muitos protocolos, tecnologias, 
+dispositivos, ferramentas e 
+técnicas para proteger dados e 
+reduzir ameaças.
+•Vetores de ameaça podem ser 
+internos ou externos.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+63© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoSegurança da rede
+Ameaças à segurança (Cont.)Ameaças externas:
+•Vírus, worms e cavalos de Troia
+•Spyware e adware
+•Ataques de dia zero
+•Ataques de Ator Ameaça
+•Ataques de negação de serviço
+•Interceção e roubo de dados
+•Roubo de identidade
+Ameaças internas:
+•dispositivos perdidos ou 
+roubados
+•uso indevido acidental por 
+funcionários
+•funcionários maliciosos
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+64© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoSegurança da rede
+Soluções de Segurança
+A segurança deve ser implementada em 
+várias camadas, com recurso a mais do que 
+uma solução.
+Componentes de segurança da rede 
+doméstica ou da pequena empresa:
+•O software antivírus e antispyware deve 
+ser instalado nos dispositivos finais.
+•Filtragem de firewall usada para 
+bloquear o acesso não autorizado à 
+rede.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+65© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoSegurança da rede
+Soluções de Segurança 
+(Cont.)
+As redes maiores têm requisitos de segurança 
+adicionais:
+•Sistemas de firewall dedicados
+•ACLs (Access Control Lists , listas de 
+controle de acesso) 
+•IPS ( Intrusion Prevention Systems, sistemas 
+de prevenção de intrusão)
+•Redes privadas virtuais (Virtual Private 
+Networks -VPN)
+O estudo da segurança de rede começa com 
+um entendimento claro da infra-estrutura de 
+comutação e encaminhamento subjacente.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+66© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco1.9 O profissional de TI
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+67© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoA 
+CCNA profissional de TIA certificação Cisco Certified Network 
+Associate (CCNA): 
+•demonstra que o detentor conhecimento 
+das tecnologias fundamentais 
+•garante que o detentor se mantém 
+atualizado com as competências 
+necessárias para a adoção de tecnologias 
+de próxima geração.
+O novo foco da CCNA:
+•Tópicos de base e segurança de IP
+•Wireless, virtualização, automação e 
+programação de rede. 
+Novas certificações DevNet nos níveis 
+de associado, especialista e profissional 
+para validar as competências de 
+desenvolvimento de software.
+A certificação de especialista valida as 
+competências de acordo com o seu 
+papel e interesses profissionais.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+70© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco1.10 -Sumário
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+71© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoSumário
+O que aprendi neste módulo?
+•Através do uso de redes, estamos conectados como nunca antes.
+•Todos os computadores que estão conectados a uma rede e participam diretamente na 
+comunicação em rede e são classificados como hosts.
+•Os diagramas de redes geralmente usam símbolos para representar os diferentes 
+dispositivos e conexões que compõem uma rede. 
+•Um diagrama fornece uma maneira fácil de entender como os dispositivos se conectam 
+numa rede grande.
+•Os dois tipos de infraestruturas de rede são as redes locais ( LANs ) e as redes de área 
+alargada ( WANs ).
+•As conexões à Internet SOHO incluem telefone a cabo, DSL, celular, satélite e dial -up. 
+•As conexões empresariais à Internet incluem Linha Alugada Dedicada, Ethernet WAN, 
+Business DSL e Satélite.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+72© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoSumário
+O que aprendi neste módulo? (Cont.)
+•Arquitetura de rede refere -se às tecnologias que suportam a infraestrutura e os serviços e 
+regras, ou protocolos, que movem dados pela rede.
+•Existem quatro características básicas da arquitetura de rede: Tolerância a falhas, 
+Escalabilidade, Qualidade de Serviço ( QoS) e Segurança.
+•Tendências recentes de rede que afetam organizações e os consumidores: Traga seu 
+próprio dispositivo (BYOD), colaboração on -line, comunicações de vídeo e computação em 
+nuvem.
+•Existem várias ameaças externas e internas comuns às redes.
+•Redes grandes e redes empresariais usam antivírus, antispyware e filtragem por firewall, 
+mas também têm outros requisitos de segurança: sistemas de firewall dedicados, listas de 
+controle de acesso (ACL), sistemas de prevenção de intrusões (IPS) e redes privadas 
+virtuais (VPN)
+•A certificação Cisco Certified Network Associate (CCNA) demonstra que o detentor possui 
+conhecimento sobre tecnologias fundamentais.

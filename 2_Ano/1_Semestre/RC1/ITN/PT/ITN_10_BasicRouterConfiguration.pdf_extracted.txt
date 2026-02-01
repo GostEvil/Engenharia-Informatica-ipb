@@ -1,0 +1,387 @@
+Introdução às redes v7.0 (ITN)Módulo 10: Configuração 
+básica de um router
+Versão original: Cisco Network Academy
+Versão modificada: Eduardo Costa
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+11© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoObjetivos do módulo
+Título do módulo: Configuração básica de um router
+Objetivo do módulo : Implementar configurações iniciais num router e dispositivos 
+finais.
+Título do Tópico Objetivo do Tópico
+Definir as configurações iniciais do router Definir as configurações iniciais num router Cisco 
+IOS.
+Configurar interfaces Configurar duas interfaces ativas num router
+Cisco IOS.
+Configurar o gateway por omissão Configurar dispositivos para que usem o gateway 
+por omissão.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+12© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco10.1 Definir as configurações 
+iniciais do router
+13© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoDefinir as configurações iniciais do router
+Etapas da configuração básica do router
+•Configurar o nome do 
+dispositivo.
+•Proteger o modo EXEC 
+privilegiado.
+•Proteger o modo EXEC 
+utilizador.
+•Proteger o acesso remoto 
+Telnet/SSH
+•Encriptar todas as senhas em 
+texto simples.
+•Forneçer a notificação legal e 
+salvar a configuração.Router(config)# hostname hostname
+Router(config)# enable secret password
+Router(config)# line console 0
+Router(config -line)# password password
+Router(config -line)# login
+Router(config)# line vty 0 4
+Router(config -line)# password password
+Router(config -line)# login
+Router(config -line)# transport input {ssh | telnet}
+Router(config)# service password encryption
+Router(config)# banner motd # message #
+Router(config)# end
+Router# copy running -config startup -config
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+14© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoDefinir as configurações iniciais do router
+Exemplo de configuração básica do router
+•Comandos para configuração 
+básica do router R1.
+•A configuração é salva na 
+NVRAM.R1(config)# hostname R1
+R1(config)# enable secret class
+R1(config)# line console 0
+R1(config -line)# password cisco
+R1(config -line)#login
+R1(config-line)# line vty 0 4
+R1(config -line)# password cisco
+R1(config -line)#login
+R1(config -line)# transport input ssh telnet
+R1(config -line)# exit
+R1(config)# service password encryption
+R1(config)# banner motd #
+Digite a mensagem TEXT. Termine com uma nova linha 
+e o #
+*************************************************** 
+AVISO: O acesso não autorizado é proibido!
+**********************************************
+R1(config)# exit
+R1# copy running -config startup -config
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+16© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco10.2 Configurar interfaces
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+17© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoConfigurar interfaces
+Configurar interfaces do router
+A configuração de uma interface do router inclui os seguintes comandos:
+Router(config)# interface type-and-number
+Router(config -if)# description description -text
+Router(config -if)# ip address ipv4-address subnet -mask
+Router(config -if)# ipv6 address ipv6-address/prefix -length
+Router(config -if)# no shutdown 
+•É uma boa prática usar o comando description para adicionar 
+informações sobre a rede conectada à interface.
+•O comando noshutdown ativa a interface.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+18© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoConfigurar interfaces
+Exemplo de configuração de interfaces do router
+Os comandos para configurar a interface G0/0/0 em R1 são 
+mostrados aqui:
+R1(config)# interface gigabitEthernet 0/0/0
+R1(config -if)# description Link to LAN
+R1(config -if)# ip address 192.168.10.1 255.255.255.0
+R1(config -if)# ipv6 address 2001:db8:acad:10::1/64
+R1(config -if)# no shutdown
+R1(config -if)# exit
+R1(config)#
+*Aug 1 01:43:53.435: %LINK -3-UPDOWN: Interface GigabitEthernet0/0/0, changed state to down
+*Aug 1 01:43:56.447: %LINK -3-UPDOWN: Interface GigabitEthernet0/0/0, changed state to up
+*Aug 1 01:43:57.447: %LINEPROTO -5-UPDOWN: Line protocol on Interface GigabitEthernet0/0/0, changed 
+state to up
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+19© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoConfigurar interfaces 
+Exemplo de configuração de interfaces do router (cont.)
+Os comandos para configurar a interface G0/0/1 no R1 são as 
+seguintes:
+R1(config)# interface gigabitEthernet 0/0/1
+R1(config -if)# description Link to R2
+R1(config -if)# ip address 209.165.200.225 255.255.255.252
+R1(config -if)# ipv6 address 2001:db8:feed:224::1/64
+R1(config -if)# no shutdown
+R1(config -if)# exit
+R1(config)#
+*Aug 1 01:46:29.170: %LINK -3-UPDOWN: Interface GigabitEthernet0/0/1, changed state to down
+*Aug 1 01:46:32.171: %LINK -3-UPDOWN: Interface GigabitEthernet0/0/1, changed state to up
+*Aug 1 01:46:33.171: %LINEPROTO -5-UPDOWN: Line protocol on Interface GigabitEthernet0/0/1, changed 
+state to up
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+20© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoConfigurar interfaces 
+Verificar a configuração da interface
+Para verificar a configuração da interface, use os comandos show 
+ipinterface brief e show ipv6 interface brief mostrados abaixo:
+R1# show ip interface brief
+Interface IP -Address OK? Method Status Protocol 
+GigabitEthernet0/0/0 192.168.10.1 YES manual up up 
+Gigabitethernet0/0/1 209.165.200.225 SIM manual up 
+Vlan1 unassigned YES unset administratively down down 
+R1#show ipv 6 interface brief
+GigabitEthernet 0/0/0 [up/up]
+FE80::201:C9FF:FE89:4501
+2001:DB8:ACAD:10::1
+GigabitEthernet 0/0/1 [up/up]
+FE80::201:C9FF:FE89:4502
+2001:DB8:FEED:224።1
+Vlan1 [administratively down/down]
+unassigned 
+R1#
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+21© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoConfigurar interfaces
+Configurar comandos de verificação
+A tabela resume os comandos show usados para verificar a configuração da 
+interface .
+Comandos Descrição
+show ip interface brief
+show ipv6 interface briefApresenta todas as interfaces, os seus endereços IP e seu 
+estado atual. 
+show ip route
+show ipv6 routeApresenta o conteúdo das tabelas de encaminhamento IP 
+armazenadas na RAM.
+show interfaces Apresenta estatísticas para todas as interfaces do 
+dispositivo. Apresenta somente as informações de 
+endereçamento IPv4.
+show ip interfaces Apresenta as estatísticas IPv4 para todas as interfaces 
+num router .
+show ipv6 interfaces Apresenta as estatísticas IPv6 para todas as interfaces 
+num router .
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+22© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoConfigurar Interfaces
+Configurar Comandos de Verificação (Cont.) 
+Veja o estado de todas as interfaces com os comandos show ipinterface brief e 
+show ipv 6 interface brief , mostrados abaixo:
+R1# show ip interface brief
+Interface IP -Address OK? Method Status Protocol 
+GigabitEthernet0/0/0 192.168.10.1 YES manual up up 
+Gigabitethernet0/0/1 209.165.200.225 SIM manual up 
+Vlan1 unassigned YES unset administratively down down 
+R1#
+R1#show ipv 6 interface brief
+GigabitEthernet 0/0/0 [up/up]
+FE80::201:C9FF:FE89:4501
+2001:DB8:ACAD:10::1
+GigabitEthernet 0/0/1 [up/up]
+FE80::201:C9FF:FE89:4502
+2001:DB8:FEED:224።1
+Vlan1 [administratively down/down]
+unassigned 
+R1#
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+23© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoConfigurar Interfaces
+Configurar Comandos de Verificação (Cont.) 
+Apresenta o conteúdo das tabelas de encaminhamento IP com os comandos show ip
+route e show ipv6 route , conforme mostrado abaixo:
+R1# show ip route
+< output omitted>
+Gateway of last resort is not set.
+192.168.10.0 /24 is variably subnetted, 2 subnets, 2 masks
+C 192.168.10.0 /24 is directly connected, GigabitEthernet 0/0/0
+L 192.168.10.1 /32 is directly connected, GigabitEthernet 0/0/0
+209.165.200.0 /24 is variably subnetted, 2 subnets, 2 masks
+C 209.165.200.224 /30 está conectado diretamente, GigabitEthernet 0 / 0/1
+L 209.165.200.225 /32 está conectado diretamente, GigabitEthernet 0 / 0/1
+R1#
+R1# show ipv6 route
+<output omitted>
+C 2001:DB8:ACAD:10::/64 [0/0]
+via GigabitEthernet0/0/0, directly connected
+L 2001:DB8:ACAD:10::1/128 [0/0]
+via GigabitEthernet0/0/0, receive
+C 2001:DB8:FEED:224::/64 [0/0]
+via GigabitEthernet0/0/1, directly connected
+L 2001:DB8:FEED:224: :1/128 [0/0]
+via Gigabitethernet0/0/1, receba
+L FF00::/8 [0/0]
+via Null0, receive
+R1#
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+24© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoConfigurar Interfaces
+Configurar Comandos de Verificação (Cont.) 
+Apresenta estatísticas 
+para todas as interfaces 
+com o comando show 
+interfaces , conforme 
+mostrado aqui:R1# show interfaces gig0/0/0
+GigabitEthernet0/0/0 está ativo, protocolo de linha está ativo 
+O hardware é ISR4321 -2x1ge, o endereço é a0e0.af0d.e140 (bia 
+a0e0.af0d.e140)
+Description: Link to LAN
+Internet address is 192.168.10.1/24
+MTU 1500 bytes, BW 100000 Kbit/sec, DLY 100 usec, 
+reliability 255/255, txload 1/255, rxload 1/255
+Encapsulation ARPA, loopback not set
+Keepalive not supported 
+Full Duplex, 100 Mbps, o tipo de link é automático, o tipo de mídia é RJ45
+o controle de fluxo de saída está desativado, o controle de fluxo de 
+entrada está desativado
+ARP type: ARPA, ARP Timeout 04:00:00
+Last input 00:00:01, output 00:00:35, output hang never
+Last clearing of "show interface" counters never
+Fila de entrada: 0/375/0/0 (tamanho/máx/quedas/descargas); Quedas na 
+produção total: 0
+Queueing strategy: fifo
+Output queue: 0/40 (size/max)
+5 minute input rate 0 bits/sec, 0 packets/sec
+5 minute output rate 0 bits/sec, 0 packets/sec
+1180 packets input, 109486 bytes, 0 no buffer
+Received 84 broadcasts (0 IP multicasts)
+0 runts, 0 giants, 0 throttles 
+<saída omitida>
+R1#
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+25© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoConfigurar Interfaces
+Configurar Comandos de Verificação (Cont.) 
+Apresenta estatísticas 
+IPv4 para as interfaces do 
+router com o comando 
+show ipinterface , 
+conforme mostrado aqui:R1# show ip interface g0/0/0
+GigabitEthernet0/0/0 is up, line protocol is up
+Internet address is 192.168.10.1/24
+Broadcast address is 255.255.255.255
+Address determined by setup command
+MTU is 1500 bytes
+Helper address is not set
+Directed broadcast forwarding is disabled
+Outgoing Common access list is not set 
+Outgoing access list is not set
+Inbound Common access list is not set 
+A lista de acesso de entrada não está definida
+O proxy ARP está ativado
+O ARP de Proxy Local está desativado
+O nível de segurança é padrão
+Dividir horizonte está ativado
+Os redirecionamentos ICMP são sempre enviados
+O ICMP inacessível é sempre enviado
+As respostas da máscara ICMP nunca são enviadas
+A comutação rápida de IP está habilitada
+A comutação de fluxo de IP está desativada
+<saída omitida>
+R1#
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+26© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoConfigurar Interfaces
+Configurar Comandos de Verificação (Cont.) 
+Apresenta estatísticas 
+IPv6 para interfaces do 
+router com o comando 
+show ipv 6 interface 
+mostrado aqui:R1# show ipv6 interface g0/0/0
+GigabitEthernet0/0/0 is up, line protocol is up
+IPv6 is enabled, link -local address is 
+FE80::868A:8DFF:FE44:49B0
+No Virtual link -local address(es):
+Description: Link to LAN
+Global unicast address(es):
+2001:DB8:ACAD:10::1, subnet is 2001:DB8:ACAD:10::/64
+Joined group address(es):
+FF02::1
+FF02::1:FF00:1
+FF02::1:FF44:49B0
+MTU is 1500 bytes
+ICMP error messages limited to one every 100 milliseconds
+ICMP redirects are enabled
+ICMP unreachables are sent
+ND DAD is enabled, number of DAD attempts: 1
+ND reachable time is 30000 milliseconds (using 30000)
+ND NS retransmit interval is 1000 milliseconds
+R1#
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+27© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco10.3 Configurar o Gateway 
+por Omissão
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+28© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoConfigurar o gateway por omissão
+Gateway por omissão num host
+•O gateway por omissão é usado 
+quando um host envia um 
+pacote para um dispositivo 
+noutra rede.
+•O endereço do gateway por 
+omissão geralmente é o 
+endereço da interface do router
+associado à rede local do host.
+•Para alcançar o PC 3, o PC 1 
+endereça um pacote com o 
+endereço IPv 4 do PC 3, mas 
+encaminha o pacote para seu 
+gateway por omissão, a 
+interface G 0/0/0 de R 1.Nota : O endereço IP do host e a interface do 
+router devem estar na mesma rede.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+29© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoConfigurar o gateway por omissão
+Gateway por omissão num PC
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+
+30© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoConfigurar o gateway por omissão
+Gateway por omissão num switch
+•Um switch deve ter um 
+endereço de gateway por 
+omissão configurado para 
+que possa ser gerido  
+remotamente de outra 
+rede.
+•Para configurar um 
+gateway por omissão 
+IPv4 num switch, use o 
+comando de configuração 
+global ipdefault -gateway
+ip-address .
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+33© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco10.4 -Sumário
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+38© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoSumário
+O que aprendi neste módulo?
+•As tarefas necessárias para definir as configurações iniciais de um router .
+•Configurar o nome do dispositivo.
+•Proteger o modo EXEC privilegiado.
+•Proteger o modo EXEC utilizador.
+•Proteger o acesso remoto Telnet/SSH
+•Proteger todas as passwords em texto simple presentes na configuração.
+•Apresentar a notificação legal (banner).
+•Salvar a configuração.
+•Para que os routers estejam acessíveis, as interfaces do router devem estar configuradas.
+•O uso do comando no shutdown ativa a interface. A interface também deve ser conectada 
+a outro dispositivo, como switch ou router , para que a camada física esteja ativa. 
+•Existem vários comandos que podem ser usados para verificar a configuração da 
+interface, incluindo o show ipinterface brief eshow ipv6 interface brief , o show ip
+route eshow ipv6 route , bem como show interfaces ,show ipinterface e show ipv6 
+interface . 
+39© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoSumário
+O que eu aprendi neste módulo (Cont.)?
+•Para que um dispositivo final consiga comunicar com outras redes, deve ser 
+configurado um gateway por omissão.
+•O endereço IP do dispositivo host e o endereço da interface do router devem 
+estar na mesma rede.
+•Um switch deve ter um endereço de gateway por omissão configurado para poder 
+ser gerido remotamente a partir de outra rede.
+•Para configurar um gateway por omissão IPv4 num switch, use o comando de 
+configuração global ipdefault -gateway ip-address .

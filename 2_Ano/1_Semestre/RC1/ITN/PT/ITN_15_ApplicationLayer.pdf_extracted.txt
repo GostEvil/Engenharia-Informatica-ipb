@@ -1,0 +1,504 @@
+Introdução às redes v7.0 (ITN)Módulo 15: Camada de 
+Aplicação
+Versão original: Cisco Network Academy
+Versão modificada: Eduardo Costa
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+11© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoObjetivos do módulo
+•Título do Módulo : Camada de Aplicação
+•Objetivo do módulo : Explicar o  fincionamento dos protocolos da camada de aplicação no suporte a 
+aplicações do utilizador final.
+Título do Tópico Objetivo do Tópico
+Aplicação, Apresentação e SessãoExplicar como as funções da camada de aplicação, camada de 
+apresentação e camada de sessão funcionam em conjunto para fornecer 
+serviços de rede para as aplicações do utilizador final.
+Peer -to-peer Explicar como funcionam as aplicações de utilizador numa rede peer-to-
+peer.
+Protocolos de e -mail e Web Explicar como funcionam os protocolos Web e de e -mail.
+Serviços de endereçamento IP Explicar como funciona o DHCP e DNS.
+Serviços de partilha de ficheiros Explicar como funcionam os protocolos de transferência de ficheiros.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+12© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco15.1 Aplicação, apresentação 
+e sessão
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+13© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAplicação, Apresentação, e Sessão
+Camada  de Aplicação
+•As três camadas superiores do modelo 
+OSI (aplicativo, apresentação e sessão) 
+definem funções da camada de 
+aplicação TCP / IP .
+•A camada de aplicação fornece a 
+interface entre as aplicações usadas 
+para a comunicação e a rede subjacente 
+pela qual as mensagens são 
+transmitidas.
+•Alguns dos protocolos da camada de 
+aplicação  mais conhecidos são: HTTP, 
+FTP, TFTP, IMAP e DNS.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+14© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAplicação, apresentação e sessão 
+Camadas de apresentação e sessão
+A camada de apresentação tem três funções 
+principais:
+•Formatar ou apresentar dados no dispositivo 
+de origem num formato compatível para 
+serem recebidos pelo dispositivo de destino
+•Compactar os dados de forma que eles 
+possam ser descompactados pelo dispositivo 
+destino
+•Encriptar os dados para transmissão e 
+desencriptá -losao serem recebidos
+As funções da  camada de sessão são:
+•Criar e mantém diálogos entre aplicações de 
+origem e destino. 
+•Lidar com a troca de informação para iniciar 
+diálogos, mantê -los ativos e reiniciar 
+sessões interrompidas ou inativas por um 
+longo período de tempo.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+15© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAplicação, apresentação e sessão 
+Protocolos da camada de aplicação TCP/IP
+•Os protocolos de aplicação do modelo TCP / IP especificam o formato e a informação de 
+controlo necessária por muitas funções comuns de comunicação na Internet.
+•Os protocolos da camada de aplicação são utilizados pelos dispositivos de origem e destino 
+durante uma sessão de comunicação.
+•Para que as comunicações sejam bem -sucedidas, os protocolos da camada de aplicação 
+implementados no host de origem e destino devem ser compatíveis.
+Sistema de nomes
+DNS –Sistema (ou Serviço)
+de Nomes de Domínio 
+•TCP , cliente UDP 53
+•Converte nomes de domínio, 
+como cisco.com , em 
+endereços IP .Configuração de hosts
+DHCP -Protocolo de 
+configuração de host 
+dinâmico
+•Cliente UDP 68, servidor 67
+•Atribui dinamicamente 
+endereços IP que serão 
+reutilizados quando já não 
+forem necessáriosWeb
+HTTP -Protocolo de 
+transferência de hipertexto
+•TCP 80, 8080
+•Um conjunto de regras para a 
+troca de texto, imagens 
+gráficas, som, vídeo e outros 
+ficheiros multimédia na World 
+Wide Web
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+16© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco15.2 Peer -to-peer
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+17© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoPeer -to-peer
+Modelo cliente -servidor
+•Os processos cliente e servidor são considerados integrante da camada de aplicação.
+•No modelo de cliente / servidor, o dispositivo que pede a informação é chamado de 
+cliente e o dispositivo que responde a solicitação é chamado de servidor.
+•Os protocolos da camada de aplicação descrevem o formato dos pedidos e respostas 
+entre clientes e servidores.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+18© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoPeer -to-peer
+Redes peer-to-peer
+•Em uma rede peer-to-peer(P2P), dois ou mais computadores são conectados via rede e 
+podem compartilhar recursos (como impressoras e arquivos) sem ter um servidor dedicado.
+•Cada dispositivo final ligado (conhecido como peer) pode funcionar como cliente ou servidor.
+•Um computador pode assumir o papel de servidor para uma transação ao mesmo tempo em 
+que é o cliente de outra. As funções de cliente e servidor são definidas de acordo com o 
+pedido.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+19© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoPeer -to-peer
+Aplicações peer-to-peer
+•Uma aplicação P2P permite que um dispositivo atue como cliente e servidor na mesma 
+comunicação.
+•Algumas aplicações P2P usam um sistema híbrido no qual cada ponto acede a um servidor de 
+indexação para obter a localização de um recurso armazenado noutro ponto.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+20© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoPeer -to-peer
+Aplicações Comuns P2P
+Com aplicações P2P , cada computador 
+na rede que está executando a aplicação 
+pode atuar como um cliente ou com um 
+servidor para os outros computadores na 
+rede que também estão a executar a 
+aplicação.
+As redes de aplicações P2P comuns 
+incluem o seguinte:
+•⁪BitTorrent
+•Direct Connect
+•eDonkey
+•Freenet
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+21© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco15.3 Protocolos Web e de email
+22© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoProtocolos Web e de email
+Protocolo de transferência de hipertexto e linguagem de 
+marcação de hipertexto
+Quando um endereço da Web ou URL (URL) é digitado num browser (navegador) Web, ele 
+estabelece uma conexão com o serviço da Web. O serviço Web está em execução no 
+servidor que está a utilizar o protocolo HTTP. 
+Para entender melhor como o browser e o servidor da web interagem, examine como uma 
+página da web é aberta num browser.
+Passo 1 
+O browser interpreta as três partes do 
+URL:
+•http (o protocolo ou o esquema)
+•www.cisco.com (o nome do 
+servidor)
+•index.html (o nome do ficheiro 
+específico requisitado)
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+23© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoProtocolos Web e de email
+Protocolo de transferência de hipertexto e linguagem de marcação 
+de hipertexto (cont.)
+Passo 2
+O browser então recorre a um 
+servidor de nomes para converter 
+www.cisco.com em um endereço IP 
+numérico, usado para ligar -se ao 
+servidor. 
+O cliente inicia uma solicitação HTTP 
+para um servidor enviando uma 
+solicitação GET para o servidor e 
+solicita o ficheiro index.html .
+Passo 3
+Em resposta à solicitação, o servidor envia o 
+código HTML para essa página Web para o 
+browser.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+24© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoProtocolos Web e de email
+Protocolo de transferência de hipertexto e linguagem de marcação 
+de hipertexto (cont.)
+Passo 4
+O browser decifra o código HTML e formata a página para a janela do browser.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+25© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoProtocolos Web e de email
+HTTP e HTTPS
+HTTP é um protocolo de solicitação/resposta 
+que especifica os tipos de mensagem usados 
+para essa comunicação.
+Os três tipos de mensagens comuns são 
+GET, POST e PUT:
+•GET -Pedido de dados do cliente. Um 
+cliente (browser Web) envia a 
+mensagem GET ao servidor Web para 
+pedir páginas HTML.
+•POST -Carrega ficheiros de dados no 
+servidor da web, como dados de um 
+formulário.
+•PUT -Carrega recursos ou conteúdo no 
+servidor da web, tal como uma imagem.Observação: HTTP não é um protocolo 
+seguro. Para comunicações seguras 
+enviadas através da Internet, HTTPS 
+deve ser usado. 
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+26© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoProtocolos de E -mail e Web 
+Protocolos de E -mail
+O e-mail é um método de armazenar, de 
+enviar e de recuperar mensagens 
+eletrônicas numa rede. As mensagens de 
+e-mail são armazenadas nas bases de 
+dados dos servidores de email . Os clientes 
+de e-mail se comunicam com os 
+servidores de e -mail para enviar e receber 
+e-mails.
+Os protocolos de e -mail usados são: 
+•SMTP ( Simple Mail Transfer Protocol ) 
+-usado para enviar email .
+•Post Office Protocol (POP) e IMAP —
+usado para clientes descarregarem e-
+mails.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+27© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoProtocolos Web e E -mail
+SMTP, POP e IMAP
+•Quando um cliente envia um e -mail, o 
+processo de SMTP do cliente liga -se com 
+um processo SMTP do servidor na porta 
+bem conhecida 25. 
+•Depois da ligação ser estabelecida, o 
+cliente tenta enviar o e -mail para o 
+servidor dessa ligação. 
+•Quando o servidor recebe a mensagem, 
+ele a coloca numa conta local, se o 
+destinatário for local, ou encaminha a 
+mensagem para outro servidor de correio 
+para entrega.
+•O servidor de email de destino pode não 
+estar online ou pode estar ocupado. 
+Nesse caso, o SMTP coloca numa spool
+as mensagens a serem enviadas 
+posteriormente. Observação : os formatos de mensagem SMTP exigem 
+um cabeçalho de mensagem (endereço de e -mail do 
+destinatário e endereço de e -mail do remetente) e um 
+corpo da mensagem. 
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+28© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoProtocolos Web e E -mail
+SMTP, POP e IMAP (Cont.) 
+O POP é usado por uma aplicação para recuperar e -mails de um servidor de e -mail. 
+Quando o correio é descarregado do servidor para o cliente usando POP, as mensagens 
+por defeito são excluídas do servidor.
+•O servidor inicia o serviço POP 
+escutando de forma passiva na porta 
+TCP 110 à espera de ligações dos 
+clientes. 
+•Quando um cliente deseja utilizar o 
+serviço, envia um pedido para 
+estabelecer uma ligação TCP com o 
+servidor.
+•Quando a ligação é estabelecida, o 
+servidor POP envia uma saudação. 
+•O cliente e o servidor POP trocam 
+comandos e respostas até que a 
+conexão seja encerrada ou cancelada.Nota: Como o POP não armazena mensagens, não é 
+recomendado para pequenas empresas que precisam de uma 
+solução de backup centralizada.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+29© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoProtocolos Web e E -mail
+SMTP, POP e IMAP (Cont.) 
+O IMAP é outro protocolo que 
+descreve um método para recuperar 
+mensagens de e -mail.
+•Quando um utilizador se liga a um 
+servidor IPMAP , Ao contrário do 
+POP , cópias das mensagens são 
+descarregadas na aplicação do 
+cliente. As mensagens originais são 
+mantidas no servidor até que sejam 
+excluídas manualmente. 
+•Quando um utilizador decide excluir 
+uma mensagem, o servidor 
+sincroniza essa ação e exclui a 
+mensagem também no servidor.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+30© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco15.4 Serviços de 
+endereçamento IP
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+31© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoServiços de endereçamento de IP 
+Serviços de nome de domínio
+•Os nomes de domínio foram criados 
+para converter os endereços IP 
+numéricos em um nome simples e 
+reconhecível.
+•Nomes de domínio totalmente 
+qualificados ( FQDNs ), como 
+www.cisco.com , são muito mais fáceis 
+para as pessoas lembrarem do que do 
+IP 198.133.219.25.
+•O protocolo DNS define um serviço 
+automatizado que faz a 
+correspondência de nomes de 
+recursos com o endereço de rede 
+numérico requisitado. Ele inclui o 
+formato para as consultas, as 
+respostas e os dados.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+32© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoServiços de endereçamento IP 
+Formato de mensagem DNS
+Um servidor DNS armazena diferentes tipos de registros de recursos qusão usados para 
+resolver nomes. Esses registos contêm o nome, endereço e tipo de registo.
+Alguns desses tipos de registo são os seguintes:
+•A-Um endereço IPv4 do dispositivo final
+•NS-Um servidor de nomes autoritário para o domínio
+•AAAA -Um endereço IPv6 do dispositivo final (pronunciado quad -A)
+•MX-Um registo de troca de correio
+Quando um cliente faz uma consulta, o processo DNS do servidor primeiro examina seus 
+próprios registos para resolver o nome. Se não conseguir resolver o nome usando seus registos 
+armazenados, entrará em contato com outros servidores para resolver o nome.
+Quando uma correspondência é encontrada e retornada ao servidor requisitante original, o 
+servidor temporariamente armazena o número do endereço em causa, para o caso do mesmo 
+nome ser requisitado outra vez.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+33© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoServiços de endereçamento IP
+Formato de mensagem DNS (cont.)
+O DNS na troca de mensagens entre servidores usa o mesmo formato de mensagem usado 
+entre clientes e servidores, consistindo numa pergunta, resposta, autoridade( s) e informações 
+adicionais. O mesmo formato é usado para todos os tipos de consultas de clientes e respostas 
+de servidores, mensagens de erro e transferência de informações de registos de recursos.
+Seção de mensagens DNS Descrição
+Pergunta A pergunta para o servidor de nomes
+Resposta Registos de recursos respondendo a pergunta
+AutoridadeRegistos de recursos apontando os servidores autoritários 
+associados à resposta
+Adicional Registos de recursos com informações adicionais
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+34© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoServiços de endereçamento IP
+Hierarquia de DNS
+•O DNS usa um sistema hierárquico para criar 
+uma base de dados para fornecer resolução de 
+nomes.
+•Cada servidor DNS autoritário mantém uma 
+base de dados específica e é apenas 
+responsável por berir os mapeamentos de 
+nome para IP para essa pequena parte de toda 
+estrutura DNS.
+•Quando um servidor DNS recebe um pedido 
+para a conversão de um nome que não faz 
+parte da sua zona DNS, o servidor DNS 
+encaminha -o para outro servidor DNS na zona 
+apropriada para a tradução.
+•Exemplos de domínios de nível superior:
+•.com -uma empresa ou indústria
+•.org-uma organização sem fins lucrativos
+•.au-Austrália
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+35© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoServiços de endereçamento IP
+O comando nslookup
+•Nslookup é um utilitário do sistema operativo 
+do computador que permite que um utilizador 
+consulte manualmente os servidores DNS 
+configurados no dispositivo para resolver um 
+determinado nome de host.
+•Este utilitário também pode ser usado para 
+corrigir problemas de resolução de nomes e 
+verificar o estado atual dos servidores de 
+nomes.
+•Quando o comando nslookup é executado, o 
+servidor DNS padrão configurado para o seu 
+host é exibido.
+•O nome de um host ou de um domínio pode 
+ser inserido na prompt nslookup .
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+36© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoServiços de endereçamento IP
+Protocolo de configuração dinâmica de host
+•O serviço DHCP em IPv4 torna automática a 
+atribuição de endereços IPv4, máscaras de sub-
+rede, gateways e outros parâmetros de rede IPv4.
+•DHCP é considerado endereçamento dinâmico em 
+comparação com endereçamento estático. No 
+endereçamento estático são inseridas manualmente 
+as informações de endereçamento IP .
+•Quando um host se liga à rede, o servidor DHCP é 
+contatado e um endereço é solicitado. O servidor 
+DHCP escolhe um endereço de uma lista 
+configurada de endereços chamada pool e o atribui 
+(aluga -o) ao host.
+•Muitas redes utilizam DHCP e endereçamento 
+estático. O DHCP é usado para hosts de uso geral, 
+como dispositivos de utilizador final. O 
+endereçamento estático é usado para dispositivos 
+de rede, como routers , switches, servidores e 
+impressoras.Nota: O DHCP para IPv6 (DHCPv6) fornece 
+serviços semelhantes para clientes IPv6. No 
+entanto, o DHCPv6 não fornece um endereço de 
+gateway por omissão. Isso só pode ser obtido 
+dinamicamente a partir da mensagem Anúncio do 
+router (RA –Router Advertisment ).
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+37© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoServiços de endereçamento IP
+Funcionamento do DHCP
+O processo DHCP: 
+•Quando um dispositivo com IPv4, configurado com 
+DHCP arranca e/ou é ligado à rede, o cliente 
+transmite uma mensagem de descoberta DHCP 
+(DHCPDISCOVER) para identificar quaisquer 
+servidores DHCP disponíveis na rede.
+•Um servidor DHCP responde com uma mensagem de 
+oferta DHCP (DHCPOFFER), que oferece uma 
+concessão ao cliente.(Se um cliente receber mais de 
+uma oferta devido a haver vários servidores DHCP na 
+rede, ele deve escolher uma.)
+•O cliente envia uma mensagem de solicitação de 
+DHCP (DHCPREQUEST) que identifica o servidor 
+explícito e a oferta de concessão que o cliente está 
+aceitando.
+•Em seguida, o servidor retorna uma mensagem de 
+confirmação DHCP (DHCPACK) que confirma ao 
+cliente que a concessão foi finalizada.
+•Se a oferta já não for válida, o servidor selecionado 
+responderá com uma mensagem de confirmação 
+negativa de DHCP (DHCPNAK) e o processo deverá 
+começar com uma nova mensagem 
+DHCPDISCOVER. Observação : o DHCPv6 tem um conjunto de mensagens 
+semelhantes às do DHCPv4. As mensagens DHCPv6 são SOLICIT, 
+ADVERTISE, INFORMATION REQUEST, e REPLY.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+39© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco15.5 Serviços de partilha de 
+ficheiros
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+40© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoServiços de partilha de ficheiros
+Protocolo de Transferência de Ficheiros
+O FTP (File Transfer Protocol ) foi desenvolvido para possibilitar transferências de ficheiros 
+entre um cliente e um servidor. Um cliente FTP é uma aplicação que é executada num 
+computador que está a ser usado para enviar e receber dados de um servidor FTP .
+Etapa 1 -O cliente estabelece a primeira ligação com 
+o servidor para controlar o tráfego usando a porta TCP 
+21. O tráfego consiste em comandos do cliente e 
+respostas do servidor. 
+Etapa 2 -O cliente estabelece a segunda ligação com 
+o servidor para a transferência de dados real usando a 
+porta TCP 20 . Essa ligação é criada todas as vezes 
+que houver dados a serem transferidos.
+Etapa 3 -A transferência de dados pode ocorrer em 
+qualquer direção. O cliente pode fazer download 
+(descarregar) dados do servidor ou o cliente pode 
+fazer upload (enviar) de dados para o servidor .
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+41© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoServiços de partilha de ficheiros
+Bloco de mensagens do servidor
+O SMB (Server Message Block) é um protocolo de 
+partilha de ficheiros do tipo cliente / servidor, solicitação -
+resposta. Os servidores podem disponibilizar seus 
+próprios recursos para os clientes na rede.
+Três funções das mensagens SMB:
+•Iniciar, autenticar e terminar sessões
+•Controlar o acesso a ficheiros e a impressoras
+•Permitir que uma aplicação envie ou receba 
+mensagens de ou para outro dispositivo
+Ao contrário da partilha de ficheiros suportada pelo FTP , 
+os clientes estabelecem uma ligação de longo prazo 
+com os servidores. Depois da ligação ser estabelecida, 
+o utilizador do cliente pode aceder aos recursos no 
+servidor como se o recurso fosse local para o host do 
+cliente.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+42© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco15.6 -Sumário
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+43© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoSumário
+O que aprendi neste módulo?
+•Os protocolos da camada de aplicação são utilizados para troca de dados entre programas executados nos hosts de 
+origem e destino. A camada de apresentação tem três funções principais: formatação ou apresentação de dados, 
+compactação de dados e encriptação de dados para transmissão e desencriptação de dados após a recepção. A 
+camada de sessão cria e mantém diálogos entre as aplicações de origem e destino.
+•No modelo cliente / servidor, o dispositivo que solicita as informações é chamado de cliente e o dispositivo que 
+responde à solicitação é chamado de servidor.
+•Numa rede P2P , dois ou mais computadores estão ligados através da rede e podem partilhar recursos sem terem 
+um servidor dedicado.
+•Os três tipos de mensagens HTTP comuns são GET , POST e PUT .
+•O e-mail suporta três protocolos diferentes para o funcionamento: SMTP , POP e IMAP .
+•O protocolo DNS faz correspondência dos nomes dos recursos com o endereço de rede numérico.
+•O serviço DHCP para IPv4 automatiza a atribuição de endereços IPv4, máscaras de sub-rede, gateways e outros 
+parâmetros de rede IPv4. As mensagens DHCPv6 são SOLICIT , ADVERTISE, INFORMATION REQUEST , e REPLY .
+•Um cliente FTP é uma aplicação que é executado num computador que é usado para enviar e receber dados de um 
+servidor FTP .
+•Três funções de mensagens SMB: iniciar, autenticar e terminar sessões, controlar o acesso a ficheiros e 
+impressoras e permitir que uma aplicação envie ou receba mensagens de ou para outro dispositivo.

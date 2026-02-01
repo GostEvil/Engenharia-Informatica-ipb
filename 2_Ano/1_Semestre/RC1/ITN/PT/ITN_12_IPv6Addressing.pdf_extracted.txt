@@ -1,0 +1,560 @@
+Módulo 12: endereçamento 
+IPv6
+Introdução às redes v7.0 (ITN)Versão original: Cisco Network Academy
+Versão modificada: Eduardo Costa
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+14© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoObjetivos do módulo
+Título do módulo: Endereçamento IPv6
+Objetivo do Módulo : Implementar um esquema de endereçamento IPv6 .
+Título do Tópico Objetivo do Tópico
+Problemas do IPv4Explicar a necessidade do endereçamento IPv6.
+Representação dos Endereços IPv6Explicar como os endereços IPv6 são representados.
+Tipos de Endereços IPv6Comparar os tipos de endereços de rede IPv6.
+Configuração Estática do GUA e do LLAExpliquar como configurar endereços de rede IPv6 estáticos 
+unicast globais e link -local.
+Endereçamento dinâmico para GUAs em IPv6Explicar como configurar endereços unicast globais de forma 
+dinâmica.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+15© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoObjetivos do módulo (Cont.)
+Título do módulo: Endereçamento IPv6
+Objetivo do Módulo : Implementar um esquema de endereçamento IPv6 .
+Título do Tópico Objetivo do Tópico
+Endereçamento dinâmico para LLAs IPv6 Configurar endereços link -local de forma dinâmica.
+Endereços multicast IPv6 Identificar endereços IPv6
+Divisão de uma rede IPv6 em sub-redes Implementar um esquema de Endereçamento IPv6 com sub-sedes
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+16© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco12.1 Problemas do IPv4
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+17© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoProblemas do IPv4
+Necessidade do IPv6
+•O IPv4 está a ficar sem endereços. O 
+IPv6 é o sucessor do IPv4. Tem um 
+espaço de endereço maior, com 128 
+bits
+•O desenvolvimento do IPv6 também 
+incluiu correções para as limitações do 
+IPv4 e outras melhorias.
+•Com uma população cada vez maior na 
+Internet, espaço de endereços IPv4 
+limitado, problemas com NAT a Internet 
+das Coisas (IoT), chegou o momento 
+de iniciar a transição para o IPv6.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+18© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoProblemas do IPv4 
+A coexistência do IPv4 e do IPv6
+Tanto o IPv4 como o IPv6 coexistirão no futuro próximo e a transição levará vários 
+anos.
+A IETF criou vários protocolos e ferramentas para ajudar os administradores de rede 
+a migrarem as redes para IPv6. As técnicas de migração podem ser divididas em três 
+categorias:
+•Pilha dupla (Dual Stack) -Os dispositivos executam ambas as pilhas protocolores , IPv4 e 
+IPv6 simultaneamente.
+•Tunelamento ( Tunneling )-Um método de transporte de pacotes IPv6 através de uma rede 
+IPv4. O pacote IPv6 é encapsulado dentro de um pacote IPv4.
+•Tradução ( Translation )-NAT64 (Network Address Translation 64) permite que os 
+dispositivos habilitados para IPv6 comuniquem com os dispositivos habilitados para IPv4 
+usando uma técnica de tradução semelhante ao NAT em IPv4.
+Observação: O tunelamento e a tradução são para transição para IPv6 nativo e só devem ser 
+usados quando necessário. O objetivo deve ser as comunicações IPv6 nativas da origem até o 
+destino.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+19© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoRepresentação do Endereço 
+IPv6
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+20© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoRepresentação de endereços IPv6 
+Formatos do endereçamento IPv6 
+•Os endereços IPv6 têm 128 bits e são escritos em hexadecimal.
+•Os endereços IPv6 não diferenciam maiúsculas e minúsculas e podem ser 
+escritos tanto em minúsculas como em maiúsculas.
+•O formato preferencial para escrever um endereço IPv6 é x: x: x: x: x: x: x: x, com 
+cada “ x” consistindo em quatro valores hexadecimais.
+•No IPv6, um hexteto é o termo não oficial usado para se referir a um segmento 
+de 16 bits ou quatro valores hexadecimais.
+•Exemplos de endereços IPv6 no formato preferido:
+2001:0db8:0000:1111:0000:0000:0000:0200 
+2001:0db8:0000:00 a3:abcd:0000:0000:1234 
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+21© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoRepresentação  de endereços  IPv6
+Regra 1 -Omitir zeros à esquerda
+A primeira regra para ajudar a reduzir a notação de endereços IPv6 é omitir 
+quaisquer 0s (zeros) iniciais.
+Exemplos:
+•01AB pode ser representado como 1AB
+•09f0 pode ser representado como 9f0
+•0a00 pode ser representado como a00
+•00ab pode ser representado como ab
+Observação : A regra aplica -se apenas aos 0s à esquerda, e NÃO aos 0s à direita. 
+Caso contrário, o endereço ficaria ambíguo.
+Tipo Formato
+Preferencial 2001: 0db8: 0000:1111: 0000: 0000: 0000: 0200
+Sem zeros à esquerda 2001: db8:0: 1111:0: 0:0: 200
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+22© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoRepresentação  de endereços  IPv6
+Regra 2 -Dois-pontos duplos
+Dois pontos duplos (: :) podem substituir qualquer sequência única e 
+contígua de um ou mais hextets de 16 bits que consistem em todos a zeros. 
+Exemplo:
+•2001:db8:cafe: 1:0:0:0:1 poderia ser representado como 2001:db8:cafe:1: :1
+Observação :Osdois pontos duplos (::) só podem ser usados uma vez num endereço; caso 
+contrário, haveria mais de um endereço resultante possível.
+Tipo Formato
+Preferencial 2001: 0db8: 0000:1111: 0000 : 0000 : 0000 : 0200
+Compactado 2001:db8:0:1111::200
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+23© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco12.3 Tipos de endereços IPv6
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+24© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTipo de Endereçamento IPv6 
+Unicast , Multicast , Anycast
+Existem três grandes categorias de endereços IPv6:
+•Unicast –Um endereço IPv6 unicast identifica exclusivamente uma interface num 
+dispositivo habilitado para IPv6.
+•Multicast –Um endereço IPv6 multicast é usado para enviar um único pacote IPv6 
+para vários destinos.
+•Anycast –Um endereço IPv6 anycast é qualquer endereço IPv6 unicast que possa 
+ser atribuído a vários dispositivos . Um pacote enviado a um endereço de anycast é 
+encaminhado para o dispositivo mais próximo que tenha esse endereço.
+Observação : Ao contrário do IPv4, o IPv6 não possui um endereço de broadcast . No 
+entanto, há um endereço multicast all-nodes IPv6 que fornece basicamente o mesmo 
+resultado.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+25© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTipos de endereços IPv6 
+Comprimento do prefixo IPv6
+O comprimento do prefixo é representado na notação de barra e é usado para indicar a 
+parte da rede de um endereço IPv6.
+O comprimento do prefixo pode variar de 0 a 128. O comprimento recomendado do 
+prefixo IPv6 para LANs e a maioria dos outros tipos de redes é / 64.
+Observação : É altamente recomendado usar um ID de interface de 64 bits para a maioria das 
+redes. Isso porque a configuração automática de endereço sem estado ( Stateless Address
+Autoconfiguration -SLAAC ) usa 64 bits para o ID de interface. Também facilita a criação e a 
+gestão de sub-redes . 
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+26© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTipos de endereços IPv6 
+Endereços IPv6 unicast
+Ao contrário dos dispositivos IPv4 que têm apenas 
+um único endereço, os dispositivos com endereços 
+IPv6 normalmente têm dois endereços unicast :
+•Um endereço unicast global (Global Unicast
+Address -GUA) é semelhante a um endereço 
+IPv4 público . São endereços de encaminháveis 
+na Internet  e globalmente exclusivos .
+•Endereço do link local (Link Local Address -
+LLA) –é obrigatório para todos os dispositivos 
+habilitados para IPv6 e é usado para comunicar 
+com outros dispositivos no mesmo link local . Os 
+LLAs não são encaminháveis e estão confinados 
+a um único link.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+27© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTipos de endereços IPv6
+Uma observação sobre o endereço locais exclusivos
+Os endereços locais exclusivos IPv6 (intervalo fc00 :: / 7 a fdff:: / 7) têm 
+alguma semelhança com os endereços privados do RFC 1918 para o IPv4, 
+mas existem diferenças significativas:
+•Os endereços locais exclusivos ( Unique local adresses ) são utilizados para 
+endereçamento local dentro de um site ou entre um número limitado de sites.
+•Unique local adresses podem ser usados para dispositivos que nunca precisarão 
+ou terão acesso por outra rede.
+•Unique local adresses não são globalmente encaminhados ou traduzidos para um 
+endereço IPv6 global.
+Nota : Muitos sites usam a natureza privada dos endereços RFC 1918 para tentar 
+proteger ou ocultar sua rede de possíveis riscos à segurança. Este nunca foi o uso 
+pretendido dos ULA. 
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+28© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTipos de endereços IPv6
+IPv6 GUA
+O endereço IPv6 unicast global ( Global Unicast Address -GUA ) é globalmente 
+exclusivo e roteável na Internet em IPv6.
+•Atualmente, apenas estão a ser atribuídos GUAs com os três primeiros bits de 001 ou 
+2000::/3.
+•GUAs disponíveis atualmente começam com 2 ou um 3 (Isso é apenas 1/8 do espaço total de 
+endereços IPv6 disponível).
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+29© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTipos de endereços IPv6
+Estrutura IPv6 GUA
+Prefixo de encaminhamento global (Global Routing Prefix ):
+•O prefixo global de encaminhamento é o prefixo (parte de rede) do endereço que 
+é atribuído pelo fornecedor (como um ISP) a um cliente ou um site. O prefixo de 
+encaminhamento global varia dependendo das políticas do ISP .
+ID da sub-rede (Subnet ID):
+•O campo ID de sub-rede é a área entre o Prefixo de roteamento global e o ID da 
+interface. A ID da sub-rede é usada por uma empresa para identificar sub-redes
+localmente.
+ID da interface:
+•A ID da interface IPv6 equivale à parte de host de um endereço IPv4. É 
+altamente recomendado que na maioria dos casos sejam usadas sub-redes /64. 
+Nota : O IPv6 permite que os endereços com todos os bits a 0s e os endereços com todos os bits a 1s , na parte 
+de host,  possam ser atribuídos a um dispositivo. O endereço all -0s é reservado como endereço anycast do 
+Subnet -Router e deve ser atribuído apenas aos routers .
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+30© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTipos de endereços IPv6 
+IPv6 LLA
+Um endereço IPv6 de link -local permite que um dispositivo comunique com outros 
+dispositivos habilitados para IPv6 no mesmo link e somente nesse link ( sub-rede).
+•Pacotes com um LLA ( Link-Local Address ) de origem ou destino não podem ser encaminhados.
+•Todas as  interfaces de rede habilitadas para IPv6 deve ter um LLA .
+•Se um LLA não estiver configurado manualmente numa interface, o dispositivo criará 
+automaticamente um.
+•Os LLAs IPv6 estão no intervalo fe80: :/10 .
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+31© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco12.4 Configuração estática 
+GUA e LLA
+32© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoConfiguração estática GUA e LLA 
+Configuração  estática do GUA num router
+A maioria dos comandos de configuração e verificação do IPv6 no Cisco IOS são 
+semelhantes aos seus equivalentes no IPv4. Em muitos casos, a única diferença é o 
+uso de ipv6 em vez de ipnos comandos.
+•O comando para configurar um GUA IPv6 numa interface é: ipv6 address ipv6-
+address/ prefix -length . 
+•O exemplo mostra comandos para configurar um GUA na interface G0/0/0 em R1:
+R1(config)# interface gigabitEthernet 0/0/0
+R1(config -if)#ipv6 address 2001:db8:acad:1::1/64
+R1(config -if)# no shutdown
+R1(config -if)# exit
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+33© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoConfiguração estática da GUA e do LLA 
+Configuração estática da GUA num host com Windows
+•Configurar manualmente o 
+endereço IPv6 num host é 
+semelhante a configurar um 
+endereço IPv4.
+•O GUA ou LLA da interface do 
+router podem ser usados como 
+gateway por omissão (default 
+gateway) . A melhor prática é 
+usar o LLA .
+Nota : Quando DHCPv6 ou SLAAC é 
+usado, o LLA do router será especificado 
+automaticamente como o endereço de 
+default gateway.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+34© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoConfiguração estática de GUA e LLA 
+Configuração de GUA estática de um endereço Link Local 
+Unicast
+A configuração manual do LLA permite criar um endereço reconhecível e fácil de 
+lembrar. 
+•Os LLAS podem ser configurados manualmente usando o comando ipv6 
+address ipv6-link-local-address link-local .
+•O exemplo mostra comandos para configurar um LLA na interface G0/0/0 em R1
+R1(config)# interface gigabitEthernet 0/0/0
+R1 (config -if) # ipv6 endereço fe80:: 1:1 link -local
+R1(config -if)# no shutdown
+R1(config -if)# exit
+Observação : O mesmo LLA pode ser configurado em cada link, desde que seja 
+exclusivo nesse link. A prática comum é criar um LLA diferente em cada interface 
+do router para facilitar a identificação do router e da interface específica. 
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+35© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco12.5 Endereçamento dinâmico 
+para GUAs IPv6
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+36© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoEndereçamento dinâmico para GUAs IPv6
+Mensagens RS e RA
+Os dispositivos obtêm endereços GUA dinamicamente através de mensagens ICMPv6 
+(Internet Control Message Protocol versão 6).
+•As mensagens de solicitação de router (Router Solicitation -RS) são enviadas por 
+dispositivos host para descobrir routers IPv6
+•As mensagens de anúncio de router (Router Advertisement -RA) são enviadas por 
+routers para informar os hosts sobre como obter um GUA IPv6 e fornecer 
+informações úteis de rede, como:
+•Prefixo de rede e comprimento do prefixo
+•Endereço do default gateway
+•Endereços DNS e nome de domínio
+•O RA pode fornecer três métodos para configurar um GUA IPv6 :
+•SLAAC
+•SLAAC com servidor DHCPv6 stateless
+•DHCPv6 stateful (sem SLAAC)
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+37© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoEndereçamento dinâmico para GUAS IPv6
+Método 1: SLAAC
+•O SLAAC permite que um dispositivo configure um GUA sem os serviços do DHCPv6. 
+•Os dispositivos obtêm as informações necessárias para configurar um GUA a partir 
+das mensagens de RA ICMPv6 do router local.
+•O prefixo é fornecido pelo RA e o dispositivo usa o EUI-64ou método de geração 
+aleatória para criar um ID de interface .
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+38© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoEndereçamento dinâmico para IPv6 GUAs
+Método 2: SLAAC e DHCP sem estado
+Um RA pode instruir um dispositivo a usar o SLAAC e o DHCPv6 sem estado. 
+A mensagem RA sugere que os dispositivos usem o seguinte:
+•SLAAC para criar seu próprio GUA IPv6
+•O LLA do router , que é o endereço IPv6 de origem da mensagem RA, como o 
+endereço do default gateway
+•Um servidor DHCPv6 stateless para obter outras informações como o endereço de 
+um servidor DNS e um nome de domínio .
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+39© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoEndereçamento dinâmico para GUAs IPv6
+Método 3: DHCPv6 com estado
+Um RA pode instruir um dispositivo a usar apenas DHCPv6 com estado.
+O DHCPv6 stateful é semelhante ao DHCP para IPv4. Um dispositivo pode receber 
+automaticamente de um servidor DHCPv6 com estado um GUA, comprimento de 
+prefixo e os endereços de servidores DNS .
+A mensagem RA sugere que os dispositivos usem o seguinte:
+•O LLA do router , que é o endereço IPv6 de origem da mensagem RA, como o 
+endereço default gateway
+•Um servidor DHCPv6 stateful para obter o endereço unicast global , o endereço do 
+servidor DNS , o nome do domínio e outras informações.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+40© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoEndereçamento dinâmico para IPv6 GUAS
+EUI-64 processo vs. gerado aleatoriamente
+•Quando a mensagem de RA é 
+SLAAC ou SLAAC com DHCPv6 
+stateless, o cliente deve gerar 
+sua própria ID da interface.
+•A ID da interface pode ser criada 
+por meio do processo EUI -64 ou 
+de um número de 64 bits gerado 
+aleatoriamente
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+41© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoEndereçamento dinâmico para IPv6 GUAS
+EUI-64 processo
+O IEEE definiu o processo de identificador exclusivo estendido ( Extended Unique 
+Identifier EUI) ou EUI -64 modificado, que executa o seguinte:
+•Um valor de 16 bits de fffe(em hexadecimal) é inserido no meio do endereço 
+MAC Ethernet de 48 bits do cliente.
+•O 7ºbit do endereço MAC do cliente é revertido do binário 0 para 1.
+•Exemplo:
+MAC de 48 bits fc: 99:47:75:ce:e0
+ID da interface EUI -64 fe: 99:47: ff:fe:75:ce:e0
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+42© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoEndereçamento dinâmico para GUAs IPv6
+IDsde interface gerados aleatoriamente
+Dependendo do sistema operativo, um dispositivo pode usar um ID de interface 
+gerado de forma aleatória em vez de usar o endereço MAC e o processo EUI -64.
+Por exemplo, desde o Windows Vista, o Windows usa um ID da interface gerado de 
+forma aleatória em vez de um criado com o EUI -64.
+C:\> ipconfig
+Windows IP Configuration 
+Adaptador Ethernet Conexão de Área Local: 
+Connection -specific DNS Suffix . : 
+IPv6 Address. . . . . . . . . . . : 2001:db8:acad: 1:50 um 5:8 a35:a5bb:66e1
+Link-local IPv6 Address . . . . .: fe80: :50a 5:8 a35:a5bb:66e1 
+Gateway Padrão . . . . . . . . . : fe80::1 
+C:\> 
+Observação: para garantir a exclusividade de qualquer endereço IPv6 unicast , o 
+cliente pode usar um processo conhecido como detecção de endereço duplicado 
+(DAD). Isso equivale a uma solicitação ARP para seu próprio endereço. Se não 
+houver resposta, significa que o endereço é exclusivo.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+43© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco12.6 Endereçamento dinâmico 
+para LLAs IPv6
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+44© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoEndereçamento dinâmico para LLAs IPv6
+LLAs dinâmicos 
+•Todas as interfaces IPv6 devem ter um LLA IPv6.
+•Como GUAs IPv6, os LLAs podem ser configurados dinamicamente.
+•A Figura mostra que o endereço de link local é criado dinamicamente com o 
+prefixo FE80::/10 e que a ID da interface é criada por meio do processo EUI -64 ou 
+por um número de 64 bits gerado aleatoriamente.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+45© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoEndereçamento dinâmico para LLAs IPv6
+LLAs dinâmicos no Windows
+Sistemas operativos, como o Windows, normalmente usarão o mesmo método para 
+um GUA criado pelo SLAAC e um LLA atribuído dinamicamente.
+ID da interface gerada com EUI -64
+C:\> ipconfig
+Windows IP Configuration
+Adaptador Ethernet Conexão de Área Local:
+Connection -specific DNS Suffix . :
+IPv6 Address. . . . . . . . . . . : 2001:db8:acad:1: fc 99:47 ff:fe75:cee0
+Link-local IPv6 Address . . . . .: fe80:: fc 99:47 ff:fe75:cee0
+Gateway Padrão . . . . . . . . . : fe80::1
+C:\>
+ID da interface gerada aleatoriamente com 64 bits
+C:\> ipconfig
+Windows IP Configuration
+Adaptador Ethernet Conexão de Área Local:
+Connection -specific DNS Suffix . :
+IPv6 Address. . . . . . . . . . . : 2001:db8:acad:1: 50a 5:8 a35:a5bb:66e1
+Link-local IPv6 Address . . . . .: fe80:: 50a 5:8 a35:a5bb:66e1
+Gateway Padrão . . . . . . . . . : fe80::1
+C:\>
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+46© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoEndereçamento dinâmico para LLAs IPv6
+LLAs dinâmicos em Routers Cisco
+Os routers Cisco criam automaticamente um endereço IPv6 de link local sempre que 
+um endereço unicast global é atribuído à interface. Por defeito, os routers Cisco IOS 
+usam o EUI -64 para gerar a ID da interface de todos os endereços de link local 
+(LLAs ) em interfaces IPv6.
+A figura seguinte apresenta um exemplo de um LLA configurado dinamicamente na 
+interface G0/0/0 de R1:
+R1# show interface gigabitEthernet 0/0/0
+GigabitEthernet0/0/0 está ativo, protocolo de linha está ativo 
+O hardware é ISR4221 -2x1GE, o endereço é 7079.b392.3640 (bia 7079.b392.3640) 
+(Saída omitida) 
+R1#show ipv6 interface brief
+GigabitEthernet0/0/0 [ up/up] 
+FE80::7279:B3FF:FE92:3640
+2001:DB8:ACAD:1::1 
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+49© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco12.7 Endereços de multicast 
+IPv6
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+50© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoEndereços IPv6 multicast
+Endereços IPv6 multicast atribuídos
+Os endereços multicast IPv6 têm o prefixo ff00::/8. Há dois tipos de endereços IPv6 
+multicast :
+•Endereços multicast bem conhecidos.
+•Endereços multicast do nó solicitado
+Observação : os endereços multicast só podem ser endereços destino, e não endereços 
+origem .
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+51© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoEndereços IPv6 multicast
+Endereços IPv6 multicast bem conhecidos
+Endereços multicast IPv6 conhecidos são atribuídos e reservados para grupos de 
+dispositivos predefinidos.
+Há dois grupos de multicast atribuídos IPv6 comuns:
+•ff02 :: 1 All-nodes multicast group -este é um grupo multicast ao qual se juntam todos os 
+dispositivos habilitados com IPv6. Um pacote enviado para esse grupo é recebido e 
+processado por todas as interfaces IPv6 no link ou rede.
+•ff02 :: 1 All-routers multicast group -este é um grupo multicast ao qual se juntam  todos os 
+routers habilitados com IPv6. Um router torna -se membro desse grupo quando é ativado 
+como router IPv6 com o comando de configuração global ipv6 unicast -routing . 
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+52© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoEndereços IPv6 multicast 
+Endereços IPv6 multicast do nó solicitado
+•Um endereço multicast nó 
+solicitado ( solicited -node) é 
+semelhante ao endereço multicast
+all-nodes.
+•Um endereço multicast de nó 
+solicitado é mapeado para um 
+endereço multicast Ethernet 
+especial.
+•A NIC Ethernet pode filtrar o 
+quadro examinando o endereço 
+MAC de destino sem o enviar ao 
+processo IPv6 para verificar se o 
+dispositivo é o destino pretendido 
+do pacote IPv6.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+54© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco12.8 Divisão de uma rede IPv6
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+55© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoDivisão de uma rede IPv6 em sub-redes
+Divisão em sub-redes usando a ID da sub-rede
+O IPv6 foi projetado com a sub-rede em mente. 
+•Um campo de ID de sub-rede separado no GUA IPv6 é usado para criar sub-redes . 
+•O campo ID da sub-rede é a área entre o Prefixo de Encaminhamento Global e o 
+ID da interface.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+56© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoDivisão de uma rede IPv6 em sub-redes
+Exemplo de sub-redes IPv6
+Dado o prefixo de encaminhamento 
+global 2001:db8:acad: :/48 com um ID 
+de sub-rede de 16 bits.
+•Permite 65.536/64 sub-redes
+•O prefixo de encaminhamento global 
+é o mesmo para todas as sub-redes .
+•Somente o hexteto do ID da sub-rede é 
+incrementado em hexadecimal para cada 
+sub-rede.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+57© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoDivisão de uma rede IPv6 em sub-redes
+Alocação de sub-rede IPv6
+A topologia de exemplo requer cinco sub-redes , uma para cada LAN e também para o link 
+serie entre R1 e R2.
+As cinco sub-redes IPv6 foram alocadas, com o campo ID de sub-rede 0001 a 0005. Cada 
+sub-rede /64 fornecerá mais endereços que o necessário.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+58© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoDivisão de uma rede IPv6 em sub-redes
+Router configurado com sub-redes IPv6
+O exemplo mostra que cada uma das interfaces do router R1 foi configurada 
+para estar numa sub-rede IPv6 diferente.
+R1(config)# interface gigabitEthernet 0/0/0
+R1(config -if)# ipv6 address 2001:db8:acad:1::1/64
+R1(config -if)# no shutdown
+R1(config -if)# exit
+R1(config)# interface gigabitEthernet 0/0/1
+R1 (config -if) # ipv6 endereço 2001:db8:acad:2: :1/64
+R1(config -if)# no shutdown
+R1(config -if)# exit
+R1(config)# interface serial0/1/0
+R1 (config -if) # ipv6 address 2001:db8:acad:3::1/64
+R1(config -if)# no shutdown
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+59© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco2.9 -Sumário
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+62© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoSumário
+O que aprendi neste módulo?
+•O IPv4 tem um máximo teórico de 4,3 bilhões de endereços.
+•A IETF criou vários protocolos e ferramentas para ajudar os administradores de rede a 
+migrarem as redes para IPv6. As técnicas de migração podem ser divididas em três categorias: 
+pilha dupla, encapsulamento e tradução.
+•Os endereços IPv6 têm 128 bits e são escritos como uma sequência de valores hexadecimais.
+•Como mostrado na Figura 1, o formato preferencial para escrever um endereço IPv6 é x: x: x: 
+x: x: x: x: x, com cada “ x” consistindo de quatro valores hexadecimais. 
+•Há três tipos de endereços IPv6: unicast , multicast e anycast .
+•Um endereço IPv6 unicast identifica exclusivamente uma interface em um dispositivo 
+habilitado para IPv6. 
+•O endereço IPv6 unicast global (GUA) é globalmente exclusivo e roteável na Internet IPv6. 
+•Um endereço IPv6 de link -local permite que um dispositivo se comunique com outros 
+dispositivos habilitados para IPv6 no mesmo link e somente nesse link ( sub-rede).
+•O comando para configurar um GUA IPv6 em uma interface é ipv6 address ipv6-
+address/ prefix -length . 
+•Um dispositivo obtém um GUA dinamicamente através de mensagens ICMPv6. Os roteadores 
+IPv6 enviam mensagens ICMPv6 de RA a cada 200 segundos para todos os dispositivos 
+habilitados para IPv6 na rede.❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+63© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoSumário
+O que aprendi neste módulo? (Cont.)
+•As mensagens de RA têm três métodos: SLAAC, SLAAC com um servidor DHCPv6 sem estado e 
+DHCPv6 com estado (sem SLAAC). 
+•A ID da interface pode ser criada por meio do processo EUI -64 ou de um número de 64 bits gerado 
+aleatoriamente 
+•Esse processo usa o endereço MAC Ethernet de 48 bits de um cliente e insere outros 16 bits no meio do 
+endereço MAC de 48 bits para criar uma ID da interface de 64 bits.
+•Dependendo  do sistema  operativo , um dispositivo  pode  usar um ID de interface gerado  aleatoriamente .
+•Todos os dispositivos IPv6 devem ter um IPv6 LLA. Um LLA pode ser configurado manualmente ou criado 
+dinamicamente. 
+•Os routers Cisco criam automaticamente um endereço IPv6 de link local sempre que um endereço unicast
+global é atribuído à interface. 
+•Existem dois tipos de endereços multicast IPv6: endereços multicast conhecidos e endereços multicast de 
+nó solicitado. 
+•Dois grupos comuns de multicast atribuídos IPv6 são: ff02: :1 Grupo de multicast de todos os nós e ff02: :2 
+Grupo de multicast de todos os routers .
+•Um endereço multicast solicited -node é semelhante ao endereço multicast all-nodes. A vantagem do 
+endereço multicast solicited -node é que ele é mapeado para um endereço multicast Ethernet especial.
+•O IPv6 foi projetado com a sub-rede em mente. Um campo de ID de sub-rede separado no GUA IPv6 é 
+usado para criar sub-redes .
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)

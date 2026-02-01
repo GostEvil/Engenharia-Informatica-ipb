@@ -1,0 +1,615 @@
+Módulo 11: 
+endereçamento IPv4
+Introdução às redes v7.0 (ITN)Versão original: Cisco Network Academy
+Versão modificada: Eduardo Costa
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+16© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoObjetivos do módulo
+Título do módulo: Endereçamento IPv4
+Objetivo do módulo :Calcular um esquema de sub-rede IPv4 para segmentar com eficiência 
+sua rede.
+Título do Tópico Objetivo do Tópico
+Estrutura do endereço IPv4 Descrever a estrutura de um endereço IPv4, 
+incluindo a parte de rede, a parte de host e a 
+máscara de sub -rede.
+Unicast, broadcast e multicast IPv4 Comparar as características e os usos dos 
+endereços IPv4 unicast, multicast e broadcast.
+Tipos de endereços IPv4 Explicar os endereços IPv4 públicos, privados e 
+reservados.
+Segmentação de rede Explicar como a divisão em sub -redes segmenta 
+uma rede para facilitar a comunicação.
+Sub-rede de uma rede IPv4 Calcular sub-redes IPv4 para um prefixo /24.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+17© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoObjetivos do módulo (Cont.)
+Título do módulo: Endereçamento IPv4
+Objetivo do módulo :Calcular um esquema de sub -rede IPv4 para segmentar com eficiência 
+sua rede.
+Título do Tópico Objetivo do Tópico
+Dividir em sub -redes de prefixos /16 e /8 Calcular sub -redes IPv4 para um prefixo /16 e /8.
+Divisão em Sub -Redes para Atender a 
+RequisitosDado um conjunto de requisitos para divisão de 
+sub-redes, implementar um esquema de 
+endereçamento IPv4.
+Divisão em Sub-Redes de Tamanho Variável 
+(VLSM)Explicar como criar um esquema de 
+endereçamento flexível usando VLSM (máscaras 
+de sub -rede com tamanho variável).
+Projeto estruturado Implementar um esquema de endereçamento 
+VLSM.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+18© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco11.1 Estrutura de endereço 
+IPv4
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+19© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoEstrutura do endereço IPv4 
+Partes de rede e host
+•Um endereço IPv4 é um endereço hierárquico de 32 bits, composto por uma parte de 
+rede e uma parte do host. 
+•Ao determinar a parte da rede versus a parte do host, você deve observar o fluxo de 
+32 bits.
+•Uma máscara de sub-rede é usada para determinar as partes da rede e do host. 
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+20© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoEstrutura de endereço IPv4
+A máscara de sub -rede
+•Para identificar as partes da rede e do host de um endereço IPv4, a máscara de sub-
+rede é comparada com o endereço IPv4 bit por bit, da esquerda para a direita.
+•O processo usado para 
+identificar as partes da 
+rede e do host é chama -se 
+operação AND.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+21© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoEstrutura do endereço IPv4
+O comprimento do prefixo
+•O comprimento de prefixo é um método menos complicado usado para identificar um 
+endereço de máscara de sub-rede.
+•O comprimento do prefixo é o 
+número de bits definido como 1 
+na máscara de sub -rede. 
+•Está escrito em "notação de 
+barra", portanto, conte o 
+número de bits na máscara de 
+sub-rede e adicione -a com 
+uma barra.Máscara de Sub -
+RedeEndereço de 32 bitsPrefixo 
+Tamanho
+255.0.0.0 11111111.00000000.00000000.00000000 /8
+255.255.0.0 11111111.11111111.00000000.00000000 /16
+255.255.255.0 11111111.11111111.11111111.00000000 /24
+255.255.255.128 11111111.111111.11111111.10000000 /25
+255.255.255.192 11111111.11111111.11111111.11000000 /26
+255.255.255.224 11111111.11111111.11111111.11100000 /27
+255.255.255.240 11111111.11111111.11111111.11110000 /28
+255.255.255.248 11111111.11111111.11111111.11111000 /29
+255.255.255.252 11111111.11111111.11111111.11111100 /30
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+22© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoEstrutura de Endereços IPv4
+Determinar a Rede: AND Lógico
+•Uma operação lógica AND booleana é usada na determinação do endereço de rede.
+•O AND Lógico é a comparação de dois bits onde apenas um 1 AND 1 produz um 1 e qualquer 
+outra combinação resulta em um 0.
+•1 AND 1 = 1, 0 AND 1 = 0, 1 AND 0 = 0, 0 AND 0 = 0
+•1 = Verdadeiro e 0 = Falso
+•Para identificar o endereço de rede, 
+o endereço IPv4 do host é usado a 
+operação de AND lógico, bit a bit, 
+com a máscara de sub-rede para 
+identificar o endereço de rede.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+24© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoEstrutura de endereço IPv4
+Endereços de rede, host e broadcast
+•Dentro de cada rede há três tipos de endereços IP:
+•Endereço de rede
+•Endereços de host
+•Endereço de broadcast
+Parte de redeParte de 
+hostBitsde host
+Máscara de sub -rede
+255.255.255. 0 ou /24255 255 255
+11111111 111111 111111 1111110
+00000000
+Endereço de rede
+192.168.10. 0 ou /24192 168 10
+11000000 10100000 000010100
+00000000Todos os 0
+Primeiro endereço
+192.168.10.1 ou /24192 168 10
+11000000 10100000 000010101
+00000001Todos os 0s 
+e um 1
+Último endereço
+192.168.10.254 ou /24192 168 10
+11000000 10100000 00001010254
+11111110Todos os 1s 
+e um 0
+Endereço de 
+broadcast
+192.168.10.255 ou /24192 168 10
+11000000 10100000 00001010255
+11111111Todos os 1s
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+25© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco11.2 IPv4 Unicast , broadcast 
+e multicast
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+26© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoIPv4 Unicast , Broadcast e Multicast
+Unicast
+•A transmissão unicast envia um pacote para um endereço IP de destino.
+•Por exemplo, o PC com o IP 172.16.4.1 envia um pacote unicast para a impressora 
+com o IP 172.16.4.253.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+27© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoIPv4 Unicast , Broadcast e Multicast
+Broadcast
+•Transmissão broadcast envia um pacote para todos os outros endereços IP de 
+destino.
+•Por exemplo, o PC com o IP 172.16.4.1 envia um pacote de broadcast para todos os 
+hosts IPv4.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+28© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoIPv4 Unicast , transmissão e multicast
+Multicast
+•A transmissão multicast envia um pacote para um grupo de endereços multicast .
+•Por exemplo, o PC com o IP  172.16.4.1 envia um pacote multicast para o endereço 
+de grupo de multicast com o IP 224.10.10.5.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+29© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco11.3 Tipos de endereços 
+IPv4
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+30© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTipos de endereços IPv4
+Endereços IPv4 públicos e privados
+•Conforme definido no RFC 1918, os endereços IPv4 públicos são encaminhados 
+globalmente entre os routers do fornecedor de serviços de Internet (ISP). 
+•No entanto, os endereços privados não são globalmente encaminháveis.•Endereços privados são blocos comuns 
+de endereços usados pela maioria das 
+organizações para atribuir endereços 
+IPv4 a hosts internos.
+•Os endereços IPv4 privados não são 
+exclusivos e podem ser usados 
+internamente em qualquer rede.Endereço de 
+rede e prefixoRFC 1918 Intervalo de endereços 
+privados
+10.0.0.0/8 10.0.0.0 -10.255.255.255
+172.16.0.0/12 172.16.0.0 -172.31.255.255
+192.168.0.0/16 192.168.0.0 -192.168.255.255
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+31© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTipos de Endereços IPv4
+Encaminhamento para a Internet
+•A conversão de endereços de rede (NAT –Network Address Translation ) converte 
+endereços IPv4 privados em endereços IPv4 públicos.
+•Normalmente, o NAT é 
+ativado no router de 
+fronteira que se liga à 
+Internet.
+•Converte o endereço 
+privado interno num 
+endereço IP global 
+público.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+32© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTipos de endereços IPv4
+Endereços IPv4 de uso especial
+Endereços de loopback
+•127.0.0.0 / 8 (127.0.0.1 a 127.255.255.254)
+•Comumente identificado como apenas 
+127.0.0.1
+•Usado num host para testar se o TCP / IP está 
+operacional.
+Endereços locais de link
+•169.254.0.0 / 16 (169.254.0.1 a 169.254.255.254)
+•Comumente conhecido como endereços APIPA ( Automatic Private IP Addressing ) ou 
+endereços auto-atribuídos . 
+•Usado pelos clientes DHCP do Windows para se autoconfigurar quando nenhum 
+servidor DHCP está disponível.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+33© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTipos de endereços IPv4
+Endereçamento em Classes ( Legacy Classful Addressing )
+O RFC 790 (1981) aloca endereços IPv4 
+em classes
+•Classe A (0.0.0/8 a 127.0.0.0/8)
+•Classe B(128.0.0.0 /16 —191.255.0.0 /16)
+•Classe C (192.0.0.0 /24 —223.255.255.0 /24)
+•Classe D(224.0.0.0 a 239.0.0.0)
+•Classe E (240.0.0.0 —255.0.0.0)
+•Endereços em classe desperdiçaram muitos 
+endereços IPv4.
+A alocação de endereços em classe foi substituída 
+por endereçamento sem classe que ignora as regras 
+das classes (A, B, C). 
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+34© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoTipos de endereço IPv4 
+Atribuição de endereços IP
+•A IANA (Internet Assigned Numbers Authority ) gere e aloca blocos de endereços IPv4 
+e IPv6 a cinco RIRs (Registros Regionais da Internet). 
+•Os RIRs são responsáveis 
+pela alocação de endereços IP 
+aos ISPs que fornecem blocos 
+de endereços IPv4 a ISPs e 
+organizações menores. 
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+35© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco11.4 Segmentação
+de rede
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+36© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoSegmentação de rede
+Domínios de Broadcast e Segmentação
+•Muitos protocolos usam broadcasts ou multicasts (por exemplo, ARP usam 
+broadcasts para localizar outros dispositivos, hosts enviam broadcasts de 
+descoberta DHCP para localizar um servidor DHCP).
+•Os switches propagam broadcasts por todas as interfaces, exceto a interface em que 
+foram recebidos. 
+•O único dispositivo que 
+interrompe as transmissões é 
+um router .
+•Os routers não propagam 
+broadcasts. 
+•Cada interface do router
+conecta -se a um domínio de 
+broadcast e os broadcasts são 
+propagados apenas dentro 
+desse domínio de broadcast 
+específico.❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+37© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoSegmentação de rede
+Problemas com grandes domínios de broadcast
+•Um problema desse tipo de domínio é que os 
+hosts podem gerar broadcasts em excesso e 
+afetar a rede de forma negativa.
+•A solução é reduzir o tamanho da rede para 
+criar domínios de broadcast menores num 
+processo denominado divisão em sub-redes . 
+•Dividindo o endereço de rede 172.16.0.0 / 16 
+em duas sub-redes de 200 utilizadores cada: 
+172.16.0.0 / 24 e 172.16.1.0 / 24. 
+•Os broadcasts são propagados apenas dentro 
+dos domínios de broadcast menores. 
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+38© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoSegmentação de rede 
+Razões para segmentar redes
+•A divisão em sub-redes reduz o tráfego total da rede e melhora seu desempenho. 
+•Pode ser usado para implementar políticas de segurança entre sub-redes .
+•A sub-rede reduz o número de dispositivos afetados pelo tráfego de broadcast 
+anormal.
+•As sub-redes são usadas por uma variedade de razões, incluindo:
+Local
+ Grupo ou Função
+ Tipo de dispositivo
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+39© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco11.5 Divisão em Sub-redes
+de uma rede  IPv4
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+40© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoDivisão em Sub-Redes de uma rede IPv4
+Sub-rede com limite de octetos
+•É mais fácil dividir redes em sub-redes com limites dos octetos: /8, /16 e /24. 
+•Observe que o uso de prefixos mais longos diminui o número de hosts por sub-rede.
+Comprimento 
+do PrefixoMáscara de sub -
+redeMáscara de sub -rede em binário (n = rede, h = 
+host)Nº de hosts
+/8 255.0.0.0nnnnnnnn .hhhhhhhh.hhhhhhhh.hhhhhhhh 
+11111111 .00000000.00000000.0000000016.777.214
+/16 255.255 .0.0nnnnnnnn.nnnnnnnn .hhhhhhhh.hhhhhhhh 
+11111111.11111111 .00000000.0000000065.534
+/24 255.255.255 .0nnnnnnnn.nnnnnnnn .nnnnnnnn .hhhhhhhh 
+11111111.11111111.11111111 .00000000254
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+41© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoDivisão em Sub-redes de uma rede IPv4
+Sub-redes com limite de octetos (cont.)
+•Na primeira tabela a rede 10.0.0.0/8 é dividida em sub-redes usando /16 e na 
+segunda tabela, usando /24.
+Endereço de 
+sub-rede 
+(256 possíveis 
+sub-redes)Intervalo de hosts 
+(65.534 hosts possíveis por 
+sub-rede)Broadcast
+10.0.0.0/16 10.0.0.1 -10.0.255.254 10.0.255.255
+10.1. 0.0/16 10.1.0.1 -10.1.255.254 10.1.255.255
+10.2.0.0/16 10.2.0.1 -10.2.255.254 10.2.255.255
+10.3.0.0/16 10.3.0.1 -10.3.255.254 10.3.255.255
+10.4.0.0/16 10.4.0.1 -10.4.255.254 10.4.255.255
+10.5.0.0/16 10.5.0.1 -10.5.255.254 10.5.255.255
+10.6.0.0/16 10.6.0.1 -10.6.255.254 10.6.255.255
+10.7.0.0/16 10.7.0.1 -10.7.255.254 10.7.255.255
+... ... ...
+10.255 .0.0/16 10.255 .0.1 -10.255 .255.254 10.255 .255.255Endereço de sub -
+rede 
+(65.536 sub -redes 
+possíveis)Intervalo de hosts 
+(254 hosts possíveis por sub -
+rede)Broadcast
+10.0.0 .0/24 10.0.0 .1 -10.0.0 .254 10.0.0 .255
+10.0.1 .0/24 10.0.1 .1 -10.0.1 .254 10.0.1 .255
+10.0.2 .0/24 10.0.2 .1 -10.0.2 .254 10.0.2 .255
+… … …
+10.0.255 .0/24 10.0.255 .1 -10.0.255 .254 10.0.255 .255
+10.1.0 .0/24 10.1.0 .1 -10.1.0 .254 10.1.0 .255
+10.1.1 .0/24 10.1.1 .1 -10.1.1 .254 10.1.1 .255
+10.1.2 .0/24 10.1.2 .1 -10.1.2 .254 10.1.2 .255
+… … …
+10.100.0 .0/24 10.100.0 .1 -10.100.0 .254 10.100.0 .255
+... ... ...
+10.255.255 .0/24 10.255.255 .1 -10.2255.255 .254 10.255.255 .255
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+42© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoDivisão em Sub-redes de uma rede IPv4 
+Sub-rede dentro de um limite de octeto
+•Consulte a tabela para ver seis opções de divisão em sub-redes de uma rede /24.
+Comprimento 
+do PrefixoMáscara de sub -
+redeMáscara de Sub -Rede em Binário
+(n = rede, h = host)Nº de 
+subredesNº de 
+hosts
+/25 255.255.255.128nnnnnnnn.nnnnnnnn.nnnnnnnn. nhhhhhhh
+11111111.11111111.11111111. 100000002 126
+/26 255.255.255.192nnnnnnnn.nnnnnnnn.nnnnnnnn. nnhhhhhh
+11111111.11111111.11111111. 110000004 62
+/27 255.255.255.224nnnnnnnn.nnnnnnnn.nnnnnnnn. nnnhhhhh
+11111111.11111111.11111111. 111000008 30
+/28 255.255.255.240nnnnnnnn.nnnnnnnn.nnnnnnnn. nnnnhhhh
+11111111.11111111.11111111. 1111000016 14
+/29 255.255.255.248nnnnnnnn.nnnnnnnn.nnnnnnnn. nnnnnhhh
+11111111.11111111.11111111. 1111100032 6
+/30 255.255.255.252nnnnnnnn.nnnnnnnn.nnnnnnnn. nnnnnnhh
+11111111.11111111.11111111. 1111110064 2
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+46© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco11.6 Sub-redes com prefixos 
+/16 e /8
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+47© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoSub-redes com prefixos /16 e /8
+Criar sub-redes com um prefixo de barra 16
+•A tabela destaca todos os 
+cenários possíveis para a 
+sub-rede de um prefixo 
+/16.Comprimento do 
+PrefixoMáscara de sub -
+redeEndereço de rede (n = rede, h = host)Nº de 
+subredesNº de hosts
+/17 255.255. 128.0nnnnnnnn.nnnnnnnn. nhhhhhhh.hhhhhhhh 
+11111111.11111111. 10000000.000000002 32766
+/18 255.255. 192.0nnnnnnnn.nnnnnnn. nnhhhhhhhhhhhhhh 
+11111111.111111. 11000000.000000004 16382
+/19 255.255. 224.0nnnnnnnn.nnnnnnn. nnnhhhhhhhhhhhh 
+11111111.111111. 11100000.000000008 8190
+/20 255.255. 240.0nnnnnnnn.nnnnnnn. nnnnhhhhhhhhhhhh 
+11111111.111111. 11110000.0000000016 4094
+/21 255.255. 248.0nnnnnnnn.nnnnnnn. nnnnnhhh.hhhhhhhh 
+11111111.111111. 11111000.0000000032 2046
+/22 255.255. 252.0nnnnnnnn.nnnnnnn. nnnnnnhh.hhhhhhhh 
+11111111.111111. 11111100.0000000064 1022
+/23 255.255. 254.0nnnnnnnn.nnnnnnn . nnnnnnh.hhhhhhhh
+11111111.111111. 11111110.00000000128 510
+/24 255.255. 255.0nnnnnnnn.nnnnnnn. nnnnnnnn .hhhhhhhh 
+11111111.111111. 11111111 .00000000256 254
+/25 255.255. 255.128nnnnnnnn.nnnnnnn. nnnnnnn.n hhhhhhh 
+11111111.111111. 11111111.1 0000000512 126
+/26 255.255. 255.192nnnnnnnn.nnnnnnn. nnnnnnnn.nn hhhhhh 
+11111111.111111. 11111111.11 0000001024 62
+/27 255.255. 255.224nnnnnnnn.nnnnnnn. nnnnnnnn.nnn hhhhh 
+11111111.111111. 11111111.111 000002048 30
+/28 255.255 .255. 240nnnnnnnn.nnnnnnn. nnnnnnnn.nnnn hhhh 
+11111111.111111. 11111111.1111 00004096 14
+/29 255.255. 255.248nnnnnnnn.nnnnnnn. nnnnnnnn.nnnnn hhh 
+11111111.111111. 11111111.11111 0008192 6
+/30 255.255. 255.252nnnnnnnn.nnnnnnn. nnnnnnnn.nnnnnn hh 
+11111111.111111. 11111111.1111 0016384 2
+48© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoSub-redes com prefixos /16 e /8
+Criar 100 sub-redes com um prefixo de /16
+Considere uma empresa grande que precise de pelo 
+menos 100 sub-redes e tenha escolhido o endereço 
+privado 172.16.0.0/16 como endereço da rede interna.
+•A figura apresenta o número de sub-redes que 
+podem ser criadas ao emprestar bits do terceiro e do 
+quarto octeto. 
+•Observe que agora existem até 14 bits de host que 
+podem ser emprestados (ou seja, os últimos dois bits 
+não podem ser emprestados).
+Para satisfazer o requisito de 100 sub-redes para a 
+empresa, 7 bits (ou seja, 27= 128 sub-redes ) precisariam 
+ser emprestados (para um total de 128 sub-redes ).
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+49© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoSub-rede com prefixos /16 e /8
+Criar 1000 sub-redes com um prefixo /8
+Considere um pequeno ISP que requer 1000 sub-
+redes para seus clientes usando o endereço de 
+rede 10.0.0.0/8, o que significa que há 8 bits na 
+parte da rede e 24 bits de host disponíveis para 
+empréstimo para sub-redes . 
+•A figura apresenta o número de sub-redes que podem 
+ser criadas ao emprestar bits do segundo e terceiro 
+octeto. 
+•Observe que há agora até 22 bits de host que podem 
+ser emprestados (ou seja, os últimos dois bits não 
+podem ser emprestados).
+Para satisfazer o requisito de 1000 sub-redes para 
+a empresa, 10 bits (ou seja, 210= 1024 sub-redes ) 
+precisariam ser emprestados (para um total de 
+1024 sub-redes )
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+52© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco11.7 Sub -rede para atender 
+aos requisitos
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+53© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoSub-rede para atender aos requisitos
+Sub-rede Privada versus Espaço de Endereços IPv4 Público
+As redes empresariais terão:
+•Intranet -rede interna de uma empresa 
+normalmente usando endereços IPv4 privados.
+•DMZ —A empresas que têm servidores visíveis 
+para a internet. Os dispositivos na DMZ usam 
+endereços IPv4 públicos.
+•A empresa poderia usar a rede 10.0.0.0/8 e sub-
+redes com prefixos /16 ou /24. 
+•Os dispositivos DMZ teriam que ser configurados 
+com endereços IP públicos.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+54© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoSub-rede para atender aos requisitos
+Minimizar endereços IPv4 de host não utilizados e maximizar sub -redes
+Há duas considerações no planeamento de sub-redes : 
+•O número de endereços de host necessários para cada rede 
+•O número de sub-redes individuais necessárias
+Comprimento 
+do PrefixoMáscara de sub -
+redeMáscara de Sub-Rede em Binário
+(n= rede, h= host)Nº de 
+subredesNº de 
+hosts
+/25 255.255.255.128nnnnnnnn.nnnnnnnn.nnnnnnnn. nhhhhhhh
+11111111.11111111.11111111. 100000002 126
+/26 255.255.255.192nnnnnnnn.nnnnnnnn.nnnnnnnn. nnhhhhhh
+11111111.11111111.11111111. 110000004 62
+/27 255.255.255.224nnnnnnnn.nnnnnnnn.nnnnnnnn. nnnhhhhh
+11111111.11111111.11111111. 111000008 30
+/28 255.255.255.240nnnnnnnn.nnnnnnnn.nnnnnnnn. nnnnhhhh
+11111111.11111111.11111111. 1111000016 14
+/29 255.255.255.248nnnnnnnn.nnnnnnnn.nnnnnnnn. nnnnnhhh
+11111111.11111111.11111111. 1111100032 6
+/30 255.255.255.252nnnnnnnn.nnnnnnnn.nnnnnnnn. nnnnnnhh
+11111111.11111111.11111111. 1111110064 2
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+55© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoSub-rede para atender  aos requisitos
+Exemplo: sub-rede IPv4 eficiente
+•Neste exemplo, a sede da empresa recebeu do 
+seu ISP um endereço de rede pública 
+172.16.0.0/22 (10 bits de host), fornecendo 
+1.022 endereços de host.
+•Existem cinco sites e, portanto, cinco conexões 
+de internet, o que significa que a organização 
+requer 10 sub-redes com a maior sub-rede
+requer 40 endereços.
+•Foram alocadas10 sub-redes com um prefixo de 
+sub-rede /26 (ou seja, com a máscara de rede 
+255.255.255.192).
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+57© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco11.8 VLSM
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+60© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoVLSM
+Conservação de endereços IPv4
+Dada a topologia, 7 sub-redes são necessárias (ou seja, quatro LANs e três links WAN) e 
+o maior número de host está no Edifício Dcom 28 hosts.
+•Um prefixo /27 forneceria 8 sub-redes de 30 endereços IP de host e, portanto, 
+suportaria essa topologia.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+61© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoVLSM
+Conservação de endereços IPv4 (Cont.) 
+No entanto, os links WAN ponto a ponto exigem apenas dois 
+endereços e, por isso são desperdiçados 28 endereços em cada 
+um, resultando num total de 84 endereços não utilizados.
+•A aplicação de um esquema de divisão em sub-redes tradicional a esse cenário não é 
+muito eficaz e resulta em desperdício.
+•O VLSM foi desenvolvido para evitar o desperdício de endereços, permitindo -nos 
+criar uma sub-rede de uma sub-rede.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+62© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoVLSM
+VLSM
+•O lado esquerdo exibe o esquema de sub-rede
+tradicional (ou seja, a mesma máscara de sub-rede), 
+enquanto o lado direito ilustra como o VLSM pode ser 
+usado para dividir em sub-redes uma sub-rede.  
+Divisão da última sub-rede em oito sub-redes /30.
+•Ao usar o VLSM, comece sempre por satisfazer os 
+requisitos do host da maior sub-rede e continue 
+dividindo em sub-redes até que os requisitos do host 
+da menor sub-rede sejam atendidos.
+•A topologia resultante com VLSM aplicada.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+63© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoVLSM
+Atribuição de endereço de topologia VLSM
+•Usando sub-redes VLSM, as redes LAN e inter-router podem ser endereçadas sem 
+desperdício desnecessário, como mostrado no diagrama de topologia lógica.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+64© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco11.9 Projeto estruturado
+65© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoProjeto Estruturado
+Planeamento de endereços de rede IPv4
+O planeamento de rede IP é crucial para desenvolver uma solução escalável para uma 
+rede empresarial. 
+•Para desenvolver um esquema de endereçamento de toda a rede IPv4, você precisa saber 
+quantas sub-redes são necessárias, quantos hosts uma sub-rede específica requer, quais 
+dispositivos fazem parte da sub-rede, quais partes da rede usam endereços privados e quais as 
+que usam endereços públicos e muitos outros fatores determinantes. 
+Examine as necessidades do uso da rede de uma organização e como as sub-redes
+serão estruturadas. 
+•Realize um estudo de requisitos de rede examinando toda a rede para determinar como cada área 
+será segmentada. 
+•Determine quantas sub-redes são necessárias e quantos hosts por sub-rede. 
+•Determine pools de endereços DHCP e pools de VLAN de camada 2.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+66© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoProjeto Estruturado
+Atribuição de endereço de dispositivo
+Dentro de uma rede, existem diferentes tipos de dispositivos que exigem endereços:
+•Clientes de utilizadores finais —A maioria usa DHCP para reduzir erros e sobrecarga na equipa 
+de suporte à rede. Os clientes IPv6 podem obter informações de endereço usando DHCPv6 ou 
+SLAAC.
+•Servidores e periféricos -Devem ter um endereço IP estático previsível.
+•Servidores acessíveis a partir da Internet —Os servidores devem ter um endereço IPv4 
+público, mais frequentemente acedido usando NAT. 
+•Dispositivos intermediários -os dispositivos recebem endereços para gestão, monitorização e 
+segurança de rede.
+•Gateway—Os routers e os dispositivos de firewall que são gateway por omissão para os hosts 
+dessa rede. 
+Ao desenvolver um esquema de endereçamento IP , geralmente é recomendável que 
+você tenha um padrão definido de como os endereços são alocados para cada tipo de 
+dispositivo. 
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+68© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco11.10 -Sumário
+71© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoSumário
+O que aprendi neste módulo?
+•A estrutura de endereçamento IP consiste num endereço de rede hierárquico de 32 bits que 
+identifica a parte de rede e a parte de host. Os dispositivos de rede usam um processo 
+chamado AND lógico usando o endereço IP e a máscara de sub-rede associada para 
+identificar as partes da rede e do host.
+•Os pacotes IPv4 de destino podem ser unicast , broadcast e multicast .
+•Há endereços IP encaminháveis globalmente são atribuídos pela IANA e há três intervalos 
+de endereços IP privados que não podem ser encaminhados globalmente, mas podem ser 
+usados em todas as redes privadas internas.
+•Reduzir grandes domínios de broadcast usando sub-redes para criar domínios de broadcast 
+menores, reduzir o tráfego geral da rede e melhorar o desempenho da rede. 
+•Crie sub-redes IPv4 usando um ou mais bits do host como bits de rede. No entanto, as 
+redes são mais facilmente divididas em sub-redes com limites de octeto de / 8, / 16 e / 24.
+•Redes maiores podem ser sub-redes com prefixos /8 ou /16.
+•Use o VLSM para reduzir o número de endereços de host não utilizados por sub-rede.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+72© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoSumário
+O que aprendi neste módulo? (Cont.)
+•O VLSM permite que um espaço de rede seja dividido em partes desiguais. Comece sempre 
+por satisfazer os requisitos de host da maior sub-rede. Continue a divisão em sub-redes até 
+atender aos requisitos de host da menor sub-rede. 
+•Ao projetar um esquema de endereçamento de rede, considere os requisitos internos, DMZ 
+e externos. Use um esquema de endereçamento IP interno consistente com um padrão 
+definido de como os endereços são alocados para cada tipo de dispositivo.
+❑ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)

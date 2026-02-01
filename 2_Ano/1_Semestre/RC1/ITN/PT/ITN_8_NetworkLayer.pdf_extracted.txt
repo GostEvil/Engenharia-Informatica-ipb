@@ -1,0 +1,417 @@
+Módulo 8: Camada de 
+rede
+Introdução às redes v7.0 (ITN)Versão original: Cisco Network Academy
+Versão modificada: Eduardo Costa
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+11© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoMódulo 8: Tópicos
+O que vou aprender neste módulo?
+Título do Tópico Objetivo do Tópico
+Características da camada de 
+redeExplicar como a camada de rede usa os protocolos IP para 
+comunicações confiáveis.
+Pacote IPv4Explicar a função dos campos principais do cabeçalho nos pacotes 
+IPv4.
+Pacote IPv6Explicar a função dos campos principais  do cabeçalho nos pacotes 
+IPv6.
+Como um host encaminhaExplicar como os dispositivos de rede usam as tabelas de 
+encaminhamento  para direcionar pacotes para uma rede de destino.
+Tabelas de encaminhamento 
+do routerExplicar a função dos campos na tabela de encaminhamento de um 
+router .
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+12© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco8.1 Características da 
+camada de rede
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+13© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoCaracterísticas da camada de rede 
+Camada de Rede
+•Fornece serviços para permitir que dispositivos 
+finais troquem dados
+•IP versão 4 (IPv4) e IP versão 6 (IPv6) são os 
+principais protocolos de comunicação da camada 
+de rede.
+•A camada de rede executa quatro operações 
+básicas:
+•Endereça os dispositivos finais
+•Encapsulamento
+•Encaminhamento
+•Desencapsulamento
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+14© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoCaracterísticas da camada de rede 
+Encapsulamento IP
+•O IP encapsula os segmentos da 
+camada de transporte.
+•O IP pode usar um pacote IPv4 ou 
+IPv6 sem impacto no segmento da 
+camada 4.
+•O pacote IP será examinado por 
+todos os dispositivos de camada 3 
+à medida que atravessa a rede.
+•O endereçamento IP não sofre 
+alterações desde a origem até ao 
+destino.
+Observação: A utilização de NAT altera o 
+endereçamento, mas será discutido 
+apenas num módulo posterior. 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+15© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoCaracterísticas da camada de rede
+Características do IP
+O IP deve ter baixa sobrecarga e pode ser descrito como:
+•Sem ligação ( Connectionless ) 
+•Melhor Esforço ( Best Effort )
+•Independente do meio físico
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+16© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoCaracterísticas da camada de rede 
+Sem ligação ( Connectionless )
+IP não estabelece ligação
+•Nenhuma ligação é estabelecida com o destino antes do envio dos pacotes de dados.
+•Não há informações de controlo necessárias (sincronizações, confirmações, etc.).
+•O destino receberá o pacote quando ele chegar, mas nenhuma pré-notificação é enviada 
+pelo IP.
+•Se houver necessidade de tráfego orientado à ligação, outro protocolo irá tratar disso 
+(normalmente TCP na camada de transporte).
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+17© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoCaracterísticas da camada de rede
+Melhor Esforço ( Best Effort )
+IP é melhor esforço
+•IP não garante a entrega do pacote.
+•O IP tem sobrecarga reduzida, uma 
+vez que não há mecanismo para 
+reenviar dados que não são 
+recebidos.
+•IP não espera confirmações.
+•IP não sabe se o outro dispositivo 
+está operacional ou se recebeu o 
+pacote.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+18© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoCaracterísticas da camada de rede
+Independente do meio físico
+IP não é confiável  
+•O IP não pode gerir ou corrigir pacotes 
+não entregues ou corrompidos.
+•IP não pode retransmitir após um erro.
+•O IP não pode reordenar pacotes fora 
+de sequência.
+•IP deve depender de outros protocolos 
+para essas funções.
+O protocolo IP é independe de meio físico.
+•O IP não se preocupa com o tipo de 
+quadro necessário na camada de 
+ligação de dados ou com o tipo de meio 
+na camada física.
+•Pacotes IP podem ser enviados por 
+qualquer tipo de meio: cobre, fibra ou 
+sem fios.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+19© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoCaracterísticas da Camada de Rede
+Independente do meio físico (Cont.) 
+A camada de rede estabelece a Unidade 
+Máxima de Transmissão (MTU –Maximum
+Transmission Unit).
+•A camada de rede recebe essa informação 
+a partir da informação de controlo enviada 
+pela camada de ligação de dados.
+•Em seguida, a rede estabelece o tamanho 
+da MTU.
+Fragmentação ocorre quando a Camada 3 
+divide o pacote IPv4 em unidades menores.
+•Fragmentação causa latência.
+•O IPv6 não fragmenta pacotes.
+•Exemplo: Num router passa -se de  
+Ethernet para uma WAN lenta, com um 
+MTU menor
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+20© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco8.2 Pacote IPv4
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+21© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoPacote IPv4 
+Cabeçalho dos Pacotes IPv4
+IPv4 é o principal protocolo de comunicação na camada de rede.
+O cabeçalho da camada rede tem muitas finalidades:
+•Garante que o pacote é enviado na direção correta (para o destino).
+•Contém informação para o processamento da camada de rede em vários campos.
+•As informação no cabeçalho é usada por todos os dispositivos de camada 3 que 
+manipulam o pacote
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+22© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoPacote IPv4 
+Campos do Cabeçalhos dos Pacotes IPv4
+As características do cabeçalho de rede IPv4:
+•É em binário.
+•Contém vários campos de informação
+•O diagrama é lido da esquerda para a 
+direita, 4 bytes por linha
+•Os dois campos mais importantes são os 
+endereços de origem e de destino.
+Protocolos podem ter uma ou mais funções.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+23© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoPacote IPv4 
+Campos do Cabeçalho dos Pacotes IPv4
+Campos mais importantes no cabeçalho IPv4:
+Função Descrição
+Versão Issoserá para v4, ao contrário de v6, um campo de 4 bits = 0100 
+Serviços Diferenciados Usado para QoS : campo DiffServ —DS ou o IntServ mais antigo —ToS ou 
+Tipo de Serviço 
+Soma de verificação do 
+cabeçalhoDetectar corrupção no cabeçalho IPv4
+Tempo de vida (TTL) Contagem de saltos de camada 3. Quando se tornar zero, o router eliminará o 
+pacote. 
+Protocolos I.D.s do protocolo de próximo nível: ICMP , TCP, UDP , etc.
+Endereço IPv4 de Origem Endereço de origem de 32 bits
+Endereço IPV4 de 
+destinoEndereço de destino de 32 bits
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+25© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco8.3 Pacotes IPv6
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+26© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoPacote IPv6 
+Limitações do IPv4
+O IPv4 tem três limitações principais:
+•Esgotamento de endereços IPv4 —Ficámos basicamente sem endereçamento IPv4.
+•Falta de conectividade de extremo a extremo —Para que o IPv4 sobreviva mais tempo, 
+foi criado o endereçamento privado e o NAT. Com a utilização do endereçamento privado 
+deixa de ser possível a comunicação direta com o endereçamento público.
+•Aumenta a complexidade da rede —o NAT foi definido como uma solução temporária e 
+cria problemas na rede como um efeito colateral da manipulação do endereçamento dos 
+cabeçalhos de rede. O NAT causa latência e dificuldades na despistagem de problemas.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+27© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoPacotes IPv6
+Visão geral do IPv6
+•O IPv6 foi desenvolvido pela Internet 
+Engineering Task Force (IETF).
+•O IPv6 supera as limitações do IPv4.
+•Melhorias que o IPv6 fornece:
+•Aumento do espaço de endereçamento  
+-baseado em endereços de 128 bits, e 
+não em 32 bits
+•Manipulação optimizada de pacotes -O 
+cabeçalho IPv6 foi simplificado e tem 
+menos campos
+•Elimina a necessidade de NAT -uma 
+vez que há uma grande quantidade de 
+endereçamento, não há necessidade de 
+usar o endereçamento privado 
+internamente e do seu mapeamento para 
+endereços públicos partilhados
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+28© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoPacotes IPv6
+Campos no cabeçalho dos pacotes IPv6
+•O cabeçalho IPv6 é simplificado, 
+mas não menor.
+•O cabeçalho tem 40 bytes ou 
+octetos de comprimento.
+•Vários campos IPv4 foram 
+removidos para melhorar o 
+desempenho.
+•Alguns campos IPv4 foram 
+removidos para melhorar o 
+desempenho:
+•Flag
+•Deslocamento do fragmento
+•Soma de verificação do cabeçalho
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+29© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoPacotes IPv6
+Cabeçalho do Pacote IPv6
+Campos significativos no cabeçalho IPv6:
+Função Descrição
+Versão Issoserá para v6, ao contrário de v4, um campo de 4 bits = 0110 
+Classe de tráfego Usado para QoS : Equivalente ao campo DiffServ —DS 
+Etiqueta de fluxo Informa o dispositivo para tratar o fluxos idênticos (mesma etiqueta) da mesma 
+maneira, campo de 20 bits
+Tamanho do conteúdo Este campo de 16 bits indica o comprimento da parte dos dados ou do 
+conteúdo útil do pacote IPv6
+Próximo cabeçalho I.D.s do protocolo do próximo nível: ICMP , TCP, UDP , etc.
+Limite de saltos Substitui o campo TTL da Camada 3 de contagem de saltos (hop count )
+Endereço IPv6 de Origem Endereço de origem de 128 bits
+Endereço IPv6 de destino Endereço de destino de 128 bits
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+30© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoPacote IPv6 
+Cabeçalho do pacote IPv6 (Cont.)
+O pacote IPv6 também pode conter cabeçalhos de extensão (EH –Extension headers ). 
+Características dos cabeçalhos EH: 
+•fornecer informações opcionais sobre a camada de rede
+•são opcionais
+•são colocados entre o cabeçalho IPv6 e o conteúdo útil
+•podem ser usados para fragmentação, segurança, suporte à mobilidade etc.
+Nota: Ao contrário do IPv4, os routers não fragmentam pacotes IPv6.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+32© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco8.4 Como um host encaminha
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+33© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoComo um host encaminha 
+Decisão de encaminhamento do host
+•Os pacotes são sempre criados na origem.
+•Cada dispositivo host cria sua própria tabela de roteamento.
+•Um host pode enviar pacotes para o seguinte:
+•Próprio —127.0.0.1 (IPv4),: :1 (IPv6)
+•Hosts locais —o destino está na mesma LAN
+•Hosts remotos —os dispositivos não estão na mesma LAN 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+34© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoComo um host encaminha 
+Decisão de encaminhamento do host (Cont.)
+•O dispositivo de origem determina se o destino é local ou remoto
+•Método de determinação:
+•IPv4 —A origem usa seu próprio endereço IP e máscara de sub-rede, juntamente com o 
+endereço IP de destino
+•IPv6 —A origem usa o endereço de rede e o prefixo anunciados pelo router local
+•O tráfego local é despejado na interface do host a ser tratado por um dispositivo 
+intermediário.
+•O tráfego remoto é encaminhado diretamente para o gateway por omissão ( default 
+gateway ) na LAN.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+35© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoComo um host encaminha 
+Gateway por omissão ( default gateway )
+Um router ou um switch de camada 3 pode ser um gateway por omissão ( default 
+gateway ).
+Características de um gateway por omissão (DGW):
+•Deve ter um endereço IP no mesmo intervalo que o resto da LAN.
+•Pode aceitar dados da LAN e é capaz de encaminhar o tráfego para fora da LAN.
+•Pode encaminhar para outras redes.
+Se um dispositivo não tiver um gateway por omissão ou um gateway por omissão 
+incorreto, o seu tráfego não será capaz de sair da LAN.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+36© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoComo um host encaminha
+Um host encaminha para o gateway por omissão
+•Em IPv4 o host obterá o gateway por 
+omissão (DGW) estaticamente ou 
+através de DHCP.
+•Em IPv6 o DGW pode ser enviado 
+através de uma solicitação de roteador 
+(RS) ou pode ser configurado 
+manualmente.
+•Um DGW é uma rota estática que será 
+uma rota de último recurso na tabela de 
+encaminhamento.
+•Todos os dispositivos na LAN precisarão 
+do DGW se pretenderem enviar tráfego 
+remotamente.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+37© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoComo um host encaminha 
+Tabelas de encaminhamento do host
+•No Windows, route print ou 
+netstat -rexibe a tabela de 
+encaminhamento do PC
+•São apresentadas três 
+seções por estes dois 
+comandos:
+•Lista de interfaces —todas 
+as interfaces potenciais e 
+endereçamento MAC
+•Tabela de encaminhamento 
+IPv4
+•Tabela de encaminhamento 
+IPv6
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+38© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco8.5 Introdução ao 
+Encaminhamento
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+39© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoIntrodução ao encaminhamento
+Decisão de encaminhamento de pacotes no router
+O que acontece quando o router recebe o quadro do dispositivo host?
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+40© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoIntrodução ao encaminhamento
+Tabela de encaminhamento do router IP
+Há três tipos de rotas na tabela de encaminhamento de um router :
+•Diretamente ligadas —Estas rotas são adicionadas automaticamente pelo router , desde que a interface 
+esteja ativa e lhe tenha sido atribuído um endereço. 
+•Remota—Estas são as rotas para as quais o router não tem uma ligação direta e pode ser aprendidas:
+•Manualmente —com uma rota estática configurada
+•Dinamicamente —através de um protocolo de encaminhamento que permite que os routers partilhem 
+informações entre eles
+•Rota por omissão —será usada quando não houver correspondência na tabela de encaminhamento e 
+nesse caso encaminha todo o tráfego para uma direção específica. 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+41© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoIntrodução ao encaminhamento
+Encaminhamento  Estático
+Características do encaminhamento 
+estático:
+•Deve ser configurado manualmente
+•Deve ser atualizado manualmente 
+pelo administrador quando houver 
+uma alteração na topologia
+•Bom para pequenas redes não 
+redundantes
+•Muitas vezes usado em conjunto 
+com um protocolo de 
+encaminhamento dinâmico para 
+configurar uma rota por omissão
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+42© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoIntrodução ao encaminhamento
+Encaminhamento  Dinâmico
+Características do encaminhamento 
+dinâmico:
+•Descobrir redes remotas
+•Manter as informações de 
+encaminhamento atualizadas
+•Escolher o melhor caminho para uma 
+rede de destino
+•Encontrar os novos melhores caminhos 
+quando houver uma alteração de 
+topologia
+O encaminhamento dinâmico também 
+pode partilhar com outros routers rotas 
+por omissão estáticas.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+44© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoIntrodução ao encaminhamento
+Introdução às tabelas de encaminhamento IPv4
+O comando show iproute mostra as 
+seguintes origens de rota:
+•L-Endereço IP da interface local 
+diretamente ligada
+•C-Rede diretamente ligada
+•S-Rota estática que foi configurada 
+manualmente por um administrador
+•O -OSPF
+•D-EIGRP
+Este comando mostra tipos de rotas:
+•Diretamente ligadas -C e L
+•Rotas remotas -O, D, etc.
+•Rotas por omissão -S* 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+45© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco8.6 -Sumário
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+46© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoSumário
+O que aprendi neste módulo?
+•IP é sem ligação, o melhor esforço e independente do meio físico.
+•IP não garante a entrega de pacotes.
+•Um cabeçalho do pacote IPv4 consiste em campos que contêm informações sobre o pacote.
+•O IPv6 supera a falta de conectividade extremo a extremo do IPv4 e o aumento da 
+complexidade da rede.
+•Um dispositivo determinará se um destino é ele próprio, outro host local ou um host remoto.
+•Um gateway por omissão é o router que faz parte da LAN e será usado como porta para outras 
+redes.
+•A tabela de encaminhamento contém uma lista de todos os endereços de rede conhecidos 
+(prefixos) e para onde encaminhar o pacote.
+•O router usa a correspondência de máscara de sub-rede mais longa ou de prefixo.
+•A tabela de encaminhamento tem três tipos de entradas de rota: redes diretamente ligadas, 
+redes remotas e uma rota por omissão.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+

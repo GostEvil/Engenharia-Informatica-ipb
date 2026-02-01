@@ -1,0 +1,263 @@
+Módulo 6: Camada de Ligação 
+de Dados
+Introdução às redes v7.0 (ITN)Versão original: Cisco Network Academy
+Versão modificada: Eduardo Costa
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+10© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoObjetivos do módulo
+Título do Módulo: Camada de Ligação de Dados
+Objetivo do módulo : Explique como o controlo de acesso ao meio na camada de 
+ligação de dados suporta a comunicação entre redes .
+Título do Tópico Objetivo do Tópico
+Finalidade da camada de ligaçãode dados Descrever o objetivo e a função da camada de ligação 
+de dados na preparação da comunicação para 
+transmissão em determinado meio físico.
+Topologias Comparar as características dos métodos de controlo 
+de acesso ao meio físico nas topologias WAN e LAN.
+Quadro da ligação de dados Descrever as características e as funções do quadro da 
+camada de ligação de dados.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+11© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco6.1 Finalidade da camada 
+de ligação de dados
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+12© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoObjetivo da camada de ligação de dados 
+A camada de ligação de dados
+•A camada de ligação de dados é 
+responsável pelas comunicações entre 
+as placas de interface de rede dos 
+dispositivos finais.
+•Permite que os protocolos da camada 
+superior acedam ao meio da camada 
+física. Encapsula pacotes da Camada 3 
+(IPv4 e IPv6) em Frames da Camada 2.
+•Executa a detecção de erros e rejeita 
+quadros corrompidos.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+13© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoObjetivo da camada de ligação de dados
+IEEE 802 LAN/MAN Data Link Sublayers
+Os padrões IEEE 802 LAN/MAN são 
+específicos para o tipo de rede (Ethernet, 
+WLAN, WPAN, etc).
+A Camada de Ligação de Dados consiste em 
+duas subcamadas. Controle de Ligação 
+Lógico (LLC) e Controle de Acesso ao 
+Meio (MAC). 
+•A subcamada LLC trata da 
+comunicação entre o software (de rede) 
+nas camadas superiores e o hardware 
+do dispositivo nas camadas inferiores.
+•A subcamada MAC é responsável pelo 
+encapsulamento de dados e controlo de 
+acesso ao meio.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+14© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoObjetivo da camada de ligação de dados
+Fornecendo acesso ao meio
+Pacotes trocados entre nós podem passar por várias camadas de 
+ligação de dados e serem transportados transições por diferentes 
+meio.
+Em cada salto ao longo do caminho, um router executa quatro 
+funções básicas da Camada 2:
+•Aceita um quadro do meio de rede.
+•Desencapsula o quadro para expor o pacote encapsulado.
+•Encapsula novamente o pacote num novo quadro.
+•Encaminha o novo quadro no meio do próximo segmento de rede.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+15© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoObjetivo da camada de ligação de dados
+Standards da camada de ligação de dados
+Os protocolos de camada de 
+ligação de dados são definidos 
+por organizações de 
+engenharia:
+•Instituto de Engenheiros Elétricos 
+e Eletrônicos (IEEE).
+•União Internacional de 
+Telecomunicações (UIT).
+•Organizações Internacionais de 
+Normalização (ISO).
+•Instituto Nacional Americano de 
+Padrões (ANSI).
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+16© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco6.2 Topologias
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+17© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoTopologias 
+Topologias físicas e lógicas
+A topologia de uma rede é a organização e o relacionamento dos dispositivos 
+de rede e as interconexões entre eles.
+Existem dois tipos de topologias usadas ao descrever redes:
+•Topologia física —mostra as conexões físicas e como os dispositivos 
+estão interligados. 
+•Topologia lógica —identifica as conexões virtuais entre dispositivos 
+usando interfaces de dispositivo e esquemas de endereçamento IP. 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+18© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoTopologias
+Topologias WAN
+Existem três topologias físicas comuns de WAN: 
+•Ponto a ponto —a topologia WAN mais simples e comum. Consiste numa 
+ligação permanente entre dois pontos finais. 
+•Hub e spoke -semelhante a uma topologia em estrela, na qual um site 
+central interconecta sites de filiais por meio de links ponto a ponto.
+•Malha -fornece alta disponibilidade, mas requer que todos os sistemas 
+finais estejam conectados a todos os outros sistemas finais.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+19© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoTopologias 
+Topologia WAN ponto a ponto
+•As topologias ponto a ponto físicas conectam diretamente dois nós.
+•Os nós não podem compartilhar o meio com outros hosts.
+•Como todos os quadros no meio só podem viajar de ou para os dois 
+nós, os protocolos WAN Ponto a Ponto podem ser muito simples.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+20© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoTopologias
+Topologias LAN
+Os dispositivos finais nas LANs são 
+normalmente interconectados usando uma 
+topologia em estrela ou estrela estendida. 
+Topologias em estrela e estrelas estendidas 
+são fáceis de instalar, muito escaláveis e 
+fáceis de solucionar problemas.
+As tecnologias Early Ethernet e Token Ring 
+Legacy fornecem duas topologias adicionais:
+•Barramento -Todos os sistemas finais 
+encadeados e terminados em cada 
+extremidade.
+•Anel —Cada sistema final é conectado 
+aos seus respectivos vizinhos para 
+formar um anel . 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+21© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoTopologias
+Comunicação Half e Full Duplex
+Comunicação half-duplex
+•Só permite que um dispositivo envie ou receba de cada vez num meio partilhado.
+•Usado em WLANs e topologias de barramento herdadas com hubs Ethernet.
+Comunicação full -duplex
+•Permite que ambos os dispositivos transmitam e recebam simultaneamente num 
+meio partilhado.
+•Os switches Ethernet funcionam no modo full -duplex.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+22© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoTopologias
+Métodos de controlo de acesso
+Acesso baseado em contenção
+Todos os nós funcionam em half-duplex, competindo pelo uso do meio. Os exemplos 
+são:
+•A operadora detecta o acesso múltiplo com detecção de colisão (CSMA / CD) 
+conforme é usado na Ethernet com a topologia de barramento herdada.
+•A operadora detecta o acesso múltiplo com prevenção de colisão (CSMA / CA), 
+conforme é usado nas LANs sem fios.
+Acesso controlado
+•Acesso determinístico onde cada nó tem seu próprio tempo no meio.
+•Usado em redes herdadas, como Token Ring e ARCNET.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+23© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoTopologias
+-Acesso baseado em contenção -CSMA/CD
+CSMA/CD
+•Usado por LANs Ethernet herdadas.
+•Funciona no modo half-duplex onde apenas um dispositivo envia ou recebe de cada 
+vez.
+•Usa um processo de detecção de colisão para controlar quando um dispositivo pode 
+enviar e o que acontece se vários dispositivos enviarem ao mesmo tempo.
+Processo de detecção de colisão CSMA/CD :
+•Se os dispositivos transmitirem simultaneamente o resultado será uma colisão de 
+sinal no meio partilhado.
+•Dispositivos detectam a colisão.
+•Os dispositivos aguardam um período aleatório de tempo e retransmitem dados.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+24© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoTopologias
+Acesso baseado em contenção -CSMA/CA
+CSMA/CA
+•Usado nas WLANs IEEE 802.11.
+•Funciona no modo half-duplex onde apenas um dispositivo envia ou recebe de cada 
+vez.
+•Usa um processo de prevenção de colisão para controlar quando um dispositivo 
+pode enviar e o que acontece se vários dispositivos enviarem ao mesmo tempo.
+Processo de prevenção de colisão CSMA/CA :
+•Ao transmitir, os dispositivos também incluem a duração de tempo necessária para a 
+transmissão.
+•Outros dispositivos no meio partilhado recebem as informações de duração do 
+tempo e sabem por quanto tempo o meio ficará indisponível.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+25© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco6.3 Quadro de ligação de 
+dados
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+26© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoQuadro de ligação de dados 
+O quadro
+Os dados são encapsulados pela camada de ligação de dados com um cabeçalho e um 
+trailer para formar um quadro.
+Um quadro de ligação de dados é composto por três partes:
+•Cabeçalho
+•Dados
+•Trailer
+Os campos do cabeçalho e do trailer variam de acordo com o protocolo da camada de 
+ligação de dados.
+A quantidade de informações de controlo transportadas no quadro varia de acordo com 
+as informações de controlo de acesso e a topologia lógica.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+27© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoQuadro de ligação de dados 
+Campos do quadro
+Campo Descrição
+Frame Start e Stop Identifica o início e o fim do quadro
+Endereçamento Indica nós de origem e destino
+Tipo Identifica o protocolo encapsulado da Camada 3
+Controle Identifica serviços de controle de fluxo 
+Dados Contém a carga útil do quadro
+Detecção de erros Usado para determinar erros de transmissão
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+28© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoQuadro de ligação de dados 
+Endereço da Camada 2
+•Também referido como um endereço físico.
+•Contido no cabeçalho do quadro.
+•Usado apenas para entrega local de um quadro de ligação de dados.
+•Atualizado por cada dispositivo que encaminha o quadro.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+29© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoQuadro de Ligação de Dados 
+LAN e WAN Frames
+A topologia lógica e o meio física determinam o protocolo de ligação de 
+dados usado:
+•Ethernet
+•802.11 sem fios
+•Ponto a ponto (PPP)
+•Controle de Enlace de Dados de Alto Nível (HDLC)
+•Frame -Relay
+Cada protocolo executa o controle de acesso ao meio para topologias 
+lógicas especificadas.
+30© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco6.4 -Sumários
+31© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoSumário
+O que aprendi neste módulo?
+•A camada de ligação de dados do modelo OSI (Camada 2) prepara dados de rede para a rede 
+física. 
+•A camada de ligação de dados é responsável pela placa de interface de rede (NIC) para 
+comunicações de placa de interface de rede.
+•A camada de ligação de dados IEEE 802 LAN/MAN consiste nas seguintes duas subcamadas: 
+LLC e MAC.
+•Os dois tipos de topologias usados em redes LAN e WAN são físicos e lógicos.
+•Três tipos comuns de topologias WAN físicas são: ponto a ponto, hub e spoke e malha.
+•As comunicações Half -duplex trocam dados numa direção de cada vez. Full -duplex envia e 
+recebe dados simultaneamente.
+•Em redes multiacesso baseadas em contenção, todos os nós funcionam em half-duplex.
+•Exemplos de métodos de acesso baseados em contenção incluem: CSMA/CD para LANs
+Ethernet de topologia barramento e CSMA/CA para WLANs .
+•O quadro do ligação de dados tem três partes básicas: cabeçalho, dados e reboque.
+•Os campos do quadro incluem: sinalizadores de indicador de início e fim de quadros, 
+endereçamento, tipo, controle, dados e detecção de erros.
+•Endereços de ligação de dados também são conhecidos como endereços físicos.
+•Endereços de ligação de dados são usados somente para a entrega local de quadros de ligação.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)

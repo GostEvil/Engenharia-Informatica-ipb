@@ -1,0 +1,612 @@
+Introdução às redes v7.0 (ITN)Módulo 2: Configuração Básica 
+do Switch e do Dispositivo Final
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)Versão original: Cisco Network Academy
+Versão modificada: Eduardo Costa
+15© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoObjetivos do módulo
+Título do Módulo : Configuração Básica de Switches e dos Dispositivos Finais
+Objetivo do Módulo: Implementar as configurações iniciais, incluindo passwords , endereçamento IP e 
+parâmetros de gateway por omissão num switch e em dispositivos finais.
+Título do Tópico Objetivo do Tópico
+Acesso ao Cisco IOSExplicar como aceder a um dispositivo Cisco IOS para fins 
+de configuração.
+Navegação no IOSExplicar como navegar no Cisco IOS para configurar os 
+dispositivos de rede.
+A estrutura de comandos Descrever a estrutura de comandos do software Cisco IOS.
+Configuração básica de dispositivos Configurar um dispositivo Cisco IOS usando a CLI.
+Guardar configuraçõesUsar os comandos do IOS para guardar a configuração 
+atual.
+Portas e endereçosExplicar como os dispositivos se comunicam no meio físico 
+de rede.
+Configurar endereços IP Configurar um dispositivo de host com um endereço IP.
+Verificar a conectividade Verificar a conectividade entre dois dispositivos finais.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+16© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco2.1 –Acesso ao Cisco IOS
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+17© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoAcesso ao Cisco IOS 
+Sistema operativo
+•Shell -A interface de utilizador que 
+permite que os utilizadores solicitem 
+tarefas específicas do computador. 
+Essas solicitações podem ser feitas 
+por meio da interface CLI ou GUI. 
+•Kernel -comunica entre o hardware e 
+o software de um computador e gere a 
+forma como os recursos de hardware 
+são usados para atender aos 
+requisitos de software.
+•Hardware -A parte física de um 
+computador, incluindo os 
+componentes eletrônicos subjacentes.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+18© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoAcesso ao Cisco IOS 
+GUI
+•Uma GUI permite que o utilizador 
+interaja com o sistema usando um 
+ambiente de ícones gráficos, menus e 
+janelas.
+•Uma GUI é mais amigável e requer 
+menos conhecimento da estrutura de 
+comandos subjacente que controla o 
+sistema.
+•Exemplos deles são: Windows, macOS , 
+Linux KDE, Apple iOS e Android.
+•As GUIs podem falhar, travar ou 
+simplesmente não funcionar como 
+especificado. Por esses motivos, os 
+dispositivos de rede geralmente são 
+acedidos por meio de uma CLI.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+19© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoAcesso  ao Cisco IOS 
+Finalidade do SO
+O sistema operativo do PC permite que um 
+utilizador faça o seguinte:
+•Utilizar o rato para fazer seleções e 
+executar programas
+•Inserir texto e comandos baseados 
+em texto
+•Exibir a saída num monitor
+O sistema operativo de rede baseado em CLI 
+permite que um técnico de rede faça o 
+seguinte:
+•Use um teclado para executar 
+programas de rede baseados na 
+CLI
+•Use um teclado para inserir texto e 
+comandos baseados em texto
+•Exibir a saída num monitor
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+20© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoAcesso ao Cisco IOS 
+Métodos de acesso
+•Consola —Uma porta de gestão física 
+usada para aceder a um dispositivo para 
+permitira a sua manutenção, bem como 
+para executar as configurações iniciais. 
+•Shell segura (SSH) –Estabelece uma 
+conexão CLI segura remota com um 
+dispositivo, por meio de uma interface 
+virtual, através da rede. ( Nota: Este é o 
+método recomendado para se ligar 
+remotamente a um dispositivo.) 
+•Telnet —Estabelece uma conexão CLI 
+remota insegura a um dispositivo através 
+da rede. (Nota: a autenticação do 
+utilizador, passwords e comandos são 
+enviados pela rede em texto legível.)
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+21© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoAcesso ao Cisco IOS 
+Programa de emulação de terminal
+•Programas de emulação de terminal são usados para a conexão a um dispositivo de rede 
+por uma porta de consola ou por uma conexão SSH/Telnet. 
+•Existem vários programas de emulação de terminal, tais como o PuTTY , Tera Term e 
+SecureCRT . 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+22© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco2.2 -Navegação no IOS
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+23© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoNavegação no IOS 
+Modos de comando primários
+Modo EXEC do Utilizador 
+•Permite acesso a apenas um 
+número limitado de comandos 
+básicos de monitorização
+•Identificado pelo prompt da CLI que 
+termina com o símbolo >
+⁪Modo EXEC com privilégios: 
+•Permite acesso a todos os 
+comandos e recursos
+•Identificado pelo prompt da CLI que 
+termina com o símbolo #
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+24© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoNavegação no IOS
+Modo de configuração e modos de subconfiguração
+Modo de configuração global
+•Usado para aceder a opções de 
+configuração no dispositivo 
+Modo de configuração de linhas 
+•Usado para configurar o acesso 
+por consola, SSH, Telnet ou AUX
+Modo de configuração de interface
+•Usado para configurar uma porta 
+do switch ou interface de router
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+26© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoNavegar no IOS 
+Navegar entre os modos do IOS
+▪⁪modo EXEC com privilégios:
+•Usar o comando enable , para passar do 
+modo EXEC do utilizador  para o modo 
+EXEC privilegiado.
+▪Modo de configuração global 
+•Usar o comando configure terminal , para 
+entrar no modo de configuração global. 
+Para retornar ao modo EXEC privilegiado 
+usar o comando exit
+▪Modo de configuração de linhas 
+•Usar o comando lineseguido do tipo de 
+linha de gestão, para entrar no modo de 
+configuração de linha. Retorne ao modo de 
+configuração global usando o comando exit
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+27© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoNavegar no IOS 
+Navegar entre os modos do IOS (cont.)
+modos de subconfiguração : 
+•Para sair de qualquer modo de 
+subconfiguração e voltar ao modo de 
+configuração global, use o comando exit. 
+Para retornar ao modo EXEC de privilégio, 
+use o comando endou combinação de 
+teclas Ctrl + Z. 
+•Para mover diretamente de um modo de 
+subconfiguração para outro, digite o comando 
+de modo de subconfiguração desejado. No 
+exemplo, o prompt de comando muda de 
+(config -line)#para (config -if)#. 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+29© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco2.3 –A estrutura de comandos
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+30© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoA estrutura de comandos 
+Estrutura básica de comandos do IOS
+•Palavra -chave -este é um parâmetro específico definido no sistema operativo (na 
+figura, ipprotocols )
+•Argumento -não predefinido; um valor ou variável definido pelo utilizador (na 
+figura, 192.168.10.5)
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+31© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoA estrutura de comandos 
+Sintaxe dos comandos do IOS
+Um comando pode exigir um ou mais argumentos. A sintaxe de comando indica as 
+palavras -chave e os argumentos necessários para um comando. 
+•O texto em negrito indica comandos e palavras -chave que são inseridos como 
+mostrado na sintaxe. 
+•O texto em itálico indica um argumento para o qual o utilizador fornece o valor.
+Convenção Descrição
+negritoO texto em negrito indica comandos e palavras -chave que você insere 
+literalmente, como mostradas.
+itálico O texto em itálico indica argumentos para os quais você fornece valores.
+[x] Colchetes indicam um elemento opcional (palavra -chave ou argumento).
+{x} Chaves indicam um elemento necessário (palavra -chave ou argumento).
+[x{y| z}]Chaves e linhas verticais entre colchetes indicam uma escolha obrigatória 
+dentro de um elemento opcional. Espaços são usados para delinear 
+claramente partes do comando.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+32© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoA estrutura de comandos 
+Sintaxe dos comandos do IOS
+▪A sintaxe fornece o padrão, ou formato, que deve ser usado ao inserir um comando.
+▪O comando é ping tem um argumento 
+definido pelo utilizador que é o ip-address
+do dispositivo de destino. Por exemplo, 
+ping 10.10.10.5 .
+▪O comando é traceroute tem um 
+argumento definido pelo utilizador que é o 
+ip-address do dispositivo de destino. Por 
+exemplo, traceroute 192.168.254.254.
+▪Se um comando é complexo e com vários argumentos, você pode vê -lo representado assim:
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+33© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoA estrutura de comandos 
+Recursos de ajuda do IOS
+O IOS tem duas formas de ajuda disponíveis: ajuda sensível ao contexto e 
+verificação da sintaxe do comando.
+•A ajuda sensível ao contexto permite 
+encontrar rapidamente respostas para estas 
+perguntas:
+•Quais comandos estão disponíveis em cada modo 
+de comando?
+•Quais comandos que começam com caracteres 
+específicos ou grupo de caracteres?
+•Quais argumentos e palavras -chave que estão 
+disponíveis para comandos específicos?•A verificação da sintaxe de 
+comandos verifica se um comando 
+inserido pelo utilizador é válido. 
+•No entanto, se o interpretador não puder 
+entender o comando inserido, ele 
+fornecerá feedback descrevendo o que 
+está errado com o comando.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+35© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoA estrutura de comandos 
+Teclas de acesso e atalhos
+•A CLI do IOS fornece teclas de atalho e atalhos que facilitam a configuração, a 
+monitorização e a resolução de problemas.
+•Os comandos e as palavras -chave podem ser abreviados para o número mínimo de 
+caracteres que identificam uma seleção exclusiva. Por exemplo, o comando 
+configure pode ser abreviado para conf porque configure é o único comando que 
+se inicia com conf .
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+36© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoA estrutura de comandos 
+Teclas de acesso e atalhos (Cont.)
+▪A tabela abaixo apresenta uma lista sumarizada de teclas que podem ser usadas 
+para auxiliar a edição na linha de comando . 
+Tecla( s) Descrição
+Tab Completa um nome de comando digitado parcialmente.
+Backspace Apaga o caractere à esquerda do cursor.
+Seta para a esquerda ou
+Ctrl-BMovem o cursor um caractere para a esquerda.
+Seta para a direita ou
+Ctrl-FMovem o cursor um caractere para a direita.
+Seta para cima ouCtrl-PRelembram os comandos no buffer de histórico, a partir dos 
+comandos mais recentes.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+37© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoA estrutura de comandos 
+Teclas de acesso e atalhos (Cont.)
+•Quando uma saída de comando produz mais 
+texto do que pode ser exibido em uma janela 
+de terminal, o IOS exibirá um prompt “—
+More —”. A tabela abaixo descreve as teclas 
+que podem ser usados quando esse prompt 
+é apresentado.•A tabela abaixo lista comandos que 
+podem ser usados para sair de uma 
+operação.
+Nota: Para ver mais teclas de atalho e atalhos, consulte o ponto 2.3.5.Tecla( s) Descrição
+Ctrl-CEm qualquer modo de configuração, finaliza o 
+modo de configuração e retorna ao modo EXEC 
+privilegiado. 
+Ctrl-ZEm qualquer modo de configuração, finaliza o 
+modo de configuração e retorna ao modo EXEC 
+privilegiado.
+Ctrl-Shift -6Sequência de quebra para todas as finalidades 
+usada para abortar pesquisas DNS, traceroutes , 
+pings , etc.Tecla( s) Descrição
+Tecla Enter Mostra a próxima linha.
+Barra de espaço Mostra a próxima janela.
+Qualquer outra chaveEncerra a sequência de 
+apresentação, retornando ao modo 
+EXEC privilegiado.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+41© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco2.4 -Configuração Básica do 
+Dispositivo
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+42© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoConfiguração Básica do Dispositivos  
+Nomes de dispositivos
+•O primeiro comando de configuração em qualquer 
+dispositivo deve ser o comando usado para atribuir -lhe um 
+nome de host exclusivo. 
+•Todos os dispositivos recebem um nome por omissão de 
+fábrica. Por exemplo, um switch Cisco IOS é “Switch”.
+•As regras a usar na construção de 
+nomes de dispositivos são:
+•Começar com uma letra
+•Não conter espaços
+•Terminar com uma letra ou dígito
+•Usar somente letras, números e 
+traços
+•Ter menos de 64 caracteresNota : Para o switch retornar ao nome por 
+omissão, usar o comando no hostname , no 
+modo de configuração global .
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+43© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoConfiguração básica de dispositivos
+Regras para as Passwords
+•O uso de passwords fracas ou facilmente adivinhadas é uma preocupação de segurança.
+•Todos os dispositivos de rede devem limitar o acesso administrativo protegendo o acesso 
+ao modo EXEC privilegiado, EXEC de utilizador e acesso remoto Telnet com passwords . 
+Além disso, todas as passwords devem ser encriptadas e devem ser fornecidas 
+notificações legais.
+•Regras para definição de passwords
+•Usar passwords com mais de oito caracteres.
+•Usar uma combinação de letras maiúsculas e 
+minúsculas, números, caracteres especiais 
+e/ou sequências numéricas.
+•Evitar usar a mesma password para todos os 
+dispositivos.
+•Não usar palavras comuns, pois é fácil 
+adivinhá -las.Observação : a maioria dos laboratórios neste curso 
+usa passwords simples, como cisco ou class. Essas 
+senhas são consideradas fracas e facilmente 
+adivinháveis e devem ser evitadas nos ambientes de 
+produção.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+44© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoConfiguração básica de dispositivos
+Configurar passwords
+Acesso seguro ao modo EXEC de utilizador.
+•Primeiro, no modo de configuração global 
+entre no modo de configuração de linha de 
+consola usando o comando lineconsole 0 .
+•A seguir, especifique a password do modo 
+EXEC utilizador com o comando password
+password . 
+•Por fim, use o comando login para permitir o 
+acesso ao EXEC utilizador.
+Acesso seguro ao modo EXEC privilegiado:
+•Primeiro entre no modo de configuração global.
+•A seguir, use o comando enable secret password
+. 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+45© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoConfiguração básica dsdispositivos
+Configurar passwords (Cont.)
+Proteger o acesso à linhas VTY:
+•Primeiro, no modo de configuração 
+global, entre no modo de configuração 
+das linhas VTY usando o comando line
+vty0 15.
+•A seguir, especifique a password de 
+acesso às linhas VTY com o comando 
+password password . 
+•Por fim, use o comando login para 
+permitir o acesso via VTY .
+Observação: As linhas VTY permitem acesso remoto usando Telnet ou SSH ao dispositivo. Muitos switches Cisco 
+são compatíveis com até 16 linhas VTY numeradas de 0 a 15. 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+46© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoConfiguração básica de dispositivos
+Encriptar passwords
+▪Os ficheiros startup -config e running -config
+exibem a maioria das passwords em texto 
+legível.
+▪Para encriptar passwords , use o comando 
+service password -encryption , no modo de 
+configuração global.
+▪Use o comando show running -config
+para verificar se as passwords do 
+dispositivo agora estão encriptadas. 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+47© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoConfiguração básica de dispositivos 
+Mensagens Banner
+▪Uma mensagem de banner é 
+importante para avisar que pessoas não 
+autorizadas que tentem aceder o 
+dispositivo. 
+▪Para criar uma mensagem de banner 
+do dia num dispositivo de rede, use o 
+comando  banner motd # A mensagem 
+do dia #, no modo de configuração 
+global .
+O “#” na sintaxe do comando é denominado 
+caractere de delimitação. Ele é inserido antes 
+e depois da mensagem.O banner será apresentado nas tentativas de acesso ao dispositivo. 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+49© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco2.5 Guardar configurações
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+50© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoGuardar configurações 
+Ficheiros de Configuração
+▪Há dois ficheiros de sistema que armazenam a configuração do dispositivo:
+•startup -config -Este é o ficheiro de configuração armazenado na NVRAM. Contém todos os comandos que serão 
+carregados pelo dispositivo na inicialização ou reinicialização. O memória flash (NVRAM) não perde seu conteúdo 
+quando o dispositivo está desligado.
+•running -config -Armazenado na memória de acesso aleatório (RAM). Reflete a configuração atual. A modificação de 
+uma configuração ativa (running configuration ) afeta o funcionamento de um dispositivo Cisco imediatamente. A RAM é 
+uma memória volátil. Perde todo o seu conteúdo quando o dispositivo é desligado ou reiniciado.
+•Use o comando, no modo EXEC privilegiado, copy running -config startup -config para guardar as alterações feitas na 
+configuração ativa ( running -config ) no ficheiro startup -config .
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+51© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoGuardar configurações 
+Alterar a configuração ativa (running configuration )
+Se as alterações feitas na configuração ativa não 
+tiverem o efeito desejado e a configuração ainda 
+tiver sido guardada na NVRAM, poderá restaurar -
+se a configuração anterior do dispositivo. Para tal, 
+poderá seguir umas das possibilidades seguintes:
+•Remova os comandos alterados individualmente.
+•Recstaurar o dispositivo usando o comando 
+reload no modo EXEC privilegiado. Observação: 
+Isso fará com que o dispositivo fique off -line por 
+uns instantes, levando ao um tempo de 
+inatividade da rede. 
+Se as alterações indesejadas foram salvas na 
+startup -config , pode ser necessário limpar todas 
+as configurações usando o comando erase
+startup -config no modo EXEC de privilegiado. 
+•Depois de apagar o startup -config , reinicie o 
+dispositivo para limpar o arquivo running -config
+da RAM. 
+
+53© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoGuardar configurações 
+Capturar a configuração num ficheiro de texto
+Os ficheiros de configuração também podem ser 
+guardados e armazenados num documento de 
+texto.
+•Etapa 1. Abra um software de emulação de 
+terminal, como PuTTY ou Tera Term (Figura 1) 
+que já está conectado a um switch.
+•Etapa 2. No software do terminal, ative o 
+registo do ficheiro de Logs e indique o nome e 
+o local a guardar o ficheiro. A Figura ao a lado 
+mostra que  Allsession output será 
+capturado no arquivo especificado (isto é, 
+MySwitchLogs ).
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+54© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoGuardar configurações 
+Capturar a configuração num ficheiro de texto (Cont.)
+•Etapa 3. Execute o comando show running -
+config ou show startup -config no prompt no 
+modo EXEC privilegiado. O texto apresentado 
+na janela do terminal será redirecionado para 
+o ficheiro escolhido.
+•Etapa 4. Desative o log no software de 
+terminal. A Figura mostra como desativar o log 
+escolhendo a opção de log de sessão None .
+Nota: O ficheiro de texto criado pode ser usado como 
+um registo de como o dispositivo está configurado 
+atualmente. Talvez seja necessário editar o ficheiro 
+antes de usá -lo para restaurar uma configuração 
+guardada num dispositivo.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+56© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco2.6 Portas e Endereços
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+57© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoPortas e endereços 
+Endereços IP
+•O uso de endereços IP é o principal meio usado 
+para permitir que os dispositivos se localizem uns 
+aos outros e estabeleçam comunicação extremo 
+a extremo na Internet. 
+•A estrutura de um endereço IPv4 é denominada 
+notação decimal com ponto e é representada por 
+quatro números decimais entre 0 e 255.
+•Uma máscara de sub-rede IPv4 é um valor de 32 
+bits que permite diferenciar no endereço a parte 
+da rede da parte do host. Juntamente com o 
+endereço IPv4, a máscara de sub-rede determina 
+de que sub-rede é membro o dispositivo.
+•O endereço de gateway por omissão é o 
+endereço IP do router que o host usará para 
+aceder a redes remotas, incluindo à Internet.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+58© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoPortas e endereços 
+Endereços IP (Cont.)
+•Os endereços IPv6 têm 128 bits e são escritos 
+como uma sequência de valores hexadecimais. 
+A cada quatro bits é representado por um único 
+dígito hexadecimal; para um total de 32 valores 
+hexadecimais. Grupos de quatro dígitos 
+hexadecimais são separados por dois pontos 
+“:”. 
+•Os endereços IPv6 não diferenciam maiúsculas 
+e minúsculas e podem ser escritos tanto em 
+minúsculas como em maiúsculas.
+Observação : neste curso, o termo IP se refere tanto a 
+protocolos IPv4 quanto IPv6. O IPv6 é a versão mais recente 
+do IP e está a substituir o IPv4 que é o mais comum.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+59© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoPortas e endereços 
+Interfaces e portas
+•As comunicações em rede dependem de 
+interfaces de dispositivos de utilizador final, 
+interfaces de dispositivos de rede e cabos 
+para conectá -las.
+•Os tipos de meio físico de rede incluem 
+cabos de cobre de par trançado, cabos de 
+fibra óptica, cabos coaxiais ou sem fios.
+•Diferentes tipos de meio físico de rede 
+oferecem características e benefícios 
+diferentes. Algumas das diferenças entre os 
+vários tipos de meios incluem:
+•A distância pela qual o meio físico 
+consegue carregar um sinal com êxito
+•O ambiente no qual o meio físico deve ser 
+instalado
+•A quantidade e a velocidade de dados nas 
+quais eles devem ser transmitidos
+•O custo do meio físico e da instalação
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+60© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco2.7 -Configurar endereços IP
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+61© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoConfigurar endereços IP 
+Configuração manual de endereço IP em dispositivos finais
+•Os dispositivos finais na rede precisam de um 
+endereço IP para se comunicar com outros 
+dispositivos na rede. 
+•As informações do endereço IPv4 podem ser 
+inseridas manualmente nos dispositivos finais ou 
+automaticamente usando o DHCP (Dynamic Host 
+Configuration Protocol ).
+•Para configurar manualmente um endereço IPv4 num 
+host no SO Windows, abra o Painel de controle > 
+Central de Rede e Compartilhamento > Alterar as 
+configurações do adaptador e escolha o adaptador. 
+Clique com o botão direito e selecione Propriedades
+para exibir as Propriedades da Conexão Local
+•Depois, Clique em Propriedades para abrir a janela de
+Propriedades do Protocolo IP Versão 4 (TCP/IPv4) . 
+Em seguida, configure o endereço IPv4 e as 
+informações da máscara de sub-rede e o gateway por 
+omissão.Observação : as opções de 
+endereçamento e configuração IPv6 são 
+semelhantes ao IPv4. 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+62© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoConfigurar endereços IP 
+Configuração automática de endereço IP em dispositivos finais
+•O DHCP habilita a configuração automática de 
+endereço IPv4 para todos os dispositivos finais 
+com o DHCP ativo.
+•Os dispositivos finais usam normalmente por 
+omissão o DHCP para configuração 
+automática de endereço IPv4.
+•Para configurar DHCP num host no SO Windows, 
+abra o Painel de controle > Central de Rede e 
+Compartilhamento > Alterar as configurações
+do adaptador e escolha o adaptador. Clique com o 
+botão direito e selecione Propriedades para exibir 
+as Propriedades da Conexão Local
+•Em seguida, clique em Preferência s para abrir a 
+janela Propriedades da Internet Protocol Versão 
+4 (TCP / IPv4) e selecione Obter um endereço IP 
+automaticamente e Obter automaticamente o 
+endereço do servidor DNS.Observação : o IPv6 usa DHCPv6 e SLAAC ( Stateless
+Address Autoconfiguration ) para alocação de 
+endereços dinâmicos. 
+
+63© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoConfigurar endereços IP
+Interface virtual de switch (SVI)
+Para aceder a um switch remotamente, devem ser configurados na SVI um endereço IP 
+e uma máscara de sub-rede.
+Para configurar um SVI num switch:
+•Digite o comando interface vlan 1no modo de configuração global.
+•A seguir, atribua um endereço IPv4 usando o comando ipaddress ip-address subnet -
+mask .
+•Por fim, ative a interface virtual com o comando no shutdown . 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+68© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco2.9 -Sumário
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+71© 2019, 2021 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da CiscoSumário
+O que aprendi neste módulo?
+•Todos os dispositivos finais e de rede exigem um sistema operativo (SO).
+•O Software Cisco IOS separa o acesso de gestão nos dois modos de 
+comando a seguir: Modo EXEC de utilizador e Modo EXEC privilegiado.
+•O modo de configuração global é acedido antes de outros modos de 
+configuração específicos. No modo global de configuração, o utilizador 
+pode aceder a diferentes modos de subconfiguração .
+•Cada comando do IOS tem uma sintaxe ou formato específico e só pode 
+ser executado no modo adequado.
+•Configurações básicas do dispositivo -nome do host, password , 
+encriptar passwords e banner. 
+•Existem dois ficheiros de sistema que guardam a configuração do 
+dispositivo: startup -config e running -config .
+•Os endereços IP permitem que os dispositivos se localizem e 
+estabeleçam comunicação extremo a extremo na Internet. Cada 
+dispositivo final numa rede deve ser configurado com um endereço IP.
+

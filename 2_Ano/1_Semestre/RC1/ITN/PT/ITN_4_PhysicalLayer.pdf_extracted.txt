@@ -1,0 +1,454 @@
+Módulo 4: Camada Física
+Introdução às redes v7.0 (ITN)Versão original: Cisco Network Academy
+Versão modificada: Eduardo Costa
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+12© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoObjetivos do módulo
+Título do módulo: Camada física
+Objetivo do Módulo : Explicar como os protocolos de camada física, os serviços e o meios 
+físicos de rede possibilitam as comunicações nas redes de dados .
+Título do Tópico Objetivo do Tópico
+Objetivo da camada física Descrever a finalidade e as funções da camada física 
+na rede.
+Características da camada física Descreva as características da camada física.
+Cablagem de cobre Identificar as características básicas da cablagem de 
+cobre.
+Cablabagem UTP Explicar como o cabo UTP é usado nas redes 
+Ethernet.
+Cablagem de fibra óptica Descrever a cablagem de fibra óptica e as suas 
+principais vantagens em relação a outros meios 
+físicos.
+Meio sem fios Conectar dispositivos usando meio físico com e sem 
+fios.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+13© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco4.1 –Objetivo da camada 
+física
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+14© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoObjetivo da camada física 
+A conexão física
+•Antes que qualquer comunicação de rede possa ocorrer, é necessário estabelecer 
+uma conexão física com uma rede local.
+•Essa conexão pode ser com ou sem fios, dependendo da rede.
+•Isso geralmente aplica -se você independentemente de se estar a consider uma 
+empresa ou uma casa.
+•As placas de rede (Network Interface Cards -NICs) conectam um dispositivo à rede.
+•Alguns dispositivos podem ter apenas uma NIC, enquanto outros podem ter várias 
+NICs (com fios e/ou sem fios, por exemplo).
+•Nem todas as conexões físicas oferecem o mesmo nível de desempenho.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+15© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoObjetivo de camada física 
+A camada física
+•Transporta bits através da meio 
+físico de rede
+•Aceita um quadro completo da 
+camada de ligação de dados e 
+o codifica -o como uma série de 
+sinais que são transmitidos 
+para o meio físico local.
+•Este é o último passo no 
+processo de encapsulamento.
+•O próximo dispositivo no 
+caminho para o destino recebe 
+os bits e reencapsula o quadro 
+e decide o que fazer com ele.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+16© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco4.2 Características da 
+camada física
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+17© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoCaracterísticas da camada física
+Protocolos de camada física 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+18© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoCaracterísticas da camada física
+Protocolos de camada física 
+Os padrões da camada física abordam três áreas funcionais:
+•Componentes Físicos
+•Codificação
+•Sinalização
+Os componentes físicos são dispositivos de hardware eletrônicos, 
+meios físicos e outros conectores que transmitem e transportam os 
+sinais para representar os bits.
+•Os componentes de hardware, como NICs, interfaces e conectores, materiais de cabo e projetos 
+de cabo são especificados nos padrões associados à camada física.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+19© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoCaracterísticas da camada física
+Codificação
+•Codificação converte o fluxo de 
+bits num formato reconhecível pelo 
+próximo dispositivo no caminho de 
+rede.
+•Esta 'codificação' fornece padrões 
+previsíveis que podem ser 
+reconhecidos pelo próximo 
+dispositivo.
+•Exemplos de métodos de 
+codificação incluem Manchester 
+(mostrado na figura), 4B/5B e 
+8B/10B.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+20© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoCaracterísticas da camada física
+Sinalização
+•O método de sinalização é como os 
+valores de bit, “1” e “0” são 
+representados no meio físico.
+•O método de sinalização varia de 
+acordo com o tipo de meio que está 
+sendo usado.
+Sinais elétricos sobre cabo de cobre
+Pulsos de luz sobre cabo de fibra óptica
+Sinais de Microondas através de Wireless
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+21© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoCaracterísticas da camada física 
+Largura de banda -Bandwith
+•Largura de banda é a capacidade na qual um meio pode transportar dados.
+•A largura de banda digital mede a quantidade de dados que pode fluir de um lugar 
+para outro num determinado período de tempo; quantos bits podem ser transmitidos 
+num segundo.
+•Propiedades do meio físico, tecnologias atuais e as leis da física têm função 
+importante na determinação da largura de banda disponível.
+Unidades de Largura 
+de BandaSigla Equivalência
+Bits por segundo bps 1 bps = unidade fundamental de largura de banda
+Quilobits por segundo Kbps 1 kb/s = 1.000 bps = 103bps
+Megabits por segundo Mbps 1 Mbps = 1,000,000 bps = 106bps
+Gigabits por segundo Gbps 1 Gbps –1,000,000,000 bps = 109bps
+T erabits por segundo Tbps 1 Tbps = 1,000,000,000,000 bps = 1012bps
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+22© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoCaracterísticas da camada física 
+Terminologia de largura de banda
+Latência
+•Quantidade de tempo, incluindo atrasos, para os dados viajarem de um ponto a outro
+Produtividade
+•a medida da transferência de bits através do meio físico durante um determinado período
+Goodput
+•a medida de dados úteis transferidos em um determinado período
+•Goodput = Throughput -sobrecarga de tráfego
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+23© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco4.3 Cablagem de cobre
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+24© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoCablagem de cobre 
+Características dos meios físicos em cobre
+A cablagem de cobre é o tipo mais comum de cablagem usada nas redes hoje em dia. É 
+barata, fácil de instalar e tem baixa resistência ao fluxo de corrente elétrica.
+Limitações:
+•Atenuação —quanto mais tempo os sinais elétricos têm que viajar, mais fracos ficam. 
+•O sinal elétrico é suscetível a interferência de duas fontes, que podem distorcer e corromper os 
+sinais de dados (Interferência Electromagnética (EMI) e Interferência de RFI (RFI) e Crosstalk ).
+Mitigação:
+•Cumprindo limites de comprimento do cabo atenuarão a atenuação.
+•Alguns tipos de cabos de cobre atenuam EMI e RFI usando blindagem metálica e ligação à terra.
+•Alguns tipos de cabo de cobre atenuam o Crosstalk , torcendo os fios do par de circuitos opostos.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+25© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoCablagem de cobre 
+Tipos de cablagem de cobre
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+26© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoCablagem de Cobre 
+Par trançado não blindado (UTP)
+•A cablagem UTP é o meio físico de 
+rede mais comum.
+•Com terminação de conectores RJ -
+45.
+•Interconecta hosts com dispositivos 
+de rede intermediários.
+Principais características do UTP
+1.A capa externa protege os fios de 
+cobre contra danos físicos.
+2.Os pares trançados protegem o sinal 
+contra interferências.
+3.O isolamento plástico com código de 
+cores isola eletricamente os fios um 
+do outro e identifica cada par.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+27© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoCablagem de cobre 
+Cabo de par trançado blindado (STP) •Melhor proteção contra ruídos que o 
+UTP
+•Mais caro do que UTP
+•Mais difícil de instalar do que UTP
+•Com terminação de conectores RJ -
+45.
+•Interconecta hosts com dispositivos 
+de rede intermediários.
+Principais Características do STP
+1.A capa externa protege os fios de 
+cobre contra danos físicos.
+2.O escudo trançado ou folha fornece 
+proteção EMI/RFI
+3.O escudo de folha para cada par de 
+fios fornece proteção EMI/RFI
+4.O isolamento plástico com código de 
+cores isola eletricamente os fios um 
+do outro e identifica cada par.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+28© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoCablagem  de cobre 
+Cabo coaxial
+Consiste do seguinte:
+1.Revestimento de cabo externo para evitar danos 
+físicos menores
+2.Uma trança de cobre tecida, ou folha metálica, atua 
+como o segundo fio no circuito e como uma 
+blindagem para o condutor interno.
+3.Uma camada de isolamento plástico flexível
+4.Um condutor de cobre é usado para transmitir os 
+sinais eletrônicos.
+Há tipos diferentes de conectores utilizados com o cabo 
+coaxial.
+Frequentemente usado nas seguintes situações:
+•Instalações sem fio -cabos coaxiais ligam antenas a 
+dispositivos sem fios.
+•Instalações de Internet por cabo
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+29© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco4.4 –Cablagem  UTP
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+30© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoCablagem UTP 
+Propriedades da cablagem UTP
+O UTP possui quatro pares de fios de cobre com 
+código de cores torcidos juntos e envolvidos por 
+uma bainha de plástico flexível. Não usa 
+blindagem. UTP depende das seguintes 
+propriedades para limitar o crosstalk :
+•Cancelamento -Cada fio num par de fios usa 
+polaridade oposta. Um fio é negativo, o outro é 
+positivo. Eles são torcidos juntos e os campos 
+magnéticos efetivamente cancelam uns aos outros 
+e fora da EMI/RFI.
+•Variação de torções por pé em cada fio -Cada fio 
+é torcido uma quantidade diferente, o que ajuda a 
+evitar cruzamentos entre os fios no cabo.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+31© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoCablagem UTP 
+Padrões e conectores de cablagem UTP
+As normas para UTP são estabelecidas pelo TIA/EIA. 
+TIA/EIA -568 padroniza elementos como:
+•Tipos de cabo
+•Comprimentos de cabo
+•Conectores
+•Terminação de cabo
+•Métodos de ensaio
+Os padrões elétricos para a cablagem de cobre são 
+estabelecidos pelo IEEE, que classifica o cabo de acordo 
+com seu desempenho. Por exemplo:
+•Categoria 3
+•Categorias 5 e 5e
+•Categoria 6
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+32© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoCablagem UTP 
+Padrões e conectores de cablagem UTP
+Conector RJ -45
+Soquete RJ -45
+Cabo UTP mal terminado
+Cabo UTP devidamente encerrado
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+33© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoCablagem UTP 
+Cabos UTP direto e cruzado 
+Tipo do Cabo Padrão Aplicação
+Ethernet Direto Ambas as extremidades T568A 
+ou T568BHost para dispositivo de rede
+Ethernet Cruzado* Uma extremidade é T568A, 
+outra é T568BHost para host, switch para switch, 
+router para router
+* Considerado legado devido à maioria das NICs usando o Auto -MDIX para detectar o tipo de cabo e a conexão 
+completa
+Rollover Propriedade da Cisco Porta serial do host para a porta de 
+Consola do Router ou Switch, usando 
+um adaptador
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+34© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco4.5 Cablagem de fibra óptica
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+35© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoCablagem de Fibra óprica
+Propriedades da Cablagem de Fibra Óptica
+•Não tão comum como UTP por causa do custo envolvida
+•Ideal para alguns cenários de rede
+•Transmite dados por distâncias maiores com largura de banda maior do que 
+qualquer outra meio físico de rede
+•Menos suscetíveis à atenuação e completamente imunes ao EMI/RFI
+•Feito de fios flexíveis e extremamente finos de vidro muito puro
+•Usa um laser ou LED para codificar bits como pulsos de luz
+•O cabo de fibra óptica atua como um guia de ondas para transmitir luz entre as 
+duas extremidades com perda mínima de sinal
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+36© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoCablagem de fibra óptica 
+Tipos de meio físico de fibra
+Fibra de modo único (single -mode )
+•Núcleo muito pequeno
+•Usa lasers caros
+•Aplicações de longa distância
+Fibra Multimodo
+•Núcleo maior
+•Usa LEDs menos dispendiosos
+•Os LEDs transmitem em ângulos diferentes
+•Até 10 Gbps a mais de 550 metros
+O termo dispersão se refere ao espalhamento do pulso de luz com o tempo. Maior dispersão significa 
+aumento da perda de força do sinal. MMF tem maior dispersão do que SMF, com uma distância 
+máxima do cabo para MMF é de 550 metros.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+37© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoCablagem de fibra óptica
+Uso de cablagem de fibra óptica
+Agora, a cablagem de fibra óptica é usada em quatro setores:
+1.Redes empresariais -usadas para aplicativos de cablagem de backbone e 
+interligação de dispositivos
+2.Fiber -to-the-Home (FTTH) : usado para fornecer serviços de banda larga sempre 
+ativos para casas e pequenas empresas.
+3.Redes de longo curso -Utilizadas por fornecedores de serviços para ligar países e 
+cidades
+4.Redes de cabos submarinos -Utilizadas para fornecer soluções confiáveis de alta 
+velocidade e alta capacidade, capazes de sobreviver em ambientes submarinos 
+adversos até distâncias transoceânicas.
+Nosso foco neste curso é o uso de fibra dentro da empresa.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+38© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoCablagem de fibra óptica 
+Conectores de fibra óptica
+Conectores de Ponta Reta (Straight -Tip -ST)
+Conectores SC ( Subscriber Connector -
+Conectores de Assinante)
+Conectores Lucent Simplex (LC) 
+Conectores LC duplex, multimodo
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+39© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoCabo Cablafe de fibra óptica
+Patch Cords de fibra
+Cabo multimodo SC -
+SC
+Cabo de remendo LC -
+LC SM
+Cabo multimodo SC -
+SC
+Cabo de remendo ST -
+SC SM
+A cor amarela indica cabos de fibra monomodo e o laranja é para cabos de fibra multimod o.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+40© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoCablagem de fibra ótica 
+Fibra versus cobre
+A fibra óptica é usada principalmente como cablagem de backbone para alto tráfego, ligações ponto a 
+ponto entre dispositivos de distribuição de dados e para a interligação de edifícios num campus com 
+vários edifícios.
+Problemas de 
+ImplementaçãoCablagem UTP Cablagem de fibra óptica
+Largura de banda suportada 10 Mb/s -10 Gb/s 10 Mb/s -100 Gb/s
+DistânciaRelativamente curto (1 a 100 
+metros)Relativamente longo (1 -100.000 
+metros)
+Imunidade a interferência 
+eletromagnética e de 
+frequências de rádioBaixa Alto (totalmente imune)
+Imunidade a perigos elétricos Baixa Alto (totalmente imune)
+Custos do meio físico e dos 
+conectoresMenor Mais alta
+Habilidades necessárias para 
+a instalaçãoMenor Mais alta
+Precauções de segurança Menor Mais alta
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+41© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco4.6 -Meio físico Sem Fios
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+42© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoMeio físico sem fios 
+Propriedades do meio físico sem fios
+Transporta sinais eletromagnéticos que representam dígitos binários usando 
+frequências de rádio ou microondas . Fornece a melhor opção de mobilidade. 
+Os números de conexão sem fios continuam aumentando.
+Algumas das limitações do wireless:
+•Área de cobertura -A cobertura efetiva pode ser significativamente afetada pelas 
+características físicas do local de implantação. 
+•Interferência -O wireless é suscetível a interferência e pode ser interrompido por 
+muitos dispositivos comuns. 
+•Segurança -A cobertura de comunicação sem fios não requer acesso a uma parte 
+física do meio, então qualquer pessoa pode ter acesso à transmissão.
+•Meios partilhados –AS WLANs funcionam em half-duplex, o que significa que 
+apenas um dispositivo pode enviar ou receber por vez. Muitos utilizadores acedendo 
+à WLAN simultaneamente resulta em largura de banda reduzida para cada um.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+43© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoMeio físico sem fios 
+Tipos de meio físico sem fios
+Os padrões do IEEE e do setor de telecomunicações para comunicação de dados sem fios
+cobrem tanto a camada de ligação de dados quanto as camadas físicas. Em cada um desses 
+padrões, especificações da camada física definem:
+•Métodos de codificação de dados para sinais de rádio
+•Frequência e potência de transmissão
+•Requisitos de recepção e decodificação de sinal
+•Projeto e construção de antenas
+Padrões Sem Fios:
+•Wi-Fi (IEEE 802.11) -Tecnologia LAN sem fios (WLAN)
+•Bluetooth (IEEE 802.15) -Padrão de rede de área pessoal sem fios (Wireless Personal Area 
+Network -WPAN)
+•WiMAX (IEEE 802.16) -Usa uma topologia ponto -a-multiponto para fornecer acesso sem fios 
+de banda larga
+•Zigbee (IEEE 802.15.4) -Comunicações com baixa taxa de dados e baixo consumo de 
+energia, principalmente para aplicações de Internet das Coisas (Internet ofThings -IoT)
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+44© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoMeio físico sem fios 
+LAN sem fios
+Em geral, uma LAN sem fios (WLAN) requer os seguintes dispositivos:
+•Access Point –AP (Ponto de Acesso) Sem Fios : concentra os sinais 
+sem fios dos utilizadores e conecta, geralmente por meio de um cabo de 
+cobre, a uma infraestrutura de rede de cobre existente, como a Ethernet.
+•Adaptadores de NIC sem fios -fornecem recursos de comunicação sem 
+fios aos hosts.
+Existem vários padrões de WLAN. Ao adquirir equipamentos WLAN, garanta 
+compatibilidade e interoperabilidade.
+Os administradores de rede devem desenvolver e aplicar políticas e processos 
+de segurança rigorosos para proteger as WLANs contra acesso e danos não 
+autorizados.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+47© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Documento confidencial da Cisco4.7 -Sumário
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+50© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoSumário
+O que aprendi neste módulo?
+•Antes de qualquer comunicação de rede, uma conexão física com uma rede local, com ou 
+sem fios, deve ser estabelecida.
+•A camada física consiste em circuitos eletrônicos, meios físicos e conectores 
+desenvolvidos pelos engenheiros.
+•Os padrões da camada física abordam três áreas funcionais: componentes físicos, 
+codificação e sinalização.
+•Três tipos de cablagem de cobre são: UTP , STP e cabo coaxial (coaxial).
+•A cablagem UTP está em conformidade com os padrões estabelecidos conjuntamente pela 
+TIA/EIA. As características elétricas da cablagem de cobre são definidas pelo Instituto de 
+Engenharia Elétrica e Eletrônica (IEEE).
+•Os principais tipos de cabos que são obtidos usando convenções de fiação específicas são 
+Ethernet Straight -through e Ethernet Crossover.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+51© 2019 Cisco e/ou suas afiliadas. Todos os direitos reservados.   Documento 
+confidencial da CiscoSumário
+O que eu aprendi neste módulo (Cont.)?
+•O cabo de fibra óptica transmite dados por longas distâncias e a larguras de banda mais 
+altas do que qualquer outro meio físico de rede.
+•Existem quatro tipos de conectores de fibra óptica: ST, SC, LC e LC multimodo duplex.
+•Os cabos de patch de fibra óptica incluem multimodo SC -SC, monomodo LC-LC, multimodo 
+ST-LC e monomodo SC-ST.
+•O meio físico sem fios transporta sinais eletromagnéticos que representam os dígitos 
+binários de comunicações de dados usando frequências de rádio ou de micro -ondas. A rede 
+sem fios tem algumas limitações, incluindo área de cobertura, interferência, segurança e os 
+problemas que ocorrem com qualquer meio partilhado.
+•Os padrões sem fios incluem o seguinte: Wi -Fi (IEEE 802.11), Bluetooth (IEEE 802.15), 
+WiMAX (IEEE 802.16) e Zigbee (IEEE 802.15.4).
+•A LAN sem fios (WLAN) requerem um AP sem fios e adaptadores NIC sem fios.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)

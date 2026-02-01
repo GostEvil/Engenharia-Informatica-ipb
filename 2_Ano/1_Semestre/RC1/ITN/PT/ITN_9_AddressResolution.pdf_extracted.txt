@@ -1,0 +1,161 @@
+Módulo 9: Resolução de 
+Endereços
+Introdução às redes v7.0 (ITN)Versão original: Cisco Network Academy
+Versão modificada: Eduardo Costa
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+10© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoObjetivos do módulo
+Título do módulo: Resolução desendereços
+Objetivo do Módulo : Explicar como ARP e ND possibilitam a comunicação numa 
+rede local .
+Título do Tópico Objetivo do Tópico
+MAC e IP Comparar as funções do endereço MAC e do endereço IP .
+⁪ARP Descrever a finalidade do ARP.
+Descoberta de vizinhos Descrever a operação de descoberta de vizinhos em IPv6.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+11© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco9.1 MAC e IP
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+12© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoMAC e IP 
+Destino na mesma rede
+Dois endereços principais são atribuídos a um dispositivo numa LAN Ethernet:
+•Endereço físico da camada 2 (o endereço MAC) -Usado para comunicações de NIC 
+para NIC na mesma rede Ethernet.
+•Endereço lógico (o endereço IP) -Usado para enviar o pacote do dispositivo de 
+origem para o dispositivo de destino.
+Os endereços da camada 2 são usados para entregar quadros de uma NIC para outra NIC 
+na mesma rede. Se o endereço IP de destino estiver na mesma rede, o endereço MAC de 
+destino será o do dispositivo de destino.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+13© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoMAC e IP 
+Destino na rede remota
+Quando o endereço IP de destino estiver numa rede remota, o endereço MAC de destino 
+será o endereço do gateway por omissão do host.
+•ARP é usado pelo IPv4 para associar o endereço IPv4 de um dispositivo ao endereço 
+MAC da NIC do dispositivo.
+•O ICMPv6 é usado pelo IPv6 para associar o endereço IPv6 de um dispositivo ao 
+endereço MAC da NIC do dispositivo.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+15© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco9.2 ARP
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+16© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoARP
+ARP Visão geral
+Um dispositivo usa o ARP para 
+determinar o endereço MAC de destino 
+de um dispositivo local quando 
+conhece seu endereço IPv4.
+O ARP fornece duas funções básicas:
+•Resolução de endereços IPv4 em 
+endereços MAC
+•Mantêm uma tabela ARP de 
+mapeamentos de endereços IPv4 
+para MAC
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+17© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoARP 
+Funções do ARP
+Um dispositivo pesquisará na sua tabela ARP um endereço IPv4 destino correspondente 
+a um endereço MAC.
+•Se o endereço IPv4 de destino do pacote estiver na mesma rede, o dispositivo 
+procurará na tabela ARP o endereço IPv4 de destino.
+•Se o endereço IPv4 de destino estiver em uma rede diferente, o dispositivo 
+procurará na tabela ARP o endereço IPv4 do gateway por omissão.
+•Se o dispositivo localizar o endereço IPv4, o endereço MAC correspondente será 
+usado como o endereço MAC destino no quadro. 
+•Se nenhuma entrada for encontrada na tabela ARP , o dispositivo enviará uma 
+requisição ARP.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+21© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoARP 
+Remoção de entradas de uma tabela ARP
+•As entradas na tabela ARP não são permanentes e são removidas quando um 
+temporizador da cache ARP expira após um período de tempo especificado.
+•A duração do temporizador da cache ARP varia de acordo com o sistema operativo.
+•As entradas da tabela ARP também podem ser removidas manualmente pelo 
+administrador. 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+22© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoARP
+Tabelas ARP em dispositivos de rede
+•O comando show iparp exibe a tabela ARP num router Cisco.
+•O comando arp—aexibe a tabela ARP num PC com Windows 10.
+R1# show ip arp
+Protocol Address Age (min) Hardware Addr Type Interface
+Internet 192.168.10.1 -a0e0.af0d.e140 ARPA GigabitEthernet0/0/0
+C:\Users\PC> arp -a
+Interface: 192.168.1.124 —0x10
+Endereço de Internet Endereço Físico Tipo
+192.168.1.1 c8 -d7-19-cc-a0-86 dynamic
+192.168.1.101 08 -3e-0c-f5-f7-77 dynamic
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+23© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoARP
+Problemas ARP —ARP Broadcasting e ARP Spoofing
+•As solicitações de ARP são recebidas e processadas por todos os dispositivos na 
+rede local.
+•Transmissões de ARP excessivas podem causar alguma redução no desempenho.
+•As respostas ARP podem ser falsificadas por um agente ameaça para realizar um 
+ataque de envenenamento por ARP .
+•Os switches de nível empresarial incluem técnicas de mitigação para proteção contra 
+ataques ARP.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+25© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco9.3 Descoberta de Vizinhos
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+27© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoDescoberta de vizinhos IPv6
+Mensagens de descoberta de vizinhos IPv6
+O protocolo IPv6 Neighbor Discovery (ND) fornece:
+•Resolução de endereços
+•Descoberta de rotas
+•Serviços de redirecionamento
+•As mensagens ICMPv6 Neighbor Solicitation (NS) e Neighbor
+Advertisement (NA) são usadas para mensagens dispositivo -para-
+dispositivo, como resolução de endereços.
+•As mensagens de solicitação de router ICMTPv6 (RS) e de anúncio de 
+router (RA) são usadas para mensagens entre dispositivos e routers para 
+detecção do router .
+•As mensagens de redirecionamento ICMPv6 são usadas por routers para 
+melhor seleção de próximo salto.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+28© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoDescoberta de vizinhos  IPv6 
+IPv6 —Resolução de endereços
+•Dispositivos IPv6 usam ND 
+para resolver o endereço MAC 
+de um endereço IPv6 
+conhecido.
+•As mensagens de solicitação 
+de vizinhos ICMPv6 são 
+enviadas usando endereços de 
+multicast Ethernet e IPv6 
+especiais. 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+30© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco9.4 -Sumário
+31© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoSumário
+O que aprendi neste módulo?
+•Os endereços físicos da camada 2 (isto é, os endereços MAC Ethernet) são usados para 
+entregar o quadro de ligação de dados com o pacote IP encapsulado de uma NIC para outra NIC 
+na mesma rede.
+•Se o endereço IP de destino estiver na mesma rede, o endereço MAC de destino será o do 
+dispositivo de destino. 
+•Quando o endereço IP de destino (IPv4 ou IPv6) estiver numa rede remota, o endereço MAC de 
+destino será o endereço do gateway por omissão do host (ou seja, a interface do router ).
+•Um dispositivo IPv4 usa o ARP para determinar o endereço MAC de destino de um dispositivo 
+local quando conhece seu endereço IPv4.
+•O ARP fornece duas funções básicas: resolver endereços IPv4 para endereços MAC e manter 
+uma tabela de mapeamentos de endereços IPv4 para MAC.
+•Ao receber a resposta do ARP, o dispositivo adiciona o endereço IPv4 e o endereço MAC 
+correspondente à sua tabela ARP.
+•Cada dispositivo tem um temporizador da cache ARP e remove entradas ARP que não tenham 
+sido usadas durante um determinado período.
+•O IPv6 não usa ARP, usa o protocolo ND para resolver endereços MAC. 
+•Um dispositivo IPv6 usa ICMPv6 Neighbor Discovery para determinar o endereço MAC de 
+destino de um dispositivo local quando ele conhece seu endereço IPv6.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)

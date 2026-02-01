@@ -1,0 +1,687 @@
+Módulo 3: Protocolos e 
+Modelos
+Introdução às redes 7.0 (ITN)Versão original: Cisco Network Academy
+Versão modificada: Eduardo Costa
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+13© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoObjetivos do módulo
+Título do Módulo : Protocolos e Modelos
+Objetivo do Módulo :Explicar como os protocolos de rede permitem que dispositivos acedam a 
+recursos de rede locais e remotas.
+Título do Tópico Objetivo do Tópico
+As regras Descrever os tipos de regras que são necessárias para o êxito da 
+comunicação.
+Protocolos Explicar a necessidade dos protocolos na comunicação de rede.
+Conjuntos de protocolos Explicar a finalidade da adesão a um conjunto de protocolos.
+Organizações de estandardização Explicar a função de organizações de estandardização no estabelecimento de 
+protocolos para interoperabilidade de rede.
+Modelos de referência Explicar como o modelo TCP/IP e o modelo OSI são usados para facilitar a 
+padronização no processo de comunicação.
+Encapsulamento de dados Explicar como o encapsulamento permite que os dados sejam transportados 
+pela rede.
+Acesso a dados Explicar como os hosts locais acedem a recursos locais numa rede.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+15© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco3.1 As Regras
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+17© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAs regras 
+Princípios da comunicação
+As redes podem variar em tamanho e complexidade. Não é suficiente ter uma 
+conexão, os dispositivos devem concordar em “como” comunicar.
+Há três elementos para qualquer comunicação:
+•Haverá uma fonte (remetente).
+•Haverá um destino (receptor).
+•Haverá um canal (meio) que fornece o caminho para as comunicações 
+ocorrerem.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+18© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAs Regras
+Protocolos de comunicações
+•Todas as comunicações são regidas por protocolos.
+•Protocolos são as regras que as comunicações seguirão.
+•Essas regras variam de acordo com o protocolo.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+19© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAs regras 
+Estabelecimento de regras
+•Os indivíduos devem usar regras ou acordos estabelecidos para conduzir a conversa.
+•A primeira mensagem é difícil de ler porque não está formatada corretamente. A segunda 
+mostra a mensagem formatada corretamente
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+20© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAs regras 
+Estabelecimento de regras(Cont.)
+Os protocolos devem ser considerados para os seguintes requisitos:
+•Um emissor e um receptor identificados
+•Língua e gramática comum
+•Velocidade e ritmo de transmissão
+•Requisitos de confirmação ou recepção
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+21© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAs regras
+Os requisitos dos protocolo de rede
+Protocolos de computador comuns devem estar de acordo e incluir os seguintes 
+requisitos: 
+•Codificação de mensagens
+•Formatação e encapsulamento de mensagens
+•Tamanho da Mensagem
+•Tempo da mensagem
+•Opções de envio de mensagem
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+22© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAs regras 
+Codificação da mensagem
+•A codificação é o processo de conversão de informações noutra forma aceitável 
+para a transmissão. 
+•A decodificação reverte esse processo para interpretar a informação. 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+23© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAs regras 
+Formatação e encapsulamento da mensagem
+•Quando uma mensagem é enviada, ela deve usar um formato ou estrutura específica. 
+•Os formatos da mensagem dependem do tipo de mensagem e do canal usado para entregá -
+la. 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+24© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAs regras 
+Tamanho da mensagem
+A codificação entre hosts deve estar num formato adequado para o meio físico.
+•As mensagens enviadas pela rede são convertidas em bits
+•Os bits são codificados num padrão de luz, ondas electromagnéticas ou impulsos elétricos.
+•O host de destino deve decodificar os sinais para interpretar a mensagem.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+25© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAs regras 
+Temporização da mensagem
+A temporização da mensagem inclui o seguinte: 
+Controle de fluxo -gere a taxa de transmissão de dados e define a quantidade de 
+informação que pode ser enviada e a velocidade à qual ela pode ser entregue.
+Tempo limite de resposta —gere o tempo que um dispositivo espera quando não ouve 
+uma resposta do destino. 
+Método de acesso -determinar quando alguém pode enviar uma mensagem.
+•Pode haver várias regras que regem questões como “colisões”. Isso ocorre quando mais 
+de um dispositivo envia tráfego ao mesmo tempo e as mensagens ficam corrompidas. 
+•Alguns protocolos são proativos e tentam evitar colisões; outros protocolos são reativos e 
+estabelecem um método de recuperação após a colisão ocorrer.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+26© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAs regras 
+Opções de entrega da mensagem
+A entrega de mensagens pode ser um dos seguintes métodos: 
+•Unicast –comunicação um para um.
+•Multicast —um para muitos, geralmente não todos
+•Broadcast –um para todos
+Nota: Os broadcasts são usadas em redes IPv4, mas não são uma opção para IPv6. Mais 
+tarde, também veremos o “ Anycast ” como uma opção de entrega adicional para IPv6. 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+27© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAs Regras
+Uma Nota Sobre o Ícone de Nó
+•Os documentos podem usar o ícone do nó, normalmente um círculo, para representar todos 
+os dispositivos. 
+•A figura ilustra o uso do ícone do nó para opções de entrega.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+28© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco3.2 Protocolos
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+29© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoProtocolos
+Visão geral dos protocolos de rede
+Protocolos de rede definem 
+um conjunto comum de 
+regras.
+•Pode ser implementado em 
+dispositivos em:
+•Software
+•Hardware
+•Ambos
+•Protocolos têm as suas 
+próprias:
+•Funções
+•Formato
+•RegrasTipo de 
+ProtocoloDescrição
+Comunicações 
+em Redepermitir que dois ou mais dispositivos 
+comuniquem através de uma ou mais redes
+Segurança da 
+redeSegurança dos dados para fornecer autenticação, 
+integridade de dados e encriptação de dados
+Encaminhamento permitir que os routers troquem informações 
+sobre rotas, comparem informações de caminho e 
+selecionem o melhor caminho
+Descoberta de 
+serviçousado para a detecção automática de dispositivos 
+ou serviços
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+30© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoProtocolos
+Funções de protocolo de rede
+•Os dispositivos usam protocolos 
+acordados para comunicar.
+•Protocolos podem ter pode ter uma ou 
+várias funções.
+Função Descrição
+Endereçamento Identificação de remetente e destinatário
+Confiabilidade Fornece entrega garantida
+Controle de fluxo Garante fluxos de dados a uma taxa eficiente
+Sequenciamento Etiqueta exclusivamente cada segmento de dados transmitido
+Detecção de erros Determina se os dados ficaram corrompidos durante a transmissão
+Interface de aplicação Comunicações de processo a processo entre aplicativos de rede
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+31© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoProtocolos
+Interação de protocolos
+•As redes exigem o uso de vários protocolos.
+•Cada protocolo tem sua própria função e formato.
+Protocolos Função
+Protocolo HTTP ▪Governa a maneira como um servidor da Web e um cliente da Web interagem
+▪Define o conteúdo e o formato
+Protocolo TCP ▪Gere as conversas individuais
+▪Fornece entrega garantida
+▪Gere o controle de fluxo
+Protocolo IP Entrega mensagens globalmente do remetente para o receptor
+Ethernet Entrega mensagens de uma NIC para outra NIC na mesma rede local (LAN) 
+Ethernet
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+32© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco3.3 Conjuntos de protocolos
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+33© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoConjunto de protocolos
+Conjuntos de protocolos de rede
+Os protocolos devem ser capazes de funcionar 
+com outros protocolos.
+Conjunto de Protocolos:
+•Um grupo de protocolos inter -relacionados 
+necessários para executar uma função de 
+comunicação
+•Conjuntos de regras que trabalham juntos para 
+ajudar a resolver um problema
+Os protocolos são visualizados em termos de 
+camadas:
+•Camadas mais altas
+•Camadas Inferiores -preocupadas com a 
+movimentação de dados e fornecer serviços 
+para as camadas superiores
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+34© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoConjuntos de protocolos
+Evolução dos conjuntos de protocolos
+Existem vários conjuntos de protocolos.
+•Internet Protocol Suite ou TCP/IP -O
+conjunto de protocolos mais comum e 
+mantido pela Internet Engineering T ask 
+Force (IETF)
+•Protocolos de Interconexão de Sistemas 
+Abertos (OSI) -Desenvolvido pela 
+Organização Internacional de Normalização 
+(ISO) e pela União Internacional de 
+Telecomunicações (UIT)
+•AppleTalk –Suíte proprietária promovida 
+pela Apple Inc.
+•Novell NetWare -Suíte proprietária 
+desenvolvida pela Novell Inc.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+35© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoConjuntos de protocolos
+Exemplo de protocolo TCP / IP
+•Os protocolos TCP / IP 
+funcionam nas camadas de 
+aplicativo, transporte e Internet.
+•Os protocolos LAN da camada 
+de acesso à rede mais comuns 
+são Ethernet e WLAN (LAN 
+sem fios).
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+36© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoConjuntos de protocolo 
+Conjuntos de protocolos TCP/IP
+•TCP/IP é o conjunto de protocolos 
+usado pela internet e inclui muitos 
+protocolos.
+•O TCP/IP é:
+•Um conjunto de protocolos 
+standard aberto que está 
+disponível gratuitamente para o 
+público e pode ser usado por 
+qualquer fornecedor
+•Um conjunto de protocolos 
+baseado em standards que é 
+apoiado pelo setor de redes e 
+aprovado por uma organização de 
+estandardização para garantir a 
+interoperabilidade
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+37© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoConjuntos de protocolo 
+Processo de comunicação TCP/IP
+•Um servidor web encapsulando e enviando 
+uma página da Web para um cliente.•Um cliente desencapsulando a página da 
+Web para o navegador Web
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+38© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco3.4 Organizações de estandardização
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+39© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoOrganizações de estandardização
+Padrões abertos
+As normas abertas incentivam:
+•interoperabilidade
+•concorrência
+•inovação
+As organizações de estandardização são:
+•Independentes dos vendedores
+•organizações sem fins lucrativos 
+•criadas para desenvolver e promover o 
+conceito de normas abertas. 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+40© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoOrganizações de estandardização
+Padrões de Internet
+•Internet Society (ISOC) -Promove o 
+desenvolvimento aberto e a evolução da 
+Internet
+•Internet Architecture Board (IAB) -
+Responsável pela gestão e 
+desenvolvimento geral dos standards da 
+Internet.
+•Internet Engineering Task Force (IETF) -
+Desenvolve, atualiza e mantém tecnologias 
+de Internet e TCP / IP
+•Internet Research Task Force (IRTF) -
+Focada em pesquisas de longo prazo 
+relacionadas à Internet e aos protocolos 
+TCP / IP
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+41© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoOrganizações de estandardização
+Padrões de Internet (Cont.)
+Organizações de standards envolvidas no 
+desenvolvimento e suporte de TCP / IP
+•Internet Corporation for Assigned
+Names and Numbers (ICANN) -
+Coordena a alocação de endereços IP , 
+a gestão de nomes de domínio e a 
+atribuição de outras informações
+•Internet Assigned Numbers Authority
+(IANA) -supervisiona e gere a 
+alocação de endereços IP, a gestão de 
+nomes de domínio e os identificadores 
+de protocolo da ICANN
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+42© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoOrganizações de estandardização
+Padrões da eletrónica e das comunicações
+•Institute of Electrical and Electronics Engineers (IEEE , pronunciado " I-triple -E") -
+dedicado à criação de padrões em potência e energia, saúde, telecomunicações e redes
+•Electronic Industries Alliance (EIA) -desenvolve padrões relacionados à cablagem 
+elétrica, conectores e racks de 19 polegadas usados para montar equipamentos de rede
+•Telecommunications Industry Association (TIA) -desenvolve padrões de comunicação 
+em equipamentos de rádio, torres celulares, dispositivos de Voz sobre IP (VoIP), 
+comunicações por satélite e muito mais
+•International Telecommunication Union – Telecommunication (ITU-T)-define padrões 
+para compactação de vídeo, IPTV (Internet Protocol Television ) e comunicações de banda 
+larga, como uma linha de assinante digital DSL(Digital Subscriber Line)
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+44© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco3.5 Modelos de referência
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+45© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoModelos de referência 
+Os benefícios de se usar um modelo de camadas
+Conceitos complexos, como a forma 
+como uma rede opera, podem ser 
+difíceis de explicar e compreender.. 
+Por esse motivo, é usado um modelo 
+em camadas.
+Dois modelos em camadas 
+descrevem o funcionamento da rede:
+•Modelo de referência OSI (Open 
+System Interconnection )
+•Modelo de referência TCP/IP
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+46© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoModelos de referência 
+Os benefícios de se usar um modelo de camadas (Cont.)
+Os benefícios do uso de um modelo em camadas são:
+•Auxiliar no projeto de protocolos porque os protocolos que operam numa camada 
+específica definiram as informações sobre as quais atuam e uma interface definida 
+para as camadas acima e abaixo
+•Estimula a competição porque os produtos de diferentes fornecedores podem 
+trabalhar em conjunto
+•Impedir que alterações de tecnologia ou capacidade numa camada, afetem outras 
+camadas acima e abaixo
+•Fornece um idioma comum para descrever funções e habilidades de rede. 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+47© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoModelos de referência 
+O modelo de referência OSI
+Camada do 
+modelo OSIDescrição
+7 -Aplicação Contém os protocolos usados para as comunicações processo a processo
+6 -ApresentaçãoFornece representação comum dos dados transferidos entre os serviços da 
+camada de aplicação.
+5 -Sessão Fornece serviços para a camada de apresentação e para gerir a troca de dados.
+4 -TransporteDefine serviços para segmentar, transferir e remontar os dados para 
+comunicações individuais.
+3 -Rede Fornece serviços para troca de pedaços individuais de dados pela rede.
+2 -Ligação de 
+dadosDescreve métodos para a troca de quadros de dados num meio comum.
+1 -Física Descreve os meios para ativar, manter e desativar conexões físicas.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+48© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoModelos de referência
+O modelo de referência TCP / IP
+Camada do 
+modelo TCP/IPDescrição
+AplicaçãoRepresenta dados para o utilizador, além do controle de codificação e de 
+diálogo.
+Transporte Permite a comunicação entre vários dispositivos diferentes em redes distintas.
+Internet Determina o melhor caminho pela rede.
+Acesso à rede Controla os dispositivos de hardware e o meio físico que constituem a rede.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+49© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoModelos de referência
+Comparação de modelos OSI e TCP / IP
+•O modelo OSI divide a camada de 
+acesso à rede e a camada de 
+aplicação do modelo TCP/IP em 
+várias camadas.
+•O conjunto de protocolos TCP/IP não 
+especifica quais protocolos a usar ao 
+transmitir por meio físico.
+•As Camadas 1 e 2 do modelo OSI 
+discutem os procedimentos 
+necessários para acder ao meio e o 
+meio físico para enviar dados por 
+uma rede.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+51© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco3.6 Encapsulamento de dados
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+52© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoEncapsulamento de dados 
+Segmentação de mensagensSegmentação é o processo de dividir 
+mensagens em unidades menores. 
+Multiplexação é o processo de tomar 
+vários fluxos de dados segmentados e 
+intercalá -los juntos.
+A segmentação de mensagens apresenta 
+dois benefícios principais:
+•Aumenta a velocidade -É possível 
+enviar grandes quantidades de dados 
+pela rede sem monopolizar                um 
+link de comunicação.
+•Aumenta a eficiência -Somente 
+segmentos que não conseguem alcançar 
+o destino precisam ser retransmitidos, 
+não todo o fluxo de dados . 
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+53© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoEncapsulamento de dados
+Sequenciamento
+Identificar sequencialmente os segmentos 
+(as unidades menores da mensagem) é o 
+processo de numeração dos segmentos  
+para que a mensagem possa ser 
+remontada no destino.
+O TCP é responsável por identificar 
+sequencialmente os segmentos individuais.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+54© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoEncapsulamento de dados 
+Unidades protocolares de dadosEncapsulamento é o processo em que os 
+protocolos adicionam as informações aos dados.
+•Em cada etapa do processo, uma PDU 
+(Protocol Data Unit) possui um nome diferente 
+para refletir as novas funções. 
+•Não há convenção de nomenclatura universal 
+para PDUs ; neste curso, as PDUs são 
+nomeadas de acordo com os protocolos do 
+conjunto TCP / IP . 
+•PDUs passando a pilha são as seguintes:
+1.Dados (fluxo de dados)
+2.Segmento
+3.Pacote
+4.Quadro
+5.Bits (Fluxo de Bits)
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+55© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoEncapsulamento de dados 
+Exemplo de encapsulamento
+•O encapsulamento é um 
+processo de cima para 
+baixo.
+•O nível acima faz o seu 
+processo e, em seguida, 
+passa -o para o próximo 
+nível do modelo. Este 
+processo é repetido por 
+cada camada até que seja 
+enviado como um fluxo de 
+bits.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+56© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoEncapsulamento de dados 
+Exemplo de desencapsulamento
+•Os dados são desencapsulados à medida 
+que se move para cima na pilha protocolar.
+•Quando uma camada completa seu 
+processo, essa camada tira seu cabeçalho 
+e passa para o próximo nível a ser 
+processado. Isso é repetido em cada 
+camada até que seja um fluxo de dados 
+que o aplicatição pode processar.
+1.Recebido como Bits (Fluxo de Bits)
+2.Quadro
+3.Pacote
+4.Segmento
+5.Dados (fluxo de dados)
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+57© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco3.7 Acesso aos dados
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+58© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAcesso aos dados 
+Endereços
+Tanto a camada de ligação de dados como a camada de rede usam endereçamento para 
+entregar dados desde a origem ao destino.
+Endereços origem e destino da camada de rede -Responsáveis por entregar o pacote 
+IP da origem para o destino final.
+Endereços de origem e destino da camada de ligação de dados -Responsável por 
+fornecer o quadro de ligação de dados numa placa de interface de rede (NIC) para outra 
+NIC na mesma rede.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+59© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAcesso aos dados
+Endereço Lógico da Camada 3
+O pacote IP contém dois endereços 
+IP:
+•Endereço IP origem -O endereço 
+IP do dispositivo emissor, a origem 
+do pacote.
+•Endereço IP de destino -O 
+endereço IP do dispositivo 
+receptor, o destino final do pacote.
+Esses endereços podem estar na 
+mesma rede ou não.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+60© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAcesso aos dados
+Endereço lógico da Camada 3 (Cont.) 
+Um endereço IP contém duas partes:
+•Parte de rede (IPv4) ou prefixo (IPv6)
+•A parte mais à esquerda do endereço 
+indica o grupo de rede do qual o endereço 
+IP é membro.
+•Cada LAN ou WAN terá a mesma parte de 
+rede.
+•Parte do host (IPv4) ou ID da interface 
+(IPv6)
+•A parte restante do endereço identifica um 
+dispositivo específico dentro do grupo. 
+•Essa parte é exclusiva para cada 
+dispositivo na rede.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+61© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAcesso aos dados 
+Dispositivos na mesma rede
+Quando os dispositivos estão na 
+mesma rede, a origem e o destino 
+terão o mesmo número na parte da 
+rede do endereço.
+•PC1 —192.168.1 .110
+•Servidor FTP —192.168.1 .9
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+62© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAcesso aos dados
+Função dos Endereços da Camada de Ligação de Dados: Mesma 
+Rede IP
+Quando os dispositivos estiverem na 
+mesma rede Ethernet, o quadro do link 
+de dados usará o endereço MAC real da 
+NIC de destino.
+Os endereços MAC são integrados 
+fisicamente na NIC Ethernet e são 
+endereçamento local.
+•O endereço MAC de origem será o do 
+originador no link.
+•O endereço MAC de destino estará 
+sempre no mesmo link que a origem, 
+mesmo que o destino final seja remoto.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+63© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAcesso aos dados 
+Dispositivos em uma rede remota
+•O que acontece quando o destino real 
+(final) não está na mesma LAN e é 
+remoto? 
+•O que acontece quando PC1 tenta 
+alcançar o servidor Web?
+•Isso afeta as camadas de rede e de 
+link de dados?
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+64© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAcesso aos dados 
+Função dos endereços da camada de rede
+Quando a origem e o destino têm uma 
+parte de rede diferente, isso significa 
+que eles estão em redes diferentes.
+•PC1 —192.168.1
+•Servidor Web —172.16.1
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+65© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAcesso aos Dados 
+Função dos endereços da camada de enlace de dados: redes IP 
+diferentes
+Quando o destino final for remoto, a Camada 3 
+fornecerá à Camada 2 o endereço IP do gateway 
+por omissão local, também conhecido como o 
+endereço do router .
+•O gateway por omissão (DGW –Default 
+Gateway) é o endereço IP da interface do router
+que faz parte dessa LAN e será a “porta” ou 
+“gateway” para todos os outros locais remotos.
+•Todos os dispositivos na LAN devem ser 
+informados sobre esse endereço ou seu tráfego 
+será limitado apenas à LAN.
+•Depois daaCamada 2 no PC1 encaminharpara
+o gateway por omissão ( Router ), o router poderá 
+iniciar o processo de encaminhamento para 
+obter as informações para o destino real.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+66© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAcesso  aos dados
+Função dos Endereços da Camada de Ligação de Dados: Redes 
+IP Diferentes (Cont.) 
+•O endereçamento da camada de ligação de 
+dados é endereçamento de âmbito local, 
+portanto, o endereço de origem e o 
+endereço de num quadro são ambos de 
+máquinas numa mesma rede. Por cada 
+uma das redes que o quadro passe terá 
+endereços de origem e destino diferentes. 
+•O endereçamento MAC para o primeiro 
+segmento é:
+•Origem —AA-AA-AA-AA-AA-AA (PC1) 
+Envia o quadro.
+•Destino —11-11-11-11-11-11 (R1 -MAC 
+de gateway por omissão) Recebe o 
+quadro.
+Observação: Embora o endereçamento 
+local L2 mude de link para link ou de salto 
+para salto, o endereçamento L3 permanece 
+o mesmo.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+67© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAcesso aos dados 
+Endereços de ligação de dados
+•Como o endereçamento da camada de ligação de dados é endereçamento local, o 
+endereçamento no quadro terá uma origem e um destino para cada segmento ou salto 
+na viagem para o destino.
+•O endereçamento MAC para o primeiro segmento é:
+•Origem —(NIC PC1) envia quadro
+•Destino —(Interface de entrada do primeiro Roteador -Interface DGW) recebe quadro
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+68© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAcesso aos dados 
+Endereços de Ligação de dados (Cont.)
+O endereçamento MAC para o segundo salto é:
+•Origem —(Interface de saída do primeiro Router ) envia quadro
+•Destino —(Interface de entrada do segundo Roteador) recebe quadro
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+69© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAcesso aos dados 
+Endereços de Ligação de dados
+O endereçamento MAC para o último segmento é:
+•Origem —(Interface de saída do segundo Router ) envia quadro
+•Destino —(NIC do servidor Web) recebe quadro
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+70© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoAcesso aos dados 
+Endereços de enlace de dados (Cont.)
+•Observe que o pacote não é modificado, mas o quadro é alterado, portanto, o 
+endereçamento IP L3 não muda de segmento para segmento como o endereçamento 
+MAC L2.
+•O endereçamento L3 permanece o mesmo, uma vez que é global e o destino final 
+mantêm -se o servidor Web.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+73© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da Cisco3.8 -Sumário
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+74© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoSumário
+O que aprendi neste módulo?
+As regras
+•Os protocolos devem ter um remetente e um receptor.
+•Protocolos comuns de computadores incluem estes requisitos: codificação de mensagens, 
+formatação e encapsulamento, tamanho, tempo e opções de entrega.
+Protocolos
+•Para enviar uma mensagem através da rede é necessário a utilização de vários protocolos.
+•Cada protocolo de rede tem as suas próprias funções, formato e regras para as comunicações.
+Conjuntos de protocolos
+•Um conjunto de protocolos é um grupo de protocolos inter -relacionados.
+•O conjunto de protocolos TCP/IP são os protocolos usados hoje.
+Organizações de estandardização
+•Os standars abertos incentivam a interoperabilidade, a concorrência e a inovação.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+75© 2016 Cisco e/ou suas afiliadas. Todos os direitos reservados.   
+Confidencial da CiscoSumário
+O que aprendi neste módulo? (Cont.)
+Modelos de referência
+•Os dois modelos utilizados na rede são o TCP/IP e o modelo OSI.
+•O modelo OSI tem 7 camadas e o modelo TCP/IP tem 4 camadas.
+Encapsulamento de dados
+•O formato que um dado assume em qualquer camada é chamado de protocol data unit(PDU) .
+•Existem cinco PDUs diferentes usadas no processo de encapsulamento de dados: dados, 
+segmento, pacote, quadro e bits
+Acesso a dados
+•As camadas Rede e Ligação de Dados fornecerão endereçamento para mover dados pela 
+rede.
+•A camada 3 fornecerá endereçamento IP e a camada 2 fornecerá endereçamento MAC.
+•A maneira como essas camadas lidam com endereçamento dependerá se a origem e o destino 
+estão na mesma rede ou se o destino está em uma rede diferente da origem.
+ESTIG – IPB :: Eduardo Costa (raposo@ipb.pt)
+
