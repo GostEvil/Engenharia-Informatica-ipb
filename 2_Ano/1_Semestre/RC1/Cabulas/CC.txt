@@ -11,11 +11,6 @@ R1(config-line)#login
 R1(config-line)# transport input ssh telnet
 R1(config-line)# exit
 R1(config)# service password encryption
-R1(config)# banner motd #
-Digite a mensagem TEXT. Termine com uma nova linha 
-e o #
-*************************************************** 
-AVISO: O acesso não autorizado é proibido!
-**********************************************
+R1(config)# banner motd # msg #
 R1(config)# exit
 R1# copy running-config startup-confi
