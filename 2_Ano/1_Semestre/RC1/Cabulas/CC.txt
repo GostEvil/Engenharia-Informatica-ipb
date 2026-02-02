@@ -1,15 +1,21 @@
-Etapas da configuração básica do router
+Definir as configurações iniciais do router
 
-Router(config)# hostname name
-Router(config)# enable secret password
-Router(config)# line console 0
-Router(config-line)# password passe
-Router(config-line)# login
-Router(config)# line vty 0 4
-Router(config-line)# password password
-Router(config-line)# login
-Router(config-line)# transport input {ssh | telnet}
-Router(config)# service password encryption
-Router(config)# banner motd # message #
-Router(config)# end
-Router# copy running-config startup-confi
+R1(config)# hostname R1
+R1(config)# enable secret class
+R1(config)#line console 0
+R1(config-line)# password cisco
+R1(config-line)#login
+R1(config-line)# line vty 0 4
+R1(config-line)# password cisco
+R1(config-line)#login
+R1(config-line)# transport input ssh telnet
+R1(config-line)# exit
+R1(config)# service password encryption
+R1(config)# banner motd #
+Digite a mensagem TEXT. Termine com uma nova linha 
+e o #
+*************************************************** 
+AVISO: O acesso não autorizado é proibido!
+**********************************************
+R1(config)# exit
+R1# copy running-config startup-confi
