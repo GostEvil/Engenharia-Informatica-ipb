@@ -69,3 +69,9 @@ S1(config-if)#switchport mode access
 S1(config-if)#switch access vlan 20
 S1(config-if)# switchport voice vlan 150
 S1(config-if)#end
+
+S1(config)# interface fa0/1
+S1(config-if)# switchport mode trunk
+S1(config-if)# switchport trunk native vlan 99
+S1(config-if)# switchport trunk allowed vlan 10, 20, 30
+S1(config-if)# end
