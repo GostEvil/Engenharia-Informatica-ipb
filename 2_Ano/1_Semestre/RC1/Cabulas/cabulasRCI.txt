@@ -142,10 +142,70 @@ end
 
 
 
----SRWE--
+---
+final-pt-skills-assessment-exam-ptsa-answers
 
-Switch(config)# interface id
-Switch(config-if)# switchport mode trunk
-Switch(config-if)# switchport trunk native vlan id
-Switch(config-if)# switchport trunk allowrd vlan id //especificar lista de vlans
-Switch(config-if)# end
+
+R1(config)#ipv6 unicast-routing 
+
+R1(config)#interface g0/0/1.2
+R1(config-subif)#encapsulation dot1Q 2
+R1(config-subif)#description Bikes
+R1(config-subif)#ip address 10.19.8.1 255.255.255.192
+R1(config-subif)#ipv6 address 2001:db8:acad:a::1/64
+R1(config-subif)#ipv6 address fe80::1 link-local
+R1(config-if)#no shutdown 
+
+
+Switch1(config)#no ip domain lookup
+Switch1(config)#hostname S1
+S1(config)#banner motd #Unauthorized Access is Prohibitted!#
+
+S1(config)#line console 0
+S1(config-line)#password ciscoconpass
+S1(config-line)#login
+S1(config-line)#exit
+
+S1(config)#enable secret ciscoenpass
+
+S1(config)#service password-encryption 
+
+S1(config)#username admin secret admin1pass
+
+S1(config)#ip domain name ccna-ptsa.com
+
+S1(config)#crypto key generate rsa
+1024
+
+S1(config)#ip ssh version 2
+
+S1(config)#line vty 0 15
+S1(config-line)#login local
+S1(config-line)#transport input ssh
+S1(config-line)#exit
+
+S1(config)#interface vlan 4
+S1(config-if)#ip address 10.19.8.98 255.255.255.248
+S1(config-if)#description Management Interface
+S1(config-if)#no shutdown
+S1(config-if)#exit
+
+S1(config)#ip default-gateway 10.19.8.97
+
+
+-vlan
+
+S1(config)#vlan 2
+S1(config-vlan)#name Bikes
+S1(config-vlan)#vlan 3
+
+S1(config)#interface range f0/1-2
+S1(config-if-range)#switchport mode trunk 
+S1(config-if-range)#switchport trunk native vlan 6
+S1(config-if-range)#switchport trunk allowed vlan 2,3,4,5,6
+S1(config-if-range)#exit
+
+S1(config)#interface range f0/1-2
+S1(config-if-range)#channel-group 1 mode active
+S1(config-if-range)#interface port-channel 1
+S1(config-if-range)#exit
