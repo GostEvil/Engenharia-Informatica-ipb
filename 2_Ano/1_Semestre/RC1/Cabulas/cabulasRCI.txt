@@ -3,14 +3,11 @@
 Router> enable
 Router# configure terminal
 Router(config)# hostname R1
-R1(config)#
 R1(config)# enable secret class
-R1(config)#
 R1(config)# line console 0
 R1(config-line)# password cisco
 R1(config-line)# login
 R1(config-line)# exit
-R1(config)#
 R1(config)# line vty 0 4
 R1(config-line)# password cisco
 R1(config-line)# login
@@ -98,15 +95,6 @@ You must have explicit permission to access this device.
   ipv6 unicast-routing
   interface g0/0
    ipv6 address 2001:db8:acad::1/64
-   ipv6 address fe80::1 link-local
-  interface g0/1
-   ipv6 address 2001:db8:acad:1::1/64
-   ipv6 address fe80::1 link-local
-  interface g0/2
-   ipv6 address 2001:db8:acad:2::1/64
-   ipv6 address fe80::1 link-local
-  interface s0/0/1
-   ipv6 address 2001:db8:2::1/64
    ipv6 address fe80::1 link-local
 
 - Set the domain name to CCNA-lab.com
