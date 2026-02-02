@@ -139,3 +139,13 @@ line vty 5 15
 exec-timeout 5 0
 login
 end
+
+
+
+---SRWE--
+
+Switch(config)# interface id
+Switch(config-if)# switchport mode trunk
+Switch(config-if)# switchport trunk native vlan id
+Switch(config-if)# switchport trunk allowrd vlan id //especificar lista de vlans
+Switch(config-if)# end
