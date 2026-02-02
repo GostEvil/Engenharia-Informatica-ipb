@@ -1,6 +1,5 @@
-_______________
 Config iniciais do router
-###############
+
 R1(config)# hostname R1
 R1(config)# enable secret class
 R1(config)#line console 0
@@ -16,9 +15,8 @@ R1(config)# banner motd # msg #
 R1(config)# exit
 R1# copy running-config startup-config
 
-###############
 Config interfaces
-###############
+
 R1(config)# interface gigabitEthernet 0/0/0
 R1(config-if)# description Link to LAN
 R1(config-if)# ip address 192.168.10.1 255.255.255.0
@@ -26,9 +24,19 @@ R1(config-if)# ipv6 address 2001:db8:acad:10::1/64
 R1(config-if)# no shutdown
 R1(config-if)# exit
 
-###############
 Verificar a configuração da interface
-###############
 R1# show ip interface brief
 R1# show ip interface g0/0
+
+###############
+Switch 
+
+Config Interface gestao Switch
+S1# config terminal
+S1(config)# interface vlan 99 //entrar modo config da interface para svi
+S1(config-if)# ip address 172.17.99.11 255.255.255.0
+S1(config-if)# ipv6 address 2001:db8:acad:99: :1/64
+S1(config-if)#no shut
+S1(config-if)#end
+S1# copy running-config startup-config
 
