@@ -31,7 +31,8 @@ R1# show ip interface g0/0
 ###############
 Switch 
 
-Config Interface gestao Switch
+Config interface gestao Switch
+
 S1# config terminal
 S1(config)# interface vlan 99 //entrar modo config da interface para svi
 S1(config-if)# ip address 172.17.99.11 255.255.255.0
@@ -40,3 +41,31 @@ S1(config-if)#no shut
 S1(config-if)#end
 S1# copy running-config startup-config
 
+Config gateway por omissao
+
+S1# configure terminal
+S1(config)# ip default-gateway 172.17.99.1
+S1(config-if)# end
+S1# copy running-config startup-config
+
+show ip/ipv6 interfae brief  //verif config
+
+Configurar o SSH
+show ip ssh //ver se suporta ssh
+ip domain-name nome
+crypto key generate rsa
+transport input ssh
+
+Criacao VLAN 
+Switch(config)# vlan 20
+Switch(config-vlan)# name student
+
+Atribuicao de porta a uma VLAN
+S1(config-vlan)#vlan 150
+S1(config-vlan)#name VOICE
+S1(config-vlan)#exit
+S1(config)#interface fa0/18
+S1(config-if)#switchport mode access
+S1(config-if)#switch access vlan 20
+S1(config-if)# switchport voice vlan 150
+S1(config-if)#end
