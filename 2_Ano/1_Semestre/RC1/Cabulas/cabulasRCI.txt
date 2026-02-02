@@ -83,12 +83,6 @@ You must have explicit permission to access this device.
 - Configure the IPv4 addresses according to your addressing scheme.
   interface g0/0
    ip address 192.168.0.1 255.255.255.128
-  interface g0/1
-   ip address 192.168.0.129 255.255.255.192
-  interface g0/2
-   ip address 192.168.0.193 255.255.255.224
-  interface s0/0/1
-   ip address 172.16.1.2 255.255.255.252
    no shutdown
 
 - Configure the IPv6 addresses according to the Addressing Table.
