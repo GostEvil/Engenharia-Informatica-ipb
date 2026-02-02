@@ -139,9 +139,3 @@ line vty 5 15
 exec-timeout 5 0
 login
 end
-
-
-
-
-----
-Atividade 4
