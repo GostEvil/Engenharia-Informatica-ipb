@@ -192,7 +192,6 @@ S1(config-if)#exit
 
 S1(config)#ip default-gateway 10.19.8.97
 
-
 -vlan
 
 S1(config)#vlan 2
