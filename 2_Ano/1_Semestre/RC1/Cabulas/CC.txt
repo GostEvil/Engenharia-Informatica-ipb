@@ -70,6 +70,7 @@ S1(config-if)#switch access vlan 20
 S1(config-if)# switchport voice vlan 150
 S1(config-if)#end
 
+configurar portas de entroncamento
 S1(config)# interface fa0/1
 S1(config-if)# switchport mode trunk
 S1(config-if)# switchport trunk native vlan 99
