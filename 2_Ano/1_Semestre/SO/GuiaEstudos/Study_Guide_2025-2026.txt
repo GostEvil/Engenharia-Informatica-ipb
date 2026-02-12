@@ -116,3 +116,21 @@ Leitura complementar: "Programming with POSIX Threads", David Butenhof, Addison 
 - secções 3.1 e 3.2 do capítulo 3
 ########################################################################
 
+
+
+
+
+
+
+
+
+########################################################################
+                              Recurso
+########################################################################
+Relativamente ao exame de recurso, que se realizará no próximo dia 13 de fevereiro, a partir das 8h, informa-se o seguinte:
+- o exame terá 6 partes, que são as mesmas que foram avaliadas anteriormente: T1 (Teórica 1), T2 (Teórica 2), T3 (Teórica 3), Prática 1 (P1), Prática 2 (P2), Prática 3 (P3)
+- para detalhes sobre a matéria suscetível de avaliação em cada parte, consultem os guias de estudo anteriormente publicados no Virtual
+- a duração total do exame é de 3h; durante esse período, poderão resolver as partes que quiserem, pela ordem que quiserem
+- a nota obtida em cada parte, neste exame, apenas substitui a nota já obtida anteriormente a essa mesma parte se for superior
+- todos os alunos devem trazer o seu cartão de estudante e passar o mesmo no leitor RFID à entrada da sala onde realizarem o exame
+- durante o exame, poderão usar calculadora (não a do telemóvel) e consultar a mesma documentação autorizada a consultar nas provas anteriores
