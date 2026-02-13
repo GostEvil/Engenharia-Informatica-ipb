@@ -68,8 +68,6 @@ Leitura complementar: "Programming with POSIX Threads", David Butenhof, Addison 
 
 
 
-
-
 ########################################################################
 Sistemas Operativos - Guia de Estudo da COMPONENTE PRÁTICA - 2025-2026
 v1.2 - 2026-01-09
