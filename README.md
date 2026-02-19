@@ -14,7 +14,7 @@ Se possível deverás fazer um **clone** ou um **fork** deste arquivo na tua má
 > Faz commits com o material que desejas partilhar.
 
 
-Se nunca utilizaste o git esta é uma boa oportunidade para o fazeres.
+Se nunca utilizaste o git esta é uma boa oportunidade para o fazeres :D
 
 O plano de estudos foi **alterado** para o **ano letivo de 2025/26**.
 
