@@ -11,8 +11,9 @@ Se possível deverás fazer um **clone** ou um **fork** deste arquivo na tua má
 > `git pull`
 
 ### Queres contribuir?
-> Cadeiras e arquivos serão adicionados aqui ao longo do tempo. Se quiseres contribuir manda msg :D 
+> Faz commits com o material que desejas partilhar.
+Se nunca utilizaste o git esta é uma boa oportunidade para o fazeres.
 
-O plano de estudos está a ser **alterado** para o **ano letivo de 2025/26**.
+O plano de estudos foi **alterado** para o **ano letivo de 2025/26**.
 
 *Esta pasta é feita por alunos, para alunos. O NEEI não têm qualquer envolvivência com esta iniciativa*
