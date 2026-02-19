@@ -1,4 +1,6 @@
 # Engenharia Informática - IPB
+Adiciona este repositório aos teus favoritos - clica na estrelinha
+
 ### Algum arquivo não abre na web?
 Se possível deverás fazer um **clone** ou um **fork** deste arquivo na tua máquina. 
 ##### Como?
