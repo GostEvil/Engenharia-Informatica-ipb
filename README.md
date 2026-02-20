@@ -2,7 +2,7 @@
 Adiciona este repositório aos teus favoritos - clica na estrelinha
 
 ### Algum arquivo não abre na web?
-Se possível deverás fazer um **clone** ou um **fork** deste arquivo na tua máquina. 
+Se possível deverás fazer um **fork** deste arquivo na tua máquina. 
 ##### Como?
 - 1) Abre vscode e faz um fork com este comando:
 > `git fork https://github.com/GostEvil/Engenharia-Informatica-ipb.git`
