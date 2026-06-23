@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CCNA 3 – Scaling Networks Quiz</title>
+<style>
+  :root {
+    --blue:    #1a73e8;
+    --blue-dk: #1558b0;
+    --green:   #1e8e3e;
+    --red:     #d93025;
+    --orange:  #e37400;
+    --gray-1:  #f8f9fa;
+    --gray-2:  #e8eaed;
+    --gray-3:  #9aa0a6;
+    --gray-4:  #5f6368;
+    --gray-5:  #202124;
+    --radius:  12px;
+    --shadow:  0 2px 12px rgba(0,0,0,.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 24px 16px 48px;
+  }
+
+  /* ── SCREENS ─────────────────────────────────── */
+  .screen { display: none; width: 100%; max-width: 780px; }
+  .screen.active { display: block; }
+
+  /* ── CARD ──────────────────────────────────── */
+  .card {
+    background: #fff;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .card-header {
+    background: var(--blue);
+    color: #fff;
+    padding: 20px 28px;
+  }
+  .card-header h1 { font-size: 1.35rem; font-weight: 600; }
+  .card-header p  { font-size: .9rem; opacity: .85; margin-top: 4px; }
+  .card-body { padding: 28px; }
+
+  /* ── START SCREEN ──────────────────────────── */
+  .start-logo {
+    text-align: center;
+    font-size: 4rem;
+    margin-bottom: 12px;
+  }
+  .start-subtitle {
+    text-align: center;
+    color: var(--gray-4);
+    font-size: .95rem;
+    margin-bottom: 28px;
+  }
+  .config-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  @media(max-width:520px){ .config-grid { grid-template-columns: 1fr; } }
+  .config-item label {
+    display: block;
+    font-size: .82rem;
+    font-weight: 600;
+    color: var(--gray-4);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    margin-bottom: 6px;
+  }
+  .config-item select,
+  .config-item input[type=range] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--gray-2);
+    border-radius: 8px;
+    font-size: .95rem;
+    background: var(--gray-1);
+    cursor: pointer;
+  }
+  .range-val {
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--blue);
+    margin-top: 4px;
+  }
+
+  /* ── BTN ───────────────────────────────────── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    font-size: .95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s, transform .1s;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn-primary  { background: var(--blue);  color: #fff; }
+  .btn-primary:hover  { background: var(--blue-dk); }
+  .btn-success  { background: var(--green); color: #fff; }
+  .btn-danger   { background: var(--red);   color: #fff; }
+  .btn-outline  { background: transparent; color: var(--blue); border: 2px solid var(--blue); }
+  .btn-outline:hover { background: rgba(26,115,232,.08); }
+  .btn-gray     { background: var(--gray-2); color: var(--gray-5); }
+  .btn-gray:hover { background: var(--gray-3); color: #fff; }
+  .btn-sm { padding: 8px 16px; font-size: .85rem; }
+  .btn-full { width: 100%; justify-content: center; }
+
+  /* ── PROGRESS ──────────────────────────────── */
+  .progress-wrap {
+    background: var(--gray-2);
+    border-radius: 99px;
+    height: 8px;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+  .progress-bar {
+    height: 100%;
+    background: var(--blue);
+    border-radius: 99px;
+    transition: width .3s;
+  }
+  .progress-label {
+    font-size: .82rem;
+    color: var(--gray-4);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* ── QUESTION SCREEN ───────────────────────── */
+  .quiz-header {
+    background: var(--blue);
+    color: #fff;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .quiz-counter {
+    font-size: .95rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .progress-wrap.in-header { flex: 1; margin: 0; }
+
+  .question-card { padding: 24px 28px; }
+
+  .question-badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .badge {
+    font-size: .75rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 99px;
+    letter-spacing: .03em;
+  }
+  .badge-multiple { background: #e8f0fe; color: var(--blue); }
+  .badge-num      { background: var(--gray-2); color: var(--gray-4); }
+
+  .question-text {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--gray-5);
+    margin-bottom: 20px;
+  }
+
+  /* ── OPTIONS ───────────────────────────────── */
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option-btn {
+    width: 100%;
+    text-align: left;
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: 2px solid var(--gray-2);
+    background: var(--gray-1);
+    font-size: .95rem;
+    color: var(--gray-5);
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.5;
+  }
+  .option-btn:hover:not(:disabled) {
+    border-color: var(--blue);
+    background: #e8f0fe;
+  }
+  .option-btn.selected {
+    border-color: var(--blue);
+    background: #e8f0fe;
+    font-weight: 600;
+  }
+  .option-btn.correct {
+    border-color: var(--green);
+    background: #e6f4ea;
+    color: var(--green);
+    font-weight: 600;
+  }
+  .option-btn.wrong {
+    border-color: var(--red);
+    background: #fce8e6;
+    color: var(--red);
+    font-weight: 600;
+  }
+  .option-btn:disabled { cursor: default; }
+  .opt-letter {
+    min-width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--gray-2);
+    color: var(--gray-5);
+    font-size: .8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    transition: background .15s, color .15s;
+  }
+  .option-btn.selected .opt-letter { background: var(--blue); color: #fff; }
+  .option-btn.correct .opt-letter  { background: var(--green); color: #fff; }
+  .option-btn.wrong   .opt-letter  { background: var(--red); color: #fff; }
+
+  /* ── EXPLANATION ───────────────────────────── */
+  .explanation {
+    margin-top: 18px;
+    padding: 16px;
+    border-radius: 10px;
+    font-size: .92rem;
+    line-height: 1.65;
+    display: none;
+  }
+  .explanation.correct-exp {
+    background: #e6f4ea;
+    border: 1px solid #a8d5b5;
+    color: #1e5631;
+  }
+  .explanation.wrong-exp {
+    background: #fce8e6;
+    border: 1px solid #f5a8a2;
+    color: #7f1d1d;
+  }
+  .explanation .exp-title {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ── CONFIRM MULTI-SELECT ──────────────────── */
+  .confirm-bar {
+    margin-top: 14px;
+    display: none;
+  }
+
+  /* ── QUIZ FOOTER ───────────────────────────── */
+  .quiz-footer {
+    padding: 16px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--gray-2);
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .nav-group { display: flex; gap: 10px; }
+
+  /* ── FLAG BUTTON ───────────────────────────── */
+  .btn-flag {
+    background: transparent;
+    border: 2px solid var(--orange);
+    color: var(--orange);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: .85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .btn-flag.flagged { background: var(--orange); color: #fff; }
+  .btn-flag:hover:not(.flagged) { background: #fff3e0; }
+
+  /* ── QUESTION MAP ──────────────────────────── */
+  .map-toggle {
+    text-align: center;
+    padding: 0 28px 20px;
+  }
+  .question-map {
+    display: none;
+    padding: 16px 28px 24px;
+    border-top: 1px solid var(--gray-2);
+  }
+  .question-map.open { display: block; }
+  .map-title { font-size: .85rem; font-weight: 600; color: var(--gray-4); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .04em; }
+  .map-grid { display: flex; flex-wrap: wrap; gap: 6px; }
+  .map-dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 2px solid var(--gray-2);
+    background: var(--gray-1);
+    font-size: .8rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray-5);
+    transition: all .15s;
+  }
+  .map-dot:hover { border-color: var(--blue); color: var(--blue); }
+  .map-dot.answered { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .map-dot.correct  { background: var(--green); color: #fff; border-color: var(--green); }
+  .map-dot.wrong    { background: var(--red);   color: #fff; border-color: var(--red); }
+  .map-dot.current  { outline: 3px solid var(--orange); outline-offset: 2px; }
+  .map-dot.flagged  { box-shadow: inset 0 0 0 3px var(--orange); }
+
+  /* ── RESULTS SCREEN ────────────────────────── */
+  .results-header {
+    background: linear-gradient(135deg, var(--blue), #0d47a1);
+    color: #fff;
+    padding: 32px 28px;
+    text-align: center;
+  }
+  .score-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.2);
+    border: 6px solid rgba(255,255,255,.5);
+    margin: 0 auto 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .score-pct { font-size: 2.5rem; font-weight: 800; line-height: 1; }
+  .score-label { font-size: .85rem; opacity: .8; }
+  .score-pass { font-size: 1.25rem; font-weight: 700; margin-top: 8px; }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--gray-2);
+    border-top: 1px solid var(--gray-2);
+  }
+  .stat-cell {
+    background: #fff;
+    padding: 16px;
+    text-align: center;
+  }
+  .stat-val { font-size: 1.6rem; font-weight: 700; }
+  .stat-val.green { color: var(--green); }
+  .stat-val.red   { color: var(--red);   }
+  .stat-val.orange { color: var(--orange); }
+  .stat-lbl { font-size: .8rem; color: var(--gray-4); margin-top: 2px; }
+
+  .results-body { padding: 24px 28px; }
+  .review-title { font-size: 1rem; font-weight: 700; color: var(--gray-5); margin-bottom: 16px; }
+  .review-list { display: flex; flex-direction: column; gap: 12px; }
+  .review-item {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--gray-2);
+  }
+  .review-item-header {
+    padding: 12px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    background: var(--gray-1);
+    user-select: none;
+  }
+  .review-item-header:hover { background: var(--gray-2); }
+  .review-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+  .review-q-text { font-size: .92rem; line-height: 1.5; flex: 1; }
+  .review-item-body {
+    display: none;
+    padding: 12px 16px;
+    border-top: 1px solid var(--gray-2);
+  }
+  .review-item-body.open { display: block; }
+  .review-your, .review-correct {
+    font-size: .88rem;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+  .review-your { color: var(--red); }
+  .review-correct { color: var(--green); }
+  .review-exp {
+    font-size: .88rem;
+    color: var(--gray-4);
+    background: var(--gray-1);
+    padding: 10px 12px;
+    border-radius: 8px;
+    line-height: 1.6;
+    margin-top: 6px;
+  }
+
+  .results-actions {
+    padding: 20px 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    border-top: 1px solid var(--gray-2);
+    justify-content: center;
+  }
+
+  /* ── TOAST ─────────────────────────────────── */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--gray-5);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 99px;
+    font-size: .88rem;
+    font-weight: 600;
+    transition: transform .3s;
+    pointer-events: none;
+    z-index: 999;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ── LEGEND ─────────────────────────────────── */
+  .legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    font-size: .8rem;
+    color: var(--gray-4);
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-dot {
+    width: 12px; height: 12px; border-radius: 3px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════  START SCREEN  ═════════════════════ -->
+<div id="start-screen" class="screen active">
+  <div class="card">
+    <div class="card-header">
+      <h1>🌐 CCNA 3 – Scaling Networks</h1>
+      <p>Enterprise Networking, Security and Automation (ENSA) – Exam Prep Quiz</p>
+    </div>
+    <div class="card-body">
+      <div class="start-logo">📡</div>
+      <p class="start-subtitle">
+        Banco com <strong id="total-count"></strong> questões cobrindo VTP, STP, EtherChannel, OSPF, EIGRP, Wireless e mais.
+      </p>
+
+      <div class="config-grid">
+        <div class="config-item">
+          <label>Nº de questões</label>
+          <input type="range" id="num-q" min="5" max="150" step="5" value="20"
+                 oninput="document.getElementById('num-val').textContent=this.value">
+          <div class="range-val" id="num-val">20</div>
+        </div>
+        <div class="config-item">
+          <label>Ordem das questões</label>
+          <select id="q-order">
+            <option value="random">Aleatória</option>
+            <option value="sequential">Sequencial</option>
+          </select>
+        </div>
+        <div class="config-item">
+          <label>Mostrar resposta ao</label>
+          <select id="show-when">
+            <option value="answer">Responder</option>
+            <option value="next">Avançar</option>
+          </select>
+        </div>
+        <div class="config-item">
+          <label>Tópico</label>
+          <select id="topic-filter">
+            <option value="all">Todos os tópicos</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-full" onclick="startQuiz()">
+        ▶ Iniciar Quiz
+      </button>
+
+      <div class="legend" style="justify-content:center;margin-top:20px;">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>Em andamento</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Correto</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>Errado</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div>Marcada para revisão</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════  QUIZ SCREEN  ══════════════════════ -->
+<div id="quiz-screen" class="screen">
+  <div class="card">
+    <div class="quiz-header">
+      <span class="quiz-counter" id="q-counter">Q 1 / 20</span>
+      <div class="progress-wrap in-header">
+        <div class="progress-bar" id="q-progress" style="width:0%"></div>
+      </div>
+      <span style="font-size:.9rem;opacity:.8" id="q-score-live">✓ 0 &nbsp;✗ 0</span>
+    </div>
+
+    <div class="question-card">
+      <div class="question-badges" id="q-badges"></div>
+      <p class="question-text" id="q-text"></p>
+      <div class="options" id="q-options"></div>
+      <div class="confirm-bar" id="confirm-bar">
+        <button class="btn btn-primary btn-sm" onclick="confirmMulti()">✔ Confirmar seleção</button>
+        <span style="font-size:.85rem;color:var(--gray-4);margin-left:10px" id="multi-hint"></span>
+      </div>
+      <div class="explanation" id="q-explanation"></div>
+    </div>
+
+    <div class="quiz-footer">
+      <div class="nav-group">
+        <button class="btn btn-gray btn-sm" id="btn-prev" onclick="goTo(currentIdx-1)">← Anterior</button>
+        <button class="btn-flag" id="btn-flag" onclick="toggleFlag()">⚑ Marcar</button>
+      </div>
+      <div class="nav-group">
+        <button class="btn btn-outline btn-sm" onclick="toggleMap()">☰ Mapa</button>
+        <button class="btn btn-primary btn-sm" id="btn-next" onclick="goNext()">Próxima →</button>
+        <button class="btn btn-success btn-sm" id="btn-finish" onclick="finishQuiz()" style="display:none">🏁 Finalizar</button>
+      </div>
+    </div>
+
+    <div class="map-toggle">
+      <div class="question-map" id="q-map">
+        <div class="map-title">Navegação rápida</div>
+        <div class="map-grid" id="map-grid"></div>
+        <div class="legend" style="margin-top:12px">
+          <div class="legend-item"><div class="legend-dot" style="background:var(--gray-2);border:1px solid var(--gray-3)"></div>Sem resposta</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>Respondida</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Correta</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>Errada</div>
+          <div class="legend-item"><div class="legend-dot" style="background:transparent;border:2px solid var(--orange)"></div>Marcada</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════  RESULTS SCREEN  ══════════════════════ -->
+<div id="results-screen" class="screen">
+  <div class="card">
+    <div class="results-header">
+      <div class="score-circle">
+        <span class="score-pct" id="r-pct">0%</span>
+        <span class="score-label">acertos</span>
+      </div>
+      <div class="score-pass" id="r-pass">—</div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-cell">
+        <div class="stat-val green" id="r-correct">0</div>
+        <div class="stat-lbl">✓ Corretas</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val red" id="r-wrong">0</div>
+        <div class="stat-lbl">✗ Erradas</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val orange" id="r-skipped">0</div>
+        <div class="stat-lbl">— Puladas</div>
+      </div>
+    </div>
+
+    <div class="results-body">
+      <p class="review-title">📋 Revisão detalhada</p>
+      <div class="review-list" id="review-list"></div>
+    </div>
+
+    <div class="results-actions">
+      <button class="btn btn-primary" onclick="restartSame()">🔄 Refazer mesmas questões</button>
+      <button class="btn btn-outline" onclick="startNew()">🎲 Novo quiz aleatório</button>
+      <button class="btn btn-gray"    onclick="reviewWrong()">✗ Revisar erradas</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="questions.js"></script>
+<script>
+// ══════════════════════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════════════════════
+let quizQuestions   = [];   // subset for this session
+let currentIdx      = 0;
+let answers         = {};   // idx → { chosen:[], correct:bool, answered:bool }
+let flagged         = new Set();
+let showAnswerWhen  = 'answer'; // 'answer' | 'next'
+let lastQuizIndexes = [];       // for "redo same" feature
+
+// ── INIT ──────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('total-count').textContent = ALL_QUESTIONS.length;
+  document.getElementById('num-q').max = ALL_QUESTIONS.length;
+  buildTopicFilter();
+});
+
+function buildTopicFilter() {
+  const sel = document.getElementById('topic-filter');
+  const topics = [
+    { val: 'all',       label: 'Todos os tópicos' },
+    { val: 'vtp',       label: 'VTP' },
+    { val: 'stp',       label: 'STP / RSTP' },
+    { val: 'ether',     label: 'EtherChannel' },
+    { val: 'vlan',      label: 'VLANs / Inter-VLAN' },
+    { val: 'ospf',      label: 'OSPF / OSPFv3' },
+    { val: 'eigrp',     label: 'EIGRP' },
+    { val: 'fhrp',      label: 'FHRP (HSRP/VRRP/GLBP)' },
+    { val: 'wireless',  label: 'Wireless (802.11)' },
+    { val: 'ios',       label: 'IOS / Licenças' },
+    { val: 'network',   label: 'Design de Rede' },
+  ];
+  sel.innerHTML = topics.map(t =>
+    `<option value="${t.val}">${t.label}</option>`
+  ).join('');
+}
+
+function filterByTopic(qs, topic) {
+  if (topic === 'all') return qs;
+  const kw = {
+    vtp:      ['vtp', 'vlan.dat', 'revision'],
+    stp:      ['spanning tree', 'stp', 'rstp', 'bpdu', 'root bridge', 'portfast', 'pvst', '802.1'],
+    ether:    ['etherchannel', 'lacp', 'pagp', 'port channel', 'channel-group'],
+    vlan:     ['vlan', 'trunk', 'inter-vlan', 'trunking', 'access port'],
+    ospf:     ['ospf', 'spf', 'lsa', 'abr', 'asbr', 'dr/', 'bdr', 'area'],
+    eigrp:    ['eigrp', 'dual', 'feasible', 'successor', 'diffusing', 'variance'],
+    fhrp:     ['hsrp', 'vrrp', 'glbp', 'first-hop', 'fhrp', 'standby'],
+    wireless: ['wireless', '802.11', 'wpa', 'wep', 'ssid', 'access point', 'mimo', 'ofdm', 'wlan'],
+    ios:      ['ios', 'license', 'tftp', 'image', 'pak', 'ipbase'],
+    network:  ['hierarchical', 'failure domain', 'rack unit', 'distribution layer', 'access layer', 'core layer', 'switch block'],
+  };
+  const terms = kw[topic] || [];
+  return qs.filter(q => {
+    const haystack = (q.question + ' ' + q.options.join(' ')).toLowerCase();
+    return terms.some(t => haystack.includes(t));
+  });
+}
+
+// ── START QUIZ ─────────────────────────────────────────────
+function startQuiz() {
+  const numQ   = parseInt(document.getElementById('num-q').value);
+  const order  = document.getElementById('q-order').value;
+  const topic  = document.getElementById('topic-filter').value;
+  showAnswerWhen = document.getElementById('show-when').value;
+
+  let pool = filterByTopic([...ALL_QUESTIONS], topic);
+  if (pool.length === 0) { showToast('Nenhuma questão encontrada para esse tópico.'); return; }
+
+  if (order === 'random') {
+    pool = shuffle(pool);
+  }
+  quizQuestions = pool.slice(0, Math.min(numQ, pool.length));
+  lastQuizIndexes = quizQuestions.map(q => q.id);
+
+  currentIdx = 0;
+  answers    = {};
+  flagged    = new Set();
+
+  buildMap();
+  showScreen('quiz-screen');
+  renderQuestion();
+}
+
+function restartSame() {
+  answers  = {};
+  flagged  = new Set();
+  currentIdx = 0;
+  // restore same questions
+  quizQuestions = lastQuizIndexes.map(id => ALL_QUESTIONS.find(q => q.id === id)).filter(Boolean);
+  buildMap();
+  showScreen('quiz-screen');
+  renderQuestion();
+}
+
+function startNew() {
+  showScreen('start-screen');
+}
+
+function reviewWrong() {
+  const wrongIds = Object.entries(answers)
+    .filter(([, v]) => v.answered && !v.correct)
+    .map(([i]) => quizQuestions[parseInt(i)].id);
+  if (wrongIds.length === 0) { showToast('Nenhuma resposta errada! 🎉'); return; }
+  quizQuestions = wrongIds.map(id => ALL_QUESTIONS.find(q => q.id === id)).filter(Boolean);
+  lastQuizIndexes = quizQuestions.map(q => q.id);
+  answers    = {};
+  flagged    = new Set();
+  currentIdx = 0;
+  buildMap();
+  showScreen('quiz-screen');
+  renderQuestion();
+}
+
+// ── RENDER QUESTION ────────────────────────────────────────
+function renderQuestion() {
+  const q     = quizQuestions[currentIdx];
+  const total = quizQuestions.length;
+  const state = answers[currentIdx];
+
+  // Header
+  document.getElementById('q-counter').textContent = `Q ${currentIdx+1} / ${total}`;
+  document.getElementById('q-progress').style.width = `${((currentIdx)/total)*100}%`;
+  updateScoreLive();
+
+  // Badges
+  const badges = document.getElementById('q-badges');
+  badges.innerHTML = `<span class="badge badge-num">Q${currentIdx+1}</span>`;
+  if (q.multiple) badges.innerHTML += `<span class="badge badge-multiple">✓ Múltipla escolha</span>`;
+
+  // Text
+  document.getElementById('q-text').textContent = q.question;
+
+  // Options
+  const optDiv = document.getElementById('q-options');
+  optDiv.innerHTML = '';
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.dataset.idx = i;
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span><span>${escapeHtml(opt)}</span>`;
+
+    // Restore state
+    if (state) {
+      btn.disabled = true;
+      if (state.chosen.includes(i)) {
+        btn.classList.add(state.correct || q.correct.includes(i) ? 'selected' : 'wrong');
+      }
+      if (showAnswerWhen === 'answer' || state.answered) {
+        applyAnswerStyles(btn, i, q, state);
+      }
+    } else {
+      btn.addEventListener('click', () => selectOption(i));
+    }
+    optDiv.appendChild(btn);
+  });
+
+  // Confirm bar for multi
+  const confirmBar = document.getElementById('confirm-bar');
+  if (q.multiple && !state) {
+    confirmBar.style.display = 'flex';
+    document.getElementById('multi-hint').textContent =
+      `Selecione ${q.correct.length} opção(ões) e confirme`;
+  } else {
+    confirmBar.style.display = 'none';
+  }
+
+  // Explanation
+  const expDiv = document.getElementById('q-explanation');
+  if (state && (showAnswerWhen === 'answer' || state.answered)) {
+    showExplanation(q, state);
+  } else {
+    expDiv.style.display = 'none';
+  }
+
+  // Buttons
+  document.getElementById('btn-prev').disabled = currentIdx === 0;
+  const btnNext   = document.getElementById('btn-next');
+  const btnFinish = document.getElementById('btn-finish');
+  if (currentIdx === total - 1) {
+    btnNext.style.display   = 'none';
+    btnFinish.style.display = 'inline-flex';
+  } else {
+    btnNext.style.display   = 'inline-flex';
+    btnFinish.style.display = 'none';
+  }
+
+  // Flag
+  const flagBtn = document.getElementById('btn-flag');
+  flagBtn.classList.toggle('flagged', flagged.has(currentIdx));
+
+  updateMap();
+}
+
+function applyAnswerStyles(btn, i, q, state) {
+  btn.disabled = true;
+  if (q.correct.includes(i)) btn.classList.add('correct');
+  else if (state.chosen.includes(i)) btn.classList.add('wrong');
+}
+
+// ── SELECT OPTION ──────────────────────────────────────────
+function selectOption(optIdx) {
+  const q = quizQuestions[currentIdx];
+
+  if (!answers[currentIdx]) {
+    answers[currentIdx] = { chosen: [], correct: false, answered: false };
+  }
+  const state = answers[currentIdx];
+  if (state.answered) return;
+
+  if (!q.multiple) {
+    // Single select — answer immediately
+    state.chosen  = [optIdx];
+    state.correct = q.correct.includes(optIdx);
+    state.answered = true;
+
+    const opts = document.querySelectorAll('.option-btn');
+    opts.forEach(btn => {
+      const i = parseInt(btn.dataset.idx);
+      applyAnswerStyles(btn, i, q, state);
+    });
+
+    if (showAnswerWhen === 'answer') showExplanation(q, state);
+    updateScoreLive();
+    updateMap();
+  } else {
+    // Multi-select — toggle
+    const idx = state.chosen.indexOf(optIdx);
+    if (idx === -1) {
+      state.chosen.push(optIdx);
+    } else {
+      state.chosen.splice(idx, 1);
+    }
+    // Visual feedback (not yet confirmed)
+    const opts = document.querySelectorAll('.option-btn');
+    opts.forEach(btn => {
+      btn.classList.remove('selected');
+      if (state.chosen.includes(parseInt(btn.dataset.idx))) {
+        btn.classList.add('selected');
+      }
+    });
+    document.getElementById('multi-hint').textContent =
+      `${state.chosen.length}/${q.correct.length} selecionadas`;
+  }
+}
+
+function confirmMulti() {
+  const q     = quizQuestions[currentIdx];
+  const state = answers[currentIdx];
+  if (!state || state.answered) return;
+  if (state.chosen.length === 0) { showToast('Selecione pelo menos uma opção.'); return; }
+
+  // Check correctness: must select exactly the correct set
+  const chosen  = [...state.chosen].sort().toString();
+  const correct = [...q.correct].sort().toString();
+  state.correct  = chosen === correct;
+  state.answered = true;
+
+  document.getElementById('confirm-bar').style.display = 'none';
+  const opts = document.querySelectorAll('.option-btn');
+  opts.forEach(btn => {
+    const i = parseInt(btn.dataset.idx);
+    applyAnswerStyles(btn, i, q, state);
+  });
+  if (showAnswerWhen === 'answer') showExplanation(q, state);
+  updateScoreLive();
+  updateMap();
+}
+
+// ── EXPLANATION ─────────────────────────────────────────────
+function showExplanation(q, state) {
+  const div   = document.getElementById('q-explanation');
+  const ok    = state.correct;
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const correctLabels = q.correct.map(i => `${letters[i]}) ${q.options[i]}`).join(' / ');
+
+  div.className = 'explanation ' + (ok ? 'correct-exp' : 'wrong-exp');
+  div.innerHTML = `
+    <div class="exp-title">
+      ${ok ? '✅ Correto!' : '❌ Incorreto'}
+      ${!ok ? `<small>— Resposta(s) correta(s): <strong>${correctLabels}</strong></small>` : ''}
+    </div>
+    <p>${escapeHtml(q.explanation)}</p>
+  `;
+  div.style.display = 'block';
+}
+
+// ── NAVIGATION ─────────────────────────────────────────────
+function goNext() {
+  const q     = quizQuestions[currentIdx];
+  const state = answers[currentIdx];
+
+  // If "show on next" mode and answered but explanation not shown yet, show it first
+  if (showAnswerWhen === 'next' && state && state.answered) {
+    const expDiv = document.getElementById('q-explanation');
+    if (expDiv.style.display === 'none') {
+      showExplanation(q, state);
+      // Apply visual styles
+      const opts = document.querySelectorAll('.option-btn');
+      opts.forEach(btn => applyAnswerStyles(btn, parseInt(btn.dataset.idx), q, state));
+      return; // let user read, then click next again to advance
+    }
+  }
+
+  if (currentIdx < quizQuestions.length - 1) {
+    currentIdx++;
+    renderQuestion();
+    scrollToTop();
+  }
+}
+
+function goTo(idx) {
+  if (idx < 0 || idx >= quizQuestions.length) return;
+  currentIdx = idx;
+  renderQuestion();
+  scrollToTop();
+  toggleMap(false);
+}
+
+function toggleFlag() {
+  if (flagged.has(currentIdx)) flagged.delete(currentIdx);
+  else flagged.add(currentIdx);
+  document.getElementById('btn-flag').classList.toggle('flagged', flagged.has(currentIdx));
+  updateMap();
+  showToast(flagged.has(currentIdx) ? '⚑ Questão marcada' : '✓ Marcação removida');
+}
+
+// ── MAP ─────────────────────────────────────────────────────
+function buildMap() {
+  const grid = document.getElementById('map-grid');
+  grid.innerHTML = '';
+  quizQuestions.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'map-dot';
+    dot.textContent = i + 1;
+    dot.dataset.i = i;
+    dot.addEventListener('click', () => goTo(i));
+    grid.appendChild(dot);
+  });
+}
+
+function updateMap() {
+  const dots = document.querySelectorAll('.map-dot');
+  dots.forEach(dot => {
+    const i = parseInt(dot.dataset.i);
+    const state = answers[i];
+    dot.className = 'map-dot';
+    if (i === currentIdx) dot.classList.add('current');
+    if (flagged.has(i))   dot.classList.add('flagged');
+    if (state && state.answered) {
+      dot.classList.add(state.correct ? 'correct' : 'wrong');
+    } else if (state && state.chosen.length > 0) {
+      dot.classList.add('answered');
+    }
+  });
+}
+
+let mapOpen = false;
+function toggleMap(force) {
+  mapOpen = (force !== undefined) ? force : !mapOpen;
+  document.getElementById('q-map').classList.toggle('open', mapOpen);
+}
+
+// ── FINISH ──────────────────────────────────────────────────
+function finishQuiz() {
+  // If last question wasn't answered, warn
+  const unanswered = quizQuestions.filter((_, i) => !answers[i] || !answers[i].answered).length;
+  if (unanswered > 0) {
+    const ok = confirm(`Você tem ${unanswered} questão(ões) sem resposta. Finalizar mesmo assim?`);
+    if (!ok) return;
+  }
+  buildResults();
+  showScreen('results-screen');
+  scrollToTop();
+}
+
+// ── RESULTS ─────────────────────────────────────────────────
+function buildResults() {
+  const total    = quizQuestions.length;
+  const answered = Object.values(answers).filter(a => a.answered).length;
+  const correct  = Object.values(answers).filter(a => a.correct).length;
+  const wrong    = answered - correct;
+  const skipped  = total - answered;
+  const pct      = answered > 0 ? Math.round((correct / total) * 100) : 0;
+  const pass     = pct >= 70;
+
+  document.getElementById('r-pct').textContent     = pct + '%';
+  document.getElementById('r-pass').textContent    = pass ? '🎉 APROVADO (≥70%)' : '📚 Precisa estudar mais (<70%)';
+  document.getElementById('r-correct').textContent = correct;
+  document.getElementById('r-wrong').textContent   = wrong;
+  document.getElementById('r-skipped').textContent = skipped;
+
+  // Review list
+  const list = document.getElementById('review-list');
+  list.innerHTML = '';
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+  quizQuestions.forEach((q, i) => {
+    const state = answers[i];
+    const isAnswered = state && state.answered;
+    const isCorrect  = isAnswered && state.correct;
+    const icon       = !isAnswered ? '○' : isCorrect ? '✅' : '❌';
+
+    const item = document.createElement('div');
+    item.className = 'review-item';
+
+    const chosen  = state ? state.chosen.map(c => `${letters[c]}) ${q.options[c]}`).join(', ') : '—';
+    const correct = q.correct.map(c => `${letters[c]}) ${q.options[c]}`).join(' / ');
+
+    item.innerHTML = `
+      <div class="review-item-header" onclick="this.nextElementSibling.classList.toggle('open')">
+        <span class="review-icon">${icon}</span>
+        <span class="review-q-text">${escapeHtml(q.question.substring(0, 120))}${q.question.length > 120 ? '…' : ''}</span>
+        <span>▾</span>
+      </div>
+      <div class="review-item-body">
+        ${!isCorrect && isAnswered ? `<p class="review-your">Sua resposta: ${escapeHtml(chosen)}</p>` : ''}
+        <p class="review-correct">Resposta correta: ${escapeHtml(correct)}</p>
+        <div class="review-exp">${escapeHtml(q.explanation)}</div>
+      </div>
+    `;
+    list.appendChild(item);
+  });
+}
+
+// ── UTILITIES ───────────────────────────────────────────────
+function updateScoreLive() {
+  const correct = Object.values(answers).filter(a => a.correct).length;
+  const wrong   = Object.values(answers).filter(a => a.answered && !a.correct).length;
+  document.getElementById('q-score-live').textContent = `✓ ${correct}  ✗ ${wrong}`;
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('quiz-screen').classList.contains('active')) return;
+  const q    = quizQuestions[currentIdx];
+  const opts = document.querySelectorAll('.option-btn');
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+  const letter = e.key.toUpperCase();
+  const idx    = letters.indexOf(letter);
+  if (idx !== -1 && idx < opts.length) {
+    const btn = opts[idx];
+    if (!btn.disabled) btn.click();
+    return;
+  }
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { goNext(); }
+  if (e.key === 'ArrowLeft')  { goTo(currentIdx - 1); }
+  if (e.key === 'f' || e.key === 'F') { toggleFlag(); }
+  if (e.key === 'm' || e.key === 'M') { toggleMap(); }
+});
+</script>
+</body>
+</html>
