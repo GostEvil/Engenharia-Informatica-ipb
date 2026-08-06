@@ -1,0 +1,24 @@
+       ORG 100
+
+If,    Load     X     / Load X
+       Subt     One   / Subtract 1, store result in AC
+       Skipcond 800   / If AC>0 (X>1), skip the next instruction
+       Jump     Endif / Jump to Endif if X is not greater than 1
+
+Then,  Load     X     / Reload X so it can be doubled
+       Add      X     / Double X
+       Store    Y     / Y = X + X
+
+       Clear          / Move 0 into AC
+       Store    X     / Set X to 0
+
+Endif, Load     Y     / Load Y into AC
+       Add      One   / Add 1 to Y
+       Store    Y     / Y = Y + 1
+
+       Halt           / Terminate program
+
+X,     Dec      20    / Storage for X (value 20 given in problem)
+Y,     Dec      10    / Storage for Y (value 10 given in problem)
+One,   Dec      1     / Constant 1
+

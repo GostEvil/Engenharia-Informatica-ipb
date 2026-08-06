@@ -1,0 +1,30 @@
+//      ORG 100
+        Load X
+        Store Num
+        JnS Twice
+        Load Res
+        //O endereço a ser guardado é da 
+        //linha asseguir ao JnS
+        Store X
+        Output 
+        
+        Load Y
+        Store Num
+        JnS Twice
+        Load Res
+        Store Y
+        Output
+        Halt
+
+// Twice, HEX 0
+Twice,  HEX 000
+        Load Num
+        Add Num
+        Store Res
+        JumpI Twice
+
+
+X,      DEC 20
+Y,      DEC 48
+Num,    DEC 0
+Res,    DEC 0

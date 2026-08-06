@@ -1,0 +1,119 @@
+                        ORG 100
+
+Main,                   Load    Main_ArrayBaseAddress
+                        Store   TestPrimeArray_ArrayBaseAddress
+                        Load    Main_ArrayNumCells
+                        Store   TestPrimeArray_ArrayNumCells
+                        JnS     TestPrimeArray
+                        Halt
+
+Main_Array,             Dec 1
+                        Dec 2
+                        Dec 3
+                        Dec 4
+                        Dec 5
+
+Main_ArrayBaseAddress,  Hex 106 / address of a[0]
+Main_ArrayNumCells,     Dec 5   / number of array cells
+
+//////////////////////////////////////////////////////////////////////////////////
+
+TestPrimeArray,         Hex 0
+
+                        Clear
+                        Store   TestPrimeArray_ArrayCellIndex   / i <- 0 ; mandatory !
+
+TestPrimeArray_Loop,    Load    TestPrimeArray_ArrayCellIndex   
+                        Subt    TestPrimeArray_ArrayNumCells
+                        Skipcond 000                          / check if i < n
+                        Jump    TestPrimeArray_EndLoop
+
+                        Load    TestPrimeArray_ArrayBaseAddress
+                        Add     TestPrimeArray_ArrayCellIndex
+                        Store   TestPrimeArray_ArrayCellAddress / new address of a[i]
+  
+                        LoadI   TestPrimeArray_ArrayCellAddress / load a[i]
+                        Store   Prime_N
+                        JnS     Prime
+                        Load    Prime_P
+                        Output                                / outputs Prime(a[i])
+
+                        Load    TestPrimeArray_ArrayCellIndex
+                        Add     One
+                        Store   TestPrimeArray_ArrayCellIndex   / i++
+
+                        Jump    TestPrimeArray_Loop
+
+TestPrimeArray_EndLoop, JumpI   TestPrimeArray
+
+TestPrimeArray_ArrayBaseAddress,  Hex 0   / address of a[0]; input parameter
+TestPrimeArray_ArrayNumCells,     Dec 0   / number of array cells; input parameter
+
+TestPrimeArray_ArrayCellAddress,  Hex 0   / address of a[i]
+TestPrimeArray_ArrayCellIndex,    Dec 0   / index i
+
+One,                              Dec 1   / constant 1
+
+//////////////////////////////////////////////////////////////////////////////////
+
+Prime,          Hex 0
+
+                Load     One
+                Store    Prime_P
+
+Prime_If,       Load     Prime_N
+                Subt     One
+                Subt     One
+                Skipcond 000
+                Jump     Prime_Else
+Prime_Then,     Clear
+                Store    Prime_P
+                Jump     Prime_EndLoop
+Prime_Else,     Load     One
+                Add      One
+                Store    Prime_I
+
+Prime_Loop,     Load     Prime_I
+                Subt     Prime_N
+                Skipcond 000
+                Jump     Prime_EndLoop
+
+                 Load     Prime_N
+                 Store    Mod_X
+                 Load     Prime_I
+                 Store    Mod_Y
+                 Jns      Mod
+                 Load     Mod_Z
+                 Skipcond 400
+                 Jump     Prime_IncCounter
+                 Clear
+                 Store    Prime_P
+                 Jump     Prime_EndLoop
+Prime_IncCounter, Load     Prime_I
+                 Add      One
+                 Store    Prime_I
+                 Jump     Prime_Loop
+Prime_EndLoop,   JumpI    Prime
+Prime_N,         Dec      0
+Prime_P,         Dec      0
+Prime_I,         Dec      0
+//One,             Dec      1
+
+//////////////////////////////////////////////////////////////////////////////////
+Mod,            Hex 0
+                Load     Mod_X
+                Store    Mod_Z
+Mod_Loop,       Load     Mod_Z
+                Subt     Mod_Y
+                Add      One
+                Skipcond 800
+                Jump     Mod_EndLoop
+                Load     Mod_Z
+                Subt     Mod_Y
+                Store    Mod_Z
+                Jump     Mod_Loop
+Mod_EndLoop,    JumpI    Mod           
+Mod_X,          Dec      0
+Mod_Y,          Dec      0
+Mod_Z,          Dec      0
+//One,            Dec      1

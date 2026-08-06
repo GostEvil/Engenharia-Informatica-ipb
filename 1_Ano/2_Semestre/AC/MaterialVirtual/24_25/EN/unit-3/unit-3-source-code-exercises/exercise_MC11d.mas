@@ -1,0 +1,46 @@
+Main,           Input
+                Store   Main_Input1
+                Input
+                Store   Main_Input2
+
+                Load    Main_Input1
+                Store   Div_X
+                Load    Main_Input2
+                Store   Div_Y
+                JnS     Div
+                Load    Div_ctr
+                Store   Main_Output
+
+                Load    Main_Output
+                Output
+
+                Halt
+
+Main_Input1,    Dec 0
+Main_Input2,    Dec 0
+Main_Output,    Dec 0
+
+/////////////////////////////////////
+Div,            Hex 0
+                Load     Div_X
+                Store    Div_Z
+                Clear
+                Store    Div_ctr
+Div_Loop,       Load     Div_Z
+                Subt     Div_Y
+                Add      One
+                Skipcond 800
+                Jump     Div_EndLoop
+                Load     Div_Z
+                Subt     Div_Y
+                Store    Div_Z
+                Load     Div_ctr
+                Add      One
+                Store    Div_ctr
+                Jump     Div_Loop
+Div_EndLoop,    JumpI    Div          
+Div_X,          Dec      0
+Div_Y,          Dec      0
+Div_Z,          Dec      0
+Div_ctr,        Dec      0
+One,            Dec      1

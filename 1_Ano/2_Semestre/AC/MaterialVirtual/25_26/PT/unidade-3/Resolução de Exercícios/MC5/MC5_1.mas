@@ -1,0 +1,38 @@
+// int X = 1, Sum = 0;
+// while (X <= 11){
+// 		Sum = Sum + X;
+//		X = X + 1;
+// }
+// printf("%d", Sum);
+
+// 1.ª Solução
+// X <= 11 <=> 	X < 11 || X == 1
+//				x - 11 < 0 || X - 11 == 0
+
+            ORG 100
+
+Loop,       Load X
+            Subt Eleven
+            Skipcond 000
+            Jump ElseIf
+            Jump Then
+
+ElseIf,     Skipcond 400
+            Jump EndLoop
+
+Then,       Load Sum
+            Add X
+            Store Sum
+            Load X
+            Add One
+            Store X
+            Jump Loop
+
+EndLoop,    Load Sum
+            Output
+            Halt
+
+X,			DEC 1
+One,		DEC 1
+Eleven,		DEC 11
+Sum,		Dec 0

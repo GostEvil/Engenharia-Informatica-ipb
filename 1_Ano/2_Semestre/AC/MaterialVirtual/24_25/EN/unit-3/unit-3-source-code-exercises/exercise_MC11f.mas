@@ -1,0 +1,79 @@
+Main,           Input
+                Store   Main_Input
+
+                Load    Main_Input
+                Store   Prime_N
+                JnS     Prime
+                Load    Prime_P
+                Store   Main_Output
+
+                Load    Main_Output
+                Output
+
+                Halt
+
+Main_Input,     Dec 0
+Main_Output,    Dec 0
+
+/////////////////////////////////////
+Prime,          Hex 0
+
+                Load     One
+                Store    Prime_P
+
+Prime_If,       Load     Prime_N
+                Subt     One
+                Subt     One
+                Skipcond 000
+                Jump     Prime_Else
+Prime_Then,     Clear
+                Store    Prime_P
+                Jump     Prime_EndLoop
+Prime_Else,     Load     Two
+                Store    Prime_I
+
+Prime_Loop,     Load     Prime_I
+                Subt     Prime_N
+                Skipcond 000
+                Jump     Prime_EndLoop
+
+                 Load     Prime_N
+                 Store    Mod_X
+                 Load     Prime_I
+                 Store    Mod_Y
+                 Jns      Mod
+                 Load     Mod_Z
+                 Skipcond 400
+                 Jump     Prime_IncCounter
+                 Clear
+                 Store    Prime_P
+                 Jump     Prime_EndLoop
+Prime_IncCounter, Load     Prime_I
+                 Add      One
+                 Store    Prime_I
+                 Jump     Prime_Loop
+Prime_EndLoop,   JumpI    Prime
+Prime_N,         Dec      0
+Prime_P,         Dec      0
+Prime_I,         Dec      0
+One,             Dec      1
+Two,             Dec      2
+
+/////////////////////////////////////
+Mod,            Hex 0
+                Load     Mod_X
+                Store    Mod_Z
+Mod_Loop,       Load     Mod_Z
+                Subt     Mod_Y
+                Add      One
+                Skipcond 800
+                Jump     Mod_EndLoop
+                Load     Mod_Z
+                Subt     Mod_Y
+                Store    Mod_Z
+                Jump     Mod_Loop
+Mod_EndLoop,    JumpI    Mod           
+Mod_X,          Dec      0
+Mod_Y,          Dec      0
+Mod_Z,          Dec      0
+//One,            Dec      1

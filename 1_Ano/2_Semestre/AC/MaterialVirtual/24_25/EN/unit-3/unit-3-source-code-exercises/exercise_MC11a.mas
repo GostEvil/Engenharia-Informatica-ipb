@@ -1,0 +1,42 @@
+Main,           Input
+                Store   Main_Input1
+                Input
+                Store   Main_Input2
+
+                Load    Main_Input1
+                Store   Min_Input1
+                Load    Main_Input2
+                Store   Min_Input2
+                JnS     Min
+                Load    Min_Output
+                Store   Main_Output
+
+                Load    Main_Output
+                Output
+
+                Halt
+
+Main_Input1,    Dec 0
+Main_Input2,    Dec 0
+Main_Output,    Dec 0
+
+/////////////////////////////////////
+Min,            Hex 0
+
+Min_If,         Load     Min_Input1
+                Subt     Min_Input2
+                Skipcond 000
+                Jump     Min_Else
+
+Min_Then,       Load     Min_Input1
+                Store    Min_Output
+                Jump     Min_EndIf
+
+Min_Else,       Load     Min_Input2
+                Store    Min_Output
+
+Min_EndIf,      JumpI    Min
+
+Min_Input1,     Dec 0
+Min_Input2,     Dec 0
+Min_Output,     Dec 0
