@@ -1,0 +1,30 @@
+﻿// int X = 1, Sum = 0;
+// while (X < 11){
+// 		Sum = Sum + X;
+//		X = X + 1;
+// }
+// printf("%d", Sum);
+
+			ORG 100
+
+// X < 11 <=> x - 11 < 0
+Loop,		Load X
+			Subt Eleven 
+            Skipcond 000
+            Jump EndLoop
+			Load Sum
+            Add X
+            Store Sum
+            Load X
+            Add One
+            Store X
+            Jump Loop
+            
+EndLoop,	Load Sum
+			Output
+            Halt
+// EndLoop ends here
+X,			DEC 1
+One,		DEC 1
+Eleven,		DEC 11
+Sum,		Dec 0

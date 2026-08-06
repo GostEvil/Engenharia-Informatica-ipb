@@ -1,0 +1,25 @@
+         Clear
+         Store    Sum  / Init Sum ( Sum = 0 )
+         Load     Y    
+         Store    Ctr  / Init Ctr ( Ctr = Y )
+
+Loop,    Load     Ctr
+         SkipCond 800  / Ctr > 0 ?
+         Jump     EndLoop / False: break the loop
+         Load     Sum  / True: keep on the loop
+         Add      X    
+         Store    Sum  / Update Sum ( Sum = Sum + X )
+         Load     Ctr
+         Subt     One  
+         Store    Ctr  / Update Ctr ( Ctr –- )
+         Jump     Loop / Repeat the loop
+
+EndLoop, Load     Sum
+         Output        / Print Sum ( product of X by Y )
+         Halt          / End program
+
+X,       Dec      3    / Initial value of X
+Y,       Dec      6    / Initial value of Y
+Sum,     Dec      0    / Result of multiplication
+Ctr,     Dec      0    / Counter for looping
+One,     Dec      1    / The constant value 1

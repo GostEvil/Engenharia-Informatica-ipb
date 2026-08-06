@@ -1,0 +1,26 @@
+Main,           Input
+                Store   Main_Input
+
+                Load    Main_Input
+                Store   Sym_Input
+                JnS     Sym
+                Load    Sym_Output
+                Store   Main_Output
+
+                Load    Main_Output
+                Output
+
+                Halt
+
+Main_Input,     Dec 0
+Main_Output,    Dec 0
+
+/////////////////////////////////////
+Sym,            Hex 0
+                Clear
+                Subt Sym_Input
+                Store Sym_Output
+                JumpI Sym
+
+Sym_Input,      Dec 0
+Sym_Output,     Dec 0

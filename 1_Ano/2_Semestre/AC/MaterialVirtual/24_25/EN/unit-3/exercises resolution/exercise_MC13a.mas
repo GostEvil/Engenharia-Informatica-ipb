@@ -1,0 +1,83 @@
+                        ORG 100
+
+Main,                   Load    Main_ArrayBaseAddress1
+                        Store   MakeSymArray_ArrayBaseAddress1
+                        Load    Main_ArrayBaseAddress2
+                        Store   MakeSymArray_ArrayBaseAddress2
+                        Load    Main_ArrayNumCells
+                        Store   MakeSymArray_ArrayNumCells
+                        JnS     MakeSymArray
+                        Halt
+
+Main_Array1,            Dec 1
+                        Dec 2
+                        Dec 3
+                        Dec 4
+                        Dec 5
+
+Main_Array2,            Dec 0
+                        Dec 0
+                        Dec 0
+                        Dec 0
+                        Dec 0
+
+Main_ArrayBaseAddress1, Hex 108 / address of a[0]
+Main_ArrayBaseAddress2, Hex 10D / address of b[0]
+Main_ArrayNumCells,     Dec 5   / number of array cells
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+MakeSymArray,           Hex 0
+
+                        Clear
+                        Store   MakeSymArray_ArrayCellIndex   / i <- 0 ; mandatory !
+
+MakeSymArray_Loop,      Load    MakeSymArray_ArrayCellIndex   
+                        Subt    MakeSymArray_ArrayNumCells
+                        Skipcond 000                          / check if i < n
+                        Jump    MakeSymArray_EndLoop
+
+                        Load    MakeSymArray_ArrayBaseAddress1
+                        Add     MakeSymArray_ArrayCellIndex
+                        Store   MakeSymArray_ArrayCellAddress1 / new address of a[i]
+  
+                        LoadI   MakeSymArray_ArrayCellAddress1 / load a[i]
+                        Store   Sym_Input
+                        JnS     Sym
+
+                        Load    MakeSymArray_ArrayBaseAddress2
+                        Add     MakeSymArray_ArrayCellIndex
+                        Store   MakeSymArray_ArrayCellAddress2 / new address of b[i]
+
+                        Load    Sym_Output                     / load Sym(a[i])
+                        StoreI  MakeSymArray_ArrayCellAddress2 / store in b[i]
+ 
+                        Load    MakeSymArray_ArrayCellIndex
+                        Add     One
+                        Store   MakeSymArray_ArrayCellIndex   / i++
+
+                        Jump    MakeSymArray_Loop
+
+MakeSymArray_EndLoop,   JumpI   MakeSymArray
+
+MakeSymArray_ArrayBaseAddress1, Hex 0   / address of a[0]; input parameter
+MakeSymArray_ArrayBaseAddress2, Hex 0   / address of b[0]; input parameter
+MakeSymArray_ArrayNumCells,     Dec 0   / number of array cells; input parameter
+
+MakeSymArray_ArrayCellAddress1, Hex 0   / address of a[i]
+MakeSymArray_ArrayCellAddress2, Hex 0   / address of b[i]
+MakeSymArray_ArrayCellIndex,    Dec 0   / index i
+
+One,                            Dec 1   / constant 1
+
+//////////////////////////////////////////////////////////////////////////////////
+
+Sym,		Hex 0
+		Clear
+		Subt Sym_Input
+		Store Sym_Output
+		JumpI Sym
+
+Sym_Input,	Dec 0
+Sym_Output,	Dec 0

@@ -1,0 +1,55 @@
+       ORG 100
+       Input
+       Store N
+       // Load N
+       Subt Two
+If,    Skipcond 000
+       Jump Else        
+Then,  Load Two
+       Subt N
+       Store L			
+       Jump EndIf
+Else,  Load N
+       Store Num
+       JnS Lucas
+       Load Current
+       Store L 			
+EndIf, Load L
+       Output
+       Halt
+
+N,     Dec 0
+L,     Dec 0
+Two,   Dec 2
+
+Lucas,		Hex 0
+           	Load Two
+           	Store Number0 // Number0 = 2
+           	Load One
+           	Store Number1	// Number1 = 1
+           	Load Two
+           	Store Counter	// Counter = 2
+Loop,		Load Counter
+           	Subt Num
+           	Skipcond 800	// Counter > Num ?
+           	Jump LoopBody
+          	Jump LoopEnd	// or JumpI Lucas
+LoopBody, 	Load Number1
+           	Add Number0
+           	Store Current	// Current = Number1 + Number0
+           	Load Number1
+           	Store Number0	// Number0 = Number1
+           	Load Current
+           	Store Number1	// Number1 = Current
+           	Load Counter
+           	Add One
+           	Store Counter	// Counter ++
+           	Jump Loop
+LoopEnd,    	JumpI Lucas
+
+Num,		Dec 0
+One, 	        Dec 1
+Counter, 	Dec 0
+Current, 	Dec 0
+Number1, 	Dec 0
+Number0, 	Dec 0
