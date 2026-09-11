@@ -1,0 +1,26 @@
+﻿// int X = 1;
+// while (X < 10)
+//		x = x + 1;
+
+// é igual a 
+
+// int x = 1;
+// Loop: if (X < 10){
+//		X = x + 1;
+// 		goto Loop;
+// }
+
+			ORG 100
+Loop,		Load X
+			Subt Ten
+        	Skipcond 000
+        	Jump EndLoop
+        	Load X
+            Add One
+            Store X
+            Jump Loop
+            
+EndLoop,	Halt
+X,			DEC 1
+One,		DEC 1
+Ten,		DEC 10

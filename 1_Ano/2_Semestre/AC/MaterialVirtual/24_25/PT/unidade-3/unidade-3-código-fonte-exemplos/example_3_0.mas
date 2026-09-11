@@ -1,0 +1,8 @@
+   ORG 100
+   Load X
+   Add Y
+   Store Z
+   Halt
+X, Dec 35
+Y, Dec -23	
+Z, Hex 0000

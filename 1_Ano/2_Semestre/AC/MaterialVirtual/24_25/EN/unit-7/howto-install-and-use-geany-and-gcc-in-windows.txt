@@ -1,0 +1,35 @@
+1 - how to install the Geany IDE in windows
+
+Download the Windows (64-bit) version of the installer from https://www.geany.org/download/releases/ and then execute the installer
+
+2 - how to install the GCC compiler in windows
+
+2.1 Download the mingwinstaller.exe installer from https://github.com/nixman/mingw-builds-binaries
+
+2.2 run the installer a choose the following options
+(higher version)
+64 bit
+posix
+(higher revision)
+ucrt
+C:/
+
+2.3 finish the installation and confirm the folder C:/mingw64 exists
+
+2.4 change the Windows environment to make the GCC compilers visible
+
+2.4.1 search for "env" and choose "Edit the system environment variables"
+2.4.2 in the "Advanced" tab choose "Environment Variables"
+2.4.3 in the "System variables" panel, chose the "Path" variable and then "Edit"
+2.4.4 choose "New" and type "C:\mingw64\bin", the "OK", "OK, "OK
+
+2.5 test the compilation in Geany with GCC
+
+2.5.1 launch Geany, add a simple program and save it in a file hello.c
+
+#include <stdio.h>
+int main() {printf("hello world\n"); return(0);}
+
+2.5.1 to compile and build the executable, click on the "brick" button or press F9
+2.5.2 to execute the program from the IDE, click on the "gears" button or press F5
+2.5.3 to run the program from the command line environment (terminal), use the Windows Explorer to open the folder where the hello.c file sits; confirm the executable "hello" is also there; press the SHIFT key and do a mouse right click in the opened folder, then choose "Open PowerShell window here"; in the PowerShell window type ./hello to run the program

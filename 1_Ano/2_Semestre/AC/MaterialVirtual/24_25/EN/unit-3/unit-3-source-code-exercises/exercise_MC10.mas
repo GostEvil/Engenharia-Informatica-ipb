@@ -1,0 +1,54 @@
+      Load  A
+      Store X   / Store A in first parameter
+      Load  B
+      Store Y   / Store B in second parameter
+      JnS   Mul / Jump to multiplication subroutine
+      Load  Sum / Get result
+      Store E   / E = A x B
+
+      Load  C
+      Store X   / Store C in first parameter
+      Load  D
+      Store Y   / Store D in second parameter
+      JnS   Mul / Jump to multiplication subroutine
+      Load  Sum / Get result
+      Store F   / F = C x D
+
+      Load  E   / Get first result
+      Add   F   / Add second result
+      Store G   / G = E + F
+      Output    / Show final result
+      Halt      / Terminate program
+
+A,    Dec   1   / Arbitrary value
+B,    Dec   2   / Arbitrary value
+C,    Dec   3   / Arbitrary value
+D,    Dec   4   / Arbitrary value
+E,    Dec   0   / Storage for first result
+F,    Dec   0   / Storage for second result
+G,    Dec   0   / Storage  for final result
+
+Mul,     Hex      0   / Place to store return address
+		Clear
+		Store    Sum  / Init Sum ( Sum = 0 )
+         Load     Y    
+         Store    Ctr  / Init Ctr ( Ctr = Y )
+
+Loop,    Load     Ctr
+         SkipCond 800  / Ctr > 0 ?
+         Jump     EndLoop / False: break the loop
+		Load     Sum  / True: keep on the loop
+         Add      X    
+         Store    Sum  / Update Sum ( Sum = Sum + X )
+         Load     Ctr
+         Subt     One  
+         Store    Ctr  / Update Ctr ( Ctr –- )
+         Jump     Loop / Repeat the loop
+
+EndLoop, JumpI    Mul     / Done with subroutine, return to main
+
+X,    Dec   0   / First parameter of subroutine
+Y,    Dec   0   / Second parameter of subroutine
+Sum,  Dec   0   / Result of subroutine
+Ctr,  Dec   0   / Counter for looping
+One,  Dec   1   / Constant with value 1

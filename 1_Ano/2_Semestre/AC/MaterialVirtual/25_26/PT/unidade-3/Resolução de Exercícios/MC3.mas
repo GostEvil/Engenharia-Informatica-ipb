@@ -1,0 +1,18 @@
+﻿// int X = 1;
+// do {
+//		x = x + 1;
+// } while (X < 10)
+
+			ORG 100
+Loop,		Load X
+			Add One
+            Store X
+            Load X
+            Subt Ten
+            Skipcond 000
+            Jump EndLoop
+			Jump Loop
+EndLoop,	Halt
+X,			DEC 1
+One,		DEC 1
+Ten,		DEC 10

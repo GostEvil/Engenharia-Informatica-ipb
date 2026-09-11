@@ -1,0 +1,69 @@
+                        ORG 100
+
+Main,                   Load    Main_ArrayBaseAddress
+                        Store   ShowSymArray_ArrayBaseAddress
+                        Load    Main_ArrayNumCells
+                        Store   ShowSymArray_ArrayNumCells
+                        JnS     ShowSymArray
+                        Halt
+
+Main_Array,             Dec 1
+                        Dec 2
+                        Dec 3
+                        Dec 4
+                        Dec 5
+
+Main_ArrayBaseAddress,  Hex 106 / address of a[0]
+Main_ArrayNumCells,     Dec 5   / number of array cells
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+ShowSymArray,           Hex 0
+
+                        Clear
+                        Store   ShowSymArray_ArrayCellIndex   / i <- 0 ; mandatory !
+
+ShowSymArray_Loop,      Load    ShowSymArray_ArrayCellIndex   
+                        Subt    ShowSymArray_ArrayNumCells
+                        Skipcond 000                          / check if i < n
+                        Jump    ShowSymArray_EndLoop
+
+                        Load    ShowSymArray_ArrayBaseAddress
+                        Add     ShowSymArray_ArrayCellIndex
+                        Store   ShowSymArray_ArrayCellAddress / new address of a[i]
+                          
+                        LoadI   ShowSymArray_ArrayCellAddress / load a[i]
+                        Store   Sym_Input
+                        JnS     Sym
+                        Load    Sym_Output
+                        Output                                / outputs Sym(a[i])
+
+                        Load    ShowSymArray_ArrayCellIndex
+                        Add     One
+                        Store   ShowSymArray_ArrayCellIndex   / i++
+
+                        Jump    ShowSymArray_Loop
+
+ShowSymArray_EndLoop,   JumpI   ShowSymArray
+
+ShowSymArray_ArrayBaseAddress,  Hex 0   / address of a[0]; input parameter
+ShowSymArray_ArrayNumCells,     Dec 0   / number of array cells; input parameter
+
+ShowSymArray_ArrayCellAddress,  Hex 0   / address of a[i]
+ShowSymArray_ArrayCellIndex,    Dec 0   / index i
+
+One,                            Dec 1   / constant 1
+
+//////////////////////////////////////////////////////////////////////////////////
+
+Sym,		Hex 0
+		Clear
+		Subt Sym_Input
+		Store Sym_Output
+		JumpI Sym
+
+Sym_Input,	Dec 0
+Sym_Output,	Dec 0
+
+

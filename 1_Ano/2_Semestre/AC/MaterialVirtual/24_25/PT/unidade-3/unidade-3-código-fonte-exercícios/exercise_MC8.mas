@@ -1,0 +1,38 @@
+      ORG    100
+
+      Load   A    / Load the first number (A)
+      Store  X    / Use X as a parameter to pass A to Subr
+      Load   B    / Load the second number (B)
+      Store  Y    / Use Y as a parameter to pass B to Subr
+      JnS    Subr / Store return address and jump to Subr
+      Load   Res  / Load the result returned by Subr
+      Store  E    / Store the result
+      Output      / Output the result
+
+      Load   C    / Load the first number (C)
+      Store  X    / Use X as a parameter to pass C to Subr
+      Load   D    / Load the second number (D)
+      Store  Y    / Use Y as a parameter to pass D to Subr
+      JnS    Subr / Store return address and jump to Subr
+      Load   Res  / Load the result returned by Subr
+      Store  F    / Store the result
+      Output      / Output the result
+
+      Halt        / End program
+
+Subr, Hex    0    / Place to store return address
+      Load   X    / Load the first number
+      Subt   Y    / Subtract the second number
+      Store  Res  / Store result
+      JumpI  Subr / Return to calling code
+
+A,    Dec    8    / Arbitrary value
+B,    Dec    4    / Arbitrary value
+C,    Dec    10   / Arbitrary value
+D,    Dec    2    / Arbitrary value
+E,    Dec    0
+F,    Dec    0
+X,    Dec    0    / Subroutine parameter 
+Y,    Dec    0    / Subroutine parameter 
+Res,  Dec    0    / Subroutine result
+

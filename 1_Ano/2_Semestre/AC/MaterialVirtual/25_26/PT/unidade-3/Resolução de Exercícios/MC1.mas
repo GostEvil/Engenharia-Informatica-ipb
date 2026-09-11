@@ -1,0 +1,19 @@
+﻿		ORG 100
+        Load X
+        Subt One
+		Skipcond 800
+        Jump EndIf
+        Load X
+        Add X
+        Store Y
+        Clear 
+        //limpa o acumulador
+        Store X
+        
+EndIf,	Load Y
+		Add One
+        Store Y
+        Halt
+X,		DEC 20
+Y,		DEC 10
+One,	DEC 1

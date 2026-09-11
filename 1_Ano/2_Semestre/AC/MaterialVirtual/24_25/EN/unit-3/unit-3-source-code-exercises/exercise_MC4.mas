@@ -1,0 +1,25 @@
+         ORG      100
+
+Loop,    Load     X       / Load X
+         Subt     Eleven  / Compare X to 11
+         SkipCond 000     / If AC<0 (X is less than 11), continue loop
+         Jump     Endloop / If X is not less than 11, terminate loop
+
+         Load     Sum
+         Add      X       / Add X to Sum
+         Store    Sum     / Store result in Sum
+
+         Load     X
+         Add      One     / Increment X
+         Store    X
+
+         Jump     Loop
+
+Endloop, Load     Sum
+         Output           / Print Sum
+         Halt             / Terminate program
+
+Sum,     Dec  0           / Storage for Sum (value 0 given in problem)
+X,       Dec  0           / Storage for X (value 1 given in problem)
+One,     Dec  1           / The constant 1
+Eleven,  Dec  11          / The constant 11

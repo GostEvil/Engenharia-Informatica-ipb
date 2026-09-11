@@ -1,0 +1,29 @@
+       ORG 100
+
+       Load  X     / load the 1st number (X) to be doubled
+       Store Num   / use Num as a parameter to pass X to Twice
+       JnS   Twice / store return address and jump to Twice
+       Load  Res   / load the double of X returned by Twice
+       Store X     / update X with its double
+       Output      / show the new value of X
+
+       Load  Y     / load the 2nd number (Y) to be doubled
+       Store Num   / use Num as a parameter to pass Y to Twice
+       JnS   Twice / store return address and jump to Twice
+       Load  Res   / load the double of Y returned by Twice
+       Store Y     / update Y with its double
+       Output      / show the new value of Y
+
+       Halt        / end program
+
+Twice, Hex   0     / place to store return address
+       Load  Num   / AC = Num
+       Add   Num   / AC = AC + Num = Num + Num = 2 * Num
+       Store Res   / Res = 2 * Num
+       JumpI Twice / return to calling code
+
+X,     Dec   20
+Y,     Dec   48
+Num,   Dec   0
+Res,   Dec   0
+

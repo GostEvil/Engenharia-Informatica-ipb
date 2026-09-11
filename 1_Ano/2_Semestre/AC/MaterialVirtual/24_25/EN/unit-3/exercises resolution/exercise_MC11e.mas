@@ -1,0 +1,40 @@
+Main,           Input
+                Store   Main_Input1
+                Input
+                Store   Main_Input2
+
+                Load    Main_Input1
+                Store   Mod_X
+                Load    Main_Input2
+                Store   Mod_Y
+                JnS     Mod
+                Load    Mod_Z
+                Store   Main_Output
+
+                Load    Main_Output
+                Output
+
+                Halt
+
+Main_Input1,    Dec 0
+Main_Input2,    Dec 0
+Main_Output,    Dec 0
+
+/////////////////////////////////////
+Mod,            Hex 0
+                Load     Mod_X
+                Store    Mod_Z
+Mod_Loop,       Load     Mod_Z
+                Subt     Mod_Y
+                Add      One
+                Skipcond 800
+                Jump     Mod_EndLoop
+                Load     Mod_Z
+                Subt     Mod_Y
+                Store    Mod_Z
+                Jump     Mod_Loop
+Mod_EndLoop,    JumpI    Mod           
+Mod_X,          Dec      0
+Mod_Y,          Dec      0
+Mod_Z,          Dec      0
+One,            Dec      1

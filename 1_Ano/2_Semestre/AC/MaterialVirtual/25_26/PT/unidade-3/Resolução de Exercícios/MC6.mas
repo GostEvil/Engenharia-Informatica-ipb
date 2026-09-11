@@ -1,0 +1,32 @@
+                    ORG 100
+
+Loop,               Load ArrayCellIndex
+                    Subt Five
+                    Skipcond 000 // check if i < 5
+                    Jump EndLoop
+
+                    Load ArrayBaseAddress
+                    Add ArrayCellIndex
+                    Store ArrayCellAddress // new address of a[i]
+
+                    LoadI ArrayCellAddress // load a[i]
+                    Output                 // output a[i]
+
+                    Load ArrayCellIndex
+                    Add One
+                    Store ArrayCellIndex   // i++
+
+                    Jump Loop
+
+EndLoop,            Halt
+
+                    DEC 48
+                    DEC 50
+                    DEC 52
+                    DEC 54
+                    DEC 56
+ArrayBaseAddress,   DEC 014
+ArrayCellIndex,     DEC 0
+ArrayCellAddress,   DEC 0
+One,                DEC 1
+Five,               DEC 5

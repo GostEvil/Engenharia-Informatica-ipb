@@ -1,0 +1,12 @@
+	ORG 100
+	Load	A     /Load A
+	Add	One   /Add 1, store result in AC
+	Jump	S1    /Jump to S1
+S2,	Add      One  /Add 1, store result in AC
+	Store    A    /Store AC in A
+	Halt          /Terminate program
+S1,	Add	A     /Add A, store result in AC
+	Jump	S2    /Jump to S2
+A,	HEX 0023      / A = 35
+One,	HEX 0001      / One = 1
+

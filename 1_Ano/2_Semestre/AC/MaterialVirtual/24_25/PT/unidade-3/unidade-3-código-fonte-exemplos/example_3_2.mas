@@ -1,0 +1,42 @@
+         ORG 100
+
+Loop,    Load        ArrayBaseAddress
+         Add         ArrayCellIndex
+         Store       ArrayCellAddress / new address of a[i]
+
+         LoadI       ArrayCellAddress
+         /Clear
+         /AddI       ArrayCellAddress
+                  
+         Skipcond    400              / check if a[i] == ’\0’
+         Jump        BodyLoop
+         Jump        EndLoop
+
+BodyLoop, Output      / output a[i]
+
+         Load        ArrayCellIndex
+         Add         One
+         Store       ArrayCellIndex   / i++
+
+         Jump        Loop
+
+EndLoop, Halt
+
+String, Dec	072  / H
+	Dec	101  / e
+	Dec	108  / l
+	Dec	108  / l 
+	Dec	111  / o
+	Dec	032  / [space]
+	Dec	119  / w
+	Dec	111  / o
+	Dec	114  / r
+	Dec	108  / l
+	Dec	100  / d
+	Dec	033  / !
+	Dec	000  / [null]
+ArrayBaseAddress, Hex 10D / address of a[0]
+/ArrayBaseAddress, Hex 10E / address of a[0]
+ArrayCellAddress, Hex 000 / address of a[i]
+ArrayCellIndex,   Dec 0   / index i
+One,              Dec 1   / constant 1

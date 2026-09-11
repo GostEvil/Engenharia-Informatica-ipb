@@ -1,0 +1,40 @@
+                  ORG 100
+
+Loop,             Load        ArrayCellIndex   
+                  Subt        Five
+                  Skipcond    000              / check if i < 5
+                  Jump        EndLoop
+
+                  Load        ArrayBaseAddress
+                  Add         ArrayCellIndex
+                  Store       ArrayCellAddress / new address of a[i]
+  
+                  Load        Sum
+                  AddI        ArrayCellAddress
+                  Store       Sum              / sum = sum + a[i]
+
+                  /LoadI       ArrayCellAddress
+                  /Add         Sum
+                  /Store       Sum             / sum = sum + a[i]
+
+                  Load        ArrayCellIndex
+                  Add         One
+                  Store       ArrayCellIndex   / i++
+
+                  Jump        Loop
+
+EndLoop,          Load  Sum
+                  Output
+                  Halt
+
+                  Dec         10               / a[0]
+                  Dec         15               / a[1]
+                  Dec         20               / a[2]
+                  Dec         25               / a[3]
+                  Dec         30               / a[4]
+ArrayBaseAddress, Hex         111              / address of a[0]
+ArrayCellAddress, Hex         000              / address of a[i]
+ArrayCellIndex,   Dec         0                / index i
+Sum,              Dec         0                / sum
+One,              Dec         1                / constant 1
+Five,             Dec         5                / constant 5

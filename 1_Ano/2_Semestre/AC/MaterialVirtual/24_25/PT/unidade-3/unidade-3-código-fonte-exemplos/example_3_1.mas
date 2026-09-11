@@ -1,0 +1,17 @@
+       ORG 100
+If,    Load     X     / Load the first value
+       Subt     Y     / Subtract value of Y and store result in AC
+       Skipcond 400   / If AC = 0, skip the next instruction
+       Jump     Else  / Jump to the Else part if AC is not equal to 0
+Then,  Load     X     / Reload X so it can be doubled
+       Add      X     / Double X
+       Store    X     / Store the new value
+       Jump     Endif / Skip over Else part to end of If
+Else,  Load     Y     / Start the Else part by loading Y
+       Subt     X     / Subtract X from Y
+       Store    Y     / Store Y - X in Y
+Endif, Load     Y     / Reload Y so it can be printed
+       Output         / Print Y
+       Halt           / Terminate program
+X,     Dec      12    / Assume this initial value for X
+Y,     Dec      20    / Assume this initial value for Y

@@ -1,0 +1,87 @@
+                        ORG 100
+
+Main,                   Load    Main_ArrayBaseAddress
+                        Store   MinArray_ArrayBaseAddress
+                        Load    Main_ArrayNumCells
+                        Store   MinArray_ArrayNumCells
+                        JnS     MinArray
+                        Load    MinArray_Output
+                        Store   Main_Min
+                        Output
+                        Halt
+
+Main_Array,             Dec 3
+                        Dec 2
+                        Dec 1
+                        Dec 4
+                        Dec 5
+
+Main_ArrayBaseAddress,  Hex 109 / address of a[0]
+Main_ArrayNumCells,     Dec 5   / number of array cells
+Main_Min,               Dec 0
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+MinArray,               Hex 0
+
+                        LoadI   MinArray_ArrayBaseAddress
+                        Store   MinArray_Output            / a[0] is the starting minimum
+                        Load    One
+                        Store   MinArray_ArrayCellIndex    / i <- 1
+
+MinArray_Loop,          Load    MinArray_ArrayCellIndex
+                        Subt    MinArray_ArrayNumCells
+                        Skipcond 000                       / check if i < n
+                        Jump    MinArray_EndLoop
+
+                        Load    MinArray_ArrayBaseAddress
+                        Add     MinArray_ArrayCellIndex
+                        Store   MinArray_ArrayCellAddress  / new address of a[i]
+
+                        Load    MinArray_Output
+                        Store   Min_Input1                 / pass current minimum
+                        LoadI   MinArray_ArrayCellAddress
+                        Store   Min_Input2                 / pass new candidate
+                        JnS     Min                        / assess new minimum
+                        Load    Min_Output
+                        Store   MinArray_Output            / update current minimum
+
+                        Load    MinArray_ArrayCellIndex
+                        Add     One
+                        Store   MinArray_ArrayCellIndex   / i++
+
+                        Jump    MinArray_Loop
+
+MinArray_EndLoop,       JumpI   MinArray
+
+MinArray_ArrayBaseAddress,  Hex 0   / address of a[0]; input parameter
+MinArray_ArrayNumCells,     Dec 0   / number of array cells; input parameter
+
+MinArray_ArrayCellAddress,  Hex 0   / address of a[i]
+MinArray_ArrayCellIndex,    Dec 0   / index i
+
+MinArray_Output,            Dec 0
+One,                        Dec 1   / constant 1
+
+//////////////////////////////////////////////////////////////////////////////////
+
+Min,            Hex 0
+
+Min_If,         Load     Min_Input1
+                Subt     Min_Input2
+                Skipcond 000
+                Jump     Min_Else
+
+Min_Then,       Load     Min_Input1
+                Store    Min_Output
+                Jump     Min_EndIf
+
+Min_Else,       Load     Min_Input2
+                Store    Min_Output
+
+Min_EndIf,      JumpI    Min
+
+Min_Input1,     Dec 0
+Min_Input2,     Dec 0
+Min_Output,     Dec 0

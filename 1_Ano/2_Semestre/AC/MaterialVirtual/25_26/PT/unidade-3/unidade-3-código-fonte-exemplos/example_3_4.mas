@@ -1,0 +1,32 @@
+                  ORG 100
+
+Loop,             Load        ArrayCellIndex   
+                  Subt        Five
+                  Skipcond    000              / check if i < 5
+                  Jump        EndLoop
+
+                  Load        ArrayBaseAddress
+                  Add         ArrayCellIndex
+                  Store       ArrayCellAddress / new address of a[i]
+  
+                  Input
+                  StoreI      ArrayCellAddress / read a[i] from user
+
+                  Load        ArrayCellIndex
+                  Add         One
+                  Store       ArrayCellIndex   / i++
+
+                  Jump        Loop
+
+EndLoop,          Halt
+
+                  Dec         0                / a[0]
+                  Dec         0                / a[1]
+                  Dec         0                / a[2]
+                  Dec         0                / a[3]
+                  Dec         0                / a[4]
+ArrayBaseAddress, Hex         10E              / address of a[0]
+ArrayCellAddress, Hex         000              / address of a[i]
+ArrayCellIndex,   Dec         0                / index i
+One,              Dec         1                / constant 1
+Five,             Dec         5                / constant 5
